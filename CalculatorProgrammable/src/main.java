@@ -5,7 +5,7 @@
 
 /**
  *
- * @author Alessandro
+ * @author Gruppo 20
  */
 public class main {
 
