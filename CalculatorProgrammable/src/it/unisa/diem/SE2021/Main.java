@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
+package it.unisa.diem.SE2021;
+
 /**
  *
  * @author Alessandro
@@ -13,7 +15,7 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        System.out.println("Hello world from new Package!");
     }
 
 }
