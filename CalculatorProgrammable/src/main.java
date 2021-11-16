@@ -13,7 +13,7 @@ public class main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hello World");
+        System.out.println("Ci siamo");
         System.out.println("TEST_1 git");
         System.out.println("");
     }
