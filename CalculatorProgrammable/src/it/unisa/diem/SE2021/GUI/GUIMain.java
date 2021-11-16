@@ -15,7 +15,7 @@ public class GUIMain extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GUI_FXML.fxml"));
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root);
         stage.setTitle("Hello World!");
         stage.setScene(scene);
         stage.show();
