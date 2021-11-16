@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="it.unisa.diem.SE2021.GUI.GUI_FXMLController">
+    <stylesheets>
+        <URL value="@gui_fxml.css" />
+    </stylesheets>
+   <children>
+      <AnchorPane layoutX="200.0" layoutY="78.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="236.0" layoutY="14.0" prefHeight="16.0" prefWidth="127.0" text="CALCULATOR TEAM 20" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
