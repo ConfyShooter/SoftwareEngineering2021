@@ -2,6 +2,7 @@ package it.unisa.diem.SE2021.GUI;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +23,9 @@ public class GUI_FXMLController implements Initializable {
     private Button calculateBtn;
     @FXML
     private ListView<?> listView;
+    @FXML
+    private Button cancBtn;
+    //private ObservableList<Complex> stack;
 
     /**
      * Initializes the controller class.
@@ -36,7 +40,35 @@ public class GUI_FXMLController implements Initializable {
     }
 
     @FXML
-    private void CalculateBtnOnAction(ActionEvent event) {
+    private void onCalculatePressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onPlusPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onMinusPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onMulPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onDivPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onInvertPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onSqrtPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onCPressed(ActionEvent event) {
     }
 
 }
