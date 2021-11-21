@@ -20,7 +20,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private Button calculateBtn;
     @FXML
-    private ListView<?> listView;
+    private ListView<?> historyList;
     @FXML
     private Button cancBtn;
     @FXML
@@ -37,7 +37,6 @@ public class GUI_FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         calculateBtn.setDisable(true);
-        listView.setEditable(false);
     }
 
     @FXML
@@ -70,6 +69,22 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onCPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onClearPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onDropPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onDupPressed(ActionEvent event) {
+    }
+
+    @FXML
+    private void onOverPressed(ActionEvent event) {
     }
 
 }
