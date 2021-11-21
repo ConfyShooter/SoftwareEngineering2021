@@ -18,14 +18,15 @@ import javafx.scene.control.TextField;
 public class GUI_FXMLController implements Initializable {
 
     @FXML
-    private TextField textField;
-    @FXML
     private Button calculateBtn;
     @FXML
     private ListView<?> listView;
     @FXML
     private Button cancBtn;
-    //private ObservableList<Complex> stack;
+    @FXML
+    private TextField inputText;
+    
+    private ObservableList<?> stack;
 
     /**
      * Initializes the controller class.

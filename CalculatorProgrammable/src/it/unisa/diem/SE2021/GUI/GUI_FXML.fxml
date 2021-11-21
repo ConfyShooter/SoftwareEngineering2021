@@ -24,7 +24,7 @@
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="480.0" spacing="20.0">
                <children>
                   <Label text="Input" />
-                  <TextField fx:id="textField" promptText="a + bj" />
+                  <TextField fx:id="inputText" promptText="a + bj" />
                   <Button fx:id="calculateBtn" mnemonicParsing="false" onAction="#onCalculatePressed" text="Calculate" />
                </children>
                <VBox.margin>
