@@ -13,6 +13,7 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
 
 
 ✦ Second delivery: Sun. November 28:
+
   1st Sprint Release -
   
   Sprint backlog -
