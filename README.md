@@ -7,7 +7,7 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
   
   [Architecture Design](https://drive.google.com/file/d/1aC3ewx9ntOOFt4w6opfJrnL4DLbpPwoU/view?usp=sharing)
   
-  [Initial Product Backlog](https://docs.google.com/spreadsheets/d/1_tZ-b834kGpjWSfIYKGc3dXVGtDrJD-u/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
+  [Product Backlog](https://docs.google.com/spreadsheets/d/1_tZ-b834kGpjWSfIYKGc3dXVGtDrJD-u/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
   
   [First Sprint Backlog](https://docs.google.com/spreadsheets/d/16bT2IOX1n09y_2kjN82ov_fDsspXJAHg/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
 
