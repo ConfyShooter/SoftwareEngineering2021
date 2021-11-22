@@ -3,7 +3,7 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
 
 ✦ First delivery - Sun. November 21:
 
-  Pre-Game Info - https://docs.google.com/document/d/150nI8XnC_kZe4jG__v4gwtC6nZT15hzM/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true
+  [Pre-Game Info](https://docs.google.com/document/d/150nI8XnC_kZe4jG__v4gwtC6nZT15hzM/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
   
   Architecture Design - https://drive.google.com/file/d/1aC3ewx9ntOOFt4w6opfJrnL4DLbpPwoU/view?usp=sharing
   
