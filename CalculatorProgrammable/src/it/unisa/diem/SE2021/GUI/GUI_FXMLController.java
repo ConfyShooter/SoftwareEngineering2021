@@ -1,5 +1,6 @@
 package it.unisa.diem.SE2021.GUI;
 
+import it.unisa.diem.SE2021.Model.Complex;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -21,13 +22,13 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private Button calculateBtn;
     @FXML
-    private ListView<?> historyList;
+    private ListView<Complex> historyList;
     @FXML
     private Button cancBtn;
     @FXML
     private TextField inputText;
     
-    private ObservableList<?> stack;
+    private ObservableList<Complex> stack;
 
     /**
      * Initializes the controller class.
