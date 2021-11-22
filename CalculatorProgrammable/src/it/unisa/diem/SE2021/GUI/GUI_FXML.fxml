@@ -15,9 +15,6 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="500.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.SE2021.GUI.GUI_FXMLController">
-    <stylesheets>
-        <URL value="@gui_fxml.css" />
-    </stylesheets>
    <children>
       <VBox layoutX="158.0" layoutY="34.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
