@@ -29,6 +29,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private TextField inputText;
     
+    private Calculator c;
     private ObservableList<Complex> stack;
 
     /**
@@ -40,7 +41,8 @@ public class GUI_FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        Calculator c = new Calculator();
+        cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        c = new Calculator();
         stack = FXCollections.observableArrayList();
         stack.setAll(c.getData());
         historyList.setItems(stack);
@@ -48,50 +50,74 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onCalculatePressed(ActionEvent event) {
+        try{
+            c.parsing(inputText.getText());
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+        inputText.setText("");
+        stack.setAll(c.getData());
     }
 
     @FXML
     private void onPlusPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"+");
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"-");
     }
 
     @FXML
     private void onMulPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"*");
     }
 
     @FXML
     private void onDivPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"/");
     }
 
     @FXML
     private void onInvertPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"+-");
     }
 
     @FXML
     private void onSqrtPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"sqrt");
     }
 
     @FXML
     private void onCPressed(ActionEvent event) {
+        inputText.setText("");
     }
 
     @FXML
     private void onClearPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"clear");
     }
 
     @FXML
     private void onDropPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"drop");
     }
 
     @FXML
     private void onDupPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"dup");
+    }
+    
+    @FXML
+    private void onSwapPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"swap");
     }
 
     @FXML
     private void onOverPressed(ActionEvent event) {
+        inputText.setText(inputText.getText()+"over");
     }
 
 }

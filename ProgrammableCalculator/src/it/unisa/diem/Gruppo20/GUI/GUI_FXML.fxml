@@ -40,6 +40,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
@@ -63,39 +64,44 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" text="clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" text="clear" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" text="drop" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" text="drop" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" text="dup" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" text="dup" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" text="over" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" text="over" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onInvertPressed" prefHeight="50.0" prefWidth="50.0" text="+-" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onInvertPressed" prefHeight="50.0" prefWidth="50.0" text="+-" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSqrtPressed" prefHeight="50.0" prefWidth="50.0" text="√" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSqrtPressed" prefHeight="50.0" prefWidth="50.0" text="√" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="cancBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" text="C" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="cancBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" text="C" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="51.0" text="swap" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
                            </font>
                         </Button>
                      </children>

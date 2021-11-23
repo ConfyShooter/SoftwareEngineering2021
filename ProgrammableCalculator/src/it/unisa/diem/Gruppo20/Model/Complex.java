@@ -37,7 +37,15 @@ public class Complex {
 
     @Override
     public String toString() {
-        return real.toString() + imaginary.toString();
+        String ret = "";
+        if (real!=0.0)
+            ret += real.toString();
+        if (imaginary==0.0)
+            return ret;
+        if(imaginary>0.0)
+            ret += "+";
+        return ret + imaginary.toString() + "j";
+        
     }
 
     /**

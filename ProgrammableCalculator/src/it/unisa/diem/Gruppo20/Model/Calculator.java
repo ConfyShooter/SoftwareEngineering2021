@@ -63,12 +63,10 @@ public class Calculator {
      * that contains a command to be executed by Calculator.
      *
      * @param input String that contains a command to be executed by Calculator.
-     * @return True if and only if the operation invoked has been performed,
-     * otherwise return False.
      */
-    public boolean parsing(String input) throws NumberFormatException {
+    public void parsing(String input) throws Exception {
         if (input.isBlank()) {
-            return false;
+            throw new RuntimeException ("Input strink is blank");
         }
         char sequence[] = input.toCharArray();
         int length = input.length();
@@ -76,39 +74,40 @@ public class Calculator {
         for (int i = 0; i < length; i++) {
             if ((sequence[i] >= '0' && sequence[i] <= '9')) // in anycase in which the user want to insert a number
             {
-                return insert(input);
+                insert(input);
+                return;
             }
         }
         if (input.endsWith("j")) // in other cases like j, +j , -j
         {
-            return insert(input);
+            insert(input);
         } else if (input.equals("+")) {
-            return sum();
+            sum();
         } else if (input.equals("-")) {
-            return subtract();
+            subtract();
         } else if (input.equals("*")) {
-            return multiply();
+            multiply();
         } else if (input.equals("/")) {
-            return division();
+            division();
         } else if (input.equals("+-")) {
-            return invertSign();
+            invertSign();
         } else if (input.equals("sqrt")) {
-            return sqrt();
+            sqrt();
         } else if (input.equals("clear")) {
-            return clear();
+            clear();
         } else if (input.equals("drop")) {
-            return drop();
+            drop();
         } else if (input.equals("dup")) {
-            return dup();
+            dup();
         } else if (input.equals("swap")) {
-            return swap();
+            swap();
         } else if (input.equals("over")) {
-            return over();
-        } else if (input.equals("")) {//altri casi da aggiungere
-            return false;
+            over();
+        } else if (input.equals("")) {
+            return;
+        } else {
+            throw new RuntimeException ("Input strink not matched with one of possible command");
         }
-
-        return false; // in case which any kind of operation not matched with name String
     }
 
     // to add into UML
@@ -144,13 +143,11 @@ public class Calculator {
      * data structure.
      *
      * @param number String that contains a Complex number.
-     * @return True if the Complex number was created and inserted into the data
-     * structure, otherwise return False.
      */
-    public boolean insert(String number) throws NumberFormatException {
+    public void insert(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
-        //try {
+        
         int jIndex = number.indexOf("j");
         if (jIndex == -1) { // the string represent a real pure number
             real = Double.parseDouble(number);
@@ -170,11 +167,7 @@ public class Calculator {
             }
         }
         Complex c = new Complex(real, imaginary);
-        data.add(c);
-        //} catch (NumberFormatException ex) {
-        //    return false;
-        //}
-        return true;
+        data.push(c);
 
     }
 
@@ -182,104 +175,103 @@ public class Calculator {
      * Implement the sum of last two elements from the stack storing the result
      * onto it.
      *
-     * @return true if it terminates successfully
      */
-    public boolean sum() {
+    public void sum() throws Exception{
         Complex last = data.pop();
         Complex secondLast = data.pop();
 
-        return data.offer(last.plus(secondLast));
+        data.push(last.plus(secondLast));
     }
 
     /**
      *
      * @return
      */
-    public boolean subtract() {
-        return false;
+    public void subtract() {
+        
     }
 
     /**
      *
      * @return
      */
-    public boolean multiply() {
-        return false;
+    public void multiply() {
+        
     }
 
     /**
      *
      * @return
      */
-    public boolean division() {
-        return false;
+    public void division() {
+        
     }
 
     /**
      * Implement the square root of last element from the stack storing the
      * result onto it.
      *
-     * @return true if it terminates successfully
+     * @throws java.lang.Exception
      */
-    public boolean sqrt() {
+    public void sqrt() throws Exception {
         Complex last = data.pop();
         Complex result = last.squareRoot();
 
-        return data.offer(result);
+        data.push(result);
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean invertSign() {
-        return false;
+    public void invertSign() {
+        
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean clear() {
-        return false;
+    public void clear() {
+        
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean drop() {
-        return false;
+    public void drop() {
+        
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean dup() {
-        return false;
+    public void dup() {
+        
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean swap() {
-        return false;
+    public void swap() {
+        
     }
 
     /**
      *
-     * @return
+     
      */
-    public boolean over() {
-        return false;
+    public void over() {
+        
     }
 
     /**
-     *
+     * 
      * @param c
-     * @return
+     * @return 
      */
     public boolean saveIntoVariable(char c) {
         return false;
