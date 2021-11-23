@@ -28,19 +28,25 @@ public class ComplexTest {
 
         complex.setReal(3.0);
         complex.setImaginary(0.1);
-
-        assertEquals("Test if the sum() works correctly",
-                expexted, complex.plus(actual));
+        
+        actual = complex.plus(actual);
+        
+        check(expexted, actual);
     }
 
     @Test
     public void testSquareRoot() {
         Complex expexted = new Complex(2.0, 1.0);
-
         Complex actual = new Complex(3.0, 4.0);
-
-        assertEquals("Test if the squareRoot() works correctly",
-                expexted, actual.squareRoot());
+        
+        complex = actual.squareRoot();
+        
+        check(expexted, complex);
     }
 
+    private void check(Complex expexted, Complex actual) {
+        assertEquals(expexted.getReal(), actual.getReal(), 0.0001);
+        assertEquals(expexted.getImaginary(), actual.getImaginary(), 0.0001);
+    }
+    
 }

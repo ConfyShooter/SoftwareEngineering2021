@@ -118,7 +118,7 @@ public class Complex {
      * @return
      */
     public Double mod() {
-        return null;
+        return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
     }
 
     /**
@@ -126,7 +126,18 @@ public class Complex {
      * @return
      */
     public Double phase() {
-        return null;
+        if (real == 0 && imaginary > 0) {
+            return Math.PI / 2;
+        } else if (real == 0 && imaginary < 0) {
+            return -Math.PI / 2;
+        } else if (real > 0) {
+            return Math.atan(imaginary / real);
+        } else if (real < 0 && imaginary >= 0) {
+            return Math.atan(imaginary / real) + Math.PI;
+        } else if (real < 0 && imaginary < 0) {
+            return Math.atan(imaginary / real) - Math.PI;
+        }
+        return Double.NaN;
     }
 
     /**
