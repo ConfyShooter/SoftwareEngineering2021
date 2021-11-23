@@ -2,9 +2,7 @@ package it.unisa.diem.Gruppo20.Model;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.List;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -62,14 +60,16 @@ public class Calculator {
     }
 
     /**
-     * This function execute the parsing of the string passed as param.
-     * String that contains a command to be executed by Calculator.
+     * This function execute the parsing of the string passed as param. String
+     * that contains a command to be executed by Calculator.
+     *
      * @param input String that contains a command to be executed by Calculator.
-     * @return True if and only if the operation invoked has been performed, otherwise return False. 
+     * @return True if and only if the operation invoked has been performed,
+     * otherwise return False.
      */
-    public boolean parsing(String input) throws NumberFormatException {
+    public void parsing(String input) throws NumberFormatException {
         if (input.isBlank()) {
-            return false;
+            return;
         }
         char sequence[] = input.toCharArray();
         int length = input.length();
@@ -77,39 +77,40 @@ public class Calculator {
         for (int i = 0; i < length; i++) {
             if ((sequence[i] >= '0' && sequence[i] <= '9')) // in anycase in which the user want to insert a number
             {
-                return insert(input);
+                insert(input);
+                return;
             }
         }
         if (input.endsWith("j")) // in other cases like j, +j , -j
         {
-            return insert(input);
+            insert(input);
         } else if (input.equals("+")) {
-            return sum();
+            sum();
         } else if (input.equals("-")) {
-            return subtract();
+            subtract();
         } else if (input.equals("*")) {
-            return multiply();
+            multiply();
         } else if (input.equals("/")) {
-            return division();
+            division();
         } else if (input.equals("+-")) {
-            return invertSign();
+            invertSign();
         } else if (input.equals("sqrt")) {
-            return sqrt();
+            sqrt();
         } else if (input.equals("clear")) {
-            return clear();
+            clear();
         } else if (input.equals("drop")) {
-            return drop();
+            drop();
         } else if (input.equals("dup")) {
-            return dup();
+            dup();
         } else if (input.equals("swap")) {
-            return swap();
+            swap();
         } else if (input.equals("over")) {
-            return over();
+            over();
         } else if (input.equals("")) {//altri casi da aggiungere
-            return false;
+            return;
         }
 
-        return false; // in case which any kind of operation not matched with name String
+        return; // in case which any kind of operation not matched with name String
     }
 
     // to add into UML
@@ -140,208 +141,194 @@ public class Calculator {
     }
 
     /**
-     * This function extract the real and imaginary part from a complex number passed as param.
-     * After Create a new Complex Object and add it into the data structure.
+     * This function extract the real and imaginary part from a complex number
+     * passed as param. After Create a new Complex Object and add it into the
+     * data structure.
+     *
      * @param number String that contains a Complex number.
-     * @return True if the Complex number was created and inserted into the data structure, otherwise return False.
      */
-    public boolean insert(String number) throws NumberFormatException {
+    public void insert(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
         //try {
-            int jIndex = number.indexOf("j");
-            if (jIndex == -1) { // the string represent a real pure number
-                real = Double.parseDouble(number);
-            } else if (number.indexOf("+", 1) == number.indexOf("-", 1)) { // the string passed is an imaginary pure number
-                imaginary = findImaginary(number);
-            } else { // the case in which both real and imaginary part are present inside the string
-                int signIndex = number.indexOf("+", 1); //the first char of a string could be a sign +
-                if (signIndex == -1) {
-                    signIndex = number.indexOf("-", 1); //the first char of a string could be a sign -
-                }
-                if (signIndex > jIndex) { // if there is the imaginary part first and real part later
-                    real = Double.parseDouble(number.substring(signIndex, number.length()));
-                    imaginary = findImaginary(number.substring(0, signIndex));
-                } else if (signIndex < jIndex) { // the number is inserted in format a+bj
-                    real = Double.parseDouble(number.substring(0, signIndex));
-                    imaginary = findImaginary(number.substring(signIndex, number.length()));
-                }
+        int jIndex = number.indexOf("j");
+        if (jIndex == -1) { // the string represent a real pure number
+            real = Double.parseDouble(number);
+        } else if (number.indexOf("+", 1) == number.indexOf("-", 1)) { // the string passed is an imaginary pure number
+            imaginary = findImaginary(number);
+        } else { // the case in which both real and imaginary part are present inside the string
+            int signIndex = number.indexOf("+", 1); //the first char of a string could be a sign +
+            if (signIndex == -1) {
+                signIndex = number.indexOf("-", 1); //the first char of a string could be a sign -
             }
-            Complex c = new Complex(real, imaginary);
-            data.add(c);
+            if (signIndex > jIndex) { // if there is the imaginary part first and real part later
+                real = Double.parseDouble(number.substring(signIndex, number.length()));
+                imaginary = findImaginary(number.substring(0, signIndex));
+            } else if (signIndex < jIndex) { // the number is inserted in format a+bj
+                real = Double.parseDouble(number.substring(0, signIndex));
+                imaginary = findImaginary(number.substring(signIndex, number.length()));
+            }
+        }
+        Complex c = new Complex(real, imaginary);
+        data.push(c);
         //} catch (NumberFormatException ex) {
         //    return false;
         //}
-        return true;
-        
+        return;
+
     }
 
     /**
      * Implement the sum of last two elements from the stack storing the result
      * onto it.
      *
-     * @return true if it terminates successfully
      */
-    public boolean sum() {
+    public void sum() {
         Complex last = data.pop();
         Complex secondLast = data.pop();
 
-        return data.offer(last.plus(secondLast));
+        data.offer(last.plus(secondLast));
     }
 
     /**
      *
-     * @return
      */
-    public boolean subtract() {
-        return false;
+    public void subtract() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean multiply() {
-        return false;
+    public void multiply() {
+        return;
     }
 
     /**
-     *
-     * @return
+     * Implement the division a/b of last element from the stack with the last
+     * but one from the stack b storing the result onto it.
      */
-    public boolean division() {
-        return false;
+    public void division() throws NoSuchElementException {
+        Complex a = data.pop();
+        Complex b = data.pop();
+        data.push(a.division(b));
     }
 
     /**
      * Implement the square root of last element from the stack storing the
      * result onto it.
      *
-     * @return true if it terminates successfully
      */
-    public boolean sqrt() {
+    public void sqrt() {
         Complex last = data.pop();
         Complex result = last.squareRoot();
 
-        return data.offer(result);
+        data.push(result);
     }
 
     /**
      *
-     * @return
      */
-    public boolean invertSign() {
-        return false;
+    public void invertSign() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean clear() {
-        return false;
+    public void clear() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean drop() {
-        return false;
+    public void drop() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean dup() {
-        return false;
+    public void dup() {
+        return;
     }
 
     /**
-     * 
-     * @return 
+     *
      */
-    public boolean swap() {
-        return false;
+    public void swap() {
+        return;
     }
+
     /**
      *
-     * @return
      */
-    public boolean over() {
-        return false;
+    public void over() {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean saveIntoVariable(char c) {
-        return false;
+    public void saveIntoVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean saveFromVariable(char c) {
-        return false;
+    public void saveFromVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean sumWithVariable(char c) {
-        return false;
+    public void sumWithVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean subtractWithVariable(char c) {
-        return false;
+    public void subtractWithVariable(char c) {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean saveVariables() {
-        return false;
+    public void saveVariables() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean restoreVariables() {
-        return false;
+    public void restoreVariables() {
+        return;
     }
 
     /**
      *
      * @param name
-     * @return
      */
-    public boolean executeOperation(String name) {
-        return false;
+    public void executeOperation(String name) {
+        return;
     }
 
     /**
      *
      * @param name
      * @param op
-     * @return
      */
-    public boolean addOperation(String name, String[] op) {
-        return false;
+    public void addOperation(String name, String[] op) {
+        return;
     }
 
 }

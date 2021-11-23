@@ -1,5 +1,7 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.util.Objects;
+
 /**
  *
  * @author Gruppo 20
@@ -75,13 +77,54 @@ public class Complex {
         return null;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.real);
+        hash = 59 * hash + Objects.hashCode(this.imaginary);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Complex other = (Complex) obj;
+        if (!Objects.equals(this.real, other.real)) {
+            return false;
+        }
+        if (!Objects.equals(this.imaginary, other.imaginary)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
+     * This function return the ratio between this complex number and the param
+     * c.
      *
-     * @param c
-     * @return
+     * @param c the dividend of the operation
+     * @return Complex value
      */
-    public Complex division(Complex c) {
-        return null;
+    public Complex division(Complex c) throws ArithmeticException {
+        Double a = this.real;
+        Double b = this.imaginary;
+        Double c1 = c.real;
+        Double d = c.imaginary;
+        if (c1 == 0 && d == 0) {
+            throw new ArithmeticException("Complex number can't be 0.");
+        }
+        Double div = c1 * c1 + d * d;
+        Double real = (a * c1 + b * d) / div;
+        Double img = (b * c1 - a * d) / div;
+        return new Complex(real, img);
     }
 
     /**
