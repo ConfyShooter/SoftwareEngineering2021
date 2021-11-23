@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -68,11 +69,16 @@ public class Calculator {
     }
 
     /**
+     * Implement the sum of last two elements from the stack storing the result
+     * onto it.
      *
-     * @return
+     * @return true if it terminates successfully
      */
     public boolean sum() {
-        return false;
+        Complex last = data.get(data.size() - 1);
+        Complex secondLast = data.get(data.size() - 2);
+
+        return data.add(last.plus(secondLast));
     }
 
     /**
@@ -100,11 +106,16 @@ public class Calculator {
     }
 
     /**
+     * Implement the square root of last element from the stack storing the
+     * result onto it.
      *
-     * @return
+     * @return true if it terminates successfully
      */
     public boolean sqrt() {
-        return false;
+        Complex last = data.get(data.size() - 1);
+        Complex result = last.squareRoot();
+
+        return data.add(result);
     }
 
     /**

@@ -9,13 +9,47 @@ public class Complex {
     private Double real;
     private Double imaginary;
 
+    public Complex() {
+        this.real = Double.NaN;
+        this.imaginary = Double.NaN;
+    }
+
+    public Complex(Double real, Double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+
+    public Double getReal() {
+        return real;
+    }
+
+    public void setReal(Double real) {
+        this.real = real;
+    }
+
+    public Double getImaginary() {
+        return imaginary;
+    }
+
+    public void setImaginary(Double imaginary) {
+        this.imaginary = imaginary;
+    }
+
     /**
+     * This function implements the sum between two complex number.
      *
-     * @param c
-     * @return
+     * @param c is the operand we want to make the sum with.
+     * @return the complex number resulting from the operation.
      */
     public Complex plus(Complex c) {
-        return null;
+        Double cReal = c.getReal();
+        Double cImg = c.getImaginary();
+
+        Complex result = new Complex();
+        result.setReal(cReal + real);
+        result.setImaginary(cImg + imaginary);
+
+        return result;
     }
 
     /**
@@ -46,12 +80,24 @@ public class Complex {
     }
 
     /**
+     * This function implements the square root operation of a complex
+     * number.The result value is a complex numbers pair where one is the
+     * opposite of the other.
      *
-     * @param c
-     * @return
+     * @return a list made up of the two result of the square root.
      */
-    public Complex squareRoot(Complex c) {
-        return null;
+    public Complex squareRoot() {
+        Double module = this.mod();
+        Double phase = this.phase();
+
+        Complex result = new Complex();
+
+        Double r = Math.sqrt(module);
+
+        result.setReal(r * Math.cos((phase / 2)));
+        result.setImaginary(r * Math.sin((phase / 2)));
+
+        return result;
     }
 
     /**
@@ -66,7 +112,7 @@ public class Complex {
      *
      * @return
      */
-    public Complex mod() {
+    public Double mod() {
         return null;
     }
 
@@ -74,7 +120,7 @@ public class Complex {
      *
      * @return
      */
-    public Complex phase() {
+    public Double phase() {
         return null;
     }
 
