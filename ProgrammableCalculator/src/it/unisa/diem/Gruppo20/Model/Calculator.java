@@ -201,11 +201,12 @@ public class Calculator {
     /**
      * Implement the division a/b of last element from the stack with the last
      * but one from the stack b storing the result onto it.
+     * @throws java.lang.Exception
      */
     public void division() throws Exception {
         Complex a = data.pop();
         Complex b = data.pop();
-        data.push(a.division(b));
+        data.push(b.division(a));
     }
 
     /**

@@ -39,15 +39,22 @@ public class Complex {
 
     @Override
     public String toString() {
-        String ret = "";
-        if (real!=0.0)
-            ret += real.toString();
-        if (imaginary==0.0)
-            return ret;
-        if(imaginary>0.0)
-            ret += "+";
-        return ret + imaginary.toString() + "j";
+        String s = "";
+        if(real==0 && imaginary==0)
+            return "0";
         
+        if(real!=0) {
+            s = String.format("%.2f", real);
+            if(imaginary < 0)
+                s +=" - ";
+            else if (imaginary > 0)
+                s += " + ";
+        }
+        
+        if(imaginary!=0)
+            s = s + String.format("%.2f", Math.abs(imaginary)) + "j";
+        
+        return s;
     }
 
     /**
