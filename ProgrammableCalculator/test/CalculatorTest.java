@@ -24,24 +24,24 @@ public class CalculatorTest {
     @Test
     public void testParsing() {
         c.parsing("0.1+2.5j");
-        assertEquals("0.1 + 2.5j", c.getData().peekFirst());
+        assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
         c.parsing("4.0j");
-        assertEquals("0.5j", c.getData().peekFirst());
+        assertEquals("0.5j", c.getData().peekFirst().toString());
         c.parsing("3.0");
-        assertEquals("3.0", c.getData().peekFirst());
+        assertEquals("3.0", c.getData().peekFirst().toString());
         
     }
     
     @Test
     public void testSum() {
         c.sum();
-        assertEquals("3.0 + 4.0j", c.getData().peekFirst());
+        assertEquals("3.0+4.0j", c.getData().peekFirst().toString());
     }
 
     @Test
     public void testSqrt() {
         c.sqrt();
-        assertEquals("2.0 + 1.0j", c.getData().peekFirst());
+        assertEquals("2.0+1.0j", c.getData().peekFirst().toString());
     }
     
     @Test

@@ -28,7 +28,7 @@ public class GUI_FXMLController implements Initializable {
     private Button cancBtn;
     @FXML
     private TextField inputText;
-    
+    private Calculator c;
     private ObservableList<Complex> stack;
 
     /**
@@ -48,6 +48,8 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onCalculatePressed(ActionEvent event) {
+        c.parsing(inputText.getText());
+        stack.setAll(c.getData());
     }
 
     @FXML
@@ -76,6 +78,7 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onCPressed(ActionEvent event) {
+        inputText.clear();
     }
 
     @FXML

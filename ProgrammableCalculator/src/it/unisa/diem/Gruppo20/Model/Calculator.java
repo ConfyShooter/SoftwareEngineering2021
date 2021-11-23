@@ -64,8 +64,6 @@ public class Calculator {
      * that contains a command to be executed by Calculator.
      *
      * @param input String that contains a command to be executed by Calculator.
-     * @return True if and only if the operation invoked has been performed,
-     * otherwise return False.
      */
     public void parsing(String input) throws NumberFormatException {
         if (input.isBlank()) {
@@ -150,7 +148,6 @@ public class Calculator {
     public void insert(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
-        //try {
         int jIndex = number.indexOf("j");
         if (jIndex == -1) { // the string represent a real pure number
             real = Double.parseDouble(number);
@@ -171,10 +168,6 @@ public class Calculator {
         }
         Complex c = new Complex(real, imaginary);
         data.push(c);
-        //} catch (NumberFormatException ex) {
-        //    return false;
-        //}
-        return;
 
     }
 
@@ -187,7 +180,7 @@ public class Calculator {
         Complex last = data.pop();
         Complex secondLast = data.pop();
 
-        data.offer(last.plus(secondLast));
+        data.push(last.plus(secondLast));
     }
 
     /**
