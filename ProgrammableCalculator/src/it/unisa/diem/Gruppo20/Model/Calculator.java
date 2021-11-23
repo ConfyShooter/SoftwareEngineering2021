@@ -1,5 +1,7 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +12,7 @@ import javafx.collections.ObservableList;
  */
 public class Calculator {
 
-    private final ObservableList<Complex> data;
+    private final Deque<Complex> data;
     private final Variables variable;
     private final UserDefinedOperations userOperation;
 
@@ -18,7 +20,7 @@ public class Calculator {
      *
      */
     public Calculator() {
-        data = FXCollections.observableArrayList();
+        data = new ArrayDeque<>();
         variable = new Variables();
         userOperation = new UserDefinedOperations();
     }
@@ -29,7 +31,7 @@ public class Calculator {
      * @param variable
      * @param userOperation
      */
-    public Calculator(ObservableList<Complex> data, Variables variable, UserDefinedOperations userOperation) {
+    public Calculator(Deque<Complex> data, Variables variable, UserDefinedOperations userOperation) {
         this.data = data;
         this.variable = variable;
         this.userOperation = userOperation;
@@ -39,7 +41,7 @@ public class Calculator {
      *
      * @return
      */
-    public ObservableList<Complex> getData() {
+    public Deque<Complex> getData() {
         return data;
     }
 
@@ -75,10 +77,10 @@ public class Calculator {
      * @return true if it terminates successfully
      */
     public boolean sum() {
-        Complex last = data.get(data.size() - 1);
-        Complex secondLast = data.get(data.size() - 2);
+        Complex last = data.pop();
+        Complex secondLast = data.pop();
 
-        return data.add(last.plus(secondLast));
+        return data.offer(last.plus(secondLast));
     }
 
     /**
@@ -112,10 +114,10 @@ public class Calculator {
      * @return true if it terminates successfully
      */
     public boolean sqrt() {
-        Complex last = data.get(data.size() - 1);
+        Complex last = data.pop();
         Complex result = last.squareRoot();
 
-        return data.add(result);
+        return data.offer(result);
     }
 
     /**

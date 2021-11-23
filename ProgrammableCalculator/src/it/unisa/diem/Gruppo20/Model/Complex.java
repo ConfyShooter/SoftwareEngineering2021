@@ -35,6 +35,11 @@ public class Complex {
         this.imaginary = imaginary;
     }
 
+    @Override
+    public String toString() {
+        return real.toString() + imaginary.toString();
+    }
+
     /**
      * This function implements the sum between two complex number.
      *

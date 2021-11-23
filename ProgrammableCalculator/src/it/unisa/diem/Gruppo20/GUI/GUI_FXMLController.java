@@ -3,7 +3,11 @@ package it.unisa.diem.Gruppo20.GUI;
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import java.net.URL;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Stack;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +45,8 @@ public class GUI_FXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         Calculator c = new Calculator();
-        stack = c.getData();
+        stack = FXCollections.observableArrayList();
+        stack.setAll(c.getData());
         historyList.setItems(stack);
     }
 
