@@ -92,7 +92,7 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onCPressed(ActionEvent event) {
-        inputText.setText("");
+        inputText.clear();
     }
 
     @FXML

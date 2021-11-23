@@ -28,25 +28,30 @@ public class ComplexTest {
 
         complex.setReal(3.0);
         complex.setImaginary(0.1);
-        
-        actual = complex.plus(actual);
-        
-        check(expexted, actual);
+
+        assertEquals("Test if the sum works correctly",
+                expexted, complex.plus(actual));
     }
 
     @Test
     public void testSquareRoot() {
         Complex expexted = new Complex(2.0, 1.0);
-        Complex actual = new Complex(3.0, 4.0);
-        
-        complex = actual.squareRoot();
-        
-        check(expexted, complex);
-    }
+        complex.setReal(3.0);
+        complex.setImaginary(4.0);
 
-    private void check(Complex expexted, Complex actual) {
-        assertEquals(expexted.getReal(), actual.getReal(), 0.0001);
-        assertEquals(expexted.getImaginary(), actual.getImaginary(), 0.0001);
+        assertEquals("Test if the squareRoot works correctly",
+                expexted, complex.squareRoot());
+    }
+    
+    @Test
+    public void testDivision() {
+        Complex expected = new Complex((double) 45/29, (double) -40/29);
+        Complex div = new Complex(2.0, 5.0);
+        complex.setReal(10.0);
+        complex.setImaginary(5.0);
+
+        assertEquals("Test if the division works correctly",
+                expected, complex.division(div)); // trying 10+5j/2+5j
     }
     
 }

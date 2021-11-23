@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.Model;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -176,7 +177,7 @@ public class Calculator {
      * onto it.
      *
      */
-    public void sum() throws Exception{
+    public void sum() throws Exception {
         Complex last = data.pop();
         Complex secondLast = data.pop();
 
@@ -185,7 +186,6 @@ public class Calculator {
 
     /**
      *
-     * @return
      */
     public void subtract() {
         
@@ -193,18 +193,19 @@ public class Calculator {
 
     /**
      *
-     * @return
      */
     public void multiply() {
         
     }
 
     /**
-     *
-     * @return
+     * Implement the division a/b of last element from the stack with the last
+     * but one from the stack b storing the result onto it.
      */
-    public void division() {
-        
+    public void division() throws Exception {
+        Complex a = data.pop();
+        Complex b = data.pop();
+        data.push(a.division(b));
     }
 
     /**
@@ -271,72 +272,64 @@ public class Calculator {
     /**
      * 
      * @param c
-     * @return 
      */
-    public boolean saveIntoVariable(char c) {
-        return false;
+    public void saveIntoVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean saveFromVariable(char c) {
-        return false;
+    public void saveFromVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean sumWithVariable(char c) {
-        return false;
+    public void sumWithVariable(char c) {
+        return;
     }
 
     /**
      *
      * @param c
-     * @return
      */
-    public boolean subtractWithVariable(char c) {
-        return false;
+    public void subtractWithVariable(char c) {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean saveVariables() {
-        return false;
+    public void saveVariables() {
+        return;
     }
 
     /**
      *
-     * @return
      */
-    public boolean restoreVariables() {
-        return false;
+    public void restoreVariables() {
+        return;
     }
 
     /**
      *
      * @param name
-     * @return
      */
-    public boolean executeOperation(String name) {
-        return false;
+    public void executeOperation(String name) {
+        return;
     }
 
     /**
      *
      * @param name
      * @param op
-     * @return
      */
-    public boolean addOperation(String name, String[] op) {
-        return false;
+    public void addOperation(String name, String[] op) {
+        return;
     }
 
 }
