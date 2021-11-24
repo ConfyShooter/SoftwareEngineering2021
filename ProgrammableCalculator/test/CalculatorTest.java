@@ -81,5 +81,43 @@ public class CalculatorTest {
     public void testDivisionException() throws Exception { //testing that we need at most 2 elements in the stack for division
         c.division();
     }
+    
+    @Test
+    public void testClear() throws Exception {
+            c.parsing("0.1+2.5j");
+            assertFalse(c.getData().isEmpty());
+            c.clear();
+            assertTrue(c.getData().isEmpty());
+    }
+    
+    @Test
+    public void testDrop() throws Exception {
+            c.parsing("0.1+2.5j");
+            assertFalse(c.getData().isEmpty());
+            c.drop();
+            assertTrue(c.getData().isEmpty());
+            c.parsing("1");
+            c.parsing("0.1+2.5j");
+            c.drop();
+            assertEquals("1,00", c.getData().element().toString());
+    }
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testDropException() throws Exception { //testing that we need at most 1 elements in the stack
+        c.drop();
+    }
+    
+    @Test
+    public void testDup() throws Exception {
+            c.parsing("1");
+            c.dup();
+            assertEquals("1,00", c.getData().pop().toString());
+            assertEquals("1,00", c.getData().pop().toString());
+    }
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testDupException() throws Exception { //testing that we need at most 1 elements in the stack
+        c.dup();
+    }
 
 }

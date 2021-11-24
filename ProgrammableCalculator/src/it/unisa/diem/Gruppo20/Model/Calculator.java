@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.Model;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.NoSuchElementException;
 
 /**
  *
@@ -230,27 +231,26 @@ public class Calculator {
     }
 
     /**
-     *
-     
+     * This method removes all elements from the stack.
      */
     public void clear() {
-        
+        data.clear();
     }
 
     /**
-     *
-     
+     * This method remove the last element from the stack.
+     * @throws NoSuchElementException if the stack is empty.
      */
-    public void drop() {
-        
+    public void drop() throws NoSuchElementException {
+        data.pop();
     }
 
     /**
-     *
-     
+     * This method duplicate the last element from the stack and add the copy onto the stack.
+     * @throws NoSuchElementException if the stack is empty.
      */
-    public void dup() {
-        
+    public void dup() throws NoSuchElementException {
+        data.push(data.element());
     }
 
     /**
