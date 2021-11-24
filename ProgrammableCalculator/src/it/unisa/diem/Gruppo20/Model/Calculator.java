@@ -60,14 +60,18 @@ public class Calculator {
     }
 
     /**
-     * This function execute the parsing of the string passed as param. String
-     * that contains a command to be executed by Calculator.
+     * This function execute the parsing of the string passed as param.String
+       that contains a command to be executed by Calculator.
      *
      * @param input String that contains a command to be executed by Calculator.
+     * @throws java.lang.NumberFormatException if it fails to insert a number on the stack.
+     * @throws java.lang.ArithmeticException if it fails to do an operation on complex numbers.
+     * @throws java.util.NoSuchElementException if it fails to pop an element from the stack.
+     * 
      */
     public void parsing(String input) throws Exception {
         if (input.isBlank()) {
-            throw new RuntimeException ("Input strink is blank");
+            throw new RuntimeException ("Input string is blank!");
         }
         char sequence[] = input.toCharArray();
         int length = input.length();
@@ -107,7 +111,7 @@ public class Calculator {
         } else if (input.equals("")) {
             return;
         } else {
-            throw new RuntimeException ("Input strink not matched with one of possible command");
+            throw new RuntimeException ("Input string not matched with one of possible commands!");
         }
     }
 
@@ -192,10 +196,16 @@ public class Calculator {
     }
 
     /**
-     *
+     * Implement the moltiplication a*b of two element from the top of the stack
+     * a is the second last element, while b is is the last element.
+     * removing them from the stack and storing the result onto it.
      */
     public void multiply() {
-        
+        if(data.size() < 2)
+            throw new NoSuchElementException();
+        Complex b = data.pop();
+        Complex a = data.pop();
+        data.push(a.multiply(b));
     }
 
     /**

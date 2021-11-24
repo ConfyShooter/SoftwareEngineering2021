@@ -2,8 +2,6 @@
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -14,24 +12,50 @@ import static org.junit.Assert.*;
  */
 public class CalculatorTest {
 
-    private Calculator c = new Calculator();
+    private Calculator c;
 
     public CalculatorTest() {
     }
 
     @Before
     public void setUp() throws Exception {
+        c = new Calculator();
     }
 
-    @Test
-    public void testParsing() {
+    
+    @Test(expected=RuntimeException.class)
+    public void testParsingException() throws Exception {
+        c.parsing("clears");
+    }
+    
+    @Test(timeout=1000)
+    public void testParsing() throws Exception {
+        c.parsing("0.1+2.5j");
+        c.parsing("1.0+2.5j");
+        c.parsing("+");
+        assertEquals("1,10+5,00j", c.getData().peekFirst().toString());
+    }
+    @Test(expected=NumberFormatException.class)
+    public void testInsertException() throws Exception {
+        c.insert("-2.j5+0.1");
+    }
+    
+    @Test(timeout=1000)
+    public void testInsert() {
         try {
-            c.parsing("0.1+2.5j");
+            c.insert("-j4.0");
+            assertEquals("-4,00j", c.getData().peekFirst().toString());
+            c.insert("3.05");
+            assertEquals("3,05", c.getData().peekFirst().toString());
+            c.insert("0.1+2.5j");
             assertEquals("0,10+2,50j", c.getData().peekFirst().toString());
-            c.parsing("4.0j");
-            assertEquals("4,00j", c.getData().peekFirst().toString());
-            c.parsing("3.0");
-            assertEquals("3,00", c.getData().peekFirst().toString());
+            c.insert("0.1-j2.50");
+            assertEquals("0,10-2,50j", c.getData().peekFirst().toString());
+            c.insert("2.5j+0.1");
+            assertEquals("0,10+2,50j", c.getData().peekFirst().toString());
+            c.insert("-j2.5+0.1");
+            assertEquals("0,10-2,50j", c.getData().peekFirst().toString());
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -49,6 +73,20 @@ public class CalculatorTest {
             ex.printStackTrace();
         }
 
+    }
+    
+    @Test(expected=NoSuchElementException.class)
+    public void testMultiplyException() throws Exception {
+        c.parsing("0.5+2.5j");
+        c.multiply();
+    }
+    
+    @Test
+    public void testMultiply() throws Exception {
+        c.parsing("0.5+2.5j");
+        c.parsing("2-3.5j");
+        c.multiply();
+        assertEquals(new Complex((double) 39/4, (double)13/4).toString(), c.getData().peekFirst().toString());
     }
 
     @Test

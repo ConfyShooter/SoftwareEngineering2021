@@ -17,7 +17,7 @@ public class ComplexTest {
 
     @Before
     public void setUp() {
-        this.complex = new Complex();
+        complex = new Complex();
     }
 
 
@@ -31,6 +31,18 @@ public class ComplexTest {
 
         assertEquals("Test if the sum works correctly",
                 expexted, complex.plus(actual));
+    }
+    
+    @Test
+    public void testMultiply() {
+        Complex expexted = new Complex((double) 39/4, (double) 13/4);
+        Complex actual = new Complex(2.0, (double) -7/2);
+
+        complex.setReal(0.5);
+        complex.setImaginary((double) 5/2);
+
+        assertEquals("Test if the multiplication works correctly",
+                expexted, complex.multiply(actual));
     }
 
     @Test

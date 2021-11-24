@@ -56,7 +56,7 @@ public class GUI_FXMLController implements Initializable {
             ex.printStackTrace();
         }
         
-        inputText.setText("");
+        inputText.clear();
         stack.setAll(c.getData());
     }
 

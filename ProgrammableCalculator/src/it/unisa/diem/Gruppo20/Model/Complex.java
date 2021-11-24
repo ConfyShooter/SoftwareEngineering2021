@@ -40,19 +40,18 @@ public class Complex {
     @Override
     public String toString() {
         String s = "";
-        if (real == 0 && imaginary == 0) {
+        if (real == 0.0 && imaginary == 0.0) {
             return "0";
         }
 
         if (real != 0) {
             s = String.format("%.2f", real);
-
-            if (imaginary > 0) {
-                s += "+";
-            }
         }
+        
         if (imaginary != 0) {
-            s = s + String.format("%.2f", Math.abs(imaginary)) + "j";
+            if (imaginary > 0)
+                s += "+";
+            s = s + String.format("%.2f", imaginary) + "j";
         }
 
         return s;
@@ -85,12 +84,18 @@ public class Complex {
     }
 
     /**
-     *
-     * @param c
-     * @return
+     * This function implements the moltiplication between two complex number.
+     * @param c is the operand we want to make the moltiplication with.
+     * @return the complex number resulting from the operation.
      */
     public Complex multiply(Complex c) {
-        return null;
+        Double a = this.real;
+        Double b = this.imaginary;
+        Double c1 = c.real;
+        Double d = c.imaginary;
+        Double real = (a * c1 - b * d);
+        Double img = (a * d + b * c1);
+        return new Complex(real, img);
     }
 
     @Override
