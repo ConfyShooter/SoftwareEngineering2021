@@ -246,7 +246,7 @@ public class Calculator {
     }
 
     /**
-     * This method duplicate the last element from the stack and add the copy onto the stack.
+     * This method duplicate the last element from the stack and add the copy onto it
      * @throws NoSuchElementException if the stack is empty.
      */
     public void dup() throws NoSuchElementException {
@@ -254,19 +254,29 @@ public class Calculator {
     }
 
     /**
-     *
-     
+     * This method swap the last and last but one element from the stack.
+     * @throws NoSuchElementException if the stack has less then two elements.
      */
     public void swap() {
-        
+        if(data.size() < 2)
+            throw new NoSuchElementException();
+        Complex last = data.pop();
+        Complex lastButOne = data.pop();
+        data.push(last);
+        data.push(lastButOne);
     }
 
     /**
-     *
-     
+     * This method duplicate the last but one element from the stack and add the copy onto it.
+     * @throws NoSuchElementException if the stack has less than two elements.
      */
     public void over() {
-        
+        if(data.size() < 2)
+            throw new NoSuchElementException();
+        Complex last = data.pop();
+        Complex dup = data.element();
+        data.push(last);
+        data.push(dup);
     }
 
     /**

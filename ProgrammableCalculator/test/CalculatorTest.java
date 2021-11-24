@@ -119,5 +119,33 @@ public class CalculatorTest {
     public void testDupException() throws Exception { //testing that we need at most 1 elements in the stack
         c.dup();
     }
+    
+    @Test
+    public void testOver() throws Exception {
+            c.parsing("1");
+            c.parsing("2");
+            c.over();
+            assertEquals("1,00", c.getData().pop().toString());
+    }
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testOverException() throws Exception { //testing that we need at most 2 elements in the stack
+        c.parsing("2");
+        c.over();
+    }
+    
+    @Test
+    public void testSwap() throws Exception {
+            c.parsing("1");
+            c.parsing("2");
+            c.swap();
+            assertEquals("1,00", c.getData().pop().toString());
+    }
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testSwapException() throws Exception { //testing that we need at most 2 elements in the stack
+        c.parsing("2");
+        c.swap();
+    }
 
 }
