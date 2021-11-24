@@ -257,7 +257,7 @@ public class Calculator {
      * This method swap the last and last but one element from the stack.
      * @throws NoSuchElementException if the stack has less then two elements.
      */
-    public void swap() {
+    public void swap() throws NoSuchElementException {
         if(data.size() < 2)
             throw new NoSuchElementException();
         Complex last = data.pop();
@@ -270,7 +270,7 @@ public class Calculator {
      * This method duplicate the last but one element from the stack and add the copy onto it.
      * @throws NoSuchElementException if the stack has less than two elements.
      */
-    public void over() {
+    public void over() throws NoSuchElementException {
         if(data.size() < 2)
             throw new NoSuchElementException();
         Complex last = data.pop();
