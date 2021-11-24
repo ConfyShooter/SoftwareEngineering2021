@@ -74,11 +74,9 @@ public class ComplexTest {
         complex.setImaginary(0.0);
         assertEquals(Double.NaN, complex.phase(), 0.0000001);
 
-        complex.setReal(0.0);
         complex.setImaginary(1.0);
         assertEquals(Math.PI / 2, complex.phase(), 0.0000001);
 
-        complex.setReal(0.0);
         complex.setImaginary(-1.0);
         assertEquals(-Math.PI / 2, complex.phase(), 0.0000001);
 
@@ -88,7 +86,7 @@ public class ComplexTest {
         complex.setReal(-1.0);
         complex.setImaginary(0.0);
         assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) + Math.PI, complex.phase(), 0.0000001);
-        
+
         complex.setImaginary(-1.0);
         assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) - Math.PI, complex.phase(), 0.0000001);
     }
