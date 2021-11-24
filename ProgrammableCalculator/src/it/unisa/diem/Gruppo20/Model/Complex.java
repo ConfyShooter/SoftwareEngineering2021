@@ -150,7 +150,11 @@ public class Complex {
      *
      * @return a list made up of the two result of the square root.
      */
-    public Complex squareRoot() {
+    public Complex squareRoot() throws ArithmeticException {
+        if (real.isInfinite() || real.isNaN() || imaginary.isInfinite() || imaginary.isNaN()) {
+            throw new ArithmeticException("Unable to do the square root of a non-defined number");
+        }
+
         Double module = this.mod();
         Double phase = this.phase();
 
