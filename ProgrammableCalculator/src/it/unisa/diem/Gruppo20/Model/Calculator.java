@@ -2,7 +2,6 @@ package it.unisa.diem.Gruppo20.Model;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.NoSuchElementException;
 
 /**
  *

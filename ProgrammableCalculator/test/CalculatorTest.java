@@ -1,6 +1,7 @@
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +27,7 @@ public class CalculatorTest {
     public void testParsing() {
         try {
             c.parsing("0.1+2.5j");
-            assertEquals("0,10 + 2,50j", c.getData().peekFirst().toString());
+            assertEquals("0,10+2,50j", c.getData().peekFirst().toString());
             c.parsing("4.0j");
             assertEquals("4,00j", c.getData().peekFirst().toString());
             c.parsing("3.0");
@@ -74,6 +75,11 @@ public class CalculatorTest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    
+    @Test(expected = NoSuchElementException.class)
+    public void testDivisionException() throws Exception { //testing that we need at most 2 elements in the stack for division
+        c.division();
     }
 
 }

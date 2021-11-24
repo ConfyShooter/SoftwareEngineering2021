@@ -40,20 +40,21 @@ public class Complex {
     @Override
     public String toString() {
         String s = "";
-        if(real==0 && imaginary==0)
+        if (real == 0 && imaginary == 0) {
             return "0";
-        
-        if(real!=0)
+        }
+
+        if (real != 0) {
             s = String.format("%.2f", real);
-        
-        if(imaginary < 0)
-                s +=" - ";
-        else if (imaginary > 0)
-                s += " + ";
-        
-        if(imaginary!=0)
+
+            if (imaginary > 0) {
+                s += "+";
+            }
+        }
+        if (imaginary != 0) {
             s = s + String.format("%.2f", Math.abs(imaginary)) + "j";
-        
+        }
+
         return s;
     }
 

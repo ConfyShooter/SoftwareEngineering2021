@@ -54,4 +54,13 @@ public class ComplexTest {
                 expected, complex.division(div)); // trying 10+5j/2+5j
     }
     
+    @Test(expected = ArithmeticException.class)
+    public void testDivisionException() {
+        Complex div = new Complex(0.0, 0.0);
+        complex.setReal(10.0);
+        complex.setImaginary(5.0);
+
+        complex.division(div);
+    }
+    
 }
