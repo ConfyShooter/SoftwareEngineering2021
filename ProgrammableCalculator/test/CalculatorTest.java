@@ -126,6 +126,8 @@ public class CalculatorTest {
             c.parsing("2");
             c.over();
             assertEquals("1,00", c.getData().pop().toString());
+            assertEquals("2,00", c.getData().pop().toString());
+            assertEquals("1,00", c.getData().pop().toString());
     }
     
     @Test(expected = NoSuchElementException.class)
@@ -140,6 +142,7 @@ public class CalculatorTest {
             c.parsing("2");
             c.swap();
             assertEquals("1,00", c.getData().pop().toString());
+            assertEquals("2,00", c.getData().pop().toString());
     }
     
     @Test(expected = NoSuchElementException.class)
