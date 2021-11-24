@@ -111,4 +111,23 @@ public class ComplexTest {
         complex.division(div);
     }
 
+    @Test
+    public void testMinus() {
+        Complex expexted = new Complex(10.0, 0.0);
+        Complex min = new Complex(4.0, 5.0);
+        complex.setReal(14.0);
+        complex.setImaginary(5.0);
+        min = complex.minus(min);
+        assertEquals(expexted.toString(), min.toString());
+
+    }
+    
+    @Test
+    public void testInvert() {
+        Complex expexted = new Complex(5.0, 10.0);
+        Complex inv = new Complex(5.0, -10.0);
+        inv = inv.invert();
+        assertEquals(expexted.toString(), inv.toString());
+    }
+    
 }

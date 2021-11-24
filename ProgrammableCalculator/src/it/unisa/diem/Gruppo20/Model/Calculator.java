@@ -188,7 +188,9 @@ public class Calculator {
      *
      */
     public void subtract() {
-        
+        Complex last = data.pop();
+        Complex secondLast = data.pop();
+        data.push(secondLast.minus(last));        
     }
 
     /**
@@ -227,7 +229,9 @@ public class Calculator {
      
      */
     public void invertSign() {
-        
+        Complex last = data.pop();
+        Complex result = last.invert();
+        data.push(result);    
     }
 
     /**

@@ -52,7 +52,7 @@ public class Complex {
             }
         }
         if (imaginary != 0) {
-            s = s + String.format("%.2f", Math.abs(imaginary)) + "j";
+            s = s + String.format("%.2f", (imaginary)) + "j";
         }
 
         return s;
@@ -81,7 +81,12 @@ public class Complex {
      * @return
      */
     public Complex minus(Complex c) {
-        return null;
+        Double cReal = c.getReal();
+        Double cImg = c.getImaginary();
+        Complex result = new Complex();
+        result.setReal(real-cReal);
+        result.setImaginary(imaginary-cImg);
+        return result;
     }
 
     /**
@@ -173,7 +178,17 @@ public class Complex {
      * @return
      */
     public Complex invert() {
-        return null;
+        Complex result= new Complex();
+        if(imaginary==0){
+            result.setReal(-real);
+            result.setImaginary(imaginary);
+            return result;
+        }
+        else{
+            result.setReal(real);            
+            result.setImaginary(0-imaginary);
+            return result;
+        }   
     }
 
     /**
