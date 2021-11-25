@@ -76,9 +76,9 @@ public class Complex {
     }
 
     /**
-     *
-     * @param c
-     * @return
+     * This function implements the the subtraction between two numbers
+     * @param c the operand we want to subtract. 
+     * @return the complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
         Double cReal = c.getReal();
@@ -180,20 +180,11 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     *This function returns the number changed in sign
+     * @return the complex changed in sign
      */
     public Complex invert() {
-        Complex result = new Complex();
-        if (imaginary == 0) {
-            result.setReal(-real);
-            result.setImaginary(imaginary);
-            return result;
-        } else {
-            result.setReal(real);
-            result.setImaginary(0 - imaginary);
-            return result;
-        }
+        return new Complex(-real,-imaginary);  
     }
 
     /**

@@ -192,9 +192,11 @@ public class Calculator {
     }
 
     /**
-     *
+     *This functions implements the subtract between the secondlast and
+     * the last elements in the stack. Finally store the result onto the stack
+     @throws java.lang.Exception
      */
-    public void subtract() {
+    public void subtract() throws Exception{
         Complex last = data.pop();
         Complex secondLast = data.pop();
         data.push(secondLast.minus(last));
@@ -240,10 +242,10 @@ public class Calculator {
     }
 
     /**
-     *
-     *
+     *This functions take the last elements from the stack and reverses its sign
+     @throws java.lang.Exception
      */
-    public void invertSign() {
+    public void invertSign() throws Exception{
         Complex last = data.pop();
         Complex result = last.invert();
         data.push(result);

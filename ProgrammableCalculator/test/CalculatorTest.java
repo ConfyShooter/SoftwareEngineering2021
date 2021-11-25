@@ -213,7 +213,7 @@ public class CalculatorTest {
             assertEquals(new Complex(-1.0,0.0).toString(), c.getData().pop().toString());
             c.parsing("3.0+4.0j");
             c.invertSign();
-            assertEquals(new Complex(3.0,-4.0).toString(), c.getData().pop().toString());
+            assertEquals(new Complex(-3.0,-4.0).toString(), c.getData().pop().toString());
 
         } catch (Exception ex) {
             ex.printStackTrace();

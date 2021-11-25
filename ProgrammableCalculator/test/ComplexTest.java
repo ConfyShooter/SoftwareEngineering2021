@@ -132,7 +132,7 @@ public class ComplexTest {
     @Test
     public void testInvert() {
         Complex expexted = new Complex(5.0, 10.0);
-        Complex inv = new Complex(5.0, -10.0);
+        Complex inv = new Complex(-5.0, -10.0);
         inv = inv.invert();
         assertEquals(expexted.toString(), inv.toString());
     }
