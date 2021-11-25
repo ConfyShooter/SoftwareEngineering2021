@@ -61,17 +61,20 @@ public class Calculator {
 
     /**
      * This function execute the parsing of the string passed as param.String
-       that contains a command to be executed by Calculator.
+     * that contains a command to be executed by Calculator.
      *
      * @param input String that contains a command to be executed by Calculator.
-     * @throws java.lang.NumberFormatException if it fails to insert a number on the stack.
-     * @throws java.lang.ArithmeticException if it fails to do an operation on complex numbers.
-     * @throws java.util.NoSuchElementException if it fails to pop an element from the stack.
-     * 
+     * @throws java.lang.NumberFormatException if it fails to insert a number on
+     * the stack.
+     * @throws java.lang.ArithmeticException if it fails to do an operation on
+     * complex numbers.
+     * @throws java.util.NoSuchElementException if it fails to pop an element
+     * from the stack.
+     *
      */
     public void parsing(String input) throws Exception {
         if (input.isBlank()) {
-            throw new RuntimeException ("Input string is blank!");
+            throw new RuntimeException("Input string is blank!");
         }
         char sequence[] = input.toCharArray();
         int length = input.length();
@@ -111,34 +114,33 @@ public class Calculator {
         } else if (input.equals("")) {
             return;
         } else {
-            throw new RuntimeException ("Input string not matched with one of possible commands!");
+            throw new RuntimeException("Input string not matched with one of possible commands!");
         }
     }
 
     // to add into UML
     private double findImaginary(String s) throws NumberFormatException {
         switch (s) {
-            case "j":
-            case "+j":
+            case "j", "+j" -> {
                 return 1.0;
-            case "-j":
+            }
+            case "-j" -> {
                 return -1.0;
-            default:
+            }
+            default -> {
                 int jIndex = s.indexOf("j");
                 String number = new String();
-                if (jIndex == 0) // imaginary part inserted in form jb
-                {
+                if (jIndex == 0) { // imaginary part inserted in form jb
                     number = s.substring(1, s.length());
-                } else if (jIndex == 1 && (0 == s.indexOf("+") || 0 == s.indexOf("-"))) // imaginary part inserted in form +jb or -jb
-                {
+                } else if (jIndex == 1 && (0 == s.indexOf("+") || 0 == s.indexOf("-"))) {// imaginary part inserted in form +jb or -jb
                     number = s.substring(0, jIndex).concat(s.substring(jIndex + 1, s.length()));
-                } else if (jIndex == s.length() - 1) // imaginary part inserted in form bj
-                {
+                } else if (jIndex == s.length() - 1) { // imaginary part inserted in form bj
                     number = s.substring(0, jIndex);
                 } else {
                     number = s;
                 }
                 return Double.parseDouble(number);
+            }
         }
     }
 
@@ -152,7 +154,7 @@ public class Calculator {
     public void insert(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
-        
+
         int jIndex = number.indexOf("j");
         if (jIndex == -1) { // the string represent a real pure number
             real = Double.parseDouble(number);
@@ -180,6 +182,7 @@ public class Calculator {
      * Implement the sum of last two elements from the stack storing the result
      * onto it.
      *
+     * @throws java.lang.Exception
      */
     public void sum() throws Exception {
         Complex last = data.pop();
@@ -194,17 +197,18 @@ public class Calculator {
     public void subtract() {
         Complex last = data.pop();
         Complex secondLast = data.pop();
-        data.push(secondLast.minus(last));        
+        data.push(secondLast.minus(last));
     }
 
     /**
      * Implement the moltiplication a*b of two element from the top of the stack
-     * a is the second last element, while b is is the last element.
-     * removing them from the stack and storing the result onto it.
+     * a is the second last element, while b is is the last element. removing
+     * them from the stack and storing the result onto it.
      */
     public void multiply() {
-        if(data.size() < 2)
+        if (data.size() < 2) {
             throw new NoSuchElementException();
+        }
         Complex b = data.pop();
         Complex a = data.pop();
         data.push(a.multiply(b));
@@ -213,6 +217,7 @@ public class Calculator {
     /**
      * Implement the division a/b of last element from the stack with the last
      * but one from the stack b storing the result onto it.
+     *
      * @throws java.lang.Exception
      */
     public void division() throws Exception {
@@ -236,12 +241,12 @@ public class Calculator {
 
     /**
      *
-     
+     *
      */
     public void invertSign() {
         Complex last = data.pop();
         Complex result = last.invert();
-        data.push(result);    
+        data.push(result);
     }
 
     /**
@@ -253,6 +258,7 @@ public class Calculator {
 
     /**
      * This method remove the last element from the stack.
+     *
      * @throws NoSuchElementException if the stack is empty.
      */
     public void drop() throws NoSuchElementException {
@@ -260,7 +266,9 @@ public class Calculator {
     }
 
     /**
-     * This method duplicate the last element from the stack and add the copy onto it
+     * This method duplicate the last element from the stack and add the copy
+     * onto it
+     *
      * @throws NoSuchElementException if the stack is empty.
      */
     public void dup() throws NoSuchElementException {
@@ -269,11 +277,13 @@ public class Calculator {
 
     /**
      * This method swap the last and last but one element from the stack.
+     *
      * @throws NoSuchElementException if the stack has less then two elements.
      */
     public void swap() throws NoSuchElementException {
-        if(data.size() < 2)
+        if (data.size() < 2) {
             throw new NoSuchElementException();
+        }
         Complex last = data.pop();
         Complex lastButOne = data.pop();
         data.push(last);
@@ -281,12 +291,15 @@ public class Calculator {
     }
 
     /**
-     * This method duplicate the last but one element from the stack and add the copy onto it.
+     * This method duplicate the last but one element from the stack and add the
+     * copy onto it.
+     *
      * @throws NoSuchElementException if the stack has less than two elements.
      */
     public void over() throws NoSuchElementException {
-        if(data.size() < 2)
+        if (data.size() < 2) {
             throw new NoSuchElementException();
+        }
         Complex last = data.pop();
         Complex dup = data.element();
         data.push(last);
@@ -294,7 +307,7 @@ public class Calculator {
     }
 
     /**
-     * 
+     *
      * @param c
      */
     public void saveIntoVariable(char c) {

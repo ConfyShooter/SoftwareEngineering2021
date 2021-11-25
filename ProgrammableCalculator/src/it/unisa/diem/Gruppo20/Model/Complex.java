@@ -36,7 +36,7 @@ public class Complex {
     public void setImaginary(Double imaginary) {
         this.imaginary = imaginary;
     }
-  
+
     @Override
     public String toString() {
         String s = "";
@@ -47,10 +47,11 @@ public class Complex {
         if (real != 0) {
             s = String.format("%.2f", real);
         }
-        
+
         if (imaginary != 0) {
-            if (imaginary > 0)
+            if (imaginary > 0) {
                 s += "+";
+            }
             s = s + String.format("%.2f", imaginary) + "j";
         }
 
@@ -82,12 +83,16 @@ public class Complex {
     public Complex minus(Complex c) {
         Double cReal = c.getReal();
         Double cImg = c.getImaginary();
+        Complex result = new Complex();
+        result.setReal(real - cReal);
+        result.setImaginary(imaginary - cImg);
         Complex result = new Complex(real - cReal, imaginary - cImg);
         return result;
     }
 
     /**
      * This function implements the moltiplication between two complex number.
+     *
      * @param c is the operand we want to make the moltiplication with.
      * @return the complex number resulting from the operation.
      */
@@ -181,30 +186,35 @@ public class Complex {
      * @return
      */
     public Complex invert() {
-        Complex result= new Complex();
-        if(imaginary==0){
+        Complex result = new Complex();
+        if (imaginary == 0) {
             result.setReal(-real);
             result.setImaginary(imaginary);
             return result;
-        }
-        else{
-            result.setReal(real);            
-            result.setImaginary(0-imaginary);
+        } else {
+            result.setReal(real);
+            result.setImaginary(0 - imaginary);
             return result;
-        }   
+        }
     }
 
     /**
+     * This method calculate the module of a complex number.
      *
-     * @return
+     * @return the module.
      */
     public Double mod() {
         return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
     }
 
     /**
+     * This method return the phase of a complex number.
      *
-     * @return
+     * Based on how the values of the real and imaginary parts vary the value of
+     * the phases vary in the (-pi, pi] interval. The value is Undefined if the
+     * real and imaginary part are both equals to 0.
+     *
+     * @return the phase.
      */
     public Double phase() {
         if (real == 0 && imaginary > 0) {

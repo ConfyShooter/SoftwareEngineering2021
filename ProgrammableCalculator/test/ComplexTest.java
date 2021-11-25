@@ -1,3 +1,4 @@
+
 import it.unisa.diem.Gruppo20.Model.Complex;
 
 import org.junit.*;
@@ -30,14 +31,14 @@ public class ComplexTest {
         assertEquals("Test if the sum works correctly",
                 expexted, complex.plus(actual));
     }
-    
+
     @Test
     public void testMultiply() {
-        Complex expexted = new Complex((double) 39/4, (double) 13/4);
-        Complex actual = new Complex(2.0, (double) -7/2);
+        Complex expexted = new Complex((double) 39 / 4, (double) 13 / 4);
+        Complex actual = new Complex(2.0, (double) -7 / 2);
 
         complex.setReal(0.5);
-        complex.setImaginary((double) 5/2);
+        complex.setImaginary((double) 5 / 2);
 
         assertEquals("Test if the multiplication works correctly",
                 expexted, complex.multiply(actual));
@@ -64,7 +65,6 @@ public class ComplexTest {
         assertEquals("Test if the squareRoot works correctly",
                 expexted, complex);
     }
-
 
     @Test
     public void testMod() {
@@ -128,7 +128,7 @@ public class ComplexTest {
         assertEquals(expexted.toString(), min.toString());
 
     }
-    
+
     @Test
     public void testInvert() {
         Complex expexted = new Complex(5.0, 10.0);
@@ -136,5 +136,5 @@ public class ComplexTest {
         inv = inv.invert();
         assertEquals(expexted.toString(), inv.toString());
     }
-    
+
 }
