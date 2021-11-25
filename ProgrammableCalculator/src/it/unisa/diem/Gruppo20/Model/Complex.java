@@ -82,9 +82,7 @@ public class Complex {
     public Complex minus(Complex c) {
         Double cReal = c.getReal();
         Double cImg = c.getImaginary();
-        Complex result = new Complex();
-        result.setReal(real-cReal);
-        result.setImaginary(imaginary-cImg);
+        Complex result = new Complex(real - cReal, imaginary - cImg);
         return result;
     }
 
