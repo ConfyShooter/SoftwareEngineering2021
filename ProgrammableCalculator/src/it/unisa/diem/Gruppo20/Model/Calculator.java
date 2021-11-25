@@ -192,7 +192,9 @@ public class Calculator {
      *
      */
     public void subtract() {
-        
+        Complex last = data.pop();
+        Complex secondLast = data.pop();
+        data.push(secondLast.minus(last));        
     }
 
     /**
@@ -237,7 +239,9 @@ public class Calculator {
      
      */
     public void invertSign() {
-        
+        Complex last = data.pop();
+        Complex result = last.invert();
+        data.push(result);    
     }
 
     /**
@@ -267,7 +271,7 @@ public class Calculator {
      * This method swap the last and last but one element from the stack.
      * @throws NoSuchElementException if the stack has less then two elements.
      */
-    public void swap() {
+    public void swap() throws NoSuchElementException {
         if(data.size() < 2)
             throw new NoSuchElementException();
         Complex last = data.pop();
@@ -280,7 +284,7 @@ public class Calculator {
      * This method duplicate the last but one element from the stack and add the copy onto it.
      * @throws NoSuchElementException if the stack has less than two elements.
      */
-    public void over() {
+    public void over() throws NoSuchElementException {
         if(data.size() < 2)
             throw new NoSuchElementException();
         Complex last = data.pop();

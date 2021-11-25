@@ -36,7 +36,7 @@ public class Complex {
     public void setImaginary(Double imaginary) {
         this.imaginary = imaginary;
     }
-
+  
     @Override
     public String toString() {
         String s = "";
@@ -80,7 +80,12 @@ public class Complex {
      * @return
      */
     public Complex minus(Complex c) {
-        return null;
+        Double cReal = c.getReal();
+        Double cImg = c.getImaginary();
+        Complex result = new Complex();
+        result.setReal(real-cReal);
+        result.setImaginary(imaginary-cImg);
+        return result;
     }
 
     /**
@@ -155,7 +160,11 @@ public class Complex {
      *
      * @return a list made up of the two result of the square root.
      */
-    public Complex squareRoot() {
+    public Complex squareRoot() throws ArithmeticException {
+        if (real.isInfinite() || real.isNaN() || imaginary.isInfinite() || imaginary.isNaN()) {
+            throw new ArithmeticException("Unable to do the square root of a non-defined number");
+        }
+
         Double module = this.mod();
         Double phase = this.phase();
 
@@ -174,7 +183,17 @@ public class Complex {
      * @return
      */
     public Complex invert() {
-        return null;
+        Complex result= new Complex();
+        if(imaginary==0){
+            result.setReal(-real);
+            result.setImaginary(imaginary);
+            return result;
+        }
+        else{
+            result.setReal(real);            
+            result.setImaginary(0-imaginary);
+            return result;
+        }   
     }
 
     /**

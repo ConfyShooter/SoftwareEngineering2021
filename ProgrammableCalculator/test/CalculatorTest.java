@@ -35,6 +35,7 @@ public class CalculatorTest {
         c.parsing("+");
         assertEquals("1,10+5,00j", c.getData().peekFirst().toString());
     }
+    
     @Test(expected=NumberFormatException.class)
     public void testInsertException() throws Exception {
         c.insert("-2.j5+0.1");
@@ -73,7 +74,7 @@ public class CalculatorTest {
             ex.printStackTrace();
         }
 
-    }
+    }    
     
     @Test(expected=NoSuchElementException.class)
     public void testMultiplyException() throws Exception {
@@ -188,5 +189,36 @@ public class CalculatorTest {
         c.parsing("2");
         c.swap();
     }
+    
+    @Test
+    public void testSubtract() {
+        try {
+            c.parsing("6.0j");
+            c.parsing("5.0");
+            c.subtract();
+            assertEquals(new Complex(-5.0, 6.0).toString(), c.getData().pop().toString());
+            c.parsing("-6.0");
+            c.parsing("4.0");
+            c.subtract();
+            assertEquals(new Complex(-10.0, 0.0).toString(), c.getData().pop().toString());           
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    @Test
+    public void testInvertSign() {
+        try {
+            c.parsing("1.0+0.0j");
+            c.invertSign();
+            assertEquals(new Complex(-1.0,0.0).toString(), c.getData().pop().toString());
+            c.parsing("3.0+4.0j");
+            c.invertSign();
+            assertEquals(new Complex(3.0,-4.0).toString(), c.getData().pop().toString());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }    
+    
 
 }
