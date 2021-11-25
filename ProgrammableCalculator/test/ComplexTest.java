@@ -65,10 +65,6 @@ public class ComplexTest {
                 expexted, complex);
     }
 
-    private void check(Complex expexted, Complex actual) {
-        assertEquals(expexted.getReal(), actual.getReal(), 0.000001);
-        assertEquals(expexted.getImaginary(), actual.getImaginary(), 0.000001);
-    }
 
     @Test
     public void testMod() {
