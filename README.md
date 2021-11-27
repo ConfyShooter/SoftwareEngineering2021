@@ -14,17 +14,17 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
 
 ### ✦ Second delivery: Sun. November 28:
 
-  1st Sprint Release -
+  [1st Sprint Release](https://drive.google.com/file/d/1cCYvf8lUEAdfUF-aPZTC-1ij2ZDjzGNQ/view?usp=sharing)
   
   Sprint backlog -
   
   Updated prod. backlog -
   
-  Project Burndown chart -
+  [Project Burndown chart](https://drive.google.com/file/d/1cT9AXIJaZiMAEOftudyzJxPL87KYk4VU/view?usp=sharing)
   
-  Sprint review report -
+  [Sprint review report](https://docs.google.com/document/d/1bmhV0uH3nQYUFMXMjXCL-NFa-Rbx9U_g/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
   
-  Sprint retrospective report -
+  [Sprint retrospective report](https://docs.google.com/document/d/1bmTTPq2NFMwQw7BDYRe6BilHHYAtEuHt/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
   
 
 ### ✦ Third delivery: Sun. December 5:
