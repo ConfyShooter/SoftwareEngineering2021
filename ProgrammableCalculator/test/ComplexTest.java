@@ -1,3 +1,4 @@
+
 import it.unisa.diem.Gruppo20.Model.Complex;
 
 import org.junit.*;
@@ -22,18 +23,18 @@ public class ComplexTest {
     @Test
     public void testPlus() {
         Complex expected = new Complex(5.0, 10.1);
-        
+
         Complex actual = new Complex(2.0, 10.0);
         complex.setReal(3.0);
         complex.setImaginary(0.1);
-        
+
         assertComplexEquals(expected, complex.plus(actual));
     }
-    
-        @Test
+
+    @Test
     public void testMinus() {
         Complex expected = new Complex(10.0, 0.0);
-        
+
         Complex min = new Complex(4.0, 5.0);
         complex.setReal(14.0);
         complex.setImaginary(5.0);
@@ -48,7 +49,7 @@ public class ComplexTest {
 
         complex.setReal(0.5);
         complex.setImaginary((double) 5 / 2);
-        
+
         assertComplexEquals(expected, complex.multiply(actual));
 
     }
@@ -88,12 +89,12 @@ public class ComplexTest {
         complex.setImaginary(-1.0);
         assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) - Math.PI, complex.phase(), 0.00000001);
     }
-    
+
     @Test(expected = ArithmeticException.class)
     public void testPhaseExcpetion() {
         complex.setReal(0.0);
         complex.setImaginary(0.0);
-        
+
         complex.squareRoot();
     }
 
@@ -101,7 +102,7 @@ public class ComplexTest {
     public void testDivision() {
         Complex expected = new Complex((double) 45 / 29, (double) -40 / 29);
         Complex div = new Complex(2.0, 5.0);
-        
+
         complex.setReal(10.0);
         complex.setImaginary(5.0);
 
@@ -121,10 +122,10 @@ public class ComplexTest {
     public void testInvert() {
         Complex expected = new Complex(5.0, 10.0);
         Complex inv = new Complex(-5.0, -10.0);
-        
+
         assertComplexEquals(expected, inv.invert());
     }
-    
+
     private void assertComplexEquals(Complex expected, Complex actual) {
         Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
         Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);

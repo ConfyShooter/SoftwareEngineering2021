@@ -5,7 +5,9 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 /**
- * This class allows arithmetic operations on Complex number using a LIFO data structure for storing.
+ * This class allows arithmetic operations on Complex number using a LIFO data
+ * structure for storing.
+ *
  * @author Gruppo 20
  */
 public class Calculator {
@@ -15,7 +17,7 @@ public class Calculator {
     private final UserDefinedOperations userOperation;
 
     /**
-     *  Initialize the Calculator with an empty stack.
+     * Initialize the Calculator with an empty stack.
      */
     public Calculator() {
         data = new ArrayDeque<>();
@@ -25,6 +27,7 @@ public class Calculator {
 
     /**
      * Initialize the calculator using params as new attributes.
+     *
      * @param data
      * @param variable
      * @param userOperation
@@ -63,9 +66,10 @@ public class Calculator {
     public void parsing(String input) throws Exception {
         input = input.replaceAll("\\s+", "");
 
-        if (input.isBlank())
+        if (input.isBlank()) {
             throw new RuntimeException("Input string is empty!");
-        
+        }
+
         char sequence[] = input.toCharArray();
         int length = input.length();
 
@@ -75,35 +79,37 @@ public class Calculator {
                 return;
             }
         }
-        
+
         if (input.endsWith("j")) // in other cases like j, +j , -j
+        {
             insert(input);
-        else if (input.equals("+"))
+        } else if (input.equals("+")) {
             sum();
-        else if (input.equals("-"))
+        } else if (input.equals("-")) {
             subtract();
-        else if (input.equals("*"))
+        } else if (input.equals("*")) {
             multiply();
-        else if (input.equals("/"))
+        } else if (input.equals("/")) {
             division();
-        else if (input.equals("+-"))
+        } else if (input.equals("+-")) {
             invertSign();
-        else if (input.equals("sqrt"))
+        } else if (input.equals("sqrt")) {
             sqrt();
-        else if (input.equals("clear"))
+        } else if (input.equals("clear")) {
             clear();
-        else if (input.equals("drop"))
+        } else if (input.equals("drop")) {
             drop();
-        else if (input.equals("dup"))
+        } else if (input.equals("dup")) {
             dup();
-        else if (input.equals("swap"))
+        } else if (input.equals("swap")) {
             swap();
-        else if (input.equals("over"))
+        } else if (input.equals("over")) {
             over();
-        else if (input.equals(""))
+        } else if (input.equals("")) {
             return;
-        else
+        } else {
             throw new RuntimeException("Unknown error!");
+        }
     }
 
     private double findImaginary(String s) throws NumberFormatException {
@@ -115,18 +121,18 @@ public class Calculator {
                 return -1.0;
             }
             default -> {
-                
                 int jIndex = s.indexOf("j");
                 String number = new String();
-                if (jIndex == 0) // imaginary part inserted in form jb
+                if (jIndex == 0) { // imaginary part inserted in form jb
                     number = s.substring(1, s.length());
-                else if (jIndex == 1 && (0 == s.indexOf("+") || 0 == s.indexOf("-")))// imaginary part inserted in form +jb or -jb
+                } else if (jIndex == 1 && (0 == s.indexOf("+") || 0 == s.indexOf("-"))) { // imaginary part inserted in form +jb or -jb
                     number = s.substring(0, jIndex).concat(s.substring(jIndex + 1, s.length()));
-                else if (jIndex == s.length() - 1) // imaginary part inserted in form bj
+                } else if (jIndex == s.length() - 1) { // imaginary part inserted in form bj
                     number = s.substring(0, jIndex);
-                else 
+                } else {
                     number = s;
-                
+                }
+
                 return Double.parseDouble(number);
             }
         }
@@ -144,14 +150,15 @@ public class Calculator {
         Double imaginary = 0.0;
 
         int jIndex = number.indexOf("j");
-        if (jIndex == -1) // the string represent a real pure number
+        if (jIndex == -1) {// the string represent a real pure number
             real = Double.parseDouble(number);
-        else if (number.indexOf("+", 1) == number.indexOf("-", 1)) // the string passed is an imaginary pure number
+        } else if (number.indexOf("+", 1) == number.indexOf("-", 1)) { // the string passed is an imaginary pure number
             imaginary = findImaginary(number);
-        else { // the case in which both real and imaginary part are present inside the string
+        } else { // the case in which both real and imaginary part are present inside the string
             int signIndex = number.indexOf("+", 1); //the first char of a string could be a sign +
-            if (signIndex == -1)
+            if (signIndex == -1) {
                 signIndex = number.indexOf("-", 1); //the first char of a string could be a sign -
+            }
             if (signIndex > jIndex) { // if there is the imaginary part first and real part later
                 real = Double.parseDouble(number.substring(signIndex, number.length()));
                 imaginary = findImaginary(number.substring(0, signIndex));
@@ -160,10 +167,9 @@ public class Calculator {
                 imaginary = findImaginary(number.substring(signIndex, number.length()));
             }
         }
-        
+
         Complex c = new Complex(real, imaginary);
         data.push(c);
-
     }
 
     /**
@@ -174,7 +180,7 @@ public class Calculator {
      */
     public void sum() throws NoSuchElementException {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.pop();
 
@@ -182,16 +188,17 @@ public class Calculator {
     }
 
     /**
-     *This functions implements the subtract between the secondlast and
-     * the last elements in the stack. Finally store the result onto the stack
-     @throws java.lang.NoSuchElementException
+     * This functions implements the subtract between the secondlast and the
+     * last elements in the stack. Finally store the result onto the stack
+     *
+     * @throws java.lang.NoSuchElementException
      */
     public void subtract() throws NoSuchElementException {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.pop();
-        
+
         data.push(secondLast.minus(last));
     }
 
@@ -202,10 +209,10 @@ public class Calculator {
      */
     public void multiply() throws Exception {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.pop();
-        
+
         data.push(secondLast.multiply(last));
     }
 
@@ -217,10 +224,10 @@ public class Calculator {
      */
     public void division() throws Exception {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.pop();
-        
+
         data.push(secondLast.division(last));
     }
 
@@ -232,21 +239,23 @@ public class Calculator {
      */
     public void sqrt() throws Exception {
         checkStackSize(1);
-        
+
         Complex last = data.pop();
 
         data.push(last.squareRoot());
     }
 
     /**
-     *This functions take the last elements from the stack and reverses its sign
-     @throws java.lang.NoSuchElementException
+     * This functions take the last elements from the stack and reverses its
+     * sign
+     *
+     * @throws java.lang.NoSuchElementException
      */
-    public void invertSign() throws NoSuchElementException{
+    public void invertSign() throws NoSuchElementException {
         checkStackSize(1);
-        
+
         Complex last = data.pop();
-        
+
         data.push(last.invert());
     }
 
@@ -285,10 +294,10 @@ public class Calculator {
      */
     public void swap() throws NoSuchElementException {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.pop();
-        
+
         data.push(last);
         data.push(secondLast);
     }
@@ -301,10 +310,10 @@ public class Calculator {
      */
     public void over() throws NoSuchElementException {
         checkStackSize(2);
-        
+
         Complex last = data.pop();
         Complex secondLast = data.element();
-        
+
         data.push(last);
         data.push(secondLast);
     }
@@ -371,10 +380,11 @@ public class Calculator {
     public void addOperation(String name, String[] op) {
         return;
     }
-    
+
     private void checkStackSize(int k) {
-        if(data.size() < k)
+        if (data.size() < k) {
             throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");
+        }
     }
 
 }
