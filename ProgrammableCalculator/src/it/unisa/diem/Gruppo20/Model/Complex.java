@@ -170,8 +170,8 @@ public class Complex {
      * @return a list made up of the two result of the square root.
      */
     public Complex squareRoot() {
-        Double module = this.mod();
-        Double phase = this.phase();
+        Double module = mod();
+        Double phase = phase();
 
         Double r = Math.sqrt(module);
         Double real = r * Math.cos((phase / 2));
