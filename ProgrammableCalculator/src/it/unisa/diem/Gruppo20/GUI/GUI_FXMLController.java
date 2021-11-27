@@ -5,8 +5,6 @@ import it.unisa.diem.Gruppo20.Model.Complex;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
