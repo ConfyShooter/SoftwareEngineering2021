@@ -1,4 +1,3 @@
-
 import it.unisa.diem.Gruppo20.Model.Complex;
 
 import org.junit.*;
@@ -22,48 +21,44 @@ public class ComplexTest {
 
     @Test
     public void testPlus() {
-        Complex expexted = new Complex(5.0, 10.1);
+        Complex expected = new Complex(5.0, 10.1);
+        
         Complex actual = new Complex(2.0, 10.0);
-
         complex.setReal(3.0);
         complex.setImaginary(0.1);
+        
+        assertComplexEquals(expected, complex.plus(actual));
+    }
+    
+        @Test
+    public void testMinus() {
+        Complex expected = new Complex(10.0, 0.0);
+        
+        Complex min = new Complex(4.0, 5.0);
+        complex.setReal(14.0);
+        complex.setImaginary(5.0);
 
-        assertEquals("Test if the sum works correctly",
-                expexted, complex.plus(actual));
+        assertComplexEquals(expected, complex.minus(min));
     }
 
     @Test
     public void testMultiply() {
-        Complex expexted = new Complex((double) 39 / 4, (double) 13 / 4);
+        Complex expected = new Complex((double) 39 / 4, (double) 13 / 4);
         Complex actual = new Complex(2.0, (double) -7 / 2);
 
         complex.setReal(0.5);
         complex.setImaginary((double) 5 / 2);
+        
+        assertComplexEquals(expected, complex.multiply(actual));
 
-        assertEquals("Test if the multiplication works correctly",
-                expexted, complex.multiply(actual));
-    }
-
-    @Test(expected = ArithmeticException.class)
-    public void testSquareRootException() {
-        complex.setReal(Double.POSITIVE_INFINITY);
-        complex.setImaginary(-20.0);
-        complex.squareRoot();
-
-        complex.setReal(1.0);
-        complex.setImaginary(Double.NaN);
-        complex.squareRoot();
     }
 
     @Test
     public void testSquareRoot() {
-        Complex expexted = new Complex(2.0, 1.0);
+        Complex expected = new Complex(2.0, 1.0);
         Complex actual = new Complex(3.0, 4.0);
 
-        complex = actual.squareRoot();
-
-        assertEquals("Test if the squareRoot works correctly",
-                expexted, complex);
+        assertComplexEquals(expected, actual.squareRoot());
     }
 
     @Test
@@ -77,36 +72,40 @@ public class ComplexTest {
 
     @Test
     public void testPhase() {
-        complex.setReal(0.0);
-        complex.setImaginary(0.0);
-        assertEquals(Double.NaN, complex.phase(), 0.0000001);
-
         complex.setImaginary(1.0);
-        assertEquals(Math.PI / 2, complex.phase(), 0.0000001);
+        assertEquals(Math.PI / 2, complex.phase(), 0.00000001);
 
         complex.setImaginary(-1.0);
-        assertEquals(-Math.PI / 2, complex.phase(), 0.0000001);
+        assertEquals(-Math.PI / 2, complex.phase(), 0.00000001);
 
         complex.setReal(1.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()), complex.phase(), 0.0000001);
+        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()), complex.phase(), 0.00000001);
 
         complex.setReal(-1.0);
         complex.setImaginary(0.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) + Math.PI, complex.phase(), 0.0000001);
+        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) + Math.PI, complex.phase(), 0.00000001);
 
         complex.setImaginary(-1.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) - Math.PI, complex.phase(), 0.0000001);
+        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) - Math.PI, complex.phase(), 0.00000001);
+    }
+    
+    @Test(expected = ArithmeticException.class)
+    public void testPhaseExcpetion() {
+        complex.setReal(0.0);
+        complex.setImaginary(0.0);
+        
+        complex.squareRoot();
     }
 
     @Test
     public void testDivision() {
         Complex expected = new Complex((double) 45 / 29, (double) -40 / 29);
         Complex div = new Complex(2.0, 5.0);
+        
         complex.setReal(10.0);
         complex.setImaginary(5.0);
 
-        assertEquals("Test if the division works correctly",
-                expected, complex.division(div)); // trying 10+5j/2+5j
+        assertComplexEquals(expected, complex.division(div));
     }
 
     @Test(expected = ArithmeticException.class)
@@ -119,22 +118,16 @@ public class ComplexTest {
     }
 
     @Test
-    public void testMinus() {
-        Complex expexted = new Complex(10.0, 0.0);
-        Complex min = new Complex(4.0, 5.0);
-        complex.setReal(14.0);
-        complex.setImaginary(5.0);
-        min = complex.minus(min);
-        assertEquals(expexted.toString(), min.toString());
-
-    }
-
-    @Test
     public void testInvert() {
-        Complex expexted = new Complex(5.0, 10.0);
+        Complex expected = new Complex(5.0, 10.0);
         Complex inv = new Complex(-5.0, -10.0);
-        inv = inv.invert();
-        assertEquals(expexted.toString(), inv.toString());
+        
+        assertComplexEquals(expected, inv.invert());
+    }
+    
+    private void assertComplexEquals(Complex expected, Complex actual) {
+        Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
+        Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
 
 }

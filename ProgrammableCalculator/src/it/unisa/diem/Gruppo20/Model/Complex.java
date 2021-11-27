@@ -66,10 +66,10 @@ public class Complex {
             return false;
         }
         final Complex other = (Complex) obj;
-        if (!Objects.equals(this.real, other.real)) {
+        if (!this.real.equals(other.real)) {
             return false;
         }
-        if (!Objects.equals(this.imaginary, other.imaginary)) {
+        if (!this.imaginary.equals(other.imaginary)) {
             return false;
         }
         return true;

@@ -15,7 +15,7 @@ public class Calculator {
     private final UserDefinedOperations userOperation;
 
     /**
-     *
+     *  Initialize the Calculator with an empty stack.
      */
     public Calculator() {
         data = new ArrayDeque<>();
