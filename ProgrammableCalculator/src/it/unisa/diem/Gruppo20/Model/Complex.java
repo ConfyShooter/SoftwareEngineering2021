@@ -3,7 +3,8 @@ package it.unisa.diem.Gruppo20.Model;
 import java.util.Objects;
 
 /**
- *
+ * This class is an abstraction of the Complex set numbers.
+ * It supports arithmetic and trigonometic operations.
  * @author Gruppo 20
  */
 public class Complex {
@@ -11,11 +12,19 @@ public class Complex {
     private Double real;
     private Double imaginary;
 
+    /**
+     * This method return a new Complex object with default real and imaginary values.
+     */
     public Complex() {
-        this.real = Double.NaN;
-        this.imaginary = Double.NaN;
+        this.real = 0.0;
+        this.imaginary = 0.0;
     }
 
+    /**
+     * This method return a new Complex object using param real and imaginary as values.
+     * @param real The real value of this new Complex.
+     * @param imaginary The imaginary of this new Complex.
+     */
     public Complex(Double real, Double imaginary) {
         this.real = real;
         this.imaginary = imaginary;
@@ -35,6 +44,35 @@ public class Complex {
 
     public void setImaginary(Double imaginary) {
         this.imaginary = imaginary;
+    }
+    
+        @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.real);
+        hash = 59 * hash + Objects.hashCode(this.imaginary);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Complex other = (Complex) obj;
+        if (!Objects.equals(this.real, other.real)) {
+            return false;
+        }
+        if (!Objects.equals(this.imaginary, other.imaginary)) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -65,14 +103,10 @@ public class Complex {
      * @return the complex number resulting from the operation.
      */
     public Complex plus(Complex c) {
-        Double cReal = c.getReal();
-        Double cImg = c.getImaginary();
+        Double a = c.getReal();
+        Double b = c.getImaginary();
 
-        Complex result = new Complex();
-        result.setReal(cReal + real);
-        result.setImaginary(cImg + imaginary);
-
-        return result;
+        return new Complex(a + real, b + imaginary);
     }
 
     /**
@@ -81,11 +115,10 @@ public class Complex {
      * @return the complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
-        Double cReal = c.getReal();
-        Double cImg = c.getImaginary();
-        Complex result = new Complex(real - cReal, imaginary - cImg);
+        Double a = c.getReal();
+        Double b = c.getImaginary();
         
-        return result;
+        return new Complex(real - a, imaginary - b);
     }
 
     /**
@@ -95,42 +128,15 @@ public class Complex {
      * @return the complex number resulting from the operation.
      */
     public Complex multiply(Complex c) {
-        Double a = this.real;
-        Double b = this.imaginary;
+        Double a = real;
+        Double b = imaginary;
         Double c1 = c.real;
         Double d = c.imaginary;
+        
         Double real = (a * c1 - b * d);
         Double img = (a * d + b * c1);
+        
         return new Complex(real, img);
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.real);
-        hash = 59 * hash + Objects.hashCode(this.imaginary);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Complex other = (Complex) obj;
-        if (!Objects.equals(this.real, other.real)) {
-            return false;
-        }
-        if (!Objects.equals(this.imaginary, other.imaginary)) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -141,16 +147,18 @@ public class Complex {
      * @return Complex value
      */
     public Complex division(Complex c) throws ArithmeticException {
-        Double a = this.real;
-        Double b = this.imaginary;
+        Double a = real;
+        Double b = imaginary;
         Double c1 = c.real;
         Double d = c.imaginary;
-        if (c1 == 0 && d == 0) {
-            throw new ArithmeticException("Complex number can't be 0.");
-        }
+        
+        if (c1 == 0 && d == 0)
+            throw new ArithmeticException("Divider can't be 0.");
+        
         Double div = c1 * c1 + d * d;
         Double real = (a * c1 + b * d) / div;
         Double img = (b * c1 - a * d) / div;
+        
         return new Complex(real, img);
     }
 
@@ -161,63 +169,53 @@ public class Complex {
      *
      * @return a list made up of the two result of the square root.
      */
-    public Complex squareRoot() throws ArithmeticException {
-        if (real.isInfinite() || real.isNaN() || imaginary.isInfinite() || imaginary.isNaN()) {
-            throw new ArithmeticException("Unable to do the square root of a non-defined number");
-        }
-
+    public Complex squareRoot() {
         Double module = this.mod();
         Double phase = this.phase();
 
-        Complex result = new Complex();
-
         Double r = Math.sqrt(module);
+        Double real = r * Math.cos((phase / 2));
+        Double img = r * Math.sin((phase / 2));
 
-        result.setReal(r * Math.cos((phase / 2)));
-        result.setImaginary(r * Math.sin((phase / 2)));
-
-        return result;
+        return new Complex(real, img);
     }
 
     /**
-     *This function returns the number changed in sign
-     * @return the complex changed in sign
+     *This function returns the reverse of this Complex number.
+     * @return the complex changed in sign.
      */
     public Complex invert() {
-        return new Complex(-real,-imaginary);  
+        return new Complex(- real, - imaginary);  
     }
 
     /**
      * This method calculate the module of a complex number.
      *
-     * @return the module.
+     * @return the module of this Complex.
      */
     public Double mod() {
         return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
     }
 
     /**
-     * This method return the phase of a complex number.
-     *
-     * Based on how the values of the real and imaginary parts vary the value of
-     * the phases vary in the (-pi, pi] interval. The value is Undefined if the
-     * real and imaginary part are both equals to 0.
+     * This method return the phase of a complex number in (-pi, pi].
+     * The value is Undefined if the real and imaginary part are both equals to 0.
      *
      * @return the phase.
      */
     public Double phase() {
-        if (real == 0 && imaginary > 0) {
+        if (real == 0 && imaginary > 0)
             return Math.PI / 2;
-        } else if (real == 0 && imaginary < 0) {
-            return -Math.PI / 2;
-        } else if (real > 0) {
+        else if (real == 0 && imaginary < 0)
+            return - Math.PI / 2;
+        else if (real > 0)
             return Math.atan(imaginary / real);
-        } else if (real < 0 && imaginary >= 0) {
+        else if (real < 0 && imaginary >= 0)
             return Math.atan(imaginary / real) + Math.PI;
-        } else if (real < 0 && imaginary < 0) {
+        else if (real < 0 && imaginary < 0)
             return Math.atan(imaginary / real) - Math.PI;
-        }
-        return Double.NaN;
+        else
+            throw new ArithmeticException("The phase of 0 is undefined.");
     }
 
     /**
