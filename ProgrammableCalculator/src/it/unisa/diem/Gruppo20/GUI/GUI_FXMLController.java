@@ -6,7 +6,6 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleListProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
