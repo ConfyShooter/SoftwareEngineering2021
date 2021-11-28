@@ -2,8 +2,10 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,21 +15,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="500.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.Gruppo20.GUI.GUI_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #F0FFFF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.Gruppo20.GUI.GUI_FXMLController">
    <children>
       <VBox layoutX="158.0" layoutY="34.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="480.0" spacing="20.0">
                <children>
-                  <Label text="Input" />
-                  <TextField fx:id="inputText" promptText="a + bj" />
-                  <Button fx:id="calculateBtn" mnemonicParsing="false" onAction="#onCalculatePressed" text="Calculate" />
+                  <Label text="Input">
+                     <font>
+                        <Font size="16.0" />
+                     </font></Label>
+                  <TextField fx:id="inputText" prefHeight="25.0" prefWidth="230.0" promptText="a + bj" />
+                  <Button fx:id="calculateBtn" defaultButton="true" mnemonicParsing="false" onAction="#onCalculatePressed" text="Calculate">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
                </children>
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </HBox>
-            <HBox prefHeight="435.0" prefWidth="505.0">
+            <HBox alignment="CENTER" prefHeight="435.0" prefWidth="505.0" spacing="20.0">
                <children>
                   <GridPane alignment="CENTER" prefHeight="430.0" prefWidth="355.0">
                     <columnConstraints>
@@ -94,7 +102,7 @@
                               <Font size="24.0" />
                            </font>
                         </Button>
-                        <Button fx:id="cancBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" text="C" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Button fx:id="cancBtn" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" text="C" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -102,6 +110,26 @@
                         <Button alignment="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="51.0" text="swap" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                            <font>
                               <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMinorPressed" prefHeight="50.0" prefWidth="50.0" text="&lt;" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMajorPressed" prefHeight="50.0" prefWidth="50.0" text="&gt;" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSavePressed" prefHeight="50.0" prefWidth="51.0" text="save" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onRestorePressed" prefHeight="50.0" prefWidth="51.0" text="restore" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                           <font>
+                              <Font size="11.0" />
                            </font>
                         </Button>
                      </children>
@@ -113,7 +141,25 @@
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <ListView fx:id="historyList" prefHeight="285.0" prefWidth="128.0" />
+                        <ListView fx:id="historyList" prefHeight="280.0" prefWidth="130.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" layoutX="363.0" layoutY="10.0" prefHeight="430.0" prefWidth="130.0" spacing="10.0">
+                     <children>
+                        <Label text="Functions" />
+                        <ListView fx:id="functionsList" prefHeight="280.0" prefWidth="128.0">
+                           <contextMenu>
+                              <ContextMenu>
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#addFunction" text="Add function" />
+                                    <MenuItem fx:id="editMenu" mnemonicParsing="false" onAction="#editFunction" text="Edit function" />
+                                    <MenuItem fx:id="deleteMenu" mnemonicParsing="false" onAction="#deleteFunction" text="Delete function" />
+                                    <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveFunctionToFile" text="Save into a file" />
+                                    <MenuItem fx:id="restoreMenu" mnemonicParsing="false" onAction="#restoreFunctionFromFile" text="Restore from a file" />
+                                </items>
+                              </ContextMenu>
+                           </contextMenu>
+                        </ListView>
                      </children>
                   </VBox>
                </children>
