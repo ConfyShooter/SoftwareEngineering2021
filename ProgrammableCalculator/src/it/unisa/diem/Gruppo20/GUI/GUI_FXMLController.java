@@ -5,6 +5,7 @@ import it.unisa.diem.Gruppo20.Model.Complex;
 import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +36,7 @@ public class GUI_FXMLController implements Initializable {
     
     private Calculator c;
     private ObservableList<Complex> stack;
+    private ObservableList<?> functions;
     @FXML
     private ListView<?> functionsList;
     @FXML
@@ -54,10 +56,18 @@ public class GUI_FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        SimpleListProperty functionsProperty = new SimpleListProperty(functions);
         c = new Calculator();
         stack = FXCollections.observableArrayList();
+        functions = FXCollections.observableArrayList();
+        
+        calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        
+        editMenu.disableProperty().bind(functionsProperty.emptyProperty());
+        deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
+        saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
+        
         stack.setAll(c.getData());
         historyList.setItems(stack);
     }
