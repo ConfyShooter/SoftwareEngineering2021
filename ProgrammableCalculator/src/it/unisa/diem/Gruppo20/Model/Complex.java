@@ -3,8 +3,9 @@ package it.unisa.diem.Gruppo20.Model;
 import java.util.Objects;
 
 /**
- * This class is an abstraction of the Complex set numbers.
- * It supports arithmetic and trigonometic operations.
+ * This class is an abstraction of the Complex set numbers. It supports
+ * arithmetic and trigonometic operations.
+ *
  * @author Gruppo 20
  */
 public class Complex {
@@ -13,7 +14,8 @@ public class Complex {
     private Double imaginary;
 
     /**
-     * This method return a new Complex object with default real and imaginary values.
+     * This method return a new Complex object with default real and imaginary
+     * values.
      */
     public Complex() {
         this.real = 0.0;
@@ -21,7 +23,9 @@ public class Complex {
     }
 
     /**
-     * This method return a new Complex object using param real and imaginary as values.
+     * This method return a new Complex object using param real and imaginary as
+     * values.
+     *
      * @param real The real value of this new Complex.
      * @param imaginary The imaginary of this new Complex.
      */
@@ -45,8 +49,8 @@ public class Complex {
     public void setImaginary(Double imaginary) {
         this.imaginary = imaginary;
     }
-    
-        @Override
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 59 * hash + Objects.hashCode(this.real);
@@ -111,13 +115,14 @@ public class Complex {
 
     /**
      * This function implements the the subtraction between two numbers
-     * @param c the operand we want to subtract. 
+     *
+     * @param c the operand we want to subtract.
      * @return the complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
         Double a = c.getReal();
         Double b = c.getImaginary();
-        
+
         return new Complex(real - a, imaginary - b);
     }
 
@@ -132,10 +137,10 @@ public class Complex {
         Double b = imaginary;
         Double c1 = c.real;
         Double d = c.imaginary;
-        
+
         Double real = (a * c1 - b * d);
         Double img = (a * d + b * c1);
-        
+
         return new Complex(real, img);
     }
 
@@ -151,14 +156,15 @@ public class Complex {
         Double b = imaginary;
         Double c1 = c.real;
         Double d = c.imaginary;
-        
-        if (c1 == 0 && d == 0)
+
+        if (c1 == 0 && d == 0) {
             throw new ArithmeticException("Divider can't be 0.");
-        
+        }
+
         Double div = c1 * c1 + d * d;
         Double real = (a * c1 + b * d) / div;
         Double img = (b * c1 - a * d) / div;
-        
+
         return new Complex(real, img);
     }
 
@@ -181,11 +187,12 @@ public class Complex {
     }
 
     /**
-     *This function returns the reverse of this Complex number.
+     * This function returns the reverse of this Complex number.
+     *
      * @return the complex changed in sign.
      */
     public Complex invert() {
-        return new Complex(- real, - imaginary);  
+        return new Complex(-real, -imaginary);
     }
 
     /**
@@ -198,24 +205,25 @@ public class Complex {
     }
 
     /**
-     * This method return the phase of a complex number in (-pi, pi].
-     * The value is Undefined if the real and imaginary part are both equals to 0.
+     * This method return the phase of a complex number in (-pi, pi]. The value
+     * is Undefined if the real and imaginary part are both equals to 0.
      *
      * @return the phase.
      */
     public Double phase() {
-        if (real == 0 && imaginary > 0)
+        if (real == 0 && imaginary > 0) {
             return Math.PI / 2;
-        else if (real == 0 && imaginary < 0)
-            return - Math.PI / 2;
-        else if (real > 0)
+        } else if (real == 0 && imaginary < 0) {
+            return -Math.PI / 2;
+        } else if (real > 0) {
             return Math.atan(imaginary / real);
-        else if (real < 0 && imaginary >= 0)
+        } else if (real < 0 && imaginary >= 0) {
             return Math.atan(imaginary / real) + Math.PI;
-        else if (real < 0 && imaginary < 0)
+        } else if (real < 0 && imaginary < 0) {
             return Math.atan(imaginary / real) - Math.PI;
-        else
+        } else {
             throw new ArithmeticException("The phase of 0 is undefined.");
+        }
     }
 
     /**
