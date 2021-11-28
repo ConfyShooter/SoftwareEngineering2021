@@ -18,7 +18,7 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
   
   Sprint backlog -
   
-  Updated prod. backlog -
+  [Updated prod. backlog](https://docs.google.com/spreadsheets/d/1r2g8dOGUuZnLI5yRz7KbLe3PGDtyaSDE/edit#gid=1100884198)
   
   [Project Burndown chart](https://drive.google.com/file/d/1cT9AXIJaZiMAEOftudyzJxPL87KYk4VU/view?usp=sharing)
   
