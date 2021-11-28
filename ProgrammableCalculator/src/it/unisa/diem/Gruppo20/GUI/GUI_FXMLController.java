@@ -130,6 +130,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onCPressed(ActionEvent event) {
         inputText.clear();
+        calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
     }
 
     @FXML
