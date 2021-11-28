@@ -22,7 +22,7 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
   
   [Project Burndown chart](https://drive.google.com/file/d/1cT9AXIJaZiMAEOftudyzJxPL87KYk4VU/view?usp=sharing)
   
-  [Sprint review report](https://docs.google.com/document/d/1bmhV0uH3nQYUFMXMjXCL-NFa-Rbx9U_g/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
+  [Sprint review report](https://drive.google.com/file/d/189dsSWwEdrqVHjQ9U7KzXuIKnKSFEibO/view?usp=sharing)
   
   [Sprint retrospective report](https://docs.google.com/document/d/1bmTTPq2NFMwQw7BDYRe6BilHHYAtEuHt/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
   
