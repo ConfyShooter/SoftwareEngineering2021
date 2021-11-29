@@ -4,7 +4,6 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,10 +31,6 @@ public class GUI_FXMLController implements Initializable {
     private Button cancBtn;
     @FXML
     private TextField inputText;
-    
-    private Calculator c;
-    private ObservableList<Complex> stack;
-    private ObservableList<?> functions;
     @FXML
     private ListView<?> functionsList;
     @FXML
@@ -46,7 +41,10 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem saveMenu;
     @FXML
     private MenuItem restoreMenu;
-    
+
+    private Calculator c;
+    private ObservableList<Complex> stack;
+    private ObservableList<?> functions;
 
     /**
      * Initializes the controller class.
@@ -60,15 +58,15 @@ public class GUI_FXMLController implements Initializable {
         c = new Calculator();
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
-        
+
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        
+
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
         stack.setAll(c.getData());
-        
+
         historyList.setItems(stack);
     }
 
@@ -84,10 +82,10 @@ public class GUI_FXMLController implements Initializable {
 
         inputText.clear();
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        
+
         stack.setAll(c.getData());
     }
-    
+
     @FXML
     private void onPlusPressed(ActionEvent event) {
         inputText.setText("+");
@@ -203,7 +201,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void restoreFunctionFromFile(ActionEvent event) {
     }
-    
+
     private void showAlert(String message) {
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setTitle("Warning");
