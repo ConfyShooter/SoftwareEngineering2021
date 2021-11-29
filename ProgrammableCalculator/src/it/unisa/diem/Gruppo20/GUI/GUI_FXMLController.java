@@ -4,7 +4,6 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -67,8 +66,8 @@ public class GUI_FXMLController implements Initializable {
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
-        stack.setAll(c.getData());
         
+        stack.setAll(c.getData());
         historyList.setItems(stack);
     }
 
@@ -84,7 +83,6 @@ public class GUI_FXMLController implements Initializable {
 
         inputText.clear();
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        
         stack.setAll(c.getData());
     }
     
@@ -92,14 +90,14 @@ public class GUI_FXMLController implements Initializable {
     private void onPlusPressed(ActionEvent event) {
         inputText.setText("+");
         insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                and(inputText.textProperty().lessThanOrEqualTo("+z")));
+                and(inputText.textProperty().lessThan("+z")));
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
         inputText.setText("-");
         insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                and(inputText.textProperty().lessThanOrEqualTo("-z")));
+                and(inputText.textProperty().lessThan("-z")));
     }
 
     @FXML
@@ -166,14 +164,14 @@ public class GUI_FXMLController implements Initializable {
     private void onMinorPressed(ActionEvent event) {
         inputText.setText("<");
         insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
-                and(inputText.textProperty().lessThanOrEqualTo("<z")));
+                and(inputText.textProperty().lessThan("<z")));
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
         inputText.setText(">");
         insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
-                and(inputText.textProperty().lessThanOrEqualTo(">z")));
+                and(inputText.textProperty().lessThan(">z")));
     }
 
     @FXML
