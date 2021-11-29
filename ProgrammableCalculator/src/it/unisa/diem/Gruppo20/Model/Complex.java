@@ -85,24 +85,21 @@ public class Complex {
     @Override
     public String toString() {
         String s = "";
-        DecimalFormat format = new DecimalFormat("0.########"); 
+        DecimalFormat format = new DecimalFormat("0.########");
         format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
-        
+
         if (real == 0.0 && imaginary == 0.0) {
             return "0";
-        }
-
+            }
         if (real != 0) {
             s = format.format(real);
         }
-
         if (imaginary != 0) {
             if (imaginary > 0) {
                 s += "+";
             }
             s = s + format.format(imaginary) + "j";
         }
-
         return s;
     }
 

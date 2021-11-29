@@ -19,6 +19,10 @@ public class GUIMain extends Application {
         stage.setTitle("Calculator");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest((WindowEvent event) -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     /**

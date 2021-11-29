@@ -31,10 +31,6 @@ public class GUI_FXMLController implements Initializable {
     private Button cancBtn;
     @FXML
     private TextField inputText;
-    
-    private Calculator c;
-    private ObservableList<Complex> stack;
-    private ObservableList<?> functions;
     @FXML
     private ListView<?> functionsList;
     @FXML
@@ -45,7 +41,10 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem saveMenu;
     @FXML
     private MenuItem restoreMenu;
-    
+
+    private Calculator c;
+    private ObservableList<Complex> stack;
+    private ObservableList<?> functions;
 
     /**
      * Initializes the controller class.
@@ -59,10 +58,10 @@ public class GUI_FXMLController implements Initializable {
         c = new Calculator();
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
-        
+
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        
+
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
@@ -85,7 +84,7 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
-    
+
     @FXML
     private void onPlusPressed(ActionEvent event) {
         inputText.setText("+");
@@ -201,7 +200,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void restoreFunctionFromFile(ActionEvent event) {
     }
-    
+
     private void showAlert(String message) {
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setTitle("Warning");
