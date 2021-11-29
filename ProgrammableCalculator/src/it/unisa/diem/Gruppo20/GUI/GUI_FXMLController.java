@@ -129,6 +129,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onCPressed(ActionEvent event) {
         inputText.clear();
+        calculateBtn.disableProperty().bind(inputText.textProperty().isEmpty());
     }
 
     @FXML
@@ -202,7 +203,7 @@ public class GUI_FXMLController implements Initializable {
     }
     
     private void showErrorAlert(String exception, String message) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setHeaderText(exception);
         a.setContentText(message);
         a.showAndWait();

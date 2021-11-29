@@ -16,15 +16,15 @@ Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
 
   [1st Sprint Release](https://drive.google.com/file/d/1cCYvf8lUEAdfUF-aPZTC-1ij2ZDjzGNQ/view?usp=sharing)
   
-  Sprint backlog -
+  [Sprint backlog](https://docs.google.com/spreadsheets/d/1bBIzvDScUwmjzVbCXV9UNythWYEtJOPa/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
   
-  Updated prod. backlog -
+  [Updated prod. backlog](https://docs.google.com/spreadsheets/d/1r2g8dOGUuZnLI5yRz7KbLe3PGDtyaSDE/edit#gid=1100884198)
   
   [Project Burndown chart](https://drive.google.com/file/d/1cT9AXIJaZiMAEOftudyzJxPL87KYk4VU/view?usp=sharing)
   
-  [Sprint review report](https://docs.google.com/document/d/1bmhV0uH3nQYUFMXMjXCL-NFa-Rbx9U_g/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
+  [Sprint review report](https://drive.google.com/file/d/189dsSWwEdrqVHjQ9U7KzXuIKnKSFEibO/view?usp=sharing)
   
-  [Sprint retrospective report](https://docs.google.com/document/d/1bmTTPq2NFMwQw7BDYRe6BilHHYAtEuHt/edit?usp=sharing&ouid=100997386999854727288&rtpof=true&sd=true)
+  [Sprint retrospective report](https://drive.google.com/file/d/18EgGY1L9hK9GscJpfY1APJLdD3fmjrWZ/view?usp=sharing)
   
 
 ### ✦ Third delivery: Sun. December 5:
