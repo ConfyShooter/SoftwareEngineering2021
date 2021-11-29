@@ -162,15 +162,15 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onMinorPressed(ActionEvent event) {
         inputText.setText("<");
-        insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
-                and(inputText.textProperty().lessThan("<z")));
+        /*insertBtn.disableProperty().bind(inputText.textProperty().length().isNotEqualTo(2).
+                and(inputText.textProperty().lessThanOrEqualTo("<")));*/
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
         inputText.setText(">");
-        insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
-                and(inputText.textProperty().lessThan(">z")));
+        /*insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
+                and(inputText.textProperty().lessThan(">z")));*/
     }
 
     @FXML
