@@ -379,10 +379,4 @@ public class Calculator {
             throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");
     }
 
-    private void checkStackSize(int k) {
-        if (data.size() < k) {
-            throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");
-        }
-    }
-
 }
