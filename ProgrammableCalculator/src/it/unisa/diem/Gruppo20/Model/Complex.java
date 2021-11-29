@@ -198,7 +198,7 @@ public class Complex {
      * @return the complex changed in sign.
      */
     public Complex invert() {
-        return new Complex(-real, -imaginary);
+        return new Complex(-1 * real, -1 * imaginary);
     }
 
     /**

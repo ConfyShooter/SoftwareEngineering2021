@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #F0FFFF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.Gruppo20.GUI.GUI_FXMLController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #F0FFFF;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unisa.diem.Gruppo20.GUI.GUI_FXMLController">
    <children>
       <VBox layoutX="158.0" layoutY="34.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -25,7 +25,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <TextField fx:id="inputText" prefHeight="25.0" prefWidth="230.0" promptText="a + bj" />
+                  <TextField fx:id="inputText" prefHeight="25.0" prefWidth="280.0" promptText="a + bj" />
                   <Button fx:id="insertBtn" defaultButton="true" mnemonicParsing="false" onAction="#onInsertPressed" text="Insert">
                      <font>
                         <Font size="14.0" />
@@ -134,14 +134,14 @@
                         </Button>
                      </children>
                   </GridPane>
-                  <VBox alignment="CENTER" prefHeight="430.0" prefWidth="130.0" spacing="10.0">
+                  <VBox alignment="CENTER" prefHeight="418.0" prefWidth="200.0" spacing="10.0">
                      <children>
                         <Label text="History">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <ListView fx:id="historyList" prefHeight="280.0" prefWidth="130.0" />
+                        <ListView fx:id="historyList" maxHeight="280.0" maxWidth="200.0" prefHeight="280.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" layoutX="363.0" layoutY="10.0" prefHeight="430.0" prefWidth="130.0" spacing="10.0">
