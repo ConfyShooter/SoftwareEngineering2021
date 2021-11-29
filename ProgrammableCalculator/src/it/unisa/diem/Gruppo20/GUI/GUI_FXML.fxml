@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -21,11 +22,12 @@
          <children>
             <HBox alignment="CENTER" prefHeight="59.0" prefWidth="480.0" spacing="20.0">
                <children>
+                  <CheckBox fx:id="functionBox" mnemonicParsing="false" onAction="#onFunctionBoxPressed" text="Function" />
                   <Label text="Input">
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <TextField fx:id="inputText" prefHeight="25.0" prefWidth="280.0" promptText="a + bj" />
+                  <TextField fx:id="inputText" prefHeight="25.0" prefWidth="280.0" promptText="a + ib" />
                   <Button fx:id="insertBtn" defaultButton="true" mnemonicParsing="false" onAction="#onInsertPressed" text="Insert">
                      <font>
                         <Font size="14.0" />
