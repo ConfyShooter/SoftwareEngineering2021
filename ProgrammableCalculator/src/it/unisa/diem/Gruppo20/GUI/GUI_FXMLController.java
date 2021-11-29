@@ -204,7 +204,7 @@ public class GUI_FXMLController implements Initializable {
     }
     
     private void showErrorAlert(String exception, String message) {
-        Alert a = new Alert(Alert.AlertType.ERROR);
+        Alert a = new Alert(Alert.AlertType.WARNING);
         a.setHeaderText(exception);
         a.setContentText(message);
         a.showAndWait();
