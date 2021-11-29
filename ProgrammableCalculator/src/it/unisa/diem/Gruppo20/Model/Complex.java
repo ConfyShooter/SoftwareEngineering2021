@@ -1,5 +1,8 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -82,19 +85,22 @@ public class Complex {
     @Override
     public String toString() {
         String s = "";
+        DecimalFormat format = new DecimalFormat("0.########"); 
+        format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
+        
         if (real == 0.0 && imaginary == 0.0) {
             return "0";
         }
 
         if (real != 0) {
-            s = String.format("%.2f", real);
+            s = format.format(real);
         }
 
         if (imaginary != 0) {
             if (imaginary > 0) {
                 s += "+";
             }
-            s = s + String.format("%.2f", imaginary) + "j";
+            s = s + format.format(imaginary) + "j";
         }
 
         return s;

@@ -33,7 +33,7 @@ public class CalculatorTest {
         c.parsing("1.0+2.5j");
         c.parsing("+");
 
-        assertEquals("1,10+5,00j", c.getData().peekFirst().toString());
+        assertEquals("1.1+5j", c.getData().peekFirst().toString());
     }
 
     @Test(expected = NumberFormatException.class)
@@ -44,22 +44,22 @@ public class CalculatorTest {
     @Test
     public void testInsert() {
         c.insert("-j4.0");
-        assertEquals("-4,00j", c.getData().peekFirst().toString());
+        assertEquals("-4j", c.getData().peekFirst().toString());
 
         c.insert("3.05");
-        assertEquals("3,05", c.getData().peekFirst().toString());
+        assertEquals("3.05", c.getData().peekFirst().toString());
 
         c.insert("0.1+2.5j");
-        assertEquals("0,10+2,50j", c.getData().peekFirst().toString());
+        assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
         c.insert("0.1-j2.50");
-        assertEquals("0,10-2,50j", c.getData().peekFirst().toString());
+        assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
 
         c.insert("2.5j+0.1");
-        assertEquals("0,10+2,50j", c.getData().peekFirst().toString());
+        assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
         c.insert("-j2.5+0.1");
-        assertEquals("0,10-2,50j", c.getData().peekFirst().toString());
+        assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
     }
 
     @Test
