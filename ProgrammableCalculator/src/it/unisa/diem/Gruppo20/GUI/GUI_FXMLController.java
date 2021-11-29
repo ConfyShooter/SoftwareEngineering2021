@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,13 +94,15 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onPlusPressed(ActionEvent event) {
         inputText.setText("+");
-        calculateBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2));
+        calculateBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
+                and(inputText.textProperty().lessThanOrEqualTo("+z")));
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
         inputText.setText("-");
-        calculateBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2));
+        calculateBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
+                and(inputText.textProperty().lessThanOrEqualTo("-z")));
     }
 
     @FXML
@@ -165,13 +168,15 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onMinorPressed(ActionEvent event) {
         inputText.setText("<");
-        calculateBtn.disableProperty().bind(inputText.textProperty().length().isNotEqualTo(2));
+        calculateBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
+                and(inputText.textProperty().lessThanOrEqualTo("<z")));
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
         inputText.setText(">");
-        calculateBtn.disableProperty().bind(inputText.textProperty().length().isNotEqualTo(2));
+        calculateBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
+                and(inputText.textProperty().lessThanOrEqualTo(">z")));
     }
 
     @FXML
