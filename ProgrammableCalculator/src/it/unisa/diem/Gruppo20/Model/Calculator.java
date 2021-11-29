@@ -14,7 +14,6 @@ public class Calculator {
 
     private final Deque<Complex> data;
     private final Variables variable;
-    private final UserDefinedOperations userOperation;
 
     /**
      * Initialize the Calculator with an empty stack.
@@ -22,7 +21,6 @@ public class Calculator {
     public Calculator() {
         data = new ArrayDeque<>();
         variable = new Variables();
-        userOperation = new UserDefinedOperations();
     }
 
     /**
@@ -32,10 +30,9 @@ public class Calculator {
      * @param variable
      * @param userOperation
      */
-    public Calculator(Deque<Complex> data, Variables variable, UserDefinedOperations userOperation) {
+    public Calculator(Deque<Complex> data, Variables variable) {
         this.data = data;
         this.variable = variable;
-        this.userOperation = userOperation;
     }
 
     public Deque<Complex> getData() {
@@ -44,10 +41,6 @@ public class Calculator {
 
     public Variables getVariable() {
         return variable;
-    }
-
-    public UserDefinedOperations getUserOperation() {
-        return userOperation;
     }
 
     /**
