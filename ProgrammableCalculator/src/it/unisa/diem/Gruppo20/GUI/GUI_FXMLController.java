@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -32,6 +33,8 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private TextField inputText;
     @FXML
+    private CheckBox functionBox;
+    @FXML
     private ListView<?> functionsList;
     @FXML
     private MenuItem editMenu;
@@ -45,6 +48,7 @@ public class GUI_FXMLController implements Initializable {
     private Calculator c;
     private ObservableList<Complex> stack;
     private ObservableList<?> functions;
+    
 
     /**
      * Initializes the controller class.
@@ -87,40 +91,45 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onPlusPressed(ActionEvent event) {
-        inputText.setText("+");
-        insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
+        if(functionBox.isSelected())
+            inputText.setText(inputText.getText()+" +");
+        else{
+            inputText.setText("+");
+            insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
                 and(inputText.textProperty().lessThan("+z")));
+        }
+            
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
-        inputText.setText("-");
-        insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
+        if(functionBox.isSelected())
+            inputText.setText(inputText.getText()+" -");
+        else{
+            inputText.setText("-");
+            insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
                 and(inputText.textProperty().lessThan("-z")));
+        }
     }
 
     @FXML
     private void onMulPressed(ActionEvent event) {
-        inputText.setText("*");
-        onInsertPressed(event);
+        onButtonPressed(event,"*");
     }
 
     @FXML
     private void onDivPressed(ActionEvent event) {
-        inputText.setText("/");
-        onInsertPressed(event);
+        onButtonPressed(event,"/");
     }
 
     @FXML
     private void onInvertPressed(ActionEvent event) {
-        inputText.setText("+-");
-        onInsertPressed(event);
+        onButtonPressed(event,"+-");
     }
 
     @FXML
     private void onSqrtPressed(ActionEvent event) {
-        inputText.setText("sqrt");
-        onInsertPressed(event);
+        onButtonPressed(event,"sqrt");
     }
 
     @FXML
@@ -131,46 +140,43 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onClearPressed(ActionEvent event) {
-        inputText.setText("clear");
-        onInsertPressed(event);
+        onButtonPressed(event,"clear");
     }
 
     @FXML
     private void onDropPressed(ActionEvent event) {
-        inputText.setText("drop");
-        onInsertPressed(event);
+        onButtonPressed(event,"drop");
     }
 
     @FXML
     private void onDupPressed(ActionEvent event) {
-        inputText.setText("dup");
-        onInsertPressed(event);
+        onButtonPressed(event,"dup");
     }
 
     @FXML
     private void onSwapPressed(ActionEvent event) {
-        inputText.setText("swap");
-        onInsertPressed(event);
+        onButtonPressed(event,"swap");
     }
 
     @FXML
     private void onOverPressed(ActionEvent event) {
-        inputText.setText("over");
-        onInsertPressed(event);
+        onButtonPressed(event,"over");
     }
 
     @FXML
     private void onMinorPressed(ActionEvent event) {
-        inputText.setText("<");
-        /*insertBtn.disableProperty().bind(inputText.textProperty().length().isNotEqualTo(2).
-                and(inputText.textProperty().lessThanOrEqualTo("<")));*/
+        if(functionBox.isSelected())
+            inputText.setText(inputText.getText()+" <");
+        else
+            inputText.setText("<");   
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
-        inputText.setText(">");
-        /*insertBtn.disableProperty().bind(inputText.textProperty().length().lessThan(2).
-                and(inputText.textProperty().lessThan(">z")));*/
+        if(functionBox.isSelected())
+            inputText.setText(inputText.getText()+" >");
+        else
+            inputText.setText(">");
     }
 
     @FXML
@@ -179,6 +185,24 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onRestorePressed(ActionEvent event) {
+    }
+    
+    @FXML
+    private void onFunctionBoxPressed(ActionEvent event) {
+        if(functionBox.isSelected())
+            inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
+        else
+            inputText.setPromptText("a+bj");
+    }
+    
+    private void onButtonPressed(ActionEvent event, String text){
+        if(functionBox.isSelected())
+            inputText.setText(inputText.getText()+" "+text);
+        else{
+            inputText.setText(text);
+            onInsertPressed(event);
+        }
+            
     }
 
     @FXML
@@ -207,5 +231,7 @@ public class GUI_FXMLController implements Initializable {
         a.setHeaderText(message);
         a.showAndWait();
     }
+
+    
 
 }

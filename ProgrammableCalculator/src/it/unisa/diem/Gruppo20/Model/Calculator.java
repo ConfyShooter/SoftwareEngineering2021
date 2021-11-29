@@ -328,7 +328,7 @@ public class Calculator {
      *
      * @param c
      */
-    public void saveIntoVariable(char c) {
+    public void pushVariable(char c) {
         return;
     }
 
@@ -336,7 +336,7 @@ public class Calculator {
      *
      * @param c
      */
-    public void saveFromVariable(char c) {
+    public void pullVariable(char c) {
         return;
     }
 
@@ -344,7 +344,7 @@ public class Calculator {
      *
      * @param c
      */
-    public void sumWithVariable(char c) {
+    public void sumVariable(char c) {
         return;
     }
 
@@ -352,7 +352,7 @@ public class Calculator {
      *
      * @param c
      */
-    public void subtractWithVariable(char c) {
+    public void subtractVariable(char c) {
         return;
     }
 
