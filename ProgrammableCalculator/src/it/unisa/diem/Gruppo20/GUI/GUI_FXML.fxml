@@ -26,7 +26,7 @@
                         <Font size="16.0" />
                      </font></Label>
                   <TextField fx:id="inputText" prefHeight="25.0" prefWidth="230.0" promptText="a + bj" />
-                  <Button fx:id="calculateBtn" defaultButton="true" mnemonicParsing="false" onAction="#onCalculatePressed" text="Calculate">
+                  <Button fx:id="insertBtn" defaultButton="true" mnemonicParsing="false" onAction="#onInsertPressed" text="Insert">
                      <font>
                         <Font size="14.0" />
                      </font></Button>
