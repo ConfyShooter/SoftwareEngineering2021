@@ -2,6 +2,8 @@ package it.unisa.diem.Gruppo20.Model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -36,6 +38,14 @@ public class UserDefinedOperations {
         
     private Command subtractCommand() {
         return c::subtract;
+    }
+    
+    private Command multiplyCommand() {
+        return c::multiply;
+    }
+    
+    private Command divisionCommand() {
+        return c::division;
     }
     
     

@@ -206,7 +206,7 @@ public class Calculator {
      *
      * @throws java.lang.Exception
      */
-    public void multiply() throws Exception {
+    public void multiply() throws RuntimeException {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -221,7 +221,7 @@ public class Calculator {
      *
      * @throws java.lang.Exception
      */
-    public void division() throws Exception {
+    public void division() throws RuntimeException {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -236,7 +236,7 @@ public class Calculator {
      *
      * @throws java.lang.Exception
      */
-    public void sqrt() throws Exception {
+    public void sqrt() throws RuntimeException {
         checkStackSize(1);
 
         Complex last = data.pop();
