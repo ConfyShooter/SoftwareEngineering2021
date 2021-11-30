@@ -30,7 +30,7 @@ public class UserDefinedOperations {
      */
     public void parseOperations(String s) throws RuntimeException {
         int index = s.indexOf(":");
-        String name = s.substring(0, index).toLowerCase();
+        String name = s.substring(0, index).trim().toLowerCase();
         s = s.substring(index+1).trim();
         
         UserCommand opCommand = (UserCommand) operations.get(name);

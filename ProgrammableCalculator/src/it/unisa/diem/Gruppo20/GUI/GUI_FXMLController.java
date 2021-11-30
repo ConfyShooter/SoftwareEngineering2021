@@ -84,8 +84,8 @@ public class GUI_FXMLController implements Initializable {
         try {
             if(functionBox.isSelected())
                 userOp.parseOperations(input);
-            else if(userOp.getOperationsCommand(input) != null)
-                userOp.executeOperation(input);
+            else if(userOp.getOperationsCommand(input.toLowerCase()) != null)
+                userOp.executeOperation(input.toLowerCase());
             else
                 c.parsing(input);
         } catch (RuntimeException ex) {

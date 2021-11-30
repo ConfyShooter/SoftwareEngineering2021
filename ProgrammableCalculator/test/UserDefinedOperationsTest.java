@@ -60,6 +60,16 @@ public class UserDefinedOperationsTest {
     }
     
     @Test
+    public void testExecuteOperationWithAnotherOperation() {
+        userOp.parseOperations("   test :  clear  4+10j 5-4j + ");
+        userOp.parseOperations("   test1 :  test  -4 + ");
+        
+        userOp.executeOperation("test1");
+        
+        assertComplexEquals(new Complex(5.0, 6.0), c.getData().peekFirst());
+    }
+    
+    @Test
     public void testUserOperationsNames() {
         userOp.parseOperations("   test :  clear  4 8 + ");
         userOp.parseOperations(" test1 :  clear  4 8 + ");
