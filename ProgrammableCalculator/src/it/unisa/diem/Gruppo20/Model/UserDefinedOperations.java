@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class UserDefinedOperations {
     private final Calculator c;
-    private final Map<String, Macro> operations;
+    private final Map<String, MacroCommand> operations;
 
     public UserDefinedOperations(Calculator c) {
         this.c = c;
@@ -22,7 +22,7 @@ public class UserDefinedOperations {
         s = s.substring(index);
         
         String[] seq = s.split("\\s+");
-        Macro m = new Macro();
+        MacroCommand m = new MacroCommand();
         
         for (int i=0; i < seq.length; i++) {
             m.add(sumCommand());

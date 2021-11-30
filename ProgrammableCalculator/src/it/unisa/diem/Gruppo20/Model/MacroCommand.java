@@ -7,10 +7,10 @@ import java.util.List;
  *
  * @author Gruppo 20
  */
-public class Macro {
+public class MacroCommand implements Command {
     private List<Command> macros;
 
-    public Macro() {
+    public MacroCommand() {
         macros = new ArrayList<>();
     }
     
@@ -18,7 +18,8 @@ public class Macro {
         macros.add(m);
     }
     
-    public void executeMacros() {
+    @Override
+    public void execute() {
         for(Command c: macros)
             c.execute();
     }
