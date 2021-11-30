@@ -102,13 +102,13 @@ public class Calculator {
             saveVariables();
         } else if (input.equalsIgnoreCase("restore")) {
             restoreVariables();
-        } else if (input.matches("<[a-z]")) {
+        } else if (input.matches("<[a-z]{1}")) {
             pushVariable(input.charAt(1));
-        } else if (input.matches(">[a-z]")) {
+        } else if (input.matches(">[a-z]{1}")) {
             pullVariable(input.charAt(1));
-        } else if (input.matches("\\+[a-z]")) {
+        } else if (input.matches("\\+[a-z]{1}")) {
             sumVariable(input.charAt(1));
-        } else if (input.matches("\\-[a-z]")) {
+        } else if (input.matches("\\-[a-z]{1}")) {
             subtractVariable(input.charAt(1));
         } else {
             throw new RuntimeException("Unknown error!");

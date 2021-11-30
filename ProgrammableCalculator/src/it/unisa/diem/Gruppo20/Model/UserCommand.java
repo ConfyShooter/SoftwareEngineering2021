@@ -9,8 +9,8 @@ import java.util.List;
  * @author Gruppo 20
  */
 public class UserCommand implements Command {
-    private final List<String> macroName;
-    private final List<Command> macros;
+    private List<String> macroName;
+    private List<Command> macros;
 
     /**
      * Create a new UserCommand object.
@@ -45,6 +45,11 @@ public class UserCommand implements Command {
      */
     public List<String> getMacroName() {
         return macroName;
+    }
+    
+    public void reset() {
+        macros = new ArrayList<>();
+        macroName = new ArrayList<>();
     }
     
 }

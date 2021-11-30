@@ -33,15 +33,29 @@ public class UserDefinedOperations {
         String name = s.substring(0, index).toLowerCase();
         s = s.substring(index+1).trim();
         
-        String[] seq = s.split("\\s+");
-        UserCommand opCommand = new UserCommand();
+        UserCommand opCommand = (UserCommand) operations.get(name);
+        if(opCommand == null)
+            opCommand = new UserCommand();
+        else
+            opCommand.reset();
         
+        String[] seq = s.split("\\s+");
+                
         for (int i=0; i < seq.length; i++) {
             String input = seq[i];
             
-            if(input.matches("[0-9]"))
-                opCommand.add(input, addCommand(c.parseNumber(input)));
-            else
+            char sequence[] = input.toCharArray();
+            boolean flag = true;
+            
+            for (int k = 0; k < sequence.length; k++) {
+                if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
+                    opCommand.add(input, insertNumberCommand(c.parseNumber(input)));
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if(flag)
                 opCommand.add(input, commandOfOperation(input));
         }
         
@@ -75,13 +89,13 @@ public class UserDefinedOperations {
             case "restore": return restoreVariablesCommand();
         }
         
-        if(input.matches("<[a-z]"))
+        if(input.matches("<[a-z]{1}"))
             return pushVariableCommand(input.charAt(1));
-        else if(input.matches(">[a-z]"))
+        else if(input.matches(">[a-z]{1}"))
             return pullVariableCommand(input.charAt(1));
-        else if(input.matches("\\+[a-z]"))
+        else if(input.matches("\\+[a-z]{1}"))
             return sumVariableCommand(input.charAt(1));
-        else if(input.matches("\\-[a-z]"))
+        else if(input.matches("\\-[a-z]{1}"))
             return subtractVariableCommand(input.charAt(1));
         else
             throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
@@ -115,8 +129,12 @@ public class UserDefinedOperations {
      * has the name passed as a parameter.
      * @param name The user-defined operation name
      */
-    public void executeOperation(String name) {
-        operations.get(name).execute();
+    public void executeOperation(String name) throws RuntimeException {
+        Command c = operations.get(name);
+        if(c != null)
+            c.execute();
+        else
+            throw new RuntimeException("Can't execute this operation, can't find the dipendence of operation with name " + name + "." );
     }
     
     /**
@@ -136,7 +154,7 @@ public class UserDefinedOperations {
         operations.remove(name);
     }
     
-    private Command addCommand(Complex number) {
+    private Command insertNumberCommand(Complex number) {
         return () -> c.insertNumber(number);
     }
     
