@@ -205,6 +205,7 @@ public class GUI_FXMLController implements Initializable {
             inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
         else
             inputText.setPromptText("a+bj");
+        inputText.clear();
     }
     
     private void onButtonPressed(ActionEvent event, String text){
