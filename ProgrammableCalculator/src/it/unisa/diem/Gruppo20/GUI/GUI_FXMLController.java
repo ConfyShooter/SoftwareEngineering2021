@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.GUI;
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleListProperty;
@@ -35,7 +36,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private CheckBox functionBox;
     @FXML
-    private ListView<?> functionsList;
+    private ListView<String> functionsList;
     @FXML
     private MenuItem editMenu;
     @FXML
@@ -46,8 +47,9 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem restoreMenu;
 
     private Calculator c;
+    private UserDefinedOperations userOp;
     private ObservableList<Complex> stack;
-    private ObservableList<?> functions;
+    private ObservableList<String> functions;
     
 
     /**
@@ -58,10 +60,15 @@ public class GUI_FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        SimpleListProperty functionsProperty = new SimpleListProperty(functions);
         c = new Calculator();
+        userOp = new UserDefinedOperations(c);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
+        
+        stack.setAll(c.getData());
+        historyList.setItems(stack);
+        functionsList.setItems(functions);
+        SimpleListProperty functionsProperty = new SimpleListProperty(functions);
 
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
@@ -69,15 +76,18 @@ public class GUI_FXMLController implements Initializable {
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
-        
-        stack.setAll(c.getData());
-        historyList.setItems(stack);
     }
 
     @FXML
     private void onInsertPressed(ActionEvent event) {
+        String input = inputText.getText().trim();
         try {
-            c.parsing(inputText.getText());
+            if(functionBox.isSelected())
+                userOp.parseOperations(input);
+            else if(userOp.getOperationsCommand(input) != null)
+                userOp.executeOperation(input);
+            else
+                c.parsing(input);
         } catch (RuntimeException ex) {
             showAlert(ex.getMessage());
         } catch (Exception ex) {
@@ -87,6 +97,8 @@ public class GUI_FXMLController implements Initializable {
         inputText.clear();
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
+        functions.setAll(userOp.userOperationsNames());
+        
     }
 
     @FXML
@@ -211,10 +223,19 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void editFunction(ActionEvent event) {
+        functionBox.setSelected(true);
+        String name = functionsList.getSelectionModel().getSelectedItem();
+        String s = name + ":";
+        for(String x: userOp.getOperationsNames(name))
+            s += " " + x;
+        inputText.setText(s);
     }
 
     @FXML
     private void deleteFunction(ActionEvent event) {
+        String name = functionsList.getSelectionModel().getSelectedItem();
+        userOp.removeOperations(name);
+        functions.setAll(userOp.userOperationsNames());
     }
 
     @FXML

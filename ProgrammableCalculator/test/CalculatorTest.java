@@ -38,27 +38,27 @@ public class CalculatorTest {
 
     @Test(expected = NumberFormatException.class)
     public void testInsertException() throws Exception {
-        c.insert("-2.j5+0.1");
+        c.parseNumber("-2.j5+0.1");
     }
 
     @Test
     public void testInsert() {
-        c.insert("-j4.0");
+        c.insertNumber(c.parseNumber("-j4.0"));
         assertEquals("-4j", c.getData().peekFirst().toString());
 
-        c.insert("3.05");
+        c.insertNumber(c.parseNumber("3.05"));
         assertEquals("3.05", c.getData().peekFirst().toString());
 
-        c.insert("0.1+2.5j");
+        c.insertNumber(c.parseNumber("0.1+2.5j"));
         assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
-        c.insert("0.1-j2.50");
+        c.insertNumber(c.parseNumber("0.1-j2.50"));
         assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
 
-        c.insert("2.5j+0.1");
+        c.insertNumber(c.parseNumber("2.5j+0.1"));
         assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
-        c.insert("-j2.5+0.1");
+        c.insertNumber(c.parseNumber("-j2.5+0.1"));
         assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
     }
 

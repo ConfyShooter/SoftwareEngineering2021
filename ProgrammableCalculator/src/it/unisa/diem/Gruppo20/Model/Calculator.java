@@ -68,14 +68,14 @@ public class Calculator {
 
         for (int i = 0; i < length; i++) {
             if ((sequence[i] >= '0' && sequence[i] <= '9')) {// in anycase in which the user want to insert a number
-                insert(input);
+                insertNumber(parseNumber(input));
                 return;
             }
         }
 
         if (input.endsWith("j")) // in other cases like j, +j , -j
         {
-            insert(input);
+            insertNumber(parseNumber(input));
         } else if (input.equals("+")) {
             sum();
         } else if (input.equals("-")) {
@@ -86,20 +86,30 @@ public class Calculator {
             division();
         } else if (input.equals("+-")) {
             invertSign();
-        } else if (input.equals("sqrt")) {
+        } else if (input.equalsIgnoreCase("sqrt")) {
             sqrt();
-        } else if (input.equals("clear")) {
+        } else if (input.equalsIgnoreCase("clear")) {
             clear();
-        } else if (input.equals("drop")) {
+        } else if (input.equalsIgnoreCase("drop")) {
             drop();
-        } else if (input.equals("dup")) {
+        } else if (input.equalsIgnoreCase("dup")) {
             dup();
-        } else if (input.equals("swap")) {
+        } else if (input.equalsIgnoreCase("swap")) {
             swap();
-        } else if (input.equals("over")) {
+        } else if (input.equalsIgnoreCase("over")) {
             over();
-        } else if (input.equals("")) {
-            return;
+        } else if (input.equalsIgnoreCase("save")) {
+            saveVariables();
+        } else if (input.equalsIgnoreCase("restore")) {
+            restoreVariables();
+        } else if (input.matches("<[a-z]")) {
+            pushVariable(input.charAt(1));
+        } else if (input.matches("<[a-z]")) {
+            pullVariable(input.charAt(1));
+        } else if (input.matches("\\+[a-z]")) {
+            sumVariable(input.charAt(1));
+        } else if (input.matches("\\-[a-z]")) {
+            subtractVariable(input.charAt(1));
         } else {
             throw new RuntimeException("Unknown error!");
         }
@@ -141,7 +151,7 @@ public class Calculator {
      *
      * @param number String that contains a Complex number.
      */
-    public void insert(String number) throws NumberFormatException {
+    public Complex parseNumber(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
         int jIndex = number.indexOf("j");
@@ -166,6 +176,14 @@ public class Calculator {
         }
 
         Complex c = new Complex(real, imaginary);
+        //data.push(c);
+        return c;
+    }
+    /**
+     * Push the complex c onto the stack.
+     * @param c the complex number that must be pushed onto the stack;
+     */
+    public void insertNumber(Complex c) {
         data.push(c);
     }
 
@@ -368,7 +386,7 @@ public class Calculator {
      * @param name
      */
     public void executeOperation(String name) {
-       return;
+        return;
     }
 
     /**

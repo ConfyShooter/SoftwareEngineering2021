@@ -9,6 +9,7 @@ import java.util.List;
  * @author Gruppo 20
  */
 public class UserCommand implements Command {
+    private List<String> macroName;
     private List<Command> macros;
 
     /**
@@ -16,14 +17,16 @@ public class UserCommand implements Command {
      */
     public UserCommand() {
         macros = new ArrayList<>();
+        macroName = new ArrayList<>();
     }
     
     /**
      * Add m to the sequence of operations of this UserCommand.
      * @param m The command that must be added to the user-define operation.
      */
-    public void add(Command m) {
-        macros.add(m);
+    public void add(String name, Command c) {
+        macroName.add(name.toLowerCase());
+        macros.add(c);
     }
     
     /**
@@ -33,6 +36,10 @@ public class UserCommand implements Command {
     public void execute() {
         for(Command c: macros)
             c.execute();
+    }
+
+    public List<String> getMacroName() {
+        return macroName;
     }
     
 }

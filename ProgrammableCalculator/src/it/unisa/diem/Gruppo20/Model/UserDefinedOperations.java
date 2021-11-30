@@ -1,35 +1,143 @@
 package it.unisa.diem.Gruppo20.Model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Set;
 
 /**
- *
+ * This class allow user-defined operations management.
  * @author Gruppo20
  */
 public class UserDefinedOperations {
     private final Calculator c;
     private final Map<String, Command> operations;
 
+    /**
+     * Create an object of this class, using c for operation execution.
+     * An HashMap is used to save user-defined operations.
+     * @param c
+     */
     public UserDefinedOperations(Calculator c) {
         this.c = c;
         operations = new HashMap<>();
     }
     
-    private void parseFunctions(String s) {
+    /**
+     * Parse a sequence of operations and add a suquence of command to the map.
+     * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3..."
+     * @throws RuntimeException
+     */
+    public void parseOperations(String s) throws RuntimeException {
         int index = s.indexOf(":");
-        String name = s.substring(0, index);
-        s = s.substring(index);
+        String name = s.substring(0, index).toLowerCase();
+        s = s.substring(index+1).trim();
         
         String[] seq = s.split("\\s+");
-        UserCommand m = new UserCommand();
+        UserCommand opCommand = new UserCommand();
         
         for (int i=0; i < seq.length; i++) {
-            m.add(sumCommand());
-        }
+            String input = seq[i];
             
+            if(input.matches("[0-9]"))
+                opCommand.add(input, addCommand(c.parseNumber(input)));
+            else
+                opCommand.add(input, commandOfOperation(input));
+        }
+        
+        operations.put(name, opCommand);
+    }
+    /**
+     * Return a Command object that represent the operation input.
+     * @param input a string labeling an operation
+     * @return Command object
+     * @throws RuntimeException 
+     */
+    private Command commandOfOperation(String input) throws RuntimeException {
+        input = input.toLowerCase();
+        Command c = operations.get(input);
+        if(c != null)
+            return c;
+        
+        switch(input) {
+            case "+": return sumCommand();
+            case "-": return subtractCommand();
+            case "*": return multiplyCommand();
+            case "/": return divisionCommand();
+            case "+-": return invertSignCommand();
+            case "sqrt": return sqrtCommand();
+            case "clear": return clearCommand();
+            case "drop": return dropCommand();
+            case "dup": return dupCommand();
+            case "swap": return swapCommand();
+            case "over": return overCommand();
+            case "save": return saveVariablesCommand();
+            case "restore": return restoreVariablesCommand();
+        }
+        
+        if(input.matches("<[a-z]"))
+            return pushVariableCommand(input.charAt(1));
+        else if(input.matches(">[a-z]"))
+            return pullVariableCommand(input.charAt(1));
+        else if(input.matches("\\+[a-z]"))
+            return sumVariableCommand(input.charAt(1));
+        else if(input.matches("\\-[a-z]"))
+            return subtractVariableCommand(input.charAt(1));
+        else
+            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
+
+    }
+    
+    /**
+     * Return the Command object that performs the operation with the name passed as a parameter.
+     * @param name The operation that must be returned.
+     * @return Command object
+     */
+    public Command getOperationsCommand(String name) {
+        return operations.get(name);
+    }
+    
+    /**
+     * Returns the names of all operations performed by 
+     * the user-defined operation that has the name passed as a parameter. 
+     * @param name The user-defined operation name
+     * @return List of String
+     */
+    public List<String> getOperationsNames(String name) {
+        UserCommand c = (UserCommand) operations.get(name);
+        if(c != null)
+            return c.getMacroName();
+        return null;
+    }
+    
+    /**
+     * Execute the user-defined operation that 
+     * has the name passed as a parameter.
+     * @param name The user-defined operation name
+     */
+    public void executeOperation(String name) {
+        operations.get(name).execute();
+    }
+    
+    /**
+     * Return the names of all user-defined operations.
+     * @return Set of String
+     */
+    public Set<String> userOperationsNames() {
+        return operations.keySet();
+    }
+    
+    /**
+     * Remove the user-defined operation that 
+     * has the name passaed as a parameter.
+     * @param name The user-defined operation name
+     */
+    public void removeOperations(String name) {
+        operations.remove(name);
+    }
+    
+    private Command addCommand(Complex number) {
+        return () -> c.insertNumber(number);
     }
     
     private Command sumCommand() {
@@ -48,6 +156,55 @@ public class UserDefinedOperations {
         return c::division;
     }
     
+    private Command sqrtCommand() {
+        return c::sqrt;
+    }
     
+    private Command invertSignCommand() {
+        return c::invertSign;
+    }
     
+    private Command clearCommand() {
+        return c::clear;
+    }
+    
+    private Command dropCommand() {
+        return c::drop;
+    }
+    
+    private Command dupCommand() {
+        return c::dup;
+    }
+    
+    private Command swapCommand() {
+        return c::swap;
+    }
+    
+    private Command overCommand() {
+        return c::over;
+    }
+    
+    private Command pushVariableCommand(char ch) {
+        return () -> c.pushVariable(ch);
+    }
+    
+    private Command pullVariableCommand(char ch) {
+        return () -> c.pullVariable(ch);
+    }
+    
+    private Command sumVariableCommand(char ch) {
+        return () -> c.sumVariable(ch);
+    }
+    
+    private Command subtractVariableCommand(char ch) {
+        return () -> c.subtractVariable(ch);
+    }
+    
+    private Command saveVariablesCommand() {
+        return c::saveVariables;
+    }
+    
+    private Command restoreVariablesCommand() {
+        return c::restoreVariables;
+    }
 }
