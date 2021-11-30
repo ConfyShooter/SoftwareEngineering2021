@@ -104,7 +104,7 @@ public class Calculator {
             restoreVariables();
         } else if (input.matches("<[a-z]")) {
             pushVariable(input.charAt(1));
-        } else if (input.matches("<[a-z]")) {
+        } else if (input.matches(">[a-z]")) {
             pullVariable(input.charAt(1));
         } else if (input.matches("\\+[a-z]")) {
             sumVariable(input.charAt(1));
