@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -152,6 +153,22 @@ public class UserDefinedOperations {
      */
     public void removeOperations(String name) {
         operations.remove(name);
+    }
+    
+    /**
+     * 
+     * @param f 
+     */
+    public void saveOnFile(File f) {
+        ;
+    }
+    
+    /**
+     * 
+     * @param f 
+     */
+    public void loadFromFile(File f) {
+        ;
     }
     
     private Command insertNumberCommand(Complex number) {
