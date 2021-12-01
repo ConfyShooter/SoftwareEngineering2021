@@ -1,6 +1,10 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +91,9 @@ public class UserDefinedOperations {
     private Command commandOfOperation(String input) throws RuntimeException {
         input = input.toLowerCase();
         Command c = operations.get(input);
-        if (c != null)
+        if (c != null) {
             return c;
+        }
 
         switch (input) {
             case "+":
@@ -191,20 +196,42 @@ public class UserDefinedOperations {
      */
     public void removeOperations(String name) {
         UserCommand c = (UserCommand) operations.get(name);
-        if(c != null) {
+        if (c != null) {
             c.reset();
-            c = null; 
+            c = null;
         }
-        
+
         operations.remove(name);
     }
 
+// NON SO SE NECESSARIA - UTILE SOLO ALLA STAMPA SU FILE
+    public String operationsNameToString(String name) {
+        UserCommand comm = (UserCommand) operations.get(name);
+        String str = "";
+
+        if (comm != null) {
+            for (String op : comm.getMacroName()) {
+                str += " " + op;
+            }
+        }
+        return str + "\n";
+    }
+
     /**
+     * This method save on a default file the user-defined functions.
      *
-     * @param f
+     * @param f The name of the file where save the fucntions (default =
+     * "functions.txt").
      */
     public void saveOnFile(File f) {
-        ;
+        try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
+            for (String func : operations.keySet()) {
+                out.write(func + ":" + operationsNameToString(func) + "\n");
+                //out.write(func + ": " + getOperationsNames(func) + "\n");
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**
