@@ -45,10 +45,15 @@ public class UserDefinedOperations {
         for (int i=0; i < seq.length; i++) {
             String input = seq[i];
             
+            /*if(input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}") || input.equalsIgnoreCase("j"))
+                opCommand.add(input, insertNumberCommand(c.parseNumber(input)));
+            else
+                opCommand.add(input, commandOfOperation(input*/
+            
             char sequence[] = input.toCharArray();
             boolean flag = true;
             
-            for (int k = 0; k < sequence.length; k++) {
+            for (int k = 0; k < sequence.length; k++) { //can use also this input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}"); but this not accept j
                 if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
                     opCommand.add(input, insertNumberCommand(c.parseNumber(input)));
                     flag = false;

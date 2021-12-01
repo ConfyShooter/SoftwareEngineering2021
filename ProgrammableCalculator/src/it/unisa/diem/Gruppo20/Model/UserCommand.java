@@ -9,8 +9,8 @@ import java.util.List;
  * @author Gruppo 20
  */
 public class UserCommand implements Command {
-    private List<String> macroName;
-    private List<Command> macros;
+    private final List<String> macroName;
+    private final List<Command> macros;
 
     /**
      * Create a new UserCommand object.
@@ -35,6 +35,8 @@ public class UserCommand implements Command {
      */
     @Override
     public void execute() {
+        if(macros.isEmpty() || macroName.isEmpty())
+            throw new RuntimeException("This user-defined operation is trying to use a deleted user-defined operation.");
         for(Command c: macros)
             c.execute();
     }
@@ -48,8 +50,8 @@ public class UserCommand implements Command {
     }
     
     public void reset() {
-        macros = new ArrayList<>();
-        macroName = new ArrayList<>();
+        macros.clear();
+        macroName.clear();
     }
     
 }

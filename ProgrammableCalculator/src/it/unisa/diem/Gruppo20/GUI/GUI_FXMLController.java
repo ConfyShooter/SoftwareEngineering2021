@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.GUI;
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -235,6 +236,9 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void deleteFunction(ActionEvent event) {
         String name = functionsList.getSelectionModel().getSelectedItem();
+        UserCommand c = (UserCommand) userOp.getOperationsCommand(name);
+        c.reset();
+        c = null;
         userOp.removeOperations(name);
         functions.setAll(userOp.userOperationsNames());
     }
