@@ -1,5 +1,0 @@
-aa: clear + * dup drop swap over
-bb: clear drop - + * sqrt over
-cc: + + + +
-dd: dup / * drop
-ee: 12 + - clear drop
