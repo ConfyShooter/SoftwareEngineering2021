@@ -35,6 +35,8 @@ public class UserCommand implements Command {
      */
     @Override
     public void execute() {
+        if(macros.isEmpty() || macroName.isEmpty())
+            throw new RuntimeException("This user-defined operation is trying to use a deleted user-defined operation.");
         for(Command c: macros)
             c.execute();
     }
