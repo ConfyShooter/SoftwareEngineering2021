@@ -259,10 +259,10 @@ public class GUI_FXMLController implements Initializable {
     private void restoreFunctionFromFile(ActionEvent event) {
         try {
             userOp.loadFromFile(defaultFile);
-            functions.setAll(userOp.userOperationsNames());
         } catch (IOException ex) {
             showAlert("General I/O error (while loading). Retry!");
         }
+        functions.setAll(userOp.userOperationsNames());
     }
 
     private void showAlert(String message) {
