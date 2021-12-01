@@ -1,13 +1,17 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -218,28 +222,37 @@ public class UserDefinedOperations {
     }
 
     /**
-     * This method save on a default file the user-defined functions.
+     * Save on a default file the user-defined operations.
      *
-     * @param f The name of the file where save the fucntions (default =
+     * @param f The file where save the user-defined operations (default =
      * "functions.txt").
+     * @throws java.io.IOException
      */
-    public void saveOnFile(File f) {
+    public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(func + ":" + operationsNameToString(func) + "\n");
+                out.write(func + ":" + operationsNameToString(func));
                 //out.write(func + ": " + getOperationsNames(func) + "\n");
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
 
     /**
+     * Reload the previuses user-defined operations from the default file.
      *
-     * @param f
+     * @param f The file where re-load the user-defined operations (default =
+     * "functions.txt")
+     * @throws java.io.IOException
      */
-    public void loadFromFile(File f) {
-        ;
+    public void loadFromFile(File f) throws IOException {
+        operations.clear(); // overwrite the operations inserted before
+        try (Scanner in = new Scanner(new BufferedReader(new FileReader(f)))) {
+            in.useDelimiter("\n+|\n\r");
+            in.useLocale(Locale.US);
+            while (in.hasNext()) {
+                parseOperations(in.next());
+            }
+        }
     }
 
     private Command insertNumberCommand(Complex number) {

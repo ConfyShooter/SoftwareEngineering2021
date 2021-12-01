@@ -4,6 +4,7 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleListProperty;
@@ -51,6 +52,7 @@ public class GUI_FXMLController implements Initializable {
     private UserDefinedOperations userOp;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
+    private final File defaultFile = new File("functions.txt"); // added just for easy-use
 
     /**
      * Initializes the controller class.
@@ -246,11 +248,21 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void saveFunctionToFile(ActionEvent event) {
-        userOp.saveOnFile(new File("functions.txt"));
+        try {
+            userOp.saveOnFile(defaultFile);
+        } catch (IOException ex) {
+            showAlert("General I/O error (while saving). Retry!");
+        }
     }
 
     @FXML
     private void restoreFunctionFromFile(ActionEvent event) {
+        try {
+            userOp.loadFromFile(defaultFile);
+            functions.setAll(userOp.userOperationsNames());
+        } catch (IOException ex) {
+            showAlert("General I/O error (while loading). Retry!");
+        }
     }
 
     private void showAlert(String message) {

@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -112,10 +114,37 @@ public class UserDefinedOperationsTest {
         userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
 
-        userOp.saveOnFile(testSaveFile);
+        try {
+            userOp.saveOnFile(testSaveFile);
+        } catch (IOException ex) {
+            Logger.getLogger(UserDefinedOperationsTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         String actual = read(testSaveFile);
         String expected = expected_1 + "\n" + expected_2 + "\n";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLoadFromFile() {
+        String expected_1 = "test_1: + - * / +- sqrt";
+        String expected_2 = "test: clear drop dup swap over + - * / +- sqrt";
+        String expected = expected_1 + "\n" + expected_2 + "\n";
+
+        userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
+        userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
+
+        write(testReadFile);
+        try {
+            userOp.loadFromFile(testReadFile);
+        } catch (IOException ex) {
+            Logger.getLogger(UserDefinedOperationsTest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String actual = "";
+        for (String i : userOp.userOperationsNames()) {
+            actual += i + ":" + userOp.operationsNameToString(i);
+        }
         assertEquals(expected, actual);
     }
 
