@@ -90,9 +90,9 @@ public class UserDefinedOperations {
             case "restore": return restoreVariablesCommand();
         }
         
-        if(input.matches("<[a-z]{1}"))
+        if(input.matches(">[a-z]{1}"))
             return pushVariableCommand(input.charAt(1));
-        else if(input.matches(">[a-z]{1}"))
+        else if(input.matches("<[a-z]{1}"))
             return pullVariableCommand(input.charAt(1));
         else if(input.matches("\\+[a-z]{1}"))
             return sumVariableCommand(input.charAt(1));

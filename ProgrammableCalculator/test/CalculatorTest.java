@@ -256,6 +256,47 @@ public class CalculatorTest {
         c.parsing("2");
         c.swap();
     }
+    
+    @Test(expected=NoSuchElementException.class)
+    public void testPushVariableException(){
+        
+    }
+    
+    @Test()
+    public void testPushVariable(){
+        
+    }
+    
+    @Test(expected=NoSuchElementException.class)
+    public void testPullVariableException(){
+        
+    }
+    
+    @Test()
+    public void testPullVariable(){
+        
+    }
+    
+    @Test(expected=NoSuchElementException.class)
+    public void testSumVariableException(){
+        
+    }
+    
+    @Test()
+    public void testSumVariable(){
+        
+    }
+    
+    @Test(expected=NoSuchElementException.class)
+    public void testSubtractVariableException(){
+        
+    }
+    
+    @Test()
+    public void testSubtractVariable(){
+        
+    }
+    
 
     private void assertComplexEquals(Complex expected, Complex actual) {
         Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
