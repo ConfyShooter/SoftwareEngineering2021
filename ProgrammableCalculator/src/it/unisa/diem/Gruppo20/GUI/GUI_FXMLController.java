@@ -236,9 +236,6 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void deleteFunction(ActionEvent event) {
         String name = functionsList.getSelectionModel().getSelectedItem();
-        UserCommand c = (UserCommand) userOp.getOperationsCommand(name);
-        c.reset();
-        c = null;
         userOp.removeOperations(name);
         functions.setAll(userOp.userOperationsNames());
     }

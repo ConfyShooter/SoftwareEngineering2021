@@ -190,6 +190,9 @@ public class UserDefinedOperations {
      * @param name The user-defined operation name
      */
     public void removeOperations(String name) {
+        UserCommand c = (UserCommand) getOperationsCommand(name);
+        c.reset();
+        c = null;
         operations.remove(name);
     }
 
