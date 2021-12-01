@@ -2,8 +2,8 @@ package it.unisa.diem.Gruppo20.GUI;
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
-import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleListProperty;
@@ -51,7 +51,6 @@ public class GUI_FXMLController implements Initializable {
     private UserDefinedOperations userOp;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
-    
 
     /**
      * Initializes the controller class.
@@ -65,7 +64,7 @@ public class GUI_FXMLController implements Initializable {
         userOp = new UserDefinedOperations(c);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
-        
+
         stack.setAll(c.getData());
         historyList.setItems(stack);
         functionsList.setItems(functions);
@@ -83,12 +82,13 @@ public class GUI_FXMLController implements Initializable {
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
-            if(functionBox.isSelected())
+            if (functionBox.isSelected()) {
                 userOp.parseOperations(input);
-            else if(userOp.getOperationsCommand(input.toLowerCase()) != null)
+            } else if (userOp.getOperationsCommand(input.toLowerCase()) != null) {
                 userOp.executeOperation(input.toLowerCase());
-            else
+            } else {
                 c.parsing(input);
+            }
         } catch (RuntimeException ex) {
             showAlert(ex.getMessage());
         } catch (Exception ex) {
@@ -99,50 +99,50 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
         functions.setAll(userOp.userOperationsNames());
-        
+
     }
 
     @FXML
     private void onPlusPressed(ActionEvent event) {
-        if(functionBox.isSelected())
-            inputText.setText(inputText.getText()+" +");
-        else{
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " +");
+        } else {
             inputText.setText("+");
             insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                and(inputText.textProperty().lessThan("+z")));
+                    and(inputText.textProperty().lessThan("+z")));
         }
-            
+
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
-        if(functionBox.isSelected())
-            inputText.setText(inputText.getText()+" -");
-        else{
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " -");
+        } else {
             inputText.setText("-");
             insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                and(inputText.textProperty().lessThan("-z")));
+                    and(inputText.textProperty().lessThan("-z")));
         }
     }
 
     @FXML
     private void onMulPressed(ActionEvent event) {
-        onButtonPressed(event,"*");
+        onButtonPressed(event, "*");
     }
 
     @FXML
     private void onDivPressed(ActionEvent event) {
-        onButtonPressed(event,"/");
+        onButtonPressed(event, "/");
     }
 
     @FXML
     private void onInvertPressed(ActionEvent event) {
-        onButtonPressed(event,"+-");
+        onButtonPressed(event, "+-");
     }
 
     @FXML
     private void onSqrtPressed(ActionEvent event) {
-        onButtonPressed(event,"sqrt");
+        onButtonPressed(event, "sqrt");
     }
 
     @FXML
@@ -153,43 +153,45 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onClearPressed(ActionEvent event) {
-        onButtonPressed(event,"clear");
+        onButtonPressed(event, "clear");
     }
 
     @FXML
     private void onDropPressed(ActionEvent event) {
-        onButtonPressed(event,"drop");
+        onButtonPressed(event, "drop");
     }
 
     @FXML
     private void onDupPressed(ActionEvent event) {
-        onButtonPressed(event,"dup");
+        onButtonPressed(event, "dup");
     }
 
     @FXML
     private void onSwapPressed(ActionEvent event) {
-        onButtonPressed(event,"swap");
+        onButtonPressed(event, "swap");
     }
 
     @FXML
     private void onOverPressed(ActionEvent event) {
-        onButtonPressed(event,"over");
+        onButtonPressed(event, "over");
     }
 
     @FXML
     private void onMinorPressed(ActionEvent event) {
-        if(functionBox.isSelected())
-            inputText.setText(inputText.getText()+" <");
-        else
-            inputText.setText("<");   
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " <");
+        } else {
+            inputText.setText("<");
+        }
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
-        if(functionBox.isSelected())
-            inputText.setText(inputText.getText()+" >");
-        else
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " >");
+        } else {
             inputText.setText(">");
+        }
     }
 
     @FXML
@@ -199,24 +201,25 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onRestorePressed(ActionEvent event) {
     }
-    
+
     @FXML
     private void onFunctionBoxPressed(ActionEvent event) {
-        if(functionBox.isSelected())
+        if (functionBox.isSelected()) {
             inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
-        else
+        } else {
             inputText.setPromptText("a+bj");
+        }
         inputText.clear();
     }
-    
-    private void onButtonPressed(ActionEvent event, String text){
-        if(functionBox.isSelected())
-            inputText.setText(inputText.getText()+" "+text);
-        else{
+
+    private void onButtonPressed(ActionEvent event, String text) {
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " " + text);
+        } else {
             inputText.setText(text);
             onInsertPressed(event);
         }
-            
+
     }
 
     @FXML
@@ -228,8 +231,9 @@ public class GUI_FXMLController implements Initializable {
         functionBox.setSelected(true);
         String name = functionsList.getSelectionModel().getSelectedItem();
         String s = name + ":";
-        for(String x: userOp.getOperationsNames(name))
+        for (String x : userOp.getOperationsNames(name)) {
             s += " " + x;
+        }
         inputText.setText(s);
     }
 
@@ -242,6 +246,7 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void saveFunctionToFile(ActionEvent event) {
+        userOp.saveOnFile(new File("functions.txt"));
     }
 
     @FXML
@@ -254,7 +259,5 @@ public class GUI_FXMLController implements Initializable {
         a.setHeaderText(message);
         a.showAndWait();
     }
-
-    
 
 }
