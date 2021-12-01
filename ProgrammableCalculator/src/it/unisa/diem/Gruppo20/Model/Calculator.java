@@ -13,14 +13,14 @@ import java.util.NoSuchElementException;
 public class Calculator {
 
     private final Deque<Complex> data;
-    private final Variables variable;
+    private final Variables var;
 
     /**
      * Initialize the Calculator with an empty stack.
      */
     public Calculator() {
         data = new ArrayDeque<>();
-        variable = new Variables();
+        var = new Variables();
     }
 
     /**
@@ -28,11 +28,10 @@ public class Calculator {
      *
      * @param data
      * @param variable
-     * @param userOperation
      */
-    public Calculator(Deque<Complex> data, Variables variable) {
+    public Calculator(Deque<Complex> data, Variables var) {
         this.data = data;
-        this.variable = variable;
+        this.var = var;
     }
 
     public Deque<Complex> getData() {
@@ -40,7 +39,7 @@ public class Calculator {
     }
 
     public Variables getVariable() {
-        return variable;
+        return var;
     }
 
     /**
@@ -72,46 +71,31 @@ public class Calculator {
                 return;
             }
         }
-
-        if (input.endsWith("j")) // in other cases like j, +j , -j
-        {
-            insertNumber(parseNumber(input));
-        } else if (input.equals("+")) {
-            sum();
-        } else if (input.equals("-")) {
-            subtract();
-        } else if (input.equals("*")) {
-            multiply();
-        } else if (input.equals("/")) {
-            division();
-        } else if (input.equals("+-")) {
-            invertSign();
-        } else if (input.equalsIgnoreCase("sqrt")) {
-            sqrt();
-        } else if (input.equalsIgnoreCase("clear")) {
-            clear();
-        } else if (input.equalsIgnoreCase("drop")) {
-            drop();
-        } else if (input.equalsIgnoreCase("dup")) {
-            dup();
-        } else if (input.equalsIgnoreCase("swap")) {
-            swap();
-        } else if (input.equalsIgnoreCase("over")) {
-            over();
-        } else if (input.equalsIgnoreCase("save")) {
-            saveVariables();
-        } else if (input.equalsIgnoreCase("restore")) {
-            restoreVariables();
-        } else if (input.matches("<[a-z]{1}")) {
+        switch(input) {
+            case "j": insertNumber(new Complex(0.0,1.0)); return;
+            case "+": sum(); return;
+            case "-": subtract(); return;
+            case "*": multiply(); return;
+            case "/": division(); return;
+            case "+-": invertSign(); return;
+            case "sqrt": sqrt(); return;
+            case "clear": clear(); return;
+            case "drop": drop(); return;
+            case "dup": dup(); return;
+            case "swap": swap(); return;
+            case "over": over(); return;
+            case "save": saveVariables(); return;
+            case "restore": restoreVariables(); return;
+        } if (input.matches(">[a-z]{1}")) {
             pushVariable(input.charAt(1));
-        } else if (input.matches(">[a-z]{1}")) {
+        } else if (input.matches("<[a-z]{1}")) {
             pullVariable(input.charAt(1));
         } else if (input.matches("\\+[a-z]{1}")) {
             sumVariable(input.charAt(1));
         } else if (input.matches("\\-[a-z]{1}")) {
             subtractVariable(input.charAt(1));
         } else {
-            throw new RuntimeException("Unknown error!");
+            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
         }
     }
 
@@ -336,35 +320,42 @@ public class Calculator {
     }
 
     /**
-     *
+     * This function takes(removing it) the top element of the stack and
+     * insert the couple (c,element) into HashMap var corresponding. 
+     * @param c the key of var at which corresponds the top element of the stack.
+     * @throws NoSuchElementException if the stack is empty
+     */
+    public void pushVariable(char c) throws NoSuchElementException {
+        checkStackSize(1);
+        var.setVariable(c, data.pop());
+    }
+
+    /**
+     * 
      * @param c
      */
-    public void pushVariable(char c) {
-        return;
+    public void pullVariable(char c) throws RuntimeException {
+        Complex value = var.getVariable(c);
+        data.push(value);
+        
     }
 
     /**
      *
      * @param c
      */
-    public void pullVariable(char c) {
-        return;
+    public void sumVariable(char c) throws RuntimeException {
+        checkStackSize(1);
+        var.sumVariable(c, data.element());
     }
 
     /**
-     *
+     * 
      * @param c
      */
-    public void sumVariable(char c) {
-        return;
-    }
-
-    /**
-     *
-     * @param c
-     */
-    public void subtractVariable(char c) {
-        return;
+    public void subtractVariable(char c) throws RuntimeException {
+        checkStackSize(1);
+        var.sumVariable(c, data.element());
     }
 
     /**

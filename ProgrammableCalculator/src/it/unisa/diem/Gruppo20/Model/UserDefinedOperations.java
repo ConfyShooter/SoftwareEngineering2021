@@ -88,9 +88,8 @@ public class UserDefinedOperations {
     private Command commandOfOperation(String input) throws RuntimeException {
         input = input.toLowerCase();
         Command c = operations.get(input);
-        if (c != null) {
+        if (c != null)
             return c;
-        }
 
         switch (input) {
             case "+":
@@ -172,7 +171,7 @@ public class UserDefinedOperations {
         if (c != null) {
             c.execute();
         } else {
-            throw new RuntimeException("Can't execute this operation, can't find the dipendence of operation with name " + name + ".");
+            throw new RuntimeException("Can't execute this operation, can't find operation with name " + name + ".");
         }
     }
 
