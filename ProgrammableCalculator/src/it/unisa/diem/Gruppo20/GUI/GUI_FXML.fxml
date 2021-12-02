@@ -153,7 +153,7 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                  <MenuItem mnemonicParsing="false" onAction="#addFunction" text="Add function" />
+                                  <MenuItem fx:id="addMenu" mnemonicParsing="false" onAction="#addFunction" text="Add function" />
                                     <MenuItem fx:id="editMenu" mnemonicParsing="false" onAction="#editFunction" text="Edit function" />
                                     <MenuItem fx:id="deleteMenu" mnemonicParsing="false" onAction="#deleteFunction" text="Delete function" />
                                     <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveFunctionToFile" text="Save into a file" />

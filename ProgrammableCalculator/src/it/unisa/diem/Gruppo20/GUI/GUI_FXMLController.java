@@ -40,6 +40,8 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private ListView<String> functionsList;
     @FXML
+    private MenuItem addMenu;
+    @FXML
     private MenuItem editMenu;
     @FXML
     private MenuItem deleteMenu;
@@ -53,6 +55,7 @@ public class GUI_FXMLController implements Initializable {
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("functions.txt"); // added just for easy-use
+    
 
     /**
      * Initializes the controller class.
@@ -75,6 +78,7 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
 
+        addMenu.disableProperty().bind(functionsProperty.emptyProperty());
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
@@ -110,8 +114,6 @@ public class GUI_FXMLController implements Initializable {
             inputText.setText(inputText.getText() + " +");
         } else {
             inputText.setText("+");
-            insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                    and(inputText.textProperty().lessThan("+z")));
         }
 
     }
@@ -122,8 +124,6 @@ public class GUI_FXMLController implements Initializable {
             inputText.setText(inputText.getText() + " -");
         } else {
             inputText.setText("-");
-            insertBtn.disableProperty().bind(inputText.textProperty().length().greaterThan(2).
-                    and(inputText.textProperty().lessThan("-z")));
         }
     }
 
@@ -226,6 +226,7 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void addFunction(ActionEvent event) {
+        onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
     }
 
     @FXML

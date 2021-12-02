@@ -13,33 +13,33 @@ import java.util.NoSuchElementException;
 public class Calculator {
 
     private final Deque<Complex> data;
-    private final Variables var;
+    private final Variables map;
 
     /**
      * Initialize the Calculator with an empty stack.
      */
     public Calculator() {
         data = new ArrayDeque<>();
-        var = new Variables();
+        map = new Variables();
     }
 
     /**
      * Initialize the calculator using params as new attributes.
      *
      * @param data
-     * @param variable
+     * @param map
      */
-    public Calculator(Deque<Complex> data, Variables var) {
+    public Calculator(Deque<Complex> data, Variables map) {
         this.data = data;
-        this.var = var;
+        this.map = map;
     }
 
     public Deque<Complex> getData() {
         return data;
     }
 
-    public Variables getVariable() {
-        return var;
+    public Variables getMap() {
+        return map;
     }
 
     /**
@@ -130,10 +130,11 @@ public class Calculator {
 
     /**
      * This function extract the real and imaginary part from a complex number
-     * passed as param. After Create a new Complex Object and add it into the
-     * data structure.
+     * passed as param.After Create a new Complex Object and add it into the
+ data structure.
      *
      * @param number String that contains a Complex number.
+     * @return Complex number parsed from the string.
      */
     public Complex parseNumber(String number) throws NumberFormatException {
         Double real = 0.0;
@@ -160,11 +161,10 @@ public class Calculator {
         }
 
         Complex c = new Complex(real, imaginary);
-        //data.push(c);
         return c;
     }
     /**
-     * Push the complex c onto the stack.
+     * This method push the complex c onto the stack.
      * @param c the complex number that must be pushed onto the stack;
      */
     public void insertNumber(Complex c) {
@@ -175,7 +175,7 @@ public class Calculator {
      * Implement the sum of last two elements from the stack storing the result
      * onto it.
      *
-     * @throws java.lang.NoSuchElementException
+     * @throws java.lang.NoSuchElementException if the stack has less than 2 elements.
      */
     public void sum() throws NoSuchElementException {
         checkStackSize(2);
@@ -190,7 +190,7 @@ public class Calculator {
      * This functions implements the subtract between the secondlast and the
      * last elements in the stack. Finally store the result onto the stack
      *
-     * @throws java.lang.NoSuchElementException
+     * @throws java.lang.NoSuchElementException if the stack has less than 2 elements.
      */
     public void subtract() throws NoSuchElementException {
         checkStackSize(2);
@@ -236,7 +236,7 @@ public class Calculator {
      * Implement the square root of last element from the stack storing the
      * result onto it.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception if the stack is empty.
      */
     public void sqrt() throws RuntimeException {
         checkStackSize(1);
@@ -250,7 +250,7 @@ public class Calculator {
      * This functions take the last elements from the stack and reverses its
      * sign
      *
-     * @throws java.lang.NoSuchElementException
+     * @throws java.lang.NoSuchElementException if the stack is empty.
      */
     public void invertSign() throws NoSuchElementException {
         checkStackSize(1);
@@ -291,7 +291,7 @@ public class Calculator {
     /**
      * This method swap the last and last but one element from the stack.
      *
-     * @throws NoSuchElementException if the stack has less then two elements.
+     * @throws NoSuchElementException if the stack has less than two elements.
      */
     public void swap() throws NoSuchElementException {
         checkStackSize(2);
@@ -320,42 +320,54 @@ public class Calculator {
     }
 
     /**
-     * This function takes(removing it) the top element of the stack and
-     * insert the couple (c,element) into HashMap var corresponding. 
-     * @param c the key of var at which corresponds the top element of the stack.
-     * @throws NoSuchElementException if the stack is empty
+     * This method remove the top element of the stack and
+     * insert it as value of key c into variables map.
+     * 
+     * @param c the variable that we want store value to.
+     * @throws NoSuchElementException if the stack is empty.
      */
     public void pushVariable(char c) throws NoSuchElementException {
         checkStackSize(1);
-        var.setVariable(c, data.pop());
+        map.setVariable(c, data.pop());
     }
 
     /**
+     * This method reads the Complex number associated with the variable c
+     * and pushes it onto the stack.
      * 
-     * @param c
+     * @param c the variable that we want read value from.
+     * @throws RuntimeException if the variable has null corresponding value.
      */
     public void pullVariable(char c) throws RuntimeException {
-        Complex value = var.getVariable(c);
-        data.push(value);
+        Complex value = map.getVariable(c);
+        insertNumber(value);
         
     }
 
     /**
-     *
-     * @param c
+     * This method remove the top element of the stack and
+     * sum it at value of key c into variables map.
+     * 
+     * @param c the variable that we want sum top element of the stack to.
+     * @throws NoSuchElementException if the stack is empty.
+     * @throws RuntimeException if the variable has null corresponding value.
      */
     public void sumVariable(char c) throws RuntimeException {
         checkStackSize(1);
-        var.sumVariable(c, data.element());
+        map.sumVariable(c, data.pop());
     }
 
     /**
+     * This method remove the top element of the stack and
+     * subtratc it at value of key c into variables map.
      * 
-     * @param c
+     * @param c the variable that we want subtract top element of the stack to.
+     * @throws NoSuchElementException if the stack is empty.
+     * @throws RuntimeException if the variable has null corresponding value.
      */
     public void subtractVariable(char c) throws RuntimeException {
         checkStackSize(1);
-        var.sumVariable(c, data.element());
+        map.subVariable(c, data.pop());
     }
 
     /**

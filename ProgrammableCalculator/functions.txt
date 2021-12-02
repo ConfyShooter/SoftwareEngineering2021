@@ -1,0 +1,4 @@
+ris1: <b +- <d - <a 2 * /
+ris2: <b +- <d + <a 2 * /
+delta: >c >b >a <b dup * 4 <a <c * * - sqrt >d
+hyp: dup * swap dup * + sqrt

@@ -43,6 +43,9 @@ public class UserDefinedOperations {
      */
     public void parseOperations(String s) throws RuntimeException {
         int index = s.indexOf(":");
+        if (index == -1)
+            throw new RuntimeException("To make an operation don't check Function box,\n"
+                    + " to insert a new user-operation separe name and definition with ':'.");
         String name = s.substring(0, index).trim().toLowerCase();
         s = s.substring(index + 1).trim();
 
@@ -128,9 +131,9 @@ public class UserDefinedOperations {
                 return restoreVariablesCommand();
         }
 
-        if (input.matches("<[a-z]{1}")) {
+        if (input.matches(">[a-z]{1}")) {
             return pushVariableCommand(input.charAt(1));
-        } else if (input.matches(">[a-z]{1}")) {
+        } else if (input.matches("<[a-z]{1}")) {
             return pullVariableCommand(input.charAt(1));
         } else if (input.matches("\\+[a-z]{1}")) {
             return sumVariableCommand(input.charAt(1));
