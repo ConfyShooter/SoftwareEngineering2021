@@ -130,11 +130,11 @@ public class Calculator {
 
     /**
      * This function extract the real and imaginary part from a complex number
-     * passed as param.After Create a new Complex Object and add it into the
- data structure.
+     * passed as param analysing all combinations of them.
      *
      * @param number String that contains a Complex number.
      * @return Complex number parsed from the string.
+     * @throws NumberFormatException if in the string 
      */
     public Complex parseNumber(String number) throws NumberFormatException {
         Double real = 0.0;
@@ -175,7 +175,7 @@ public class Calculator {
      * Implement the sum of last two elements from the stack storing the result
      * onto it.
      *
-     * @throws java.lang.NoSuchElementException if the stack has less than 2 elements.
+     * @throws java.util.NoSuchElementException if the stack has less than 2 elements.
      */
     public void sum() throws NoSuchElementException {
         checkStackSize(2);
@@ -190,7 +190,7 @@ public class Calculator {
      * This functions implements the subtract between the secondlast and the
      * last elements in the stack. Finally store the result onto the stack
      *
-     * @throws java.lang.NoSuchElementException if the stack has less than 2 elements.
+     * @throws java.util.NoSuchElementException if the stack has less than 2 elements.
      */
     public void subtract() throws NoSuchElementException {
         checkStackSize(2);
@@ -206,9 +206,9 @@ public class Calculator {
      * a is the second last element, while b is is the last element.removing
      * them from the stack and storing the result onto it.
      *
-     * @throws java.lang.Exception
+     * @throws java.util.NoSuchElementException if the stack has less than 2 elements.
      */
-    public void multiply() throws RuntimeException {
+    public void multiply() throws NoSuchElementException {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -218,10 +218,10 @@ public class Calculator {
     }
 
     /**
-     * Implement the division a/b of last element from the stack with the last
-     * but one from the stack b storing the result onto it.
+     * Implement the division a/b of last element from the stack with the second last
+     * element from the stack b storing the result onto it.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.RuntimeException
      */
     public void division() throws RuntimeException {
         checkStackSize(2);
@@ -236,7 +236,7 @@ public class Calculator {
      * Implement the square root of last element from the stack storing the
      * result onto it.
      *
-     * @throws java.lang.Exception if the stack is empty.
+     * @throws java.lang.RuntimeException if the stack is empty.
      */
     public void sqrt() throws RuntimeException {
         checkStackSize(1);
@@ -250,7 +250,7 @@ public class Calculator {
      * This functions take the last elements from the stack and reverses its
      * sign
      *
-     * @throws java.lang.NoSuchElementException if the stack is empty.
+     * @throws java.util.NoSuchElementException if the stack is empty.
      */
     public void invertSign() throws NoSuchElementException {
         checkStackSize(1);
@@ -270,7 +270,7 @@ public class Calculator {
     /**
      * This method remove the last element from the stack.
      *
-     * @throws NoSuchElementException if the stack is empty.
+     * @throws java.util.NoSuchElementException if the stack is empty.
      */
     public void drop() throws NoSuchElementException {
         checkStackSize(1);
@@ -281,7 +281,7 @@ public class Calculator {
      * This method duplicate the last element from the stack and add the copy
      * onto it
      *
-     * @throws NoSuchElementException if the stack is empty.
+     * @throws java.util.NoSuchElementException if the stack is empty.
      */
     public void dup() throws NoSuchElementException {
         checkStackSize(1);
@@ -291,7 +291,7 @@ public class Calculator {
     /**
      * This method swap the last and last but one element from the stack.
      *
-     * @throws NoSuchElementException if the stack has less than two elements.
+     * @throws java.util.NoSuchElementException if the stack has less than two elements.
      */
     public void swap() throws NoSuchElementException {
         checkStackSize(2);
@@ -307,7 +307,7 @@ public class Calculator {
      * This method duplicate the last but one element from the stack and add the
      * copy onto it.
      *
-     * @throws NoSuchElementException if the stack has less than two elements.
+     * @throws java.util.NoSuchElementException if the stack has less than two elements.
      */
     public void over() throws NoSuchElementException {
         checkStackSize(2);
@@ -324,7 +324,7 @@ public class Calculator {
      * insert it as value of key c into variables map.
      * 
      * @param c the variable that we want store value to.
-     * @throws NoSuchElementException if the stack is empty.
+     * @throws java.util.NoSuchElementException if the stack is empty.
      */
     public void pushVariable(char c) throws NoSuchElementException {
         checkStackSize(1);
@@ -336,7 +336,7 @@ public class Calculator {
      * and pushes it onto the stack.
      * 
      * @param c the variable that we want read value from.
-     * @throws RuntimeException if the variable has null corresponding value.
+     * @throws java.lang.RuntimeException if the variable has null corresponding value.
      */
     public void pullVariable(char c) throws RuntimeException {
         Complex value = map.getVariable(c);
@@ -349,8 +349,8 @@ public class Calculator {
      * sum it at value of key c into variables map.
      * 
      * @param c the variable that we want sum top element of the stack to.
-     * @throws NoSuchElementException if the stack is empty.
-     * @throws RuntimeException if the variable has null corresponding value.
+     * @throws java.util.NoSuchElementException if the stack is empty.
+     * @throws java.lang.RuntimeException if the variable has null corresponding value.
      */
     public void sumVariable(char c) throws RuntimeException {
         checkStackSize(1);
@@ -362,8 +362,8 @@ public class Calculator {
      * subtratc it at value of key c into variables map.
      * 
      * @param c the variable that we want subtract top element of the stack to.
-     * @throws NoSuchElementException if the stack is empty.
-     * @throws RuntimeException if the variable has null corresponding value.
+     * @throws java.util.NoSuchElementException if the stack is empty.
+     * @throws java.lang.RuntimeException if the variable has null corresponding value.
      */
     public void subtractVariable(char c) throws RuntimeException {
         checkStackSize(1);

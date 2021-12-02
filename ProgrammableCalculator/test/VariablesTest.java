@@ -61,7 +61,7 @@ public class VariablesTest {
     @Test
     public void testSetVariable (){
         v.setVariable('m', number.minus(number));
-        assertComplexEquals(new Complex(),v.getVariable('m'));
+        assertComplexEquals(new Complex(0.0, 0.0),v.getVariable('m'));
     }
     
     @Test(expected=RuntimeException.class)
