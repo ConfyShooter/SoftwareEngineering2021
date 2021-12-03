@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -11,7 +12,7 @@ import java.util.Objects;
  *
  * @author Gruppo 20
  */
-public class Complex {
+public class Complex implements Serializable {
 
     private Double real;
     private Double imaginary;

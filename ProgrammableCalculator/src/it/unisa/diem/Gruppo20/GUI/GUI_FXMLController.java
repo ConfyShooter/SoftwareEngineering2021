@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,7 +56,7 @@ public class GUI_FXMLController implements Initializable {
     private UserDefinedOperations userOp;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
-    private final File defaultFile = new File("functions.txt"); // added just for easy-use
+    private final File defaultFile = new File("functions.bin"); // added just for easy-use
     
 
     /**
@@ -252,7 +254,8 @@ public class GUI_FXMLController implements Initializable {
         try {
             userOp.saveOnFile(defaultFile);
         } catch (IOException ex) {
-            showAlert("General I/O error (while saving). Retry!");
+            //showAlert("General I/O error (while saving). Retry!");
+            ex.printStackTrace();
         }
     }
 

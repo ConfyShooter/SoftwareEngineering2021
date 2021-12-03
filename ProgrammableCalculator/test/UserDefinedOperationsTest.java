@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -28,8 +26,8 @@ public class UserDefinedOperationsTest {
 
     private UserDefinedOperations userOp;
     private Calculator c;
-    private final File testSaveFile = new File("testSaveFile.txt");
-    private final File testReadFile = new File("testReadFile.txt");
+    private File testSaveFile;
+    private File testReadFile;
 
     public UserDefinedOperationsTest() {
     }
@@ -38,6 +36,8 @@ public class UserDefinedOperationsTest {
     public void setUp() {
         c = new Calculator();
         userOp = new UserDefinedOperations(c);
+        testSaveFile = new File("testSaveFile.txt");
+        testReadFile = new File("testReadFile.txt");
     }
 
     @Test
@@ -108,44 +108,52 @@ public class UserDefinedOperationsTest {
     }
 
     @Test
-    public void testSaveOnFile() {
+    public void testSaveOnFile() throws IOException {
         String expected_1 = "test_1: + - * / +- sqrt";
         String expected_2 = "test: clear drop dup swap over + - * / +- sqrt";
         userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
 
-        try {
-            userOp.saveOnFile(testSaveFile);
-        } catch (IOException ex) {
-            Logger.getLogger(UserDefinedOperationsTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        testSaveFile.setWritable(true);
+        userOp.saveOnFile(testSaveFile);
 
         String actual = read(testSaveFile);
         String expected = expected_1 + "\n" + expected_2 + "\n";
         assertEquals(expected, actual);
     }
 
+    @Test(expected = IOException.class)
+    public void testSaveOnFileException() throws IOException {
+        testSaveFile.setReadOnly();
+        userOp.saveOnFile(testSaveFile);
+        testSaveFile.delete();
+    }
+
     @Test
-    public void testLoadFromFile() {
+    public void testLoadFromFile() throws IOException {
         String expected_1 = "test_1: + - * / +- sqrt";
         String expected_2 = "test: clear drop dup swap over + - * / +- sqrt";
-        String expected = expected_1 + "\n" + expected_2 + "\n";
-
+        String expected_3 = "test_3: 1+1j sqrt +- >a test_1 <a";
+        String expected = expected_1 + "\n" + expected_2 + "\n" + expected_3 + "\n";
+        
         userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
+        userOp.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");        
 
         write(testReadFile);
-        try {
-            userOp.loadFromFile(testReadFile);
-        } catch (IOException ex) {
-            Logger.getLogger(UserDefinedOperationsTest.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        userOp.loadFromFile(testReadFile);
 
         String actual = "";
         for (String i : userOp.userOperationsNames()) {
             actual += i + ":" + userOp.operationsNameToString(i);
         }
         assertEquals(expected, actual);
+    }
+
+    @Test(expected = IOException.class)
+    public void testLoadFromFileException() throws IOException {
+        testReadFile.delete();
+        userOp.loadFromFile(testReadFile);
     }
 
     private String read(File file) {
