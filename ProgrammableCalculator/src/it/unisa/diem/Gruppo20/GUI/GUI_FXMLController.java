@@ -254,8 +254,7 @@ public class GUI_FXMLController implements Initializable {
         try {
             userOp.saveOnFile(defaultFile);
         } catch (IOException ex) {
-            //showAlert("General I/O error (while saving). Retry!");
-            ex.printStackTrace();
+            showAlert("General I/O error (while saving). Retry!");
         }
     }
 
