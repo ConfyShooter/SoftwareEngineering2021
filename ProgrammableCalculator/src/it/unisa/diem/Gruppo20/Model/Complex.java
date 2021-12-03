@@ -90,7 +90,7 @@ public class Complex {
 
         if (real == 0.0 && imaginary == 0.0) {
             return "0";
-            }
+        }
         if (real != 0) {
             s = format.format(real);
         }
