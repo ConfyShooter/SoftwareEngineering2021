@@ -26,8 +26,7 @@ public class UserDefinedOperationsTest {
 
     private UserDefinedOperations userOp;
     private Calculator c;
-    private File testSaveFile;
-    private File testReadFile;
+    private File testFile;
 
     public UserDefinedOperationsTest() {
     }
@@ -36,10 +35,9 @@ public class UserDefinedOperationsTest {
     public void setUp() {
         c = new Calculator();
         userOp = new UserDefinedOperations(c);
-        testSaveFile = new File("testSaveFile.txt");
-        testReadFile = new File("testReadFile.txt");
+        testFile = new File("testFile.txt");
     }
-
+    
     @Test
     public void testParseOperations() {
         userOp.parseOperations("   test :  clear  4 8 + ");
@@ -114,19 +112,20 @@ public class UserDefinedOperationsTest {
         userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
 
-        testSaveFile.setWritable(true);
-        userOp.saveOnFile(testSaveFile);
+        testFile.setWritable(true);
+        userOp.saveOnFile(testFile);
 
-        String actual = read(testSaveFile);
+        String actual = read(testFile);
         String expected = expected_1 + "\n" + expected_2 + "\n";
         assertEquals(expected, actual);
     }
 
     @Test(expected = IOException.class)
     public void testSaveOnFileException() throws IOException {
-        testSaveFile.setReadOnly();
-        userOp.saveOnFile(testSaveFile);
-        testSaveFile.delete();
+        testFile.createNewFile();
+        testFile.setReadOnly();
+        userOp.saveOnFile(testFile);
+        testFile.delete();
     }
 
     @Test
@@ -140,8 +139,8 @@ public class UserDefinedOperationsTest {
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
         userOp.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");        
 
-        write(testReadFile);
-        userOp.loadFromFile(testReadFile);
+        write(testFile);
+        userOp.loadFromFile(testFile);
 
         String actual = "";
         for (String i : userOp.userOperationsNames()) {
@@ -152,8 +151,8 @@ public class UserDefinedOperationsTest {
 
     @Test(expected = IOException.class)
     public void testLoadFromFileException() throws IOException {
-        testReadFile.delete();
-        userOp.loadFromFile(testReadFile);
+        testFile.delete();
+        userOp.loadFromFile(testFile);
     }
 
     private String read(File file) {
