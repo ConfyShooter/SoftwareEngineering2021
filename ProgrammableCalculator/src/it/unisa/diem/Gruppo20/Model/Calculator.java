@@ -371,16 +371,20 @@ public class Calculator {
     }
 
     /**
-     *
+     *This method save the variables stores in the map in a auxiliary deque.
+     * @throws java.util.NoSuchElementException if the map is empty.
      */
-    public void saveVariables() {
+    public void saveVariables() throws NoSuchElementException{
+        map.backup();
         return;
     }
 
     /**
-     *
+     *This method restore the variables stores in the auxiliary deque in a map.
+     * @throws java.util.NoSuchElementException if the auxiliary deque is empty.
      */
-    public void restoreVariables() {
+    public void restoreVariables() throws NoSuchElementException{
+        map.restore();
         return;
     }
 

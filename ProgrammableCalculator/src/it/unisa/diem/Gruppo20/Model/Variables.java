@@ -1,9 +1,14 @@
 package it.unisa.diem.Gruppo20.Model;
 
 import java.util.ArrayDeque;
+import java.util.Collection;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.Set;
 
 /**
  * This class allows the Variable managment.
@@ -88,12 +93,27 @@ public class Variables {
         setVariable(c, result);
     }
     
-    public void backup() {
-        ;
+        /**
+     * This method needs to backup the variables in the map data into backupStack.
+     * @throws RuntimeException if there aren't elements contained in the map.
+     */
+    public void backup() throws NoSuchElementException{
+        if(data.size()==0)
+            throw new NoSuchElementException("There aren't elements to save");
+        Map<Character,Complex> map = new HashMap<>();
+        map.putAll(data);
+        backupsStack.push(map);
     }
     
-    public void restore() {
-        ;
+        /**
+     * This method needs to restore the variables in backupStack into the map data.
+     * @throws RuntimeException if there aren't elements contained in the Deque.
+     */
+    public void restore() throws NoSuchElementException{
+        if(backupsStack.size()==0)
+            throw new NoSuchElementException("There aren't elements to restore");
+        data.clear();
+        data.putAll(backupsStack.pop());
     }
     
     private void checkKey(String s) throws RuntimeException{
