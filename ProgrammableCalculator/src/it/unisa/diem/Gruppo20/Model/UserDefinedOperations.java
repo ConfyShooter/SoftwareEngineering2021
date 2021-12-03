@@ -43,10 +43,12 @@ public class UserDefinedOperations {
      */
     public void parseOperations(String s) throws RuntimeException {
         int index = s.indexOf(":");
-        if (index == -1)
+        if (index == -1) {
             throw new RuntimeException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
+        }
         String name = s.substring(0, index).trim().toLowerCase();
+        checkOperationName(name);
 
         s = s.substring(index + 1).trim();
 
@@ -62,10 +64,6 @@ public class UserDefinedOperations {
         for (int i = 0; i < seq.length; i++) {
             String input = seq[i];
 
-            /*if(input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}") || input.equalsIgnoreCase("j"))
-                opCommand.add(input, insertNumberCommand(c.parseNumber(input)));
-            else
-                opCommand.add(input, commandOfOperation(input*/
             char sequence[] = input.toCharArray();
             boolean flag = true;
 
@@ -167,7 +165,7 @@ public class UserDefinedOperations {
     public List<String> getOperationsNames(String name) {
         UserCommand c = (UserCommand) operations.get(name);
         if (c != null) {
-            return c.getMacroName();
+            return c.getCommandName();
         }
         return null;
     }
@@ -218,7 +216,7 @@ public class UserDefinedOperations {
         String str = "";
 
         if (comm != null) {
-            for (String op : comm.getMacroName()) {
+            for (String op : comm.getCommandName()) {
                 str += " " + op;
             }
         }
@@ -329,5 +327,27 @@ public class UserDefinedOperations {
 
     private Command restoreVariablesCommand() {
         return c::restoreVariables;
+    }
+
+    private void checkOperationName(String name) {
+        if (    name.equals("+")
+                || name.equals("-")
+                || name.equals("*")
+                || name.equals("/")
+                || name.equals("+-")
+                || name.equals("sqrt")
+                || name.equals("clear")
+                || name.equals("drop")
+                || name.equals("dup")
+                || name.equals("over")
+                || name.equals("swap")
+                || name.equals("save")
+                || name.equals("restore")
+                || name.matches(">[a-z]{1}")
+                || name.matches("<[a-z]{1}")
+                || name.matches("\\+[a-z]{1}")
+                || name.matches("\\-[a-z]{1}")
+                )
+            throw new RuntimeException("Impossible to assign name '"+ name +"' to new user defined operation.");
     }
 }

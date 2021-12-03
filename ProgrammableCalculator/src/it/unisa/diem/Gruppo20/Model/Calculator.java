@@ -56,7 +56,7 @@ public class Calculator {
      * @throws RuntimeException if input is blank or there is a unknown error.
      */
     public void parsing(String input) throws Exception {
-        input = input.replaceAll("\\s+", "");
+        input = input.replaceAll("\\s+", "").toLowerCase();
 
         if (input.isBlank()) {
             throw new RuntimeException("Input string is empty!");

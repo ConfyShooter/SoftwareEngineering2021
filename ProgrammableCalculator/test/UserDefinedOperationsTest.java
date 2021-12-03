@@ -40,6 +40,11 @@ public class UserDefinedOperationsTest {
         testReadFile = new File("testReadFile.txt");
     }
 
+    @Test(expected=RuntimeException.class)
+    public void testParseOperationsException() {
+        userOp.parseOperations("   drop :  clear  4 8 + ");
+    }
+    
     @Test
     public void testParseOperations() {
         userOp.parseOperations("   test :  clear  4 8 + ");

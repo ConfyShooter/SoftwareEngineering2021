@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class UserCommand implements Command {
 
-    private final List<String> macroName;
-    private final List<Command> macros;
+    private final List<String> commandName;
+    private final List<Command> commands;
 
     /**
      * Create a new UserCommand object.
      */
     public UserCommand() {
-        macros = new ArrayList<>();
-        macroName = new ArrayList<>();
+        commandName = new ArrayList<>();
+        commands = new ArrayList<>();
     }
 
     /**
@@ -29,19 +29,23 @@ public class UserCommand implements Command {
      * @param c The command that must be added to the user-define operation.
      */
     public void add(String name, Command c) {
-        macroName.add(name.toLowerCase());
-        macros.add(c);
+        if(name == null || c == null)
+            throw new NullPointerException();
+        commandName.add(name.toLowerCase());
+        commands.add(c);
     }
 
     /**
      * Execute this UserCommand.
+     * @throws java.lang.RuntimeException if the user-defined operation calls another
+     * user-defined operation that was deleted from function list.
      */
     @Override
     public void execute() {
-        if (macros.isEmpty() || macroName.isEmpty()) {
+        if (commands.isEmpty() || commandName.isEmpty()) {
             throw new RuntimeException("This user-defined operation is trying to use a deleted user-defined operation.");
         }
-        for (Command c : macros) {
+        for (Command c : commands) {
             c.execute();
         }
     }
@@ -51,13 +55,13 @@ public class UserCommand implements Command {
      *
      * @return List of String
      */
-    public List<String> getMacroName() {
-        return macroName;
+    public List<String> getCommandName() {
+        return commandName;
     }
 
     public void reset() {
-        macros.clear();
-        macroName.clear();
+        commands.clear();
+        commandName.clear();
     }
 
 }
