@@ -1,2 +1,0 @@
-test_1: + - * / +- sqrt
-test: clear drop dup swap over + - * / +- sqrt
