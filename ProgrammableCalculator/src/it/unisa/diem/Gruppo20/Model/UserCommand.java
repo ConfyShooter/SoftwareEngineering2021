@@ -1,6 +1,5 @@
 package it.unisa.diem.Gruppo20.Model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  *
  * @author Gruppo 20
  */
-public class UserCommand implements Serializable, Command {
+public class UserCommand implements Command {
 
     private final List<String> macroName;
     private final List<Command> macros;

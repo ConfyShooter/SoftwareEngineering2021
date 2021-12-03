@@ -1,6 +1,5 @@
 package it.unisa.diem.Gruppo20.Model;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
@@ -12,7 +11,7 @@ import java.util.Objects;
  *
  * @author Gruppo 20
  */
-public class Complex implements Serializable {
+public class Complex {
 
     private Double real;
     private Double imaginary;
@@ -91,7 +90,7 @@ public class Complex implements Serializable {
 
         if (real == 0.0 && imaginary == 0.0) {
             return "0";
-            }
+        }
         if (real != 0) {
             s = format.format(real);
         }

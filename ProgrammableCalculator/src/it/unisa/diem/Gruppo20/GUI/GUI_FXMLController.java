@@ -56,7 +56,7 @@ public class GUI_FXMLController implements Initializable {
     private UserDefinedOperations userOp;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
-    private final File defaultFile = new File("functions.bin"); // added just for easy-use
+    private final File defaultFile = new File("functions.txt"); // added just for easy-use
     
 
     /**

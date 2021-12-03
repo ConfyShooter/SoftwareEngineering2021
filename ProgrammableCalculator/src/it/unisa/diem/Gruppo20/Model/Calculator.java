@@ -1,6 +1,5 @@
 package it.unisa.diem.Gruppo20.Model;
 
-import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
@@ -11,7 +10,7 @@ import java.util.NoSuchElementException;
  *
  * @author Gruppo 20
  */
-public class Calculator implements Serializable {
+public class Calculator {
 
     private final Deque<Complex> data;
     private final Variables map;
