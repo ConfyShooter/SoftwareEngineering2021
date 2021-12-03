@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class UserDefinedOperations {
      */
     public UserDefinedOperations(Calculator c) {
         this.c = c;
-        operations = new HashMap<>();
+        operations = new LinkedHashMap<>();
     }
 
     /**
@@ -47,6 +48,7 @@ public class UserDefinedOperations {
             throw new RuntimeException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
         String name = s.substring(0, index).trim().toLowerCase();
+
         s = s.substring(index + 1).trim();
 
         UserCommand opCommand = (UserCommand) operations.get(name);
