@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -252,7 +251,7 @@ public class UserDefinedOperations {
     public void loadFromFile(File f) throws IOException {
         operations.clear(); // overwrite the operations inserted before
         try (Scanner in = new Scanner(new BufferedReader(new FileReader(f)))) {
-            in.useDelimiter("\n+|\n\r");
+            in.useDelimiter("\n+|\n\r+");
             in.useLocale(Locale.US);
             while (in.hasNext()) {
                 parseOperations(in.next());
