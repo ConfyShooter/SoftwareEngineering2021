@@ -47,8 +47,6 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem deleteMenu;
     @FXML
     private MenuItem saveMenu;
-    @FXML
-    private MenuItem restoreMenu;
 
     private Calculator c;
     private UserDefinedOperations userOp;
@@ -89,6 +87,7 @@ public class GUI_FXMLController implements Initializable {
         try {
             if (functionBox.isSelected()) {
                 userOp.parseOperations(input);
+                functions.setAll(userOp.userOperationsNames());
             } else if (userOp.getOperationsCommand(input.toLowerCase()) != null) {
                 userOp.executeOperation(input.toLowerCase());
             } else {
@@ -103,7 +102,6 @@ public class GUI_FXMLController implements Initializable {
         inputText.clear();
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
-        functions.setAll(userOp.userOperationsNames());
     }
 
     @FXML
