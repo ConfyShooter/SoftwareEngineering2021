@@ -214,13 +214,12 @@ public class UserDefinedOperations {
     }
 
     /**
-     * Return a string of all the commands of a user-defined function.
+     * Return a string of definition of a user-defined operation.
      *
-     * @param name The name of the user-defined function whose we want to print
-     * the operations.
-     * @return A string of all the operations that starts with a blank space.
+     * @param name The name of the user-defined operation whose we want to print.
+     * @return A string of name and all the commands separated by two points.
      */
-    public String operationsNameToString(String name) {
+    public String operationToString(String name) {
         UserCommand comm = (UserCommand) operations.get(name);
         String str = name + ":";
 
@@ -242,7 +241,7 @@ public class UserDefinedOperations {
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(operationsNameToString(func) + "\n");
+                out.write(operationToString(func) + "\n");
             }
         }
     }

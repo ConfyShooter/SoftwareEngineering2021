@@ -229,7 +229,7 @@ public class GUI_FXMLController implements Initializable {
     private void editFunction(ActionEvent event) {
         functionBox.setSelected(true);
         String name = functionsList.getSelectionModel().getSelectedItem();
-        inputText.setText(userOp.operationsNameToString(name));
+        inputText.setText(userOp.operationToString(name));
     }
 
     @FXML

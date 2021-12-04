@@ -41,8 +41,13 @@ public class UserDefinedOperationsTest {
     }
 
     @Test(expected = RuntimeException.class)
-    public void testParseOperationsException() {
+    public void testParseOperationsExceptionName() {
         userOp.parseOperations("   <a :  clear  4 8 + ");
+    }
+    
+    @Test(expected = RuntimeException.class)
+    public void testParseOperationsExceptionEmptyDef() {
+        userOp.parseOperations("   test :    ");
     }
 
     @Test
@@ -150,7 +155,7 @@ public class UserDefinedOperationsTest {
 
         String actual = "";
         for (String i : userOp.userOperationsNames()) {
-            actual += userOp.operationsNameToString(i) + "\n";
+            actual += userOp.operationToString(i) + "\n";
         }
         assertEquals(expected, actual);
     }
@@ -178,7 +183,7 @@ public class UserDefinedOperationsTest {
     private void write(File file) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             for (String i : userOp.userOperationsNames()) {
-                out.write(userOp.operationsNameToString(i) + "\n");
+                out.write(userOp.operationToString(i) + "\n");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
