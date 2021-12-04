@@ -148,8 +148,7 @@ public class Complex {
     }
 
     /**
-     * This method return the ratio between this complex number and the param
-     * c.
+     * This method return the ratio between this complex number and the param c.
      *
      * @param c The dividend of the operation.
      * @return Complex value.
@@ -172,11 +171,10 @@ public class Complex {
     }
 
     /**
-     * This function implements the square root operation of a complex
-     * number.The result value is a complex numbers pair where one is the
-     * opposite of the other.
+     * This method implements the square root operation of a complex number. The
+     * result value is a complex number.
      *
-     * @return a list made up of the two result of the square root.
+     * @return A complex number.
      */
     public Complex squareRoot() {
         Double module = mod();
@@ -190,9 +188,9 @@ public class Complex {
     }
 
     /**
-     * This function returns the reverse of this Complex number.
+     * This method returns the reverse of this Complex number.
      *
-     * @return the complex changed in sign.
+     * @return The complex number changed in sign.
      */
     public Complex invert() {
         return new Complex(-1 * real, -1 * imaginary);
@@ -201,17 +199,17 @@ public class Complex {
     /**
      * This method calculate the module of a complex number.
      *
-     * @return the module of this Complex.
+     * @return The module of this Complex.
      */
     public Double mod() {
         return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
     }
 
     /**
-     * This method return the phase of a complex number in (-pi, pi]. The value
+     * This method returns the phase of a complex number in (-pi, pi]. The value
      * is Undefined if the real and imaginary part are both equals to 0.
      *
-     * @return the phase.
+     * @return The phase.
      */
     public Double phase() {
         if (real == 0 && imaginary > 0) {

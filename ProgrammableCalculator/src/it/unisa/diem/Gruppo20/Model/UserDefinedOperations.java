@@ -213,7 +213,7 @@ public class UserDefinedOperations {
      *
      * @param name The name of the user-defined function whose we want to print
      * the operations.
-     * @return A string of all the operations.
+     * @return A string of all the operations that starts with a blank space.
      */
     public String operationsNameToString(String name) {
         UserCommand comm = (UserCommand) operations.get(name);
@@ -221,7 +221,7 @@ public class UserDefinedOperations {
 
         if (comm != null) {
             for (String op : comm.getCommandName()) {
-                str += op + " ";
+                str += " " + op;
             }
         }
         return str + "\n";
@@ -237,7 +237,7 @@ public class UserDefinedOperations {
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(func + ": " + operationsNameToString(func));
+                out.write(func + ":" + operationsNameToString(func));
             }
         }
     }

@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Gruppo20
+ * @author Team 20
  */
 public class UserDefinedOperationsTest {
 
@@ -37,12 +37,12 @@ public class UserDefinedOperationsTest {
         userOp = new UserDefinedOperations(c);
         testFile = new File("testFile.txt");
     }
-    
-    @Test(expected=RuntimeException.class)
+
+    @Test(expected = RuntimeException.class)
     public void testParseOperationsException() {
         userOp.parseOperations("   <a :  clear  4 8 + ");
     }
-    
+
     @Test
     public void testParseOperations() {
         userOp.parseOperations("   test :  clear  4 8 + ");
@@ -139,10 +139,10 @@ public class UserDefinedOperationsTest {
         String expected_2 = "test: clear drop dup swap over + - * / +- sqrt";
         String expected_3 = "test_3: 1+1j sqrt +- >a test_1 <a";
         String expected = expected_1 + "\n" + expected_2 + "\n" + expected_3 + "\n";
-        
+
         userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
         userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
-        userOp.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");        
+        userOp.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");
 
         write(testFile);
         userOp.loadFromFile(testFile);
@@ -177,7 +177,7 @@ public class UserDefinedOperationsTest {
     private void write(File file) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             for (String i : userOp.userOperationsNames()) {
-                out.write(i + ":" + userOp.operationsNameToString(i)/*userOp.getOperationsNames(i)*/);
+                out.write(i + ":" + userOp.operationsNameToString(i));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -185,8 +185,8 @@ public class UserDefinedOperationsTest {
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {
-        Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
-        Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
+        assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
+        assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
 
 }
