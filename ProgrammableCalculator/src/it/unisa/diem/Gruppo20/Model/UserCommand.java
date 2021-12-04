@@ -7,7 +7,7 @@ import java.util.List;
  * Concrete class that implements Command. It represent a user-defined operation
  * made by a sequence of Command.
  *
- * @author Gruppo 20
+ * @author Team 20
  */
 public class UserCommand implements Command {
 
@@ -18,27 +18,29 @@ public class UserCommand implements Command {
      * Create a new UserCommand object.
      */
     public UserCommand() {
-        commandName = new ArrayList<>();
-        commands = new ArrayList<>();
+        this.commandName = new ArrayList<>();
+        this.commands = new ArrayList<>();
     }
 
     /**
      * Add m to the sequence of operations of this UserCommand.
      *
-     * @param name The name of the operation that the Commanc execute.
-     * @param c The command that must be added to the user-define operation.
+     * @param name The name of the operation that the Command execute.
+     * @param c The command that must be added to the user-defined operation.
      */
     public void add(String name, Command c) {
-        if(name == null || c == null)
+        if (name == null || c == null) {
             throw new NullPointerException();
+        }
         commandName.add(name.toLowerCase());
         commands.add(c);
     }
 
     /**
      * Execute this UserCommand.
-     * @throws java.lang.RuntimeException if the user-defined operation calls another
-     * user-defined operation that was deleted from function list.
+     *
+     * @throws java.lang.RuntimeException if the user-defined operation calls
+     * another user-defined operation that was deleted from function list.
      */
     @Override
     public void execute() {
@@ -53,7 +55,7 @@ public class UserCommand implements Command {
     /**
      * Return the names of all operations performed by this UserCommand.
      *
-     * @return List of String
+     * @return List of String.
      */
     public List<String> getCommandName() {
         return commandName;

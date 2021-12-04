@@ -1,4 +1,4 @@
- package it.unisa.diem.Gruppo20.Model;
+package it.unisa.diem.Gruppo20.Model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * This class allow user-defined operations management.
  *
- * @author Gruppo20
+ * @author Team 20
  */
 public class UserDefinedOperations {
 
@@ -32,13 +32,13 @@ public class UserDefinedOperations {
      */
     public UserDefinedOperations(Calculator c) {
         this.c = c;
-        operations = new LinkedHashMap<>();
+        this.operations = new LinkedHashMap<>();
     }
 
     /**
-     * Parse a sequence of operations and add a suquence of command to the map.
+     * Parse a sequence of operations and add a sequence of command to the map.
      *
-     * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3..."
+     * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3...".
      * @throws RuntimeException
      */
     public void parseOperations(String s) throws RuntimeException {
@@ -90,15 +90,15 @@ public class UserDefinedOperations {
     /**
      * Return a Command object that represent the operation input.
      *
-     * @param input a string labeling an operation
-     * @return Command object
+     * @param input A string labeling an operation.
+     * @return Command object.
      * @throws RuntimeException
      */
     private Command commandOfOperation(String input) throws RuntimeException {
         input = input.toLowerCase();
-        Command c = operations.get(input);
-        if (c != null) {
-            return c;
+        Command command = operations.get(input);
+        if (command != null) {
+            return command;
         }
 
         switch (input) {
@@ -141,7 +141,6 @@ public class UserDefinedOperations {
         } else {
             throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
         }
-
     }
 
     /**
@@ -149,7 +148,7 @@ public class UserDefinedOperations {
      * passed as a parameter.
      *
      * @param name The operation that must be returned.
-     * @return Command object
+     * @return Command object.
      */
     public Command getOperationsCommand(String name) {
         return operations.get(name);
@@ -159,13 +158,13 @@ public class UserDefinedOperations {
      * Returns the names of all operations performed by the user-defined
      * operation that has the name passed as a parameter.
      *
-     * @param name The user-defined operation name
-     * @return List of String
+     * @param name The user-defined operation name.
+     * @return List of String.
      */
     public List<String> getOperationsNames(String name) {
-        UserCommand c = (UserCommand) operations.get(name);
-        if (c != null) {
-            return c.getCommandName();
+        UserCommand command = (UserCommand) operations.get(name);
+        if (command != null) {
+            return command.getCommandName();
         }
         return null;
     }
@@ -174,12 +173,12 @@ public class UserDefinedOperations {
      * Execute the user-defined operation that has the name passed as a
      * parameter.
      *
-     * @param name The user-defined operation name
+     * @param name The user-defined operation name.
      */
     public void executeOperation(String name) throws RuntimeException {
-        Command c = operations.get(name);
-        if (c != null) {
-            c.execute();
+        Command command = operations.get(name);
+        if (command != null) {
+            command.execute();
         } else {
             throw new RuntimeException("Can't execute this operation, can't find operation with name " + name + ".");
         }
@@ -188,7 +187,7 @@ public class UserDefinedOperations {
     /**
      * Return the names of all user-defined operations.
      *
-     * @return Set of String
+     * @return Set of String.
      */
     public Set<String> userOperationsNames() {
         return operations.keySet();
@@ -198,26 +197,31 @@ public class UserDefinedOperations {
      * Remove the user-defined operation that has the name passaed as a
      * parameter.
      *
-     * @param name The user-defined operation name
+     * @param name The user-defined operation name.
      */
     public void removeOperations(String name) {
-        UserCommand c = (UserCommand) operations.get(name);
-        if (c != null) {
-            c.reset();
-            c = null;
+        UserCommand command = (UserCommand) operations.get(name);
+        if (command != null) {
+            command.reset();
+            command = null;
         }
-
         operations.remove(name);
     }
 
-// NON SO SE NECESSARIA - UTILE SOLO ALLA STAMPA SU FILE
+    /**
+     * Return a string of all the commands of a user-defined function.
+     *
+     * @param name The name of the user-defined function whose we want to print
+     * the operations.
+     * @return A string of all the operations.
+     */
     public String operationsNameToString(String name) {
         UserCommand comm = (UserCommand) operations.get(name);
         String str = "";
 
         if (comm != null) {
             for (String op : comm.getCommandName()) {
-                str += " " + op;
+                str += op + " ";
             }
         }
         return str + "\n";
@@ -233,8 +237,7 @@ public class UserDefinedOperations {
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(func + ":" + operationsNameToString(func));
-                //out.write(func + ": " + getOperationsNames(func) + "\n");
+                out.write(func + ": " + operationsNameToString(func));
             }
         }
     }
@@ -330,7 +333,7 @@ public class UserDefinedOperations {
     }
 
     private void checkOperationName(String name) {
-        if (    name.equals("+")
+        if (name.equals("+")
                 || name.equals("-")
                 || name.equals("*")
                 || name.equals("/")
@@ -346,8 +349,8 @@ public class UserDefinedOperations {
                 || name.matches(">[a-z]{0,1}")
                 || name.matches("<[a-z]{0,1}")
                 || name.matches("\\+[a-z]{1}")
-                || name.matches("\\-[a-z]{1}")
-                )
-            throw new RuntimeException("You can't assign this name '"+ name +"' to an user-defined operation.");
+                || name.matches("\\-[a-z]{1}")) {
+            throw new RuntimeException("You can't assign this name '" + name + "' to an user-defined operation.");
+        }
     }
 }

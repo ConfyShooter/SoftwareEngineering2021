@@ -9,7 +9,7 @@ import java.util.Objects;
  * This class is an abstraction of the Complex set numbers. It supports
  * arithmetic and trigonometic operations.
  *
- * @author Gruppo 20
+ * @author Team 20
  */
 public class Complex {
 
@@ -104,10 +104,10 @@ public class Complex {
     }
 
     /**
-     * This function implements the sum between two complex number.
+     * This method implements the sum between two complex numbers.
      *
-     * @param c is the operand we want to make the sum with.
-     * @return the complex number resulting from the operation.
+     * @param c Is the operand we want to make the sum with.
+     * @return The complex number resulting from the operation.
      */
     public Complex plus(Complex c) {
         Double a = c.getReal();
@@ -117,10 +117,10 @@ public class Complex {
     }
 
     /**
-     * This function implements the the subtraction between two numbers
+     * This method implements the subtraction between two numbers.
      *
-     * @param c the operand we want to subtract.
-     * @return the complex number resulting from the operation.
+     * @param c The operand we want to subtract.
+     * @return The complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
         Double a = c.getReal();
@@ -130,10 +130,10 @@ public class Complex {
     }
 
     /**
-     * This function implements the moltiplication between two complex number.
+     * This method implements the moltiplication between two complex numbers.
      *
-     * @param c is the operand we want to make the moltiplication with.
-     * @return the complex number resulting from the operation.
+     * @param c Is the operand we want to make the moltiplication with.
+     * @return The complex number resulting from the operation.
      */
     public Complex multiply(Complex c) {
         Double a = real;
@@ -148,11 +148,11 @@ public class Complex {
     }
 
     /**
-     * This function return the ratio between this complex number and the param
+     * This method return the ratio between this complex number and the param
      * c.
      *
-     * @param c the dividend of the operation
-     * @return Complex value
+     * @param c The dividend of the operation.
+     * @return Complex value.
      */
     public Complex division(Complex c) throws ArithmeticException {
         Double a = real;

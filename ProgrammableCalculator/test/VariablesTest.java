@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Gruppo20
+ * @author Team 20
  */
 public class VariablesTest {
 
@@ -103,14 +103,14 @@ public class VariablesTest {
     @Test
     public void testBackup() {
         v.backup();
-        
+
         Complex result = v.getBackupsStack().peekFirst().get('j');
         expected.setReal(1.0);
         expected.setImaginary(2.0);
-        
+
         assertComplexEquals(expected, result);
     }
-    
+
     @Test(expected = NoSuchElementException.class)
     public void testBackupException() {
         v.getCurrentValues().clear();
@@ -119,32 +119,31 @@ public class VariablesTest {
 
     @Test
     public void testRestore() {
-        v.backup();        
+        v.backup();
         v.setVariable('j', new Complex(2.0, 3.0));
         Complex result = v.getVariable('j');
-        
+
         expected.setReal(2.0);
-        expected.setImaginary(3.0);        
+        expected.setImaginary(3.0);
         assertComplexEquals(expected, result);
-        
+
         v.restore();
         result = v.getVariable('j');
         expected.setReal(1.0);
-        expected.setImaginary(2.0);        
+        expected.setImaginary(2.0);
         assertComplexEquals(expected, result);
-        
+
         assertComplexEquals(expected, result);
-        ;
     }
-    
+
     @Test(expected = NoSuchElementException.class)
     public void testRestoreException() {
         v.restore();
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {
-        Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
-        Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
+        assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
+        assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
 
 }
