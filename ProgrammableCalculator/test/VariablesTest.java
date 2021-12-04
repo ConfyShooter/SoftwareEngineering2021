@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * @author Gruppo20
  */
 public class VariablesTest {
-    
+    private Variables expected;
     private Variables v;
     private Complex number;
     
@@ -96,11 +96,29 @@ public class VariablesTest {
         assertComplexEquals(new Complex(), v.getVariable('j'));
     }
     
+//    @Test
+//    public void testBackup (){
+//        v.setVariable('a', new Complex(3.0,4.0));
+//        v.backup();
+//        
+//        assertComplexEquals(new Complex(), v.getVariable('j'));
+//    }
+    
+//    @Test
+//    public void testRestore (){
+//        expected.setVariable('a', new Complex(3.0,4.0));
+//        v.setVariable('a', new Complex(3.0,4.0));
+//        v.backup();
+//        v.setVariable('a', new Complex(2.0,3.0));
+//        v.restore();
+//        assertEquals(v.getVariable('a'),expected.getVariable('a'));
+//        ;
+//    }    
     private void assertComplexEquals(Complex expected, Complex actual) {
         Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
         Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
     
-    
-    
+ 
+       
 }

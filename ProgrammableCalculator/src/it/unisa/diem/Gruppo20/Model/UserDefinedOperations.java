@@ -1,4 +1,4 @@
-package it.unisa.diem.Gruppo20.Model;
+ package it.unisa.diem.Gruppo20.Model;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -249,7 +249,7 @@ public class UserDefinedOperations {
     public void loadFromFile(File f) throws IOException {
         operations.clear(); // overwrite the operations inserted before
         try (Scanner in = new Scanner(new BufferedReader(new FileReader(f)))) {
-            in.useDelimiter("\n+|\n\r");
+            in.useDelimiter("\n+|\n\r+");
             in.useLocale(Locale.US);
             while (in.hasNext()) {
                 parseOperations(in.next());

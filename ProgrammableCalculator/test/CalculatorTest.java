@@ -361,6 +361,27 @@ public class CalculatorTest {
 
     }
     
+//    @Test()
+//    public void testSaveVariables(){
+//        Complex value = new Complex(1.0, 2.0);
+//        Complex expected = value;
+//        
+//        c.getMap().setVariable('a', value);
+//        c.saveVariables();
+//        assertEquals(expected, value);
+//    }
+//    
+    @Test()
+    public void testRestoreVariables(){
+         Complex value = new Complex(1.0, 2.0);
+        Complex expected = value;
+        
+        c.getMap().setVariable('a', value);
+        c.saveVariables();
+        assertEquals(expected, value);
+
+    }    
+    
 
     private void assertComplexEquals(Complex expected, Complex actual) {
         Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);

@@ -1,2 +1,3 @@
 test_1: + - * / +- sqrt
 test: clear drop dup swap over + - * / +- sqrt
+test_3: 1+1j sqrt +- >a test_1 <a
