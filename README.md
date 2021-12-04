@@ -29,17 +29,17 @@ _Repository of team 20 of the Software Engineering course A.Y. 21/22_
 
 ### ✦ Third delivery: Sun. December 5:
   
-  2nd Sprint Release -
+  [2nd Sprint Release]()
   
-  Sprint backlog -
+  [Sprint backlog](https://docs.google.com/spreadsheets/d/18Md_5_tZO6J8s5MCN2IoBly2AEGTL7Sq/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
   
-  Updated prod. backlog -
+  [Updated prod. backlog]()
   
-  Project Burndown chart -
+  [Project Burndown chart](https://drive.google.com/file/d/1dpd7ISsEVdynM0O9VwPgdpqo0A4RN8tv/view?usp=sharing)
   
-  Sprint review report -
+  [Sprint review report](https://drive.google.com/file/d/19Jq4d1evMEDdMitQRJmkuQnNheSQHpwv/view?usp=sharing)
   
-  Sprint retrospective report -
+  [Sprint retrospective report]()
 
 
 ### ✦ Fourth delivery: Sun. December 12:
