@@ -8,7 +8,7 @@ import javafx.fxml.*;
 
 /**
  *
- * @author Gruppo 20
+ * @author Team 20
  */
 public class GUIMain extends Application {
 

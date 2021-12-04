@@ -23,7 +23,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author Gruppo 20
+ * @author Team 20
  */
 public class GUI_FXMLController implements Initializable {
 
@@ -55,7 +55,6 @@ public class GUI_FXMLController implements Initializable {
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("functions.txt"); // added just for easy-use
-    
 
     /**
      * Initializes the controller class.
@@ -105,7 +104,6 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
         functions.setAll(userOp.userOperationsNames());
-
     }
 
     @FXML
@@ -115,7 +113,6 @@ public class GUI_FXMLController implements Initializable {
         } else {
             inputText.setText("+");
         }
-
     }
 
     @FXML
@@ -223,7 +220,6 @@ public class GUI_FXMLController implements Initializable {
             inputText.setText(text);
             onInsertPressed(event);
         }
-
     }
 
     @FXML

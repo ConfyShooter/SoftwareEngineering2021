@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Gruppo20
+ * @author Team 20
  */
 public class ComplexTest {
 

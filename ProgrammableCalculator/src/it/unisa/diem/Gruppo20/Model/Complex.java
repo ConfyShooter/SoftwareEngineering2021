@@ -17,7 +17,7 @@ public class Complex {
     private Double imaginary;
 
     /**
-     * This method return a new Complex object with default real and imaginary
+     * This method returns a new Complex object with default real and imaginary
      * values.
      */
     public Complex() {
@@ -148,7 +148,8 @@ public class Complex {
     }
 
     /**
-     * This method return the ratio between this complex number and the param c.
+     * This method returns the ratio between this complex number and the param
+     * c.
      *
      * @param c The dividend of the operation.
      * @return Complex value.
@@ -197,9 +198,9 @@ public class Complex {
     }
 
     /**
-     * This method calculate the module of a complex number.
+     * This method calculates the module of a complex number.
      *
-     * @return The module of this Complex.
+     * @return A double value that representing the module.
      */
     public Double mod() {
         return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
@@ -209,7 +210,7 @@ public class Complex {
      * This method returns the phase of a complex number in (-pi, pi]. The value
      * is Undefined if the real and imaginary part are both equals to 0.
      *
-     * @return The phase.
+     * @return A double value that representing the phase.
      */
     public Double phase() {
         if (real == 0 && imaginary > 0) {

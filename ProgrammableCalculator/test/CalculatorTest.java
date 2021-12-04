@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Gruppo20
+ * @author Team 20
  */
 public class CalculatorTest {
 
@@ -256,111 +256,108 @@ public class CalculatorTest {
         c.parsing("2");
         c.swap();
     }
-    
-    @Test(expected=NoSuchElementException.class)
-    public void testPushVariableException(){
+
+    @Test(expected = NoSuchElementException.class)
+    public void testPushVariableException() {
         c.pushVariable('d');
     }
-    
+
     @Test()
-    public void testPushVariable() throws Exception{
+    public void testPushVariable() throws Exception {
         c.parsing("2+j");
         c.parsing("j");
         c.parsing("1.23456789");
         c.pushVariable('z');
         c.pushVariable('j');
         c.pushVariable('a');
-        
+
         Complex expected = new Complex(2.0, 1.0);
-        
+
         assertComplexEquals(expected, c.getMap().getVariable('a'));
-        
+
         expected.setReal(0.0);
         assertComplexEquals(expected, c.getMap().getVariable('j'));
-        
+
         expected.setReal(1.23456789);
         expected.setImaginary(0.0);
         assertComplexEquals(expected, c.getMap().getVariable('z'));
-        
     }
-    
-    @Test(expected=RuntimeException.class)
-    public void testPullVariableException(){
+
+    @Test(expected = RuntimeException.class)
+    public void testPullVariableException() {
         c.pullVariable('f');
     }
-    
+
     @Test()
-    public void testPullVariable(){
+    public void testPullVariable() {
         Complex expectedA = new Complex(4.5, 5.5);
         Complex expectedJ = new Complex(0.0, 5.5);
         Complex expectedZ = new Complex(4.5, 0.0);
-        
+
         c.getMap().setVariable('a', expectedA);
         c.getMap().setVariable('j', expectedJ);
         c.getMap().setVariable('z', expectedZ);
         c.pullVariable('a');
         c.pullVariable('j');
         c.pullVariable('z');
-        
+
         assertComplexEquals(expectedZ, c.getData().pop());
         assertComplexEquals(expectedJ, c.getData().pop());
         assertComplexEquals(expectedA, c.getData().pop());
     }
-    
-    @Test(expected=NoSuchElementException.class)
-    public void testSumVariableExceptionStack(){
+
+    @Test(expected = NoSuchElementException.class)
+    public void testSumVariableExceptionStack() {
         c.sumVariable('h');
     }
-    
-    @Test(expected=RuntimeException.class)
-    public void testSumVariableException() throws Exception{
+
+    @Test(expected = RuntimeException.class)
+    public void testSumVariableException() throws Exception {
         c.parsing("-j+12.52");
         c.sumVariable('n');
     }
-    
+
     @Test()
-    public void testSumVariable(){
+    public void testSumVariable() {
         Complex expected = new Complex(4.5, 5.5);
         Complex top = new Complex(0.0, 5.5);
         Complex value = new Complex(4.5, 0.0);
-        
+
         c.insertNumber(top);
         c.insertNumber(value);
         c.pushVariable('t');
         c.sumVariable('t');
         c.pullVariable('t');
-        
+
         assertComplexEquals(expected, c.getData().pop());
-        
     }
-    
-    @Test(expected=NoSuchElementException.class)
-    public void testSubtractVariableExceptionStack(){
+
+    @Test(expected = NoSuchElementException.class)
+    public void testSubtractVariableExceptionStack() {
         c.subtractVariable('p');
     }
-    
-    @Test(expected=RuntimeException.class)
-    public void testSubtractVariableException() throws Exception{
+
+    @Test(expected = RuntimeException.class)
+    public void testSubtractVariableException() throws Exception {
         c.parsing("-j15-12");
         c.subtractVariable('s');
     }
-    
+
     @Test()
-    public void testSubtractVariable(){
+    public void testSubtractVariable() {
         Complex value = new Complex(4.5, 5.5);
         Complex top = new Complex(0.0, 5.5);
         Complex expected = new Complex(4.5, 0.0);
-        
+
         c.insertNumber(top);
         c.insertNumber(value);
         c.pushVariable('t');
         c.subtractVariable('t');
         c.pullVariable('t');
-        
-        assertComplexEquals(expected, c.getData().pop());
 
+        assertComplexEquals(expected, c.getData().pop());
     }
-    
+
 //    @Test()
 //    public void testSaveVariables(){
 //        Complex value = new Complex(1.0, 2.0);
@@ -372,20 +369,19 @@ public class CalculatorTest {
 //    }
 //    
     @Test()
-    public void testRestoreVariables(){
-         Complex value = new Complex(1.0, 2.0);
+    public void testRestoreVariables() {
+        Complex value = new Complex(1.0, 2.0);
         Complex expected = value;
-        
+
         c.getMap().setVariable('a', value);
         c.saveVariables();
-        assertEquals(expected, value);
 
-    }    
-    
+        assertEquals(expected, value);
+    }
 
     private void assertComplexEquals(Complex expected, Complex actual) {
-        Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
-        Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
+        assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
+        assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
 
 }
