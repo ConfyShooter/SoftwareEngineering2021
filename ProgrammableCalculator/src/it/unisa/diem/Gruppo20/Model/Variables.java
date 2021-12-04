@@ -34,6 +34,10 @@ public class Variables {
         return data;
     }
 
+    public Deque<Map<Character, Complex>> getBackupsStack() {
+        return backupsStack;
+    }
+
     /**
      * This method get the Complex number corresponding to the key c inside the
      * map.
