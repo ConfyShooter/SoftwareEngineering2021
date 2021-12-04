@@ -10,120 +10,184 @@ import static org.junit.Assert.*;
  */
 public class ComplexTest {
 
-    private Complex complex;
+    private Complex expected;
+    private Complex operand1Real;
+    private Complex operand1Imaginary;
+    private Complex operand2Real;
+    private Complex operand2Imaginary;
+    private Complex operand1;
+    private Complex operand2;
 
     public ComplexTest() {
     }
 
     @Before
     public void setUp() {
-        this.complex = new Complex();
+        expected = new Complex();
+        operand1Real = new Complex(-10.0, 0.0);
+        operand2Real = new Complex(6.0, 0.0);
+        operand1Imaginary = new Complex(0.0, -50.0);
+        operand2Imaginary = new Complex(0.0, 60.0);
+        operand1 = new Complex(3.0, 4.0);
+        operand2 = new Complex(3.0, 0.1);
     }
 
     @Test
     public void testPlus() {
-        Complex expected = new Complex(5.0, 10.1);
-
-        Complex actual = new Complex(2.0, 10.0);
-        complex.setReal(3.0);
-        complex.setImaginary(0.1);
-
-        assertComplexEquals(expected, complex.plus(actual));
+        assertComplexEquals(expected, new Complex().plus(new Complex())); //test 0+0 = 0
+        
+        expected.setReal(-4.0);
+        assertComplexEquals(expected, operand1Real.plus(operand2Real));
+        
+        expected.setReal(0.0);
+        expected.setImaginary(10.0);
+        assertComplexEquals(expected, operand1Imaginary.plus(operand2Imaginary));
+        
+        expected.setReal(6.0);
+        expected.setImaginary(4.1);
+        assertComplexEquals(expected, operand1.plus(operand2));
+        
     }
 
     @Test
     public void testMinus() {
-        Complex expected = new Complex(10.0, 0.0);
+        assertComplexEquals(expected, new Complex().minus(new Complex()));
+        
+        expected.setReal(-16.0);
+        assertComplexEquals(expected, operand1Real.minus(operand2Real));
 
-        Complex min = new Complex(4.0, 5.0);
-        complex.setReal(14.0);
-        complex.setImaginary(5.0);
-
-        assertComplexEquals(expected, complex.minus(min));
+        expected.setImaginary(-110.0);
+        expected.setReal(0.0);
+        assertComplexEquals(expected, operand1Imaginary.minus(operand2Imaginary));
+        
+        expected.setImaginary(3.9);
+        expected.setReal(0.0);
+        assertComplexEquals(expected, operand1.minus(operand2));
     }
 
     @Test
     public void testMultiply() {
-        Complex expected = new Complex((double) 39 / 4, (double) 13 / 4);
-        Complex actual = new Complex(2.0, (double) -7 / 2);
+        assertComplexEquals(expected, new Complex().multiply(new Complex()));
+        
+        expected.setReal(-60.0);
+        assertComplexEquals(expected, operand1Real.multiply(operand2Real));
+        
+        expected.setReal(3000.0);
+        expected.setImaginary(0.0);
+        assertComplexEquals(expected, operand1Imaginary.multiply(operand2Imaginary));
 
-        complex.setReal(0.5);
-        complex.setImaginary((double) 5 / 2);
+        expected.setReal((double) 39 / 4);
+        expected.setImaginary((double) 13 / 4);
+        operand1.setReal(0.5);
+        operand1.setImaginary((double) 5 / 2);
+        operand2.setReal(2.0);
+        operand2.setImaginary((double) -7 / 2);
 
-        assertComplexEquals(expected, complex.multiply(actual));
+        assertComplexEquals(expected, operand1.multiply(operand2));
 
     }
 
     @Test
     public void testSquareRoot() {
-        Complex expected = new Complex(2.0, 1.0);
-        Complex actual = new Complex(3.0, 4.0);
+        expected.setImaginary(Math.sqrt(10));
+        assertComplexEquals(expected, operand1Real.squareRoot());
+        
+        expected.setImaginary(-5.0);
+        expected.setReal(5.0);
+        assertComplexEquals(expected, operand1Imaginary.squareRoot());
 
-        assertComplexEquals(expected, actual.squareRoot());
+        expected.setReal(2.0);
+        expected.setImaginary(1.0);
+        assertComplexEquals(expected, operand1.squareRoot());
     }
 
     @Test
     public void testMod() {
-        complex.setReal(-10.64);
-        complex.setImaginary(30.12);
-        Double expected = 31.94407613;
+        Double expected = 0.0;
+        assertEquals(expected, new Complex().mod(), 0.00000001);
+        
+        expected = 10.0;
+        assertEquals(expected, operand1Real.mod(), 0.0000001);
+        
+        expected = 60.0;
+        assertEquals(expected, operand2Imaginary.mod(), 0.0000001);
+        
+        
+        operand1.setReal(-10.64);
+        operand1.setImaginary(30.12);
+        expected = 31.94407613;
 
-        assertEquals(expected, complex.mod(), 0.00000001);
+        assertEquals(expected, operand1.mod(), 0.00000001);
     }
 
     @Test
     public void testPhase() {
-        complex.setImaginary(1.0);
-        assertEquals(Math.PI / 2, complex.phase(), 0.00000001);
+        operand1.setReal(0.0);
+        operand1.setImaginary(1.0);
+        assertEquals(Math.PI / 2, operand1.phase(), 0.00000001);
 
-        complex.setImaginary(-1.0);
-        assertEquals(-Math.PI / 2, complex.phase(), 0.00000001);
+        operand1.setImaginary(-1.0);
+        assertEquals(-Math.PI / 2, operand1.phase(), 0.00000001);
 
-        complex.setReal(1.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()), complex.phase(), 0.00000001);
+        operand1.setReal(1.0);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()), operand1.phase(), 0.00000001);
 
-        complex.setReal(-1.0);
-        complex.setImaginary(0.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) + Math.PI, complex.phase(), 0.00000001);
+        operand1.setReal(-1.0);
+        operand1.setImaginary(0.0);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) + Math.PI, operand1.phase(), 0.00000001);
 
-        complex.setImaginary(-1.0);
-        assertEquals(Math.atan(complex.getImaginary() / complex.getReal()) - Math.PI, complex.phase(), 0.00000001);
+        operand1.setImaginary(-1.0);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) - Math.PI, operand1.phase(), 0.00000001);
     }
 
     @Test(expected = ArithmeticException.class)
-    public void testPhaseExcpetion() {
-        complex.setReal(0.0);
-        complex.setImaginary(0.0);
-
-        complex.squareRoot();
+    public void testPhaseException() {
+        expected.squareRoot();
     }
 
     @Test
     public void testDivision() {
-        Complex expected = new Complex((double) 45 / 29, (double) -40 / 29);
-        Complex div = new Complex(2.0, 5.0);
-
-        complex.setReal(10.0);
-        complex.setImaginary(5.0);
-
-        assertComplexEquals(expected, complex.division(div));
+        expected.setReal((double) -1 * 5 / 3);
+        assertComplexEquals(expected, operand1Real.division(operand2Real));
+        
+        expected.setReal((double) -1 * 5 / 6);
+        assertComplexEquals(expected, operand1Imaginary.division(operand2Imaginary));
+        
+        expected.setReal((double) 45 / 29);
+        expected.setImaginary((double) -40 / 29);
+        operand1.setReal(10.0);
+        operand1.setImaginary(5.0);
+        operand2.setReal(2.0);
+        operand2.setImaginary(5.0);
+        assertComplexEquals(expected, operand1.division(operand2));
     }
 
     @Test(expected = ArithmeticException.class)
     public void testDivisionException() {
-        Complex div = new Complex(0.0, 0.0);
-        complex.setReal(10.0);
-        complex.setImaginary(5.0);
-
-        complex.division(div);
+        operand1.division(expected);
     }
 
     @Test
     public void testInvert() {
-        Complex expected = new Complex(5.0, 10.0);
-        Complex inv = new Complex(-5.0, -10.0);
-
-        assertComplexEquals(expected, inv.invert());
+        assertComplexEquals(expected, expected.invert());
+        
+        expected.setReal(10.0);
+        assertComplexEquals(expected, operand1Real.invert());
+        
+        expected.setReal(-6.0);
+        assertComplexEquals(expected, operand2Real.invert());
+        
+        expected.setReal(0.0);
+        expected.setImaginary(50.0);
+        assertComplexEquals(expected, operand1Imaginary.invert());
+        
+        expected.setImaginary(-60.0);
+        assertComplexEquals(expected, operand2Imaginary.invert());
+        
+        expected.setReal(-3.0);
+        expected.setImaginary(-4.0);
+        assertComplexEquals(expected, operand1.invert());
+        
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {
