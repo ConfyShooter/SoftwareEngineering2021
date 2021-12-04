@@ -150,7 +150,7 @@ public class UserDefinedOperationsTest {
 
         String actual = "";
         for (String i : userOp.userOperationsNames()) {
-            actual += i + ":" + userOp.operationsNameToString(i);
+            actual += userOp.operationsNameToString(i) + "\n";
         }
         assertEquals(expected, actual);
     }
@@ -178,7 +178,7 @@ public class UserDefinedOperationsTest {
     private void write(File file) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
             for (String i : userOp.userOperationsNames()) {
-                out.write(i + ":" + userOp.operationsNameToString(i));
+                out.write(userOp.operationsNameToString(i) + "\n");
             }
         } catch (IOException ex) {
             ex.printStackTrace();

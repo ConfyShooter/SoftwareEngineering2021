@@ -52,6 +52,9 @@ public class UserDefinedOperations {
         checkOperationName(name); //check if is a valind name, can't be a a defined operation like swap, over, +...
 
         s = s.substring(index + 1).trim();
+        if (s.isEmpty()) { //check if is a valind definition, can't be empty
+            throw new RuntimeException("Impossible to insert user-operation: Definition is empty!");
+        }
 
         UserCommand opCommand = (UserCommand) operations.get(name); //check if already exists a user-defined operation with same name
         if (opCommand == null) {
@@ -67,7 +70,7 @@ public class UserDefinedOperations {
             input = seq[i];
 
             char sequence[] = input.toCharArray();
-            boolean flag = true; //settinh flag
+            boolean flag = true; //setting flag
 
             for (int k = 0; k < sequence.length; k++) { //can use also this input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}"); but this not accept j
                 if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
@@ -219,7 +222,7 @@ public class UserDefinedOperations {
      */
     public String operationsNameToString(String name) {
         UserCommand comm = (UserCommand) operations.get(name);
-        String str = "";
+        String str = name + ":";
 
         if (comm != null) {
             for (String op : comm.getCommandName()) {
@@ -239,7 +242,7 @@ public class UserDefinedOperations {
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(func + ":" + operationsNameToString(func) + "\n");
+                out.write(operationsNameToString(func) + "\n");
             }
         }
     }
