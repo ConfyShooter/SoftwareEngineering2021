@@ -40,7 +40,7 @@ public class UserDefinedOperationsTest {
     
     @Test(expected=RuntimeException.class)
     public void testParseOperationsException() {
-        userOp.parseOperations("   drop :  clear  4 8 + ");
+        userOp.parseOperations("   <a :  clear  4 8 + ");
     }
     
     @Test

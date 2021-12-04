@@ -343,11 +343,11 @@ public class UserDefinedOperations {
                 || name.equals("swap")
                 || name.equals("save")
                 || name.equals("restore")
-                || name.matches(">[a-z]{1}")
-                || name.matches("<[a-z]{1}")
+                || name.matches(">[a-z]{0,1}")
+                || name.matches("<[a-z]{0,1}")
                 || name.matches("\\+[a-z]{1}")
                 || name.matches("\\-[a-z]{1}")
                 )
-            throw new RuntimeException("Impossible to assign name '"+ name +"' to new user defined operation.");
+            throw new RuntimeException("You can't assign this name '"+ name +"' to an user-defined operation.");
     }
 }
