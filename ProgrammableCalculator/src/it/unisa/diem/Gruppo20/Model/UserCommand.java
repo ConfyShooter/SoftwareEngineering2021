@@ -59,6 +59,9 @@ public class UserCommand implements Command {
         return commandName;
     }
 
+    /**
+     * Reset this UserCommand's operations and commands.
+     */
     public void reset() {
         commands.clear();
         commandName.clear();
