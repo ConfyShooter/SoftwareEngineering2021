@@ -93,13 +93,16 @@ public class GUI_FXMLController implements Initializable {
             } else {
                 c.parsing(input);
             }
+            inputText.clear();
         } catch (RuntimeException ex) {
+            if (!functionBox.isSelected()) {
+                inputText.clear();
+            }
             showAlert(ex.getMessage());
         } catch (Exception ex) {
             showAlert("General error.");
         }
 
-        inputText.clear();
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
