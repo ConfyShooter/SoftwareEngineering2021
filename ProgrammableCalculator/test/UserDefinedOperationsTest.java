@@ -35,7 +35,8 @@ public class UserDefinedOperationsTest {
     public void setUp() {
         c = new Calculator();
         userOp = new UserDefinedOperations(c);
-        testFile = new File("testFile.txt");
+        testFile = new File("media/testFile.txt");
+        testFile.deleteOnExit();
     }
 
     @Test(expected = RuntimeException.class)
