@@ -12,11 +12,10 @@ import java.util.NoSuchElementException;
  * @author Team 20
  */
 public class Variables {
-
     private Map<Character, Complex> data;
-    private Deque<Map<Character, Complex>> backupsStack;
+    private final Deque<Map<Character, Complex>> backupsStack;
 
-    public Variables(Map<Character, Complex> data, Deque<Map<Character, Complex>> backupsStack) {
+     Variables(Map<Character, Complex> data, Deque<Map<Character, Complex>> backupsStack) {
         this.data = data;
         this.backupsStack = backupsStack;
     }
@@ -72,7 +71,7 @@ public class Variables {
      * This method sums the Complex number passed as param to the value of the
      * variable c and stores the result of the sum as the value of variable c.
      *
-     * @param c Is the key of the map.
+     * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to sum to the variable
      * c.
      * @throws RuntimeException if the key is not valid or is not contained
@@ -89,7 +88,7 @@ public class Variables {
      * the variable c and stores the result of subtraction as value of the
      * variable c.
      *
-     * @param c Is the key of the map.
+     * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to subtract to the
      * variable c.
      * @throws RuntimeException if the key is not valid or is not contained
@@ -102,10 +101,10 @@ public class Variables {
     }
 
     /**
-     * This method needs to backup the variables in the map data into
-     * backupStack.
+     * This method backups the variables of current map into
+     * a backup stack.
      *
-     * @throws RuntimeException if there aren't elements contained in the map.
+     * @throws RuntimeException if there aren't variables to be saved.
      */
     public void backup() throws NoSuchElementException {
         if (data.isEmpty()) {
@@ -117,10 +116,9 @@ public class Variables {
     }
 
     /**
-     * This method needs to restore the variables in backupStack into the map
-     * data.
+     * This method restore the variables with the latest backup contained from the stack, removing it.
      *
-     * @throws RuntimeException if there aren't elements contained in the Deque.
+     * @throws RuntimeException if there aren't elements contained in the backup stack.
      */
     public void restore() throws NoSuchElementException {
         if (backupsStack.isEmpty()) {

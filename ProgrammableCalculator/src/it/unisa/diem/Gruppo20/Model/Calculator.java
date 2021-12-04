@@ -423,23 +423,6 @@ public class Calculator {
         map.restore();
     }
 
-    /**
-     *
-     * @param name
-     */
-    public void executeOperation(String name) {
-        return;
-    }
-
-    /**
-     *
-     * @param name
-     * @param op
-     */
-    public void addOperation(String name, String[] op) {
-        return;
-    }
-
     private void checkStackSize(int k) {
         if (data.size() < k) {
             throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");

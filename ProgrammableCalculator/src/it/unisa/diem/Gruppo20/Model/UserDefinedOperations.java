@@ -47,31 +47,33 @@ public class UserDefinedOperations {
             throw new RuntimeException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
         }
+        
         String name = s.substring(0, index).trim().toLowerCase();
-        checkOperationName(name);
+        checkOperationName(name); //check if is a valind name, can't be a a defined operation like swap, over, +...
 
         s = s.substring(index + 1).trim();
 
-        UserCommand opCommand = (UserCommand) operations.get(name);
+        UserCommand opCommand = (UserCommand) operations.get(name); //check if already exists a user-defined operation with same name
         if (opCommand == null) {
-            opCommand = new UserCommand();
+            opCommand = new UserCommand(); //if it's a new operation create the Command object
         } else {
-            opCommand.reset();
+            opCommand.reset(); //if already exists perform a overwrite(or edit)
         }
 
         String[] seq = s.split("\\s+");
-
+        String input;
+        
         for (int i = 0; i < seq.length; i++) {
-            String input = seq[i];
+            input = seq[i];
 
             char sequence[] = input.toCharArray();
-            boolean flag = true;
+            boolean flag = true; //settinh flag
 
             for (int k = 0; k < sequence.length; k++) { //can use also this input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}"); but this not accept j
                 if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
                     try {
-                        opCommand.add(input, insertNumberCommand(c.parseNumber(input)));
-                        flag = false;
+                        opCommand.add(input, insertNumberCommand(c.parseNumber(input))); //add a new insert number command to the operation comman
+                        flag = false; //because we add a number so don't need to use commandOfOperation method
                     } catch (NumberFormatException ex) {
                     } finally {
                         break;
@@ -79,12 +81,12 @@ public class UserDefinedOperations {
                 }
             }
 
-            if (flag) {
+            if (flag) { //if flag still true input isn't a number so we must search for right operation command
                 opCommand.add(input, commandOfOperation(input));
             }
         }
-
-        operations.put(name, opCommand);
+        input = null; //clean variable for garbage collector
+        operations.put(name, opCommand); 
     }
 
     /**
@@ -96,7 +98,7 @@ public class UserDefinedOperations {
      */
     private Command commandOfOperation(String input) throws RuntimeException {
         input = input.toLowerCase();
-        Command command = operations.get(input);
+        Command command = operations.get(input); //checking if it's an already user-defined operation
         if (command != null) {
             return command;
         }
@@ -224,7 +226,7 @@ public class UserDefinedOperations {
                 str += " " + op;
             }
         }
-        return str + "\n";
+        return str;
     }
 
     /**
@@ -237,7 +239,7 @@ public class UserDefinedOperations {
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
             for (String func : operations.keySet()) {
-                out.write(func + ":" + operationsNameToString(func));
+                out.write(func + ":" + operationsNameToString(func) + "\n");
             }
         }
     }

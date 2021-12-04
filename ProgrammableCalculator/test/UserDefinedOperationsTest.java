@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -49,12 +50,12 @@ public class UserDefinedOperationsTest {
         userOp.parseOperations("   test :  clear  4 8 + ");
         assertNotNull(userOp.getOperationsCommand("test")); //check if user operation named test exist
 
-        List<String> result = userOp.getOperationsNames("test"); //get the macro defined by user
-        List<String> expected = List.of("clear", "4", "8", "+"); //expected macro
+        List<String> result = userOp.getOperationsNames("test"); //get the operations' sequence defined by user
+        List<String> expected = List.of("clear", "4", "8", "+"); //expected sequence
 
         assertEquals(expected.size(), result.size()); //checking if they have same size
         for (int i = 0; i < expected.size(); i++) {
-            assertEquals(expected.get(i), result.get(i)); //check if macro's operations are equals
+            assertEquals(expected.get(i), result.get(i)); //check if operations are equals
         }
     }
 
@@ -76,7 +77,7 @@ public class UserDefinedOperationsTest {
     public void testExecuteOperation() {
         userOp.parseOperations("   test :  clear  4 8 + ");
         userOp.executeOperation("test");
-        assertComplexEquals(new Complex(12.0, 0.0), c.getData().peekFirst());
+        assertComplexEquals(new Complex(12.0, 0.0), c.getData().element());
     }
 
     @Test
@@ -86,7 +87,7 @@ public class UserDefinedOperationsTest {
 
         userOp.executeOperation("test1");
 
-        assertComplexEquals(new Complex(5.0, 6.0), c.getData().peekFirst());
+        assertComplexEquals(new Complex(5.0, 6.0), c.getData().element());
     }
 
     @Test
@@ -131,7 +132,6 @@ public class UserDefinedOperationsTest {
         testFile.createNewFile();
         testFile.setReadOnly();
         userOp.saveOnFile(testFile);
-        testFile.delete();
     }
 
     @Test
