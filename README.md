@@ -1,5 +1,5 @@
 # ProjectSE2021
-Repository per il gruppo 20 del corso di Software Engineering A-H A.A. 21/22
+_Repository of team 20 of the Software Engineering course A.Y. 21/22_
 
 ### ✦ First delivery - Sun. November 21:
 
