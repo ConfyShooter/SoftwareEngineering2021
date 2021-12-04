@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,7 +40,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private ListView<String> functionsList;
     @FXML
-    private MenuItem addMenu;
+    private MenuItem useMenu;
     @FXML
     private MenuItem editMenu;
     @FXML
@@ -80,7 +78,7 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
 
-        addMenu.disableProperty().bind(functionsProperty.emptyProperty());
+        useMenu.disableProperty().bind(functionsProperty.emptyProperty());
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
@@ -200,10 +198,12 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onSavePressed(ActionEvent event) {
+        onButtonPressed(event, "save");
     }
 
     @FXML
     private void onRestorePressed(ActionEvent event) {
+        onButtonPressed(event, "restore");
     }
 
     @FXML
@@ -227,7 +227,7 @@ public class GUI_FXMLController implements Initializable {
     }
 
     @FXML
-    private void addFunction(ActionEvent event) {
+    private void useFunction(ActionEvent event) {
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
     }
 
