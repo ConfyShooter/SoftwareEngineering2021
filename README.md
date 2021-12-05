@@ -39,7 +39,7 @@ _Repository of team 20 of the Software Engineering course A.Y. 21/22_
   
   [Sprint review report](https://drive.google.com/file/d/19Jq4d1evMEDdMitQRJmkuQnNheSQHpwv/view?usp=sharing)
   
-  [Sprint retrospective report]()
+  [Sprint retrospective report](https://drive.google.com/file/d/19WPGM0iUTfNR5z3u9rjIDQ3HVY9or4AT/view?usp=sharing)
 
 
 ### ✦ Fourth delivery: Sun. December 12:
