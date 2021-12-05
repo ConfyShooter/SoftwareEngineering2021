@@ -29,7 +29,7 @@ _Repository of team 20 of the Software Engineering course A.Y. 21/22_
 
 ### ✦ Third delivery: Sun. December 5:
   
-  [2nd Sprint Release]()
+  [2nd Sprint Release](https://drive.google.com/file/d/189lGfXcZ-Y6AvSQv1pggmC85u2Ow_UD_/view?usp=sharing)
   
   [Sprint backlog](https://docs.google.com/spreadsheets/d/18Md_5_tZO6J8s5MCN2IoBly2AEGTL7Sq/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true)
   
