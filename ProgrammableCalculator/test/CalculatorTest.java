@@ -13,6 +13,35 @@ import static org.junit.Assert.*;
 public class CalculatorTest {
 
     private Calculator c;
+    /**
+     * Number 0
+     */
+    private Complex zero;
+    /**
+     * Pure real number 4
+     */
+    private Complex operand1Real;
+    /**
+     * Pure real number 3
+     */
+    private Complex operand2Real;
+    /**
+     * Pure imaginary number -4.25
+     */
+    private Complex operand1Imaginary;
+    /**
+     * Pure imaginary number -5
+     */
+    private Complex operand2Imaginary;
+    /**
+     * Complex number 10 - 10.25j
+     */
+    private Complex operand1;
+    /**
+     * Complex number -98 - 25j
+     */
+    private Complex operand2;
+    private Complex expected;
 
     public CalculatorTest() {
     }
@@ -20,6 +49,14 @@ public class CalculatorTest {
     @Before
     public void setUp() throws Exception {
         c = new Calculator();
+        zero = new Complex();
+        operand1Real = new Complex(4.0, 0.0);
+        operand2Real = new Complex(3.0, 0.0);
+        operand1Imaginary = new Complex(0.0, -4.25);
+        operand2Imaginary = new Complex(0.0, -5.0);
+        operand1 = new Complex(10.0, -10.25);
+        operand2 = new Complex(-98.0, -25.0);
+        expected = new Complex();
     }
 
     @Test(expected = RuntimeException.class)
@@ -29,6 +66,24 @@ public class CalculatorTest {
 
     @Test
     public void testParsing() throws Exception {
+        c.parsing("0");
+        c.parsing("0");
+        c.parsing("*");
+
+        assertEquals("0", c.getData().peekFirst().toString());
+        
+        c.parsing("-5");
+        c.parsing("4");
+        c.parsing("-");
+
+        assertEquals("-9", c.getData().peekFirst().toString());
+        
+        c.parsing("-1j");
+        c.parsing("4j");
+        c.parsing("/");
+
+        assertEquals("-0.25", c.getData().peekFirst().toString());
+        
         c.parsing("0.1+2.5j");
         c.parsing("1.0+2.5j");
         c.parsing("+");
@@ -64,11 +119,30 @@ public class CalculatorTest {
 
     @Test
     public void testSum() throws Exception {
-        c.parsing("4.0j");
-        c.parsing("3.0");
+        c.insertNumber(zero);
+        c.insertNumber(zero);
         c.sum();
-
-        Complex expected = new Complex(3.0, 4.0);
+        expected = new Complex(0.0, 0.0);
+        assertComplexEquals(expected, c.getData().peekFirst());
+        
+        c.insertNumber(operand1Real);
+        c.insertNumber(operand2Real);
+        c.sum();
+        expected.setReal(7.0);
+        assertComplexEquals(expected, c.getData().peekFirst());
+        
+        c.insertNumber(operand1Imaginary);
+        c.insertNumber(operand2Imaginary);
+        c.sum();
+        expected.setReal(0.0);
+        expected.setImaginary(-9.25);
+        assertComplexEquals(expected, c.getData().peekFirst());
+        
+        c.insertNumber(operand1);
+        c.insertNumber(operand2);
+        c.sum();
+        expected.setReal(-88.0);
+        expected.setImaginary(-15.25);
         assertComplexEquals(expected, c.getData().peekFirst());
     }
 
@@ -80,19 +154,29 @@ public class CalculatorTest {
 
     @Test
     public void testSubtract() throws Exception {
-        c.parsing("6.0j");
-        c.parsing("5.0");
+        c.insertNumber(zero);
+        c.insertNumber(zero);
         c.subtract();
-
-        Complex expected = new Complex(-5.0, 6.0);
         assertComplexEquals(expected, c.getData().peekFirst());
 
-        c.parsing("-6.0");
-        c.parsing("4.0");
+        c.insertNumber(operand1Real);
+        c.insertNumber(operand2Real);
         c.subtract();
-
-        expected.setReal(-10.0);
-        expected.setImaginary(0.0);
+        expected.setReal(1.0);
+        assertComplexEquals(expected, c.getData().peekFirst());
+        
+        c.insertNumber(operand1Imaginary);
+        c.insertNumber(operand2Imaginary);
+        c.subtract();
+        expected.setReal(0.0);
+        expected.setImaginary(0.75);
+        assertComplexEquals(expected, c.getData().peekFirst());
+        
+        c.insertNumber(operand1);
+        c.insertNumber(operand2);
+        c.subtract();
+        expected.setReal(108.0);
+        expected.setImaginary(14.75);
         assertComplexEquals(expected, c.getData().peekFirst());
     }
 
@@ -134,18 +218,26 @@ public class CalculatorTest {
 
     @Test
     public void testInvertSign() throws Exception {
-        c.parsing("1.0+0.0j");
+        c.insertNumber(zero);
         c.invertSign();
-
-        Complex expected = new Complex(-1.0, 0.0);
         assertComplexEquals(expected, c.getData().pop());
 
-        c.parsing("3.0+4.0j");
+        c.insertNumber(operand1Real);
         c.invertSign();
-
-        expected.setReal(-3.0);
-        expected.setImaginary(-4.0);
-        assertEquals(expected, c.getData().pop());
+        expected.setReal(-4.0);
+        assertComplexEquals(expected, c.getData().pop());
+        
+        c.insertNumber(operand1Imaginary);
+        c.invertSign();
+        expected.setReal(0.0);
+        expected.setImaginary(4.25);
+        assertComplexEquals(expected, c.getData().pop());
+        
+        c.insertNumber(operand2);
+        c.invertSign();
+        expected.setReal(98.0);
+        expected.setImaginary(25.0);
+        assertComplexEquals(expected, c.getData().pop());
     }
 
     @Test(expected = NoSuchElementException.class)
