@@ -2,7 +2,7 @@
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
-import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
+import it.unisa.diem.Gruppo20.Model.Operations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -24,19 +23,19 @@ import static org.junit.Assert.*;
  *
  * @author Team 20
  */
-public class UserDefinedOperationsTest {
+public class OperationsTest {
 
-    private UserDefinedOperations userOp;
+    private Operations userOp;
     private Calculator c;
     private File testFile;
 
-    public UserDefinedOperationsTest() {
+    public OperationsTest() {
     }
 
     @Before
     public void setUp() {
         c = new Calculator();
-        userOp = new UserDefinedOperations(c);
+        userOp = new Operations(c);
         testFile = new File("media/testFile.txt");
         testFile.deleteOnExit();
     }

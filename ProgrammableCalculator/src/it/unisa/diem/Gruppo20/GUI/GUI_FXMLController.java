@@ -4,7 +4,7 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Command;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
-import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
+import it.unisa.diem.Gruppo20.Model.Operations;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 
 /**
@@ -51,10 +52,14 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem saveMenu;
 
     private Calculator c;
-    private UserDefinedOperations userOp;
+    private Operations userOp;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
+    @FXML
+    private TabPane tabPane;
+    @FXML
+    private MenuItem restoreMenu;
 
     /**
      * Initializes the controller class.
@@ -65,7 +70,7 @@ public class GUI_FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         c = new Calculator();
-        userOp = new UserDefinedOperations(c);
+        userOp = new Operations(c);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
 
@@ -81,6 +86,7 @@ public class GUI_FXMLController implements Initializable {
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
         deleteMenu.disableProperty().bind(functionsProperty.emptyProperty());
         saveMenu.disableProperty().bind(functionsProperty.emptyProperty());
+        tabPane.getStyleClass().add("floating");
     }
 
     @FXML
@@ -114,7 +120,6 @@ public class GUI_FXMLController implements Initializable {
         stack.setAll(c.getData());
     }
     
-    @FXML
     private void onInsert1Pressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {

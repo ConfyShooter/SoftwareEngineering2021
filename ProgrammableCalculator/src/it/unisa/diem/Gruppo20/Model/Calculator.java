@@ -432,6 +432,69 @@ public class Calculator {
     public void restoreVariables() throws NoSuchElementException {
         map.restore();
     }
+    
+    /**
+     *
+     */
+    public void cos() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void acos() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void sin() {
+        return;
+    }
+
+    /**
+     * 
+     */
+    public void asin() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void tan() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void atan() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void pow() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void exp() {
+        return;
+    }
+
+    /**
+     *
+     */
+    public void log() {
+        return;
+    }
 
     private void checkStackSize(int k) {
         if (data.size() < k) {

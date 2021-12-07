@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,11 +23,11 @@ import java.util.Set;
  *
  * @author Team 20
  */
-public class UserDefinedOperations {
+public class Operations {
 
     private final Calculator c;
-    private final Map<String, Command> operations;
-    //private final Map<String, Command> basicOperation;
+    private final Map<String, Command> userOperations;
+    private final Map<String, Command> basicOperations;
     private final Set<String> userOpNames;
 
     /**
@@ -35,10 +36,12 @@ public class UserDefinedOperations {
      *
      * @param c
      */
-    public UserDefinedOperations(Calculator c) {
+    public Operations(Calculator c) {
         this.c = c;
-        operations = new LinkedHashMap<>();
+        userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
+        basicOperations = new HashMap<>(175);
+        initializeBasicMap();  
     }
 
     /**
@@ -62,7 +65,7 @@ public class UserDefinedOperations {
             throw new ParseException("Impossible to insert user-operation: Definition is empty!");
         }
 
-        UserCommand opCommand = (UserCommand) operations.get(name); //check if already exists a user-defined operation with same name
+        UserCommand opCommand = (UserCommand) userOperations.get(name); //check if already exists a user-defined operation with same name
         if (opCommand == null) {
             opCommand = new UserCommand(); //if it's a new operation create the Command object
         } else {
@@ -95,7 +98,7 @@ public class UserDefinedOperations {
             }
         }
         input = null; //clean variable for garbage collector
-        operations.put(name, opCommand);
+        userOperations.put(name, opCommand);
         userOpNames.add(name);
     }
 
@@ -108,7 +111,7 @@ public class UserDefinedOperations {
      */
     private Command commandOfOperation(String input) throws ParseException {
         input = input.toLowerCase();
-        Command command = operations.get(input); //checking if it's an already user-defined operation
+        Command command = userOperations.get(input); //checking if it's an already user-defined operation
         if (command != null) {
             return command;
         }
@@ -163,7 +166,7 @@ public class UserDefinedOperations {
      * @return Command object.
      */
     public Command getOperationsCommand(String name) {
-        return operations.get(name);
+        return userOperations.get(name);
     }
 
     /**
@@ -174,7 +177,7 @@ public class UserDefinedOperations {
      * @return List of String.
      */
     public List<String> getOperationsNames(String name) {
-        UserCommand command = (UserCommand) operations.get(name);
+        UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
             return command.getCommandName();
         }
@@ -188,7 +191,7 @@ public class UserDefinedOperations {
      * @param name The user-defined operation name.
      */
     public void executeOperation(String name) throws ExecuteException {
-        Command command = operations.get(name);
+        Command command = userOperations.get(name);
         if (command != null) {
             command.execute();
         } else {
@@ -212,7 +215,7 @@ public class UserDefinedOperations {
      * @param name The user-defined operation name.
      */
     public void removeOperations(String name) {
-        UserCommand command = (UserCommand) operations.get(name);
+        UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
             command.reset();
             command = null;
@@ -228,7 +231,7 @@ public class UserDefinedOperations {
      * @return A string of name and all the commands separated by two points.
      */
     public String operationToString(String name) {
-        UserCommand comm = (UserCommand) operations.get(name);
+        UserCommand comm = (UserCommand) userOperations.get(name);
         String str = name + ":";
 
         if (comm != null) {
@@ -248,8 +251,8 @@ public class UserDefinedOperations {
      */
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
-            for (String func : operations.keySet()) {
-                out.write(operationToString(func) + "\n");
+            for (String key: userOperations.keySet()) {
+                out.write(operationToString(key) + "\n");
             }
         }
     }
@@ -262,12 +265,22 @@ public class UserDefinedOperations {
      * @throws java.io.IOException
      */
     public void loadFromFile(File f) throws IOException {
-        operations.clear(); // overwrite the operations inserted before
+        userOperations.clear(); // overwrite the operations inserted before
+        userOpNames.clear();
         try (Scanner in = new Scanner(new BufferedReader(new FileReader(f)))) {
             in.useDelimiter("\n+|\n\r+");
             in.useLocale(Locale.US);
+            String s;
             while (in.hasNext()) {
-                parseOperations(in.next());
+                s = in.next();
+                int index = s.indexOf(":");
+                if(index != -1 && (s.substring(index +1).isBlank() || (s.length()-1) == index)) {
+                    String name = s.substring(0, index);
+                    userOperations.put(name, new UserCommand());
+                    userOpNames.add(name);
+                }
+                else
+                    parseOperations(s);
             }
         }
     }
@@ -363,6 +376,20 @@ public class UserDefinedOperations {
                 || name.matches("\\+[a-z]{1}")
                 || name.matches("\\-[a-z]{1}")) {
             throw new ParseException("You can't assign this name '" + name + "' to an user-defined operation.");
+        }
+    }
+
+    private void initializeBasicMap() {
+        basicOperations.put("+", sumCommand());
+        basicOperations.put("-", subtractCommand());
+        //other operations
+        char current = 'a';
+        while(current < 'z') {
+            basicOperations.put(">" + String.valueOf(current), pushVariableCommand(current));
+            //<
+            //+
+            //-
+            current += 1;
         }
     }
 }
