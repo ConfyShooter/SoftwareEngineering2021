@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
  */
 public class ComplexTest {
 
+    private Complex zero;
     private Complex expected;
     private Complex operand1Real;
     private Complex operand1Imaginary;
@@ -23,6 +24,7 @@ public class ComplexTest {
 
     @Before
     public void setUp() {
+        zero = new Complex();
         expected = new Complex();
         operand1Real = new Complex(-10.0, 0.0);
         operand2Real = new Complex(6.0, 0.0);
@@ -34,7 +36,7 @@ public class ComplexTest {
 
     @Test
     public void testPlus() {
-        assertComplexEquals(expected, new Complex().plus(new Complex())); //test 0+0 = 0
+        assertComplexEquals(expected, zero.plus(zero)); //test 0+0 = 0
         
         expected.setReal(-4.0);
         assertComplexEquals(expected, operand1Real.plus(operand2Real));
@@ -51,7 +53,7 @@ public class ComplexTest {
 
     @Test
     public void testMinus() {
-        assertComplexEquals(expected, new Complex().minus(new Complex()));
+        assertComplexEquals(expected, zero.minus(zero));
         
         expected.setReal(-16.0);
         assertComplexEquals(expected, operand1Real.minus(operand2Real));
@@ -67,7 +69,7 @@ public class ComplexTest {
 
     @Test
     public void testMultiply() {
-        assertComplexEquals(expected, new Complex().multiply(new Complex()));
+        assertComplexEquals(expected, zero.multiply(zero));
         
         expected.setReal(-60.0);
         assertComplexEquals(expected, operand1Real.multiply(operand2Real));
@@ -104,7 +106,7 @@ public class ComplexTest {
     @Test
     public void testMod() {
         Double expected = 0.0;
-        assertEquals(expected, new Complex().mod(), 0.00000001);
+        assertEquals(expected, zero.mod(), 0.00000001);
         
         expected = 10.0;
         assertEquals(expected, operand1Real.mod(), 0.0000001);

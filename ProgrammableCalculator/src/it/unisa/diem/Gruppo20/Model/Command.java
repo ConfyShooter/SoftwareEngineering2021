@@ -7,7 +7,6 @@ package it.unisa.diem.Gruppo20.Model;
  * @author Team 20
  */
 public interface Command {
-
     /**
      * Execute this command.
      */

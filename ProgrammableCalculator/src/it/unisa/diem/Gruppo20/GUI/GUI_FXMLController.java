@@ -231,8 +231,8 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void useFunction(ActionEvent event) {
-        functionBox.setSelected(false);
-        onFunctionBoxPressed(event);
+        //functionBox.setSelected(false);
+        //onFunctionBoxPressed(event);
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
     }
 

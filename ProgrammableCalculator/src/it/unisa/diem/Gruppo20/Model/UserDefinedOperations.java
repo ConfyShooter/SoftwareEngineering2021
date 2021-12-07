@@ -7,13 +7,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -26,6 +24,7 @@ public class UserDefinedOperations {
 
     private final Calculator c;
     private final Map<String, Command> operations;
+    //private final Map<String, Command> basicOperation;
     private final Set<String> userOpNames;
 
     /**
@@ -37,7 +36,7 @@ public class UserDefinedOperations {
     public UserDefinedOperations(Calculator c) {
         this.c = c;
         operations = new LinkedHashMap<>();
-        userOpNames = new LinkedHashSet<String>();
+        userOpNames = new LinkedHashSet<>();
     }
 
     /**
@@ -205,7 +204,7 @@ public class UserDefinedOperations {
     }
 
     /**
-     * Remove the user-defined operation that has the name passaed as a
+     * Remove the user-defined operation that has the name passed as a
      * parameter.
      *
      * @param name The user-defined operation name.
