@@ -69,5 +69,13 @@ public class UserCommand implements Command {
         commands.clear();
         commandName.clear();
     }
+    
+    /**
+     * Return true if this UserCommand is executable else false.
+     * @return a boolean that represent if this command is executable.
+     */
+    public boolean isExecutable() {
+        return !(commands.isEmpty() || commandName.isEmpty());
+    }
 
 }

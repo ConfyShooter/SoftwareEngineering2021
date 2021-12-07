@@ -9,10 +9,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.NavigableSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -25,6 +28,7 @@ public class UserDefinedOperations {
 
     private final Calculator c;
     private final Map<String, Command> operations;
+    private final Set<String> userOpNames;
 
     /**
      * Create an object of this class, using c for operation execution. An
@@ -34,7 +38,8 @@ public class UserDefinedOperations {
      */
     public UserDefinedOperations(Calculator c) {
         this.c = c;
-        this.operations = new LinkedHashMap<>();
+        operations = new LinkedHashMap<>();
+        userOpNames = new LinkedHashSet<String>();
     }
 
     /**
@@ -92,6 +97,7 @@ public class UserDefinedOperations {
         }
         input = null; //clean variable for garbage collector
         operations.put(name, opCommand);
+        userOpNames.add(name);
     }
 
     /**
@@ -197,7 +203,7 @@ public class UserDefinedOperations {
      * @return Set of String.
      */
     public Set<String> userOperationsNames() {
-        return operations.keySet();
+        return userOpNames;
     }
 
     /**
@@ -212,7 +218,7 @@ public class UserDefinedOperations {
             command.reset();
             command = null;
         }
-        operations.remove(name);
+        userOpNames.remove(name);
     }
 
     /**
