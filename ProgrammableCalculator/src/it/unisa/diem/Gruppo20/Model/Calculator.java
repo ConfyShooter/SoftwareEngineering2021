@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
@@ -53,12 +54,12 @@ public class Calculator {
      * complex numbers.
      * @throws java.util.NoSuchElementException if the stack not contains enough
      * elements to perform a specific operation.
-     * @throws RuntimeException if input is blank or there is a unknown error.
+     * @throws ParseException if input is blank or there is a unknown error.
      */
     public void parsing(String input) throws Exception {
         input = input.replaceAll("\\s+", "").toLowerCase();
         if (input.isBlank()) {
-            throw new RuntimeException("Input string is empty!");
+            throw new ParseException("Input string is empty!");
         }
 
         char sequence[] = input.toCharArray();
@@ -123,7 +124,7 @@ public class Calculator {
         } else if (input.matches("\\-[a-z]{1}")) {
             subtractVariable(input.charAt(1));
         } else {
-            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
+            throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
         }
     }
 

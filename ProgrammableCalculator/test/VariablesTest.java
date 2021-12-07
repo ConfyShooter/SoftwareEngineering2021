@@ -2,6 +2,7 @@
 import it.unisa.diem.Gruppo20.Model.Variables;
 
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.Exception.VariableKeyException;
 import java.util.NoSuchElementException;
 
 import org.junit.*;
@@ -30,17 +31,17 @@ public class VariablesTest {
         v.setVariable('p', number.plus(number));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionSx() {
         v.getVariable('_');
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionDx() {
         v.getVariable('{');
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionValue() {
         v.getVariable('a');
     }
@@ -52,12 +53,12 @@ public class VariablesTest {
         assertComplexEquals(number.plus(number), v.getVariable('p'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionSx() {
         v.setVariable('_', number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionDx() {
         v.setVariable('{', number);
     }
@@ -68,12 +69,12 @@ public class VariablesTest {
         assertComplexEquals(new Complex(0.0, 0.0), v.getVariable('m'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionSx() {
         v.sumVariable('_', number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionDx() {
         v.sumVariable('{', number);
     }
@@ -84,12 +85,12 @@ public class VariablesTest {
         assertComplexEquals(v.getVariable('p'), v.getVariable('j'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionSx() {
         v.subVariable('_', number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionDx() {
         v.subVariable('{', number);
     }

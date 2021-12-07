@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import it.unisa.diem.Gruppo20.Model.Exception.ExecuteException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,13 +40,13 @@ public class UserCommand implements Command {
     /**
      * Execute this UserCommand.
      *
-     * @throws java.lang.RuntimeException if the user-defined operation calls
-     * another user-defined operation that was deleted from function list.
+     * @throws ExecuteException if the user-defined operation calls another
+     * user-defined operation that was deleted from function list.
      */
     @Override
-    public void execute() {
+    public void execute() throws ExecuteException {
         if (commands.isEmpty() || commandName.isEmpty()) {
-            throw new RuntimeException("This user-defined operation is trying to use a deleted user-defined operation.");
+            throw new ExecuteException("This user-defined operation is trying to use a deleted user-defined operation.");
         }
         for (Command c : commands) {
             c.execute();

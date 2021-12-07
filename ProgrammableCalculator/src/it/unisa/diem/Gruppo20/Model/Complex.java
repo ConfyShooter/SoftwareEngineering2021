@@ -212,7 +212,7 @@ public class Complex {
      *
      * @return A double value that representing the phase.
      */
-    public Double phase() {
+    public Double phase() throws ArithmeticException {
         if (real == 0 && imaginary > 0) {
             return Math.PI / 2;
         } else if (real == 0 && imaginary < 0) {
