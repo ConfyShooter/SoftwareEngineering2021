@@ -2,6 +2,7 @@
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Command;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.Exception.ExecuteException;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
 import java.util.List;
 
@@ -72,7 +73,7 @@ public class UserCommandTest {
         assertComplexEquals(expected, result);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = ExecuteException.class)
     public void testExecuteException() {
         userCom.execute();
     }

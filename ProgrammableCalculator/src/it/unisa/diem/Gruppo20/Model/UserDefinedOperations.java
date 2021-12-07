@@ -1,5 +1,7 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import it.unisa.diem.Gruppo20.Model.Exception.ExecuteException;
+import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -39,21 +41,21 @@ public class UserDefinedOperations {
      * Parse a sequence of operations and add a sequence of command to the map.
      *
      * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3...".
-     * @throws RuntimeException
+     * @throws ParseException
      */
-    public void parseOperations(String s) throws RuntimeException {
+    public void parseOperations(String s) throws ParseException {
         int index = s.indexOf(":");
         if (index == -1) {
-            throw new RuntimeException("To make an operation don't check Function box,\n"
+            throw new ParseException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
         }
-        
+
         String name = s.substring(0, index).trim().toLowerCase();
         checkOperationName(name); //check if is a valind name, can't be a a defined operation like swap, over, +...
 
         s = s.substring(index + 1).trim();
         if (s.isEmpty()) { //check if is a valind definition, can't be empty
-            throw new RuntimeException("Impossible to insert user-operation: Definition is empty!");
+            throw new ParseException("Impossible to insert user-operation: Definition is empty!");
         }
 
         UserCommand opCommand = (UserCommand) operations.get(name); //check if already exists a user-defined operation with same name
@@ -65,7 +67,7 @@ public class UserDefinedOperations {
 
         String[] seq = s.split("\\s+");
         String input;
-        
+
         for (int i = 0; i < seq.length; i++) {
             input = seq[i];
 
@@ -89,7 +91,7 @@ public class UserDefinedOperations {
             }
         }
         input = null; //clean variable for garbage collector
-        operations.put(name, opCommand); 
+        operations.put(name, opCommand);
     }
 
     /**
@@ -97,9 +99,9 @@ public class UserDefinedOperations {
      *
      * @param input A string labeling an operation.
      * @return Command object.
-     * @throws RuntimeException
+     * @throws ParseException
      */
-    private Command commandOfOperation(String input) throws RuntimeException {
+    private Command commandOfOperation(String input) throws ParseException {
         input = input.toLowerCase();
         Command command = operations.get(input); //checking if it's an already user-defined operation
         if (command != null) {
@@ -144,7 +146,7 @@ public class UserDefinedOperations {
         } else if (input.matches("\\-[a-z]{1}")) {
             return subtractVariableCommand(input.charAt(1));
         } else {
-            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
+            throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
         }
     }
 
@@ -180,12 +182,12 @@ public class UserDefinedOperations {
      *
      * @param name The user-defined operation name.
      */
-    public void executeOperation(String name) throws RuntimeException {
+    public void executeOperation(String name) throws ExecuteException {
         Command command = operations.get(name);
         if (command != null) {
             command.execute();
         } else {
-            throw new RuntimeException("Can't execute this operation, can't find operation with name " + name + ".");
+            throw new ExecuteException("Can't execute this operation, can't find operation with name " + name + ".");
         }
     }
 
@@ -216,7 +218,8 @@ public class UserDefinedOperations {
     /**
      * Return a string of definition of a user-defined operation.
      *
-     * @param name The name of the user-defined operation whose we want to print.
+     * @param name The name of the user-defined operation whose we want to
+     * print.
      * @return A string of name and all the commands separated by two points.
      */
     public String operationToString(String name) {
@@ -336,7 +339,7 @@ public class UserDefinedOperations {
         return c::restoreVariables;
     }
 
-    private void checkOperationName(String name) {
+    private void checkOperationName(String name) throws ParseException {
         if (name.equals("+")
                 || name.equals("-")
                 || name.equals("*")
@@ -354,7 +357,7 @@ public class UserDefinedOperations {
                 || name.matches("<[a-z]{0,1}")
                 || name.matches("\\+[a-z]{1}")
                 || name.matches("\\-[a-z]{1}")) {
-            throw new RuntimeException("You can't assign this name '" + name + "' to an user-defined operation.");
+            throw new ParseException("You can't assign this name '" + name + "' to an user-defined operation.");
         }
     }
 }
