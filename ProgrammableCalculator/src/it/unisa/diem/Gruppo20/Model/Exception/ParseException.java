@@ -2,7 +2,7 @@ package it.unisa.diem.Gruppo20.Model.Exception;
 
 /**
  *
- * @author Ciro
+ * @author Team 20
  */
 public class ParseException extends RuntimeException {
 
