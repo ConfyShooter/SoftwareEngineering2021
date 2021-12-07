@@ -95,27 +95,27 @@ public class CalculatorTest {
 
     @Test(expected = NumberFormatException.class)
     public void testInsertException() throws Exception {
-        c.insertNumber(c.parseNumber("-2.j5+0.1"));
+        c.insertNumber("-2.j5+0.1");
     }
 
     @Test
     public void testInsert() {
-        c.insertNumber(c.parseNumber("-j4.0"));
+        c.insertNumber("-j4.0");
         assertEquals("-4j", c.getData().peekFirst().toString());
 
-        c.insertNumber(c.parseNumber("3.05"));
+        c.insertNumber("3.05");
         assertEquals("3.05", c.getData().peekFirst().toString());
 
-        c.insertNumber(c.parseNumber("0.1+2.5j"));
+        c.insertNumber("0.1+2.5j");
         assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
-        c.insertNumber(c.parseNumber("0.1-j2.50"));
+        c.insertNumber("0.1-j2.50");
         assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
 
-        c.insertNumber(c.parseNumber("2.5j+0.1"));
+        c.insertNumber("2.5j+0.1");
         assertEquals("0.1+2.5j", c.getData().peekFirst().toString());
 
-        c.insertNumber(c.parseNumber("-j2.5+0.1"));
+        c.insertNumber("-j2.5+0.1");
         assertEquals("0.1-2.5j", c.getData().peekFirst().toString());
     }
 
@@ -144,7 +144,7 @@ public class CalculatorTest {
         c.insertNumber(operand2);
         c.sum();
         expected.setReal(-88.0);
-        expected.setImaginary(-15.25);
+        expected.setImaginary(-35.25);
         assertComplexEquals(expected, c.getData().peekFirst());
     }
 
@@ -428,28 +428,28 @@ public class CalculatorTest {
         c.insertNumber(operand1Real);
         c.insertNumber(operand2Real);
         c.swap();
-        expected.setReal(operand2Real.getReal());
-        assertComplexEquals(expected, c.getData().pop());
         expected.setReal(operand1Real.getReal());
+        assertComplexEquals(expected, c.getData().pop());
+        expected.setReal(operand2Real.getReal());
         assertComplexEquals(expected, c.getData().pop());
         
         c.insertNumber(operand1Imaginary);
         c.insertNumber(operand2Imaginary);
         c.swap();
         expected.setReal(0d);
-        expected.setImaginary(operand2Imaginary.getImaginary());
-        assertComplexEquals(expected, c.getData().pop());
         expected.setImaginary(operand1Imaginary.getImaginary());
+        assertComplexEquals(expected, c.getData().pop());
+        expected.setImaginary(operand2Imaginary.getImaginary());
         assertComplexEquals(expected, c.getData().pop());
         
         c.insertNumber(operand1);
         c.insertNumber(operand2);
         c.swap();
-        expected.setReal(operand2.getReal());
-        expected.setImaginary(operand2.getImaginary());
-        assertComplexEquals(expected, c.getData().pop());
         expected.setReal(operand1.getReal());
         expected.setImaginary(operand1.getImaginary());
+        assertComplexEquals(expected, c.getData().pop());
+        expected.setReal(operand2.getReal());
+        expected.setImaginary(operand2.getImaginary());
         assertComplexEquals(expected, c.getData().pop());
     }
 

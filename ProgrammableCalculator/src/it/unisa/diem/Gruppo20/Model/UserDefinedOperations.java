@@ -81,7 +81,7 @@ public class UserDefinedOperations {
             for (int k = 0; k < sequence.length; k++) { //can use also this input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}"); but this not accept j
                 if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
                     try {
-                        opCommand.add(input, insertNumberCommand(c.parseNumber(input))); //add a new insert number command to the operation comman
+                        opCommand.add(input, insertNumberCommand(input)); //add a new insert number command to the operation comman
                         flag = false; //because we add a number so don't need to use commandOfOperation method
                     } catch (NumberFormatException ex) {
                     } finally {
@@ -272,8 +272,8 @@ public class UserDefinedOperations {
         }
     }
 
-    private Command insertNumberCommand(Complex number) {
-        return () -> c.insertNumber(number);
+    private Command insertNumberCommand(String input) {
+        return () -> c.insertNumber(input);
     }
 
     private Command sumCommand() {

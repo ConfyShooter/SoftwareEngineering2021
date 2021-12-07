@@ -1,6 +1,7 @@
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -114,7 +115,10 @@ public class UserDefinedOperationsTest {
     public void testRemoveOperation() {
         userOp.parseOperations("   test :  clear  4 8 + ");
         userOp.removeOperations("test");
-        assertNull(userOp.getOperationsCommand("test"));
+        assertFalse(userOp.userOperationsNames().contains("test"));
+        UserCommand uc = (UserCommand) userOp.getOperationsCommand("test");
+        assertNotNull(uc);
+        assertFalse(uc.isExecutable());
     }
 
     @Test

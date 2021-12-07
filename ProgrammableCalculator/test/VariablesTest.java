@@ -133,8 +133,6 @@ public class VariablesTest {
         expected.setReal(1.0);
         expected.setImaginary(2.0);
         assertComplexEquals(expected, result);
-
-        assertComplexEquals(expected, result);
     }
 
     @Test(expected = NoSuchElementException.class)

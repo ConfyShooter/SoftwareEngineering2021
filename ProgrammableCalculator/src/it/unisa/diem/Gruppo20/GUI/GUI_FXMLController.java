@@ -1,6 +1,7 @@
 package it.unisa.diem.Gruppo20.GUI;
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
+import it.unisa.diem.Gruppo20.Model.Command;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
@@ -98,6 +99,33 @@ public class GUI_FXMLController implements Initializable {
                 uc = null;
             } else {
                 c.parsing(input);
+            }
+            inputText.clear();
+        } catch (RuntimeException ex) {
+            if (!functionBox.isSelected()) {
+                inputText.clear();
+            }
+            showAlert(ex.getMessage());
+        } catch (Exception ex) {
+            showAlert("General error.");
+        }
+
+        insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        stack.setAll(c.getData());
+    }
+    
+    @FXML
+    private void onInsert1Pressed(ActionEvent event) {
+        String input = inputText.getText().trim();
+        try {
+            Command comm = userOp.getOperationsCommand(input.toLowerCase());
+            if (functionBox.isSelected()) {
+                userOp.parseOperations(input);
+                functions.setAll(userOp.userOperationsNames());
+            } else if (comm != null) {
+                comm.execute();
+            } else {
+                c.insertNumber(input);
             }
             inputText.clear();
         } catch (RuntimeException ex) {
