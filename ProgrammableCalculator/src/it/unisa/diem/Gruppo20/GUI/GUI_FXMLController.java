@@ -52,7 +52,7 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem saveMenu;
 
     private Calculator c;
-    private Operations userOp;
+    private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
@@ -70,7 +70,7 @@ public class GUI_FXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         c = new Calculator();
-        userOp = new Operations(c);
+        operations = new Operations(c);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
 
@@ -93,10 +93,10 @@ public class GUI_FXMLController implements Initializable {
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
-            UserCommand uc = (UserCommand) userOp.getOperationsCommand(input.toLowerCase());
+            UserCommand uc = (UserCommand) operations.getOperationsCommand(input.toLowerCase());
             if (functionBox.isSelected()) {
-                userOp.parseOperations(input);
-                functions.setAll(userOp.userOperationsNames());
+                operations.parseOperations(input);
+                functions.setAll(operations.userOperationsNames());
             } else if (uc != null) {
                 if(!uc.isExecutable())
                     showAlert("The implementation of function '" + input.toLowerCase() + "' has been deleted.");
@@ -123,10 +123,10 @@ public class GUI_FXMLController implements Initializable {
     private void onInsert1Pressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
-            Command comm = userOp.getOperationsCommand(input.toLowerCase());
+            Command comm = operations.getOperationsCommand(input.toLowerCase());
             if (functionBox.isSelected()) {
-                userOp.parseOperations(input);
-                functions.setAll(userOp.userOperationsNames());
+                operations.parseOperations(input);
+                functions.setAll(operations.userOperationsNames());
             } else if (comm != null) {
                 comm.execute();
             } else {
@@ -273,20 +273,20 @@ public class GUI_FXMLController implements Initializable {
     private void editFunction(ActionEvent event) {
         functionBox.setSelected(true);
         String name = functionsList.getSelectionModel().getSelectedItem();
-        inputText.setText(userOp.operationToString(name));
+        inputText.setText(operations.operationToString(name));
     }
 
     @FXML
     private void deleteFunction(ActionEvent event) {
         String name = functionsList.getSelectionModel().getSelectedItem();
-        userOp.removeOperations(name);
-        functions.setAll(userOp.userOperationsNames());
+        operations.removeOperations(name);
+        functions.setAll(operations.userOperationsNames());
     }
 
     @FXML
     private void saveFunctionToFile(ActionEvent event) {
         try {
-            userOp.saveOnFile(defaultFile);
+            operations.saveOnFile(defaultFile);
         } catch (IOException ex) {
             showAlert("General I/O error (while saving). Retry!");
         }
@@ -295,11 +295,11 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void restoreFunctionFromFile(ActionEvent event) {
         try {
-            userOp.loadFromFile(defaultFile);
+            operations.loadFromFile(defaultFile);
         } catch (IOException ex) {
             showAlert("General I/O error (while loading). Retry!");
         }
-        functions.setAll(userOp.userOperationsNames());
+        functions.setAll(operations.userOperationsNames());
     }
 
     private void showAlert(String message) {
