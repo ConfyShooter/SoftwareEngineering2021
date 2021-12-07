@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.GUI;
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
 import java.io.File;
 import java.io.IOException;
@@ -85,11 +86,16 @@ public class GUI_FXMLController implements Initializable {
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
+            UserCommand uc = (UserCommand) userOp.getOperationsCommand(input.toLowerCase());
             if (functionBox.isSelected()) {
                 userOp.parseOperations(input);
                 functions.setAll(userOp.userOperationsNames());
-            } else if (userOp.getOperationsCommand(input.toLowerCase()) != null) {
-                userOp.executeOperation(input.toLowerCase());
+            } else if (uc != null) {
+                if(!uc.isExecutable())
+                    showAlert("The implementation of function '" + input.toLowerCase() + "' has been deleted.");
+                else
+                    uc.execute();
+                uc = null;
             } else {
                 c.parsing(input);
             }
@@ -225,6 +231,8 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void useFunction(ActionEvent event) {
+        functionBox.setSelected(false);
+        onFunctionBoxPressed(event);
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
     }
 
