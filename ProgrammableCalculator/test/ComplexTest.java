@@ -204,28 +204,28 @@ public class ComplexTest {
     }
 
     @Test
-    public void testPhase() {
+    public void testArg() {
         operand1.setReal(0.0);
         operand1.setImaginary(1.0);
-        assertEquals(Math.PI / 2, operand1.phase(), 0.00000001);
+        assertEquals(Math.PI / 2, operand1.arg(), 0.00000001);
 
         operand1.setImaginary(-1.0);
-        assertEquals(-Math.PI / 2, operand1.phase(), 0.00000001);
+        assertEquals(-Math.PI / 2, operand1.arg(), 0.00000001);
 
         operand1.setReal(1.0);
-        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()), operand1.phase(), 0.00000001);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()), operand1.arg(), 0.00000001);
 
         operand1.setReal(-1.0);
         operand1.setImaginary(0.0);
-        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) + Math.PI, operand1.phase(), 0.00000001);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) + Math.PI, operand1.arg(), 0.00000001);
 
         operand1.setImaginary(-1.0);
-        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) - Math.PI, operand1.phase(), 0.00000001);
+        assertEquals(Math.atan(operand1.getImaginary() / operand1.getReal()) - Math.PI, operand1.arg(), 0.00000001);
     }
 
     @Test(expected = ArithmeticException.class)
-    public void testPhaseException() {
-        expected.squareRoot();
+    public void testArgException() {
+        expected.arg();
     }
     
     @Test()

@@ -2,6 +2,7 @@ package it.unisa.diem.Gruppo20.Model;
 
 import it.unisa.diem.Gruppo20.Model.Exception.ExecuteException;
 import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
+import it.unisa.diem.Gruppo20.Model.Exception.UserOperationNameException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +10,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -25,9 +25,9 @@ import java.util.Set;
  */
 public class Operations {
 
-    private final Calculator c;
+    //private final Calculator c;
     private final Map<String, Command> userOperations;
-    private final Map<String, Command> basicOperations;
+    private final BasicOperations basicOperations;
     private final Set<String> userOpNames;
 
     /**
@@ -37,11 +37,10 @@ public class Operations {
      * @param c
      */
     public Operations(Calculator c) {
-        this.c = c;
+        //this.c = c;
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        basicOperations = new HashMap<>(175);
-        initializeBasicMap();
+        basicOperations = new BasicOperations(c);
     }
 
     /**
@@ -52,14 +51,13 @@ public class Operations {
      */
     public void parseOperations(String s) throws ParseException {
         int index = s.indexOf(":");
-        if (index == -1) {
+        if (index == -1)
             throw new ParseException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
-        }
 
         String name = s.substring(0, index).trim().toLowerCase();
-        if (basicOperations.containsKey(name)) {
-            throw new ParseException("You can't assign this name '" + name + "' to an user-defined operation.");
+        if (basicOperations.isABasicOperation(name)) {
+            throw new UserOperationNameException("You can't assign this name '" + name + "' to an user-defined operation.");
         }
 
         s = s.substring(index + 1).trim();
@@ -68,65 +66,28 @@ public class Operations {
         }
 
         UserCommand opCommand = (UserCommand) userOperations.get(name); //check if already exists a user-defined operation with same name
-        if (opCommand == null) {
+        if (opCommand == null)
             opCommand = new UserCommand(); //if it's a new operation create the Command object
-        } else {
+        else
             opCommand.reset(); //if already exists perform a overwrite(or edit)
-        }
 
         String[] seq = s.split("\\s+");
-        String input;
 
-        for (int i = 0; i < seq.length; i++) {
-            input = seq[i].toLowerCase();
+        for (String input: seq) {
+            input = input.toLowerCase();
 
-            Command comm = commandOfOperation(input);
+            Command comm = userOperations.get(input); //checking if it's an already user-defined operation
+            if (comm == null)
+                comm = basicOperations.getCommand(input); //checking if it's a basic operation
+
             if (comm != null)
                 opCommand.add(input, comm);
-            else {
-                try {
-                    opCommand.add(input, insertNumberCommand(c.parseNumber(input))); //add a new insert number command to the operation comman
-                } catch (NumberFormatException ex) {
-                    throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
-                }
-            }
-
+            else
+                opCommand.add(input, basicOperations.insertNumberCommand(input));
         }
-        input = null; //clean variable for garbage collector
+        
         userOperations.put(name, opCommand);
         userOpNames.add(name);
-    }
-
-    /**
-     * Return a Command object that represent the operation input.
-     *
-     * @param input A string labeling an operation.
-     * @return Command object.
-     * @throws ParseException
-     */
-    private Command commandOfOperation(String input) throws ParseException {
-        Command command = userOperations.get(input); //checking if it's an already user-defined operation
-        if (command != null) {
-            return command;
-        }
-
-        command = basicOperations.get(input); //checking if it's a basic operation
-        if (command != null) {
-            return command;
-        }
-
-        if (input.matches(">[a-z]{1}")) {
-            return pushVariableCommand(input.charAt(1));
-        } else if (input.matches("<[a-z]{1}")) {
-            return pullVariableCommand(input.charAt(1));
-        } else if (input.matches("\\+[a-z]{1}")) {
-            return sumVariableCommand(input.charAt(1));
-        } else if (input.matches("\\-[a-z]{1}")) {
-            return subtractVariableCommand(input.charAt(1));
-        } else {
-            //throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
-            return null;
-        }
     }
 
     /**
@@ -141,7 +102,7 @@ public class Operations {
         if(c != null)
             return c;
         else
-            return basicOperations.get(name);
+            return basicOperations.getCommand(name);
     }
 
     /**
@@ -172,7 +133,7 @@ public class Operations {
             return;
         }
         
-        command = basicOperations.get(name);
+        command = basicOperations.getCommand(name);
         if(command != null)
             command.execute();
         else
@@ -265,174 +226,4 @@ public class Operations {
         }
     }
 
-    private Command insertNumberCommand(Complex number) {
-        return () -> c.insertNumber(number);
-    }
-
-    private Command sumCommand() {
-        return c::sum;
-    }
-
-    private Command subtractCommand() {
-        return c::subtract;
-    }
-
-    private Command multiplyCommand() {
-        return c::multiply;
-    }
-
-    private Command divisionCommand() {
-        return c::division;
-    }
-
-    private Command sqrtCommand() {
-        return c::sqrt;
-    }
-
-    private Command invertSignCommand() {
-        return c::invertSign;
-    }
-
-    private Command clearCommand() {
-        return c::clear;
-    }
-
-    private Command dropCommand() {
-        return c::drop;
-    }
-
-    private Command dupCommand() {
-        return c::dup;
-    }
-
-    private Command swapCommand() {
-        return c::swap;
-    }
-
-    private Command overCommand() {
-        return c::over;
-    }
-
-    private Command pushVariableCommand(char ch) {
-        return () -> c.pushVariable(ch);
-    }
-
-    private Command pullVariableCommand(char ch) {
-        return () -> c.pullVariable(ch);
-    }
-
-    private Command sumVariableCommand(char ch) {
-        return () -> c.sumVariable(ch);
-    }
-
-    private Command subtractVariableCommand(char ch) {
-        return () -> c.subtractVariable(ch);
-    }
-
-    private Command saveVariablesCommand() {
-        return c::saveVariables;
-    }
-
-    private Command restoreVariablesCommand() {
-        return c::restoreVariables;
-    }
-
-    private Command modCommand() {
-        return c::mod;
-    }
-
-    private Command phaseCommand() {
-        return c::phase;
-    }
-
-    private Command cosCommand() {
-        return c::cos;
-    }
-
-    private Command arcCosCommand() {
-        return c::arcCos;
-    }
-
-    private Command sinCommand() {
-        return c::sin;
-    }
-
-    private Command arcSinCommand() {
-        return c::arcSin;
-    }
-
-    private Command tanCommand() {
-        return c::tan;
-    }
-
-    private Command arcTanCommand() {
-        return c::arcTan;
-    }
-
-    private Command powCommand() {
-        return c::pow;
-    }
-
-    private Command expCommand() {
-        return c::exp;
-    }
-
-    private Command logCommand() {
-        return c::log;
-    }
-
-    private void checkOperationName(String name) throws ParseException {
-        if (name.equals("+")
-                || name.equals("-")
-                || name.equals("*")
-                || name.equals("/")
-                || name.equals("+-")
-                || name.equals("sqrt")
-                || name.equals("clear")
-                || name.equals("drop")
-                || name.equals("dup")
-                || name.equals("over")
-                || name.equals("swap")
-                || name.equals("save")
-                || name.equals("restore")
-                || name.matches(">[a-z]{0,1}")
-                || name.matches("<[a-z]{0,1}")
-                || name.matches("\\+[a-z]{1}")
-                || name.matches("\\-[a-z]{1}")) {
-            throw new ParseException("You can't assign this name '" + name + "' to an user-defined operation.");
-        }
-    }
-
-    private void initializeBasicMap() {
-        basicOperations.put("+", sumCommand());
-        basicOperations.put("-", subtractCommand());
-        basicOperations.put("*", multiplyCommand());
-        basicOperations.put("/", divisionCommand());
-        basicOperations.put("+-", invertSignCommand());
-        basicOperations.put("sqrt", sqrtCommand());
-        basicOperations.put("clear", clearCommand());
-        basicOperations.put("dup", dupCommand());
-        basicOperations.put("drop", dropCommand());
-        basicOperations.put("swap", swapCommand());
-        basicOperations.put("over", overCommand());
-        basicOperations.put("mod", modCommand());
-        basicOperations.put("arg", phaseCommand());
-        basicOperations.put("cos", cosCommand());
-        basicOperations.put("sin", sinCommand());
-        basicOperations.put("tan", tanCommand());
-        basicOperations.put("acos", arcCosCommand());
-        basicOperations.put("asin", arcSinCommand());
-        basicOperations.put("atan", arcTanCommand());
-        basicOperations.put("pow", powCommand());
-        basicOperations.put("exp", expCommand());
-        basicOperations.put("log", logCommand());
-        char current = 'a';
-        while (current <= 'z') {
-            basicOperations.put(">" + String.valueOf(current), pushVariableCommand(current));
-            basicOperations.put("<" + String.valueOf(current), pullVariableCommand(current));
-            basicOperations.put("+" + String.valueOf(current), sumVariableCommand(current));
-            basicOperations.put("-" + String.valueOf(current), subtractVariableCommand(current));
-            current += 1;
-        }
-    }
 }

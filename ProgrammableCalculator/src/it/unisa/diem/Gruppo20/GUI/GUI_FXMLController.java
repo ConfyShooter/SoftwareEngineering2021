@@ -58,8 +58,6 @@ public class GUI_FXMLController implements Initializable {
     private final File defaultFile = new File("media/functions.txt");
     @FXML
     private TabPane tabPane;
-    @FXML
-    private MenuItem restoreMenu;
 
     /**
      * Initializes the controller class.
@@ -104,7 +102,7 @@ public class GUI_FXMLController implements Initializable {
                     uc.execute();
                 uc = null;
             } else {
-                c.parsing(input);
+                c.insertNumber(input);
             }
             inputText.clear();
         } catch (RuntimeException ex) {

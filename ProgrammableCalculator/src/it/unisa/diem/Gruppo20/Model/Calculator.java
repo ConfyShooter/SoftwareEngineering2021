@@ -56,7 +56,7 @@ public class Calculator {
      * elements to perform a specific operation.
      * @throws ParseException if input is blank or there is a unknown error.
      */
-    public void parsing(String input) throws Exception {
+    private void parsing(String input) throws Exception {
         input = input.replaceAll("\\s+", "").toLowerCase();
         if (input.isBlank()) {
             throw new ParseException("Input string is empty!");
@@ -446,9 +446,9 @@ public class Calculator {
      * Calculates the phase of the last element inserted onto the stack and
      * stores the result at the top of it (in radians).
      */
-    public void phase() {
+    public void arg() {
         checkStackSize(1);
-        data.push(new Complex(data.pop().phase(), 0.0));
+        data.push(new Complex(data.pop().arg(), 0.0));
     }
 
     /**

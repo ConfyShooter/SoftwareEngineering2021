@@ -179,7 +179,7 @@ public class Complex {
      */
     public Complex squareRoot() {
         Double module = mod();
-        Double phase = phase();
+        Double phase = arg();
 
         Double r = Math.sqrt(module);
         Double real = r * Math.cos((phase / 2));
@@ -212,7 +212,7 @@ public class Complex {
      *
      * @return A double value that representing the phase.
      */
-    public Double phase() throws ArithmeticException {
+    public Double arg() throws ArithmeticException {
         if (real == 0 && imaginary > 0) {
             return Math.PI / 2;
         } else if (real == 0 && imaginary < 0) {
