@@ -41,7 +41,7 @@ public class Operations {
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
         basicOperations = new HashMap<>(175);
-        initializeBasicMap();  
+        initializeBasicMap();
     }
 
     /**
@@ -58,10 +58,12 @@ public class Operations {
         }
 
         String name = s.substring(0, index).trim().toLowerCase();
-        checkOperationName(name); //check if is a valind name, can't be a a defined operation like swap, over, +...
+        if (basicOperations.containsKey(name)) {
+            throw new ParseException("You can't assign this name '" + name + "' to an user-defined operation.");
+        }
 
         s = s.substring(index + 1).trim();
-        if (s.isEmpty()) { //check if is a valind definition, can't be empty
+        if (s.isEmpty()) { //check if is a valid definition, can't be empty
             throw new ParseException("Impossible to insert user-operation: Definition is empty!");
         }
 
@@ -76,26 +78,19 @@ public class Operations {
         String input;
 
         for (int i = 0; i < seq.length; i++) {
-            input = seq[i];
+            input = seq[i].toLowerCase();
 
-            char sequence[] = input.toCharArray();
-            boolean flag = true; //setting flag
-
-            for (int k = 0; k < sequence.length; k++) { //can use also this input.matches("([0-9]*(\\+|\\-){0,1}(([0-9]+j{1})|(j{1}[0-9]+)){0,1})|[0-9]+(\\+|\\-){0,1}j{1}"); but this not accept j
-                if ((sequence[k] >= '0' && sequence[k] <= '9') || input.equalsIgnoreCase("j")) {// in anycase in which the user want to insert a number
-                    try {
-                        opCommand.add(input, insertNumberCommand(input)); //add a new insert number command to the operation comman
-                        flag = false; //because we add a number so don't need to use commandOfOperation method
-                    } catch (NumberFormatException ex) {
-                    } finally {
-                        break;
-                    }
+            Command comm = commandOfOperation(input);
+            if (comm != null)
+                opCommand.add(input, comm);
+            else {
+                try {
+                    opCommand.add(input, insertNumberCommand(c.parseNumber(input))); //add a new insert number command to the operation comman
+                } catch (NumberFormatException ex) {
+                    throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
                 }
             }
 
-            if (flag) { //if flag still true input isn't a number so we must search for right operation command
-                opCommand.add(input, commandOfOperation(input));
-            }
         }
         input = null; //clean variable for garbage collector
         userOperations.put(name, opCommand);
@@ -110,39 +105,14 @@ public class Operations {
      * @throws ParseException
      */
     private Command commandOfOperation(String input) throws ParseException {
-        input = input.toLowerCase();
         Command command = userOperations.get(input); //checking if it's an already user-defined operation
         if (command != null) {
             return command;
         }
 
-        switch (input) {
-            case "+":
-                return sumCommand();
-            case "-":
-                return subtractCommand();
-            case "*":
-                return multiplyCommand();
-            case "/":
-                return divisionCommand();
-            case "+-":
-                return invertSignCommand();
-            case "sqrt":
-                return sqrtCommand();
-            case "clear":
-                return clearCommand();
-            case "drop":
-                return dropCommand();
-            case "dup":
-                return dupCommand();
-            case "swap":
-                return swapCommand();
-            case "over":
-                return overCommand();
-            case "save":
-                return saveVariablesCommand();
-            case "restore":
-                return restoreVariablesCommand();
+        command = basicOperations.get(input); //checking if it's a basic operation
+        if (command != null) {
+            return command;
         }
 
         if (input.matches(">[a-z]{1}")) {
@@ -154,7 +124,8 @@ public class Operations {
         } else if (input.matches("\\-[a-z]{1}")) {
             return subtractVariableCommand(input.charAt(1));
         } else {
-            throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
+            //throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
+            return null;
         }
     }
 
@@ -166,7 +137,11 @@ public class Operations {
      * @return Command object.
      */
     public Command getOperationsCommand(String name) {
-        return userOperations.get(name);
+        Command c = userOperations.get(name);
+        if(c != null)
+            return c;
+        else
+            return basicOperations.get(name);
     }
 
     /**
@@ -194,9 +169,14 @@ public class Operations {
         Command command = userOperations.get(name);
         if (command != null) {
             command.execute();
-        } else {
-            throw new ExecuteException("Can't execute this operation, can't find operation with name " + name + ".");
+            return;
         }
+        
+        command = basicOperations.get(name);
+        if(command != null)
+            command.execute();
+        else
+            throw new ExecuteException("Can't execute this operation, can't find operation with name " + name + ".");
     }
 
     /**
@@ -251,7 +231,7 @@ public class Operations {
      */
     public void saveOnFile(File f) throws IOException {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(f)))) {
-            for (String key: userOperations.keySet()) {
+            for (String key : userOperations.keySet()) {
                 out.write(operationToString(key) + "\n");
             }
         }
@@ -274,19 +254,19 @@ public class Operations {
             while (in.hasNext()) {
                 s = in.next();
                 int index = s.indexOf(":");
-                if(index != -1 && (s.substring(index +1).isBlank() || (s.length()-1) == index)) {
+                if (index != -1 && (s.substring(index + 1).isBlank() || (s.length() - 1) == index)) {
                     String name = s.substring(0, index);
                     userOperations.put(name, new UserCommand());
                     userOpNames.add(name);
-                }
-                else
+                } else {
                     parseOperations(s);
+                }
             }
         }
     }
 
-    private Command insertNumberCommand(String input) {
-        return () -> c.insertNumber(input);
+    private Command insertNumberCommand(Complex number) {
+        return () -> c.insertNumber(number);
     }
 
     private Command sumCommand() {
@@ -356,47 +336,47 @@ public class Operations {
     private Command restoreVariablesCommand() {
         return c::restoreVariables;
     }
-    
+
     private Command modCommand() {
         return c::mod;
     }
-    
+
     private Command phaseCommand() {
         return c::phase;
     }
-    
+
     private Command cosCommand() {
         return c::cos;
     }
-    
+
     private Command arcCosCommand() {
         return c::arcCos;
     }
-            
+
     private Command sinCommand() {
         return c::sin;
     }
-    
+
     private Command arcSinCommand() {
         return c::arcSin;
     }
-    
+
     private Command tanCommand() {
         return c::tan;
     }
-    
+
     private Command arcTanCommand() {
         return c::arcTan;
     }
-    
+
     private Command powCommand() {
         return c::pow;
     }
-    
+
     private Command expCommand() {
         return c::exp;
     }
-    
+
     private Command logCommand() {
         return c::log;
     }
@@ -446,13 +426,8 @@ public class Operations {
         basicOperations.put("pow", powCommand());
         basicOperations.put("exp", expCommand());
         basicOperations.put("log", logCommand());
-        //basicOperations.put("?", insertNumberCommand("0"));
-        //basicOperations.put(">?", pushVariableCommand('a'));
-        //basicOperations.put("<?", pullVariableCommand('b'));
-        //basicOperations.put("+?", sumVariableCommand('c'));
-        //basicOperations.put("-?", subtractVariableCommand('d'));
         char current = 'a';
-        while(current <= 'z') {
+        while (current <= 'z') {
             basicOperations.put(">" + String.valueOf(current), pushVariableCommand(current));
             basicOperations.put("<" + String.valueOf(current), pullVariableCommand(current));
             basicOperations.put("+" + String.valueOf(current), sumVariableCommand(current));

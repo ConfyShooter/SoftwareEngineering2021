@@ -162,7 +162,7 @@ public class Calculator {
      * @return Complex number parsed from the string.
      * @throws NumberFormatException if in the string.
      */
-    private Complex parseNumber(String number) throws NumberFormatException {
+    public Complex parseNumber(String number) throws NumberFormatException {
         Double real = 0.0;
         Double imaginary = 0.0;
         int jIndex = number.indexOf("j");
@@ -205,7 +205,7 @@ public class Calculator {
      * @param input The complex number that must be pushed onto the stack.
      */
     public void insertNumber(String input) {
-        data.push(parseNumber(input));
+        data.push(parseNumber(input.replaceAll("\\s", "").toLowerCase()));
     }
 
     /**
