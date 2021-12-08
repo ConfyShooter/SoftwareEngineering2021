@@ -90,7 +90,7 @@ public class GUI_FXMLController implements Initializable {
     }
 
     @FXML
-    private void onInsertPressed(ActionEvent event) {
+    private void onInsert1Pressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
             UserCommand uc = (UserCommand) operations.getOperationsCommand(input.toLowerCase());
@@ -120,10 +120,11 @@ public class GUI_FXMLController implements Initializable {
         stack.setAll(c.getData());
     }
     
-    private void onInsert1Pressed(ActionEvent event) {
-        String input = inputText.getText().trim();
+    @FXML
+    private void onInsertPressed(ActionEvent event) {
+        String input = inputText.getText().trim().toLowerCase();
         try {
-            Command comm = operations.getOperationsCommand(input.toLowerCase());
+            Command comm = operations.getOperationsCommand(input);
             if (functionBox.isSelected()) {
                 operations.parseOperations(input);
                 functions.setAll(operations.userOperationsNames());
