@@ -356,6 +356,50 @@ public class Operations {
     private Command restoreVariablesCommand() {
         return c::restoreVariables;
     }
+    
+    private Command modCommand() {
+        return c::mod;
+    }
+    
+    private Command phaseCommand() {
+        return c::phase;
+    }
+    
+    private Command cosCommand() {
+        return c::cos;
+    }
+    
+    private Command arcCosCommand() {
+        return c::arcCos;
+    }
+            
+    private Command sinCommand() {
+        return c::sin;
+    }
+    
+    private Command arcSinCommand() {
+        return c::arcSin;
+    }
+    
+    private Command tanCommand() {
+        return c::tan;
+    }
+    
+    private Command arcTanCommand() {
+        return c::arcTan;
+    }
+    
+    private Command powCommand() {
+        return c::pow;
+    }
+    
+    private Command expCommand() {
+        return c::exp;
+    }
+    
+    private Command logCommand() {
+        return c::log;
+    }
 
     private void checkOperationName(String name) throws ParseException {
         if (name.equals("+")
@@ -382,13 +426,37 @@ public class Operations {
     private void initializeBasicMap() {
         basicOperations.put("+", sumCommand());
         basicOperations.put("-", subtractCommand());
-        //other operations
+        basicOperations.put("*", multiplyCommand());
+        basicOperations.put("/", divisionCommand());
+        basicOperations.put("+-", invertSignCommand());
+        basicOperations.put("sqrt", sqrtCommand());
+        basicOperations.put("clear", clearCommand());
+        basicOperations.put("dup", dupCommand());
+        basicOperations.put("drop", dropCommand());
+        basicOperations.put("swap", swapCommand());
+        basicOperations.put("over", overCommand());
+        basicOperations.put("mod", modCommand());
+        basicOperations.put("arg", phaseCommand());
+        basicOperations.put("cos", cosCommand());
+        basicOperations.put("sin", sinCommand());
+        basicOperations.put("tan", tanCommand());
+        basicOperations.put("acos", arcCosCommand());
+        basicOperations.put("asin", arcSinCommand());
+        basicOperations.put("atan", arcTanCommand());
+        basicOperations.put("pow", powCommand());
+        basicOperations.put("exp", expCommand());
+        basicOperations.put("log", logCommand());
+        //basicOperations.put("?", insertNumberCommand("0"));
+        //basicOperations.put(">?", pushVariableCommand('a'));
+        //basicOperations.put("<?", pullVariableCommand('b'));
+        //basicOperations.put("+?", sumVariableCommand('c'));
+        //basicOperations.put("-?", subtractVariableCommand('d'));
         char current = 'a';
-        while(current < 'z') {
+        while(current <= 'z') {
             basicOperations.put(">" + String.valueOf(current), pushVariableCommand(current));
-            //<
-            //+
-            //-
+            basicOperations.put("<" + String.valueOf(current), pushVariableCommand(current));
+            basicOperations.put("+" + String.valueOf(current), pushVariableCommand(current));
+            basicOperations.put("-" + String.valueOf(current), pushVariableCommand(current));
             current += 1;
         }
     }

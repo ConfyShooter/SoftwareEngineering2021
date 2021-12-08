@@ -90,6 +90,51 @@ public class ComplexTest {
     }
 
     @Test
+    public void testDivision() {
+        expected.setReal((double) -1 * 5 / 3);
+        assertComplexEquals(expected, operand1Real.division(operand2Real));
+        
+        expected.setReal((double) -1 * 5 / 6);
+        assertComplexEquals(expected, operand1Imaginary.division(operand2Imaginary));
+        
+        expected.setReal((double) 45 / 29);
+        expected.setImaginary((double) -40 / 29);
+        operand1.setReal(10.0);
+        operand1.setImaginary(5.0);
+        operand2.setReal(2.0);
+        operand2.setImaginary(5.0);
+        assertComplexEquals(expected, operand1.division(operand2));
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void testDivisionException() {
+        operand1.division(expected);
+    }
+
+    @Test
+    public void testInvert() {
+        assertComplexEquals(expected, expected.invert());
+        
+        expected.setReal(10.0);
+        assertComplexEquals(expected, operand1Real.invert());
+        
+        expected.setReal(-6.0);
+        assertComplexEquals(expected, operand2Real.invert());
+        
+        expected.setReal(0.0);
+        expected.setImaginary(50.0);
+        assertComplexEquals(expected, operand1Imaginary.invert());
+        
+        expected.setImaginary(-60.0);
+        assertComplexEquals(expected, operand2Imaginary.invert());
+        
+        expected.setReal(-3.0);
+        expected.setImaginary(-4.0);
+        assertComplexEquals(expected, operand1.invert());
+        
+    }
+    
+    @Test
     public void testSquareRoot() {
         expected.setImaginary(Math.sqrt(10));
         assertComplexEquals(expected, operand1Real.squareRoot());
@@ -146,49 +191,94 @@ public class ComplexTest {
     public void testPhaseException() {
         expected.squareRoot();
     }
-
-    @Test
-    public void testDivision() {
-        expected.setReal((double) -1 * 5 / 3);
-        assertComplexEquals(expected, operand1Real.division(operand2Real));
+    
+    @Test()
+    public void testCosException() {
         
-        expected.setReal((double) -1 * 5 / 6);
-        assertComplexEquals(expected, operand1Imaginary.division(operand2Imaginary));
-        
-        expected.setReal((double) 45 / 29);
-        expected.setImaginary((double) -40 / 29);
-        operand1.setReal(10.0);
-        operand1.setImaginary(5.0);
-        operand2.setReal(2.0);
-        operand2.setImaginary(5.0);
-        assertComplexEquals(expected, operand1.division(operand2));
     }
-
-    @Test(expected = ArithmeticException.class)
-    public void testDivisionException() {
-        operand1.division(expected);
+    
+    @Test
+    public void testCos() {
+        
+    }
+    
+    @Test()
+    public void testAcosException() {
+        
     }
 
     @Test
-    public void testInvert() {
-        assertComplexEquals(expected, expected.invert());
+    public void testAcos() {
         
-        expected.setReal(10.0);
-        assertComplexEquals(expected, operand1Real.invert());
+    }
+    
+    @Test()
+    public void testSinException() {
         
-        expected.setReal(-6.0);
-        assertComplexEquals(expected, operand2Real.invert());
+    }
+    
+    @Test
+    public void testSin() {
         
-        expected.setReal(0.0);
-        expected.setImaginary(50.0);
-        assertComplexEquals(expected, operand1Imaginary.invert());
+    }
+    
+    @Test()
+    public void testAsinException() {
         
-        expected.setImaginary(-60.0);
-        assertComplexEquals(expected, operand2Imaginary.invert());
+    }
+    
+    @Test
+    public void testAsin() {
         
-        expected.setReal(-3.0);
-        expected.setImaginary(-4.0);
-        assertComplexEquals(expected, operand1.invert());
+    }
+    
+    @Test()
+    public void testTanException() {
+        
+    }
+    
+    @Test
+    public void testTan() {
+        
+    }
+    
+    @Test()
+    public void testAtanException() {
+        
+    }
+    
+    @Test
+    public void testAtan() {
+        
+    }
+    
+    @Test()
+    public void testPowException() {
+        
+    }
+    
+    @Test
+    public void testPow() {
+        
+    }
+    
+    @Test()
+    public void testExpException() {
+        
+    }
+    
+    @Test
+    public void testExp() {
+        
+    }
+
+    @Test()
+    public void testLogException() {
+        
+    }
+    
+    @Test
+    public void testLog() {
         
     }
 
