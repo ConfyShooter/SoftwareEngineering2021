@@ -105,7 +105,7 @@ public class VariablesTest {
     public void testBackup() {
         v.backup();
 
-        Complex result = v.getBackupsStack().peekFirst().get('j');
+        Complex result = v.getBackupsStack().element().get('j');
         expected.setReal(1.0);
         expected.setImaginary(2.0);
 

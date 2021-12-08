@@ -9,14 +9,34 @@ import static org.junit.Assert.*;
  * @author Team 20
  */
 public class ComplexTest {
-
+    /**
+     * Number 0.
+     */
     private Complex zero;
     private Complex expected;
+    /**
+     * Real number -10.
+     */
     private Complex operand1Real;
+    /**
+     * Imaginary number -50j.
+     */
     private Complex operand1Imaginary;
+    /**
+     * Real number 6.
+     */
     private Complex operand2Real;
+    /**
+     * Imaginary number 60j.
+     */
     private Complex operand2Imaginary;
+    /**
+     * Complex number 3+4j.
+     */
     private Complex operand1;
+    /**
+     * Complex number 3+0.1j.
+     */
     private Complex operand2;
 
     public ComplexTest() {
@@ -38,14 +58,18 @@ public class ComplexTest {
     public void testPlus() {
         assertComplexEquals(expected, zero.plus(zero)); //test 0+0 = 0
         
-        expected.setReal(-4.0);
+        expected.setReal(-4d);
         assertComplexEquals(expected, operand1Real.plus(operand2Real));
         
-        expected.setReal(0.0);
-        expected.setImaginary(10.0);
+        expected.setReal(0d);
+        expected.setImaginary(10d);
         assertComplexEquals(expected, operand1Imaginary.plus(operand2Imaginary));
         
-        expected.setReal(6.0);
+        expected.setReal(-10d);
+        expected.setImaginary(60d);
+        assertComplexEquals(expected, operand1Real.plus(operand2Imaginary));
+        
+        expected.setReal(6d);
         expected.setImaginary(4.1);
         assertComplexEquals(expected, operand1.plus(operand2));
         
@@ -62,6 +86,10 @@ public class ComplexTest {
         expected.setReal(0.0);
         assertComplexEquals(expected, operand1Imaginary.minus(operand2Imaginary));
         
+        expected.setImaginary(-50d);
+        expected.setReal(-6d);
+        assertComplexEquals(expected, operand1Imaginary.minus(operand2Real));
+        
         expected.setImaginary(3.9);
         expected.setReal(0.0);
         assertComplexEquals(expected, operand1.minus(operand2));
@@ -77,6 +105,10 @@ public class ComplexTest {
         expected.setReal(3000.0);
         expected.setImaginary(0.0);
         assertComplexEquals(expected, operand1Imaginary.multiply(operand2Imaginary));
+        
+        expected.setReal(0d);
+        expected.setImaginary(-600d);
+        assertComplexEquals(expected, operand1Real.multiply(operand2Imaginary));
 
         expected.setReal((double) 39 / 4);
         expected.setImaginary((double) 13 / 4);
@@ -154,6 +186,10 @@ public class ComplexTest {
         
         expected.setReal((double) -1 * 5 / 6);
         assertComplexEquals(expected, operand1Imaginary.division(operand2Imaginary));
+        
+        expected.setReal(0d);
+        expected.setImaginary((double) 1 / 6);
+        assertComplexEquals(expected, operand1Real.division(operand2Imaginary));
         
         expected.setReal((double) 45 / 29);
         expected.setImaginary((double) -40 / 29);
