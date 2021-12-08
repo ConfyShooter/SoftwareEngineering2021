@@ -1,4 +1,6 @@
-ris1: <b +- <d - <a 2 * /
-ris2: <b +- <d + <a 2 * /
-delta: >c >b >a <b dup * 4 <a <c * * - sqrt >d
 hyp: dup * swap dup * + sqrt
+test: 2+3j 3+2j +
+test1: test -5-5j -
+hyp_with_var: >b >a <a <a * <b <b * + sqrt >c
+test_hyp: 3 4 hyp
+test_hyp_with_var: 3 4 hyp_with_var <c

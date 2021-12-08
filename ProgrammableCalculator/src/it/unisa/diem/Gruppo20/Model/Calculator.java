@@ -434,6 +434,20 @@ public class Calculator {
     }
     
     /**
+     * 
+     */
+    public void mod() {
+        return;
+    }
+    
+    /**
+     * 
+     */
+    public void phase() {
+        return;
+    }
+    
+    /**
      *
      */
     public void cos() {
@@ -443,7 +457,7 @@ public class Calculator {
     /**
      *
      */
-    public void acos() {
+    public void arcCos() {
         return;
     }
 
@@ -457,7 +471,7 @@ public class Calculator {
     /**
      * 
      */
-    public void asin() {
+    public void arcSin() {
         return;
     }
 
@@ -471,7 +485,7 @@ public class Calculator {
     /**
      *
      */
-    public void atan() {
+    public void arcTan() {
         return;
     }
 

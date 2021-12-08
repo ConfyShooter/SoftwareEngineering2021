@@ -622,6 +622,116 @@ public class CalculatorTest {
 
     }
 
+    @Test()
+    public void testModException() {
+        
+    }
+    
+    @Test
+    public void testMod() {
+        
+    }
+    
+    @Test()
+    public void testPhaseException() {
+        
+    }
+    
+    @Test
+    public void testPhase() {
+        
+    }
+    
+    @Test()
+    public void testCosException() {
+        
+    }
+    
+    @Test
+    public void testCos() {
+        
+    }
+    
+    @Test()
+    public void testArcCosException() {
+        
+    }
+
+    @Test
+    public void testArcCos() {
+        
+    }
+    
+    @Test()
+    public void testSinException() {
+        
+    }
+    
+    @Test
+    public void testSin() {
+        
+    }
+    
+    @Test()
+    public void testArcSinException() {
+        
+    }
+    
+    @Test
+    public void testArcSin() {
+        
+    }
+    
+    @Test()
+    public void testTanException() {
+        
+    }
+    
+    @Test
+    public void testTan() {
+        
+    }
+    
+    @Test()
+    public void testArcTanException() {
+        
+    }
+    
+    @Test
+    public void testArcTan() {
+        
+    }
+    
+    @Test()
+    public void testPowException() {
+        
+    }
+    
+    @Test
+    public void testPow() {
+        
+    }
+    
+    @Test()
+    public void testExpException() {
+        
+    }
+    
+    @Test
+    public void testExp() {
+        
+    }
+
+    @Test()
+    public void testLogException() {
+        
+    }
+    
+    @Test
+    public void testLog() {
+        
+    }
+    
     private void assertComplexEquals(Complex expected, Complex actual) {
         assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
         assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
