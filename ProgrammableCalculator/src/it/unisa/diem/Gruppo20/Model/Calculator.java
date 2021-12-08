@@ -198,7 +198,7 @@ public class Calculator {
     public void insertNumber(Complex number) {
         data.push(number);
     }
-    
+
     /**
      * This method pushes the complex c onto the stack.
      *
@@ -432,21 +432,25 @@ public class Calculator {
     public void restoreVariables() throws NoSuchElementException {
         map.restore();
     }
-    
+
     /**
-     * 
+     * Calculates the modulus of the last element inserted onto the stack and
+     * stores the result at the top of it.
      */
     public void mod() {
-        return;
+        checkStackSize(1);
+        data.push(new Complex(data.pop().mod(), 0.0));
     }
-    
+
     /**
-     * 
+     * Calculates the phase of the last element inserted onto the stack and
+     * stores the result at the top of it (in radians).
      */
     public void phase() {
-        return;
+        checkStackSize(1);
+        data.push(new Complex(data.pop().phase(), 0.0));
     }
-    
+
     /**
      *
      */
@@ -469,7 +473,7 @@ public class Calculator {
     }
 
     /**
-     * 
+     *
      */
     public void arcSin() {
         return;

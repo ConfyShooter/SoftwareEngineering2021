@@ -593,7 +593,7 @@ public class CalculatorTest {
     public void testSaveVariables() {
         expected.setReal(operand1.getReal());
         expected.setImaginary(operand1.getImaginary());
-        
+
         c.insertNumber(operand1);
         c.pushVariable('j');
         c.saveVariables();
@@ -607,131 +607,205 @@ public class CalculatorTest {
         c.insertNumber(operand2);
         c.pushVariable('j');
         c.saveVariables();
-        
+
         c.insertNumber(operand1);
         c.pushVariable('j');
         expected.setReal(operand1.getReal());
-        expected.setImaginary(operand1.getImaginary());        
+        expected.setImaginary(operand1.getImaginary());
         assertComplexEquals(expected, c.getMap().getVariable('j'));
-        
+
         c.restoreVariables();
         expected.setReal(operand2.getReal());
-        expected.setImaginary(operand2.getImaginary());        
-        assertComplexEquals(expected, c.getMap().getVariable('j'));     
-
+        expected.setImaginary(operand2.getImaginary());
+        assertComplexEquals(expected, c.getMap().getVariable('j'));
 
     }
 
-    @Test()
+    @Test(expected = NoSuchElementException.class)
     public void testModException() {
-        
+        c.clear();
+        c.mod();
     }
-    
+
     @Test
     public void testMod() {
-        
+        c.insertNumber(zero);
+        c.mod();
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Real);
+        c.mod();
+        expected.setReal(4d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Imaginary);
+        c.mod();
+        expected.setReal(4.25);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Imaginary);
+        c.mod();
+        expected.setReal(5d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1);
+        c.mod();
+        expected.setReal(14.32000349);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(new Complex(-12.000921, -0.00001));
+        c.mod();
+        expected.setReal(12.000921);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(new Complex(0.00000001, -0.00001));
+        c.mod();
+        expected.setReal(0.00001);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2);
+        c.mod();
+        expected.setReal(101.13851887);
+        assertComplexEquals(expected, c.getData().peekFirst());
     }
-    
-    @Test()
+
+    @Test(expected = NoSuchElementException.class)
     public void testPhaseException() {
-        
+        c.clear();
+        c.phase();
     }
-    
-    @Test
+
+    @Test(expected = ArithmeticException.class)
     public void testPhase() {
-        
+        c.insertNumber(zero);
+        c.phase();
+
+        c.insertNumber(operand1);
+        c.phase();
+        expected.setReal(-0.797743);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Imaginary);
+        c.phase();
+        expected.setReal(-1.570796);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Real);
+        c.phase();
+        expected.setReal(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2);
+        c.phase();
+        expected.setReal(-2.891817864);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Imaginary);
+        c.phase();
+        expected.setReal(-1.570796327);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Real);
+        c.phase();
+        expected.setReal(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(new Complex(0.00000001, -0.00001));
+        c.phase();
+        expected.setReal(-1.5698);
+        assertComplexEquals(expected, c.getData().peekFirst());
     }
-    
+
     @Test()
     public void testCosException() {
-        
+
     }
-    
+
     @Test
     public void testCos() {
-        
+
     }
-    
+
     @Test()
     public void testArcCosException() {
-        
+
     }
 
     @Test
     public void testArcCos() {
-        
+
     }
-    
+
     @Test()
     public void testSinException() {
-        
+
     }
-    
+
     @Test
     public void testSin() {
-        
+
     }
-    
+
     @Test()
     public void testArcSinException() {
-        
+
     }
-    
+
     @Test
     public void testArcSin() {
-        
+
     }
-    
+
     @Test()
     public void testTanException() {
-        
+
     }
-    
+
     @Test
     public void testTan() {
-        
+
     }
-    
+
     @Test()
     public void testArcTanException() {
-        
+
     }
-    
+
     @Test
     public void testArcTan() {
-        
+
     }
-    
+
     @Test()
     public void testPowException() {
-        
+
     }
-    
+
     @Test
     public void testPow() {
-        
+
     }
-    
+
     @Test()
     public void testExpException() {
-        
+
     }
-    
+
     @Test
     public void testExp() {
-        
+
     }
 
     @Test()
     public void testLogException() {
-        
+
     }
-    
+
     @Test
     public void testLog() {
-        
+
     }
-    
+
     private void assertComplexEquals(Complex expected, Complex actual) {
         assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
         assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
