@@ -774,14 +774,53 @@ public class CalculatorTest {
 
     }
 
-    @Test()
+    @Test(expected = NoSuchElementException.class)
     public void testPowException() {
-
+        c.clear();
+        c.pow();
     }
 
     @Test
     public void testPow() {
+        c.insertNumber(zero);
+        c.pow();
+        assertComplexEquals(expected, c.getData().peekFirst());
 
+        c.insertNumber(operand1);
+        c.pow();
+        expected.setReal(-5.0625);
+        expected.setImaginary(-205d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Imaginary);
+        c.pow();
+        expected.setReal(-18.0625);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1Real);
+        c.pow();
+        expected.setReal(16d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Real);
+        c.pow();
+        expected.setReal(9d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2);
+        c.pow();
+        expected.setReal(8979d);
+        expected.setImaginary(4900d);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Imaginary);
+        c.pow();
+        expected.setReal(-25d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
     }
 
     @Test()

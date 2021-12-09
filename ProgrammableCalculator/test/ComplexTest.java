@@ -330,6 +330,8 @@ public class ComplexTest {
     public void testPow() {
         assertComplexEquals(operand1, operand1.pow(1));
 
+        assertComplexEquals(expected, new Complex(0d, 0d).pow(2));
+
         expected.setReal(1d);
         assertComplexEquals(expected, operand1.pow(0));
 

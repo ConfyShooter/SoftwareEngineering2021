@@ -498,10 +498,15 @@ public class Calculator {
     }
 
     /**
-     *
+     * Takes the last element inserted on the stack and calculates the 2nd
+     * degree power of that number. Then puts the result value on top of the
+     * stack.
      */
     public void pow() {
-        return;
+        checkStackSize(1);
+
+        Complex resolve = data.pop();
+        data.push(resolve.pow(2));
     }
 
     /**
