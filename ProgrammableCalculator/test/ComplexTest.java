@@ -245,6 +245,23 @@ public class ComplexTest {
 
     @Test
     public void testAcos() {
+        Complex halfPi = new Complex(Math.PI / 2, 0d);
+        
+        expected.setReal(halfPi.getReal());
+        assertComplexEquals(expected, zero.acos());
+        
+        operand2Real.setReal(Math.sqrt(99) + 10);
+        expected = halfPi.minus(operand2Real.log().invert());
+        assertComplexEquals(expected, operand1Real.acos());
+        
+        operand2Imaginary.setImaginary(Math.sqrt(2501) - 50);
+        expected = halfPi.minus(operand2Imaginary.log());
+        assertComplexEquals(expected, operand1Imaginary.acos());
+        
+        operand2 = new Complex(8d, -24d).squareRoot().minus(new Complex(-4d, 3d));
+        expected = halfPi.minus(Complex.ImaginaryUnit.multiply(operand2.log()));
+        assertComplexEquals(expected, operand1.acos());
+        
 
     }
 
@@ -265,6 +282,20 @@ public class ComplexTest {
 
     @Test
     public void testAsin() {
+        zero.asin();
+        assertComplexEquals(expected, zero);
+        
+        operand2Real.setReal(Math.sqrt(99) + 10);
+        expected = operand2Real.log().invert();
+        assertComplexEquals(expected, operand1Real.asin());
+        
+        operand2Imaginary.setImaginary(Math.sqrt(2501) - 50);
+        expected = operand2Imaginary.log();
+        assertComplexEquals(expected, operand1Imaginary.asin());
+        
+        operand2 = new Complex(8d, -24d).squareRoot().minus(new Complex(-4d, 3d));
+        expected = Complex.ImaginaryUnit.multiply(operand2.log());
+        assertComplexEquals(expected, operand1.asin());
 
     }
 

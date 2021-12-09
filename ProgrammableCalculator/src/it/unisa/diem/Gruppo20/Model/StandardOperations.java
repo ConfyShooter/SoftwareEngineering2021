@@ -11,7 +11,7 @@ public class StandardOperations {
     private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
-    private static final int mapCapacity = 175;
+    private static final int mapCapacity = 175; //standard op are 28 + 104
 
     /**
      * Create an object of this class, using c for operation execution. An
@@ -41,7 +41,7 @@ public class StandardOperations {
      * @param key The basic operation key.
      * @return true if it's a basic operation, otherwise false;
      */
-    public boolean isABasicOperation(String key) {
+    public boolean isAStandardOperation(String key) {
         return standardOpMap.containsKey(key);
     }
     
@@ -58,17 +58,19 @@ public class StandardOperations {
             return comm;
         
         if (input.matches(">[a-z]{1}")) {
-            return pushVariableCommand(input.charAt(1));
+            comm = pushVariableCommand(input.charAt(1));
         } else if (input.matches("<[a-z]{1}")) {
-            return pullVariableCommand(input.charAt(1));
+            comm = pullVariableCommand(input.charAt(1));
         } else if (input.matches("\\+[a-z]{1}")) {
-            return sumVariableCommand(input.charAt(1));
+            comm = sumVariableCommand(input.charAt(1));
         } else if (input.matches("\\-[a-z]{1}")) {
-            return subtractVariableCommand(input.charAt(1));
+            comm = subtractVariableCommand(input.charAt(1));
         } else {
-            //throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
             return null;
         }
+        
+        standardOpMap.put(input, comm);
+        return comm;
     }
     
     /**
@@ -81,7 +83,7 @@ public class StandardOperations {
         try {
             Complex number = c.parseNumber(input);
             return () -> c.insertNumber(number);
-        } catch (NumberFormatException ex) {
+        } catch (RuntimeException ex) {
             throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
         }
     }
@@ -223,14 +225,12 @@ public class StandardOperations {
         standardOpMap.put("log", logCommand());
         standardOpMap.put("save", saveVariablesCommand());
         standardOpMap.put("restore", restoreVariablesCommand());
-        //char current = 'a';
-        //while(current <= 'z') {
+        
         for (char current = 'a'; current <= 'z'; current++) {
             standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
             standardOpMap.put("<" + String.valueOf(current), pushVariableCommand(current));
             standardOpMap.put("+" + String.valueOf(current), pushVariableCommand(current));
             standardOpMap.put("-" + String.valueOf(current), pushVariableCommand(current));
-            //current += 1;
         }
     }
 }

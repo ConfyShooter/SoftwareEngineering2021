@@ -459,10 +459,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the arccos of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void arcCos() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().acos());
     }
 
     /**
@@ -473,10 +475,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the arcsin of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void arcSin() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().asin());
     }
 
     /**

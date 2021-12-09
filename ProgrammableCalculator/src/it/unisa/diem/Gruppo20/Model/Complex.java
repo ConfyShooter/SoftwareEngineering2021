@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author Team 20
  */
 public class Complex {
-
+    public static Complex ImaginaryUnit = new Complex(0d, 1d);
     private Double real;
     private Double imaginary;
 
@@ -237,11 +237,13 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the arccos of this Complex number.
+     * @return A Complex number represent the acos of this Complex number.
      */
     public Complex acos() {
-        return null;
+        //acos(z) = pi/2 - asin(z)
+        Complex halfPi = new Complex(Math.PI / 2, 0d);        
+        return halfPi.minus(asin());
     }
 
     /**
@@ -253,11 +255,15 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the arcsin of this Complex number.
+     * @return A Complex number represent the asin of this Complex number.
      */
     public Complex asin() {
-        return null;
+        //asin(z) = j*ln(sqrt(1-z^2) - j*z)
+        Complex one = new Complex(1d, 0d);
+        Complex square = (one.minus(pow(2))).squareRoot();
+        Complex log = (square.minus(ImaginaryUnit.multiply(this))).log();
+        return ImaginaryUnit.multiply(log);
     }
 
     /**
@@ -273,14 +279,16 @@ public class Complex {
      * @return
      */
     public Complex atan() {
+        //atan(z) = -j/2*ln((1+jz)/(1-jz))
         return null;
     }
 
     /**
      *
+     * @param k
      * @return
      */
-    public Complex pow() {
+    public Complex pow(int k) {
         return null;
     }
 
@@ -297,7 +305,7 @@ public class Complex {
      *
      * @return A complex number.
      * @throws ArithmeticException if the imaginary is 0 and the real part
-     * negative or if both real and imaginary part are 0.
+     * negative or if real and imaginary part are 0.
      */
     public Complex log() {
         if (real <= 0 && imaginary == 0) {

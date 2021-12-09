@@ -55,7 +55,7 @@ public class Operations {
                     + " to insert a new user-operation separe name and definition with ':'.");
 
         String name = s.substring(0, index).trim().toLowerCase();
-        if (standardOperations.isABasicOperation(name)) {
+        if (standardOperations.isAStandardOperation(name)) {
             throw new UserOperationNameException("You can't assign this name '" + name + "' to an user-defined operation.");
         }
 
