@@ -277,11 +277,25 @@ public class Complex {
     }
 
     /**
+     * Calculates the power of a specific degree 'n' of the complex number.
      *
-     * @return
+     * @param grade The degree of the exponent of the power.
+     * @return A complex number.
      */
-    public Complex pow() {
-        return null;
+    public Complex pow(double grade) {
+        if (real == 0 && imaginary == 0 && grade == 0) {
+            throw new ArithmeticException("Indefinite value. Unable to execute.");
+        }
+        if (grade == 0) {
+            return new Complex(1d, 0d);
+        }
+        if (grade == 1) {
+            return this;
+        }
+        double r = Math.pow(mod(), grade);
+        double arg = grade * arg();
+
+        return new Complex(r * Math.cos(arg), r * Math.sin(arg));
     }
 
     /**

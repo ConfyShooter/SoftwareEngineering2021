@@ -288,14 +288,53 @@ public class ComplexTest {
 
     }
 
-    @Test()
+    @Test(expected = ArithmeticException.class)
     public void testPowException() {
-
+        zero.pow(0);
     }
 
     @Test
     public void testPow() {
+        assertComplexEquals(operand1, operand1.pow(1));
 
+        expected.setReal(1d);
+        assertComplexEquals(expected, operand1.pow(0));
+
+        expected.setImaginary(24d);
+        expected.setReal(-7d);
+        assertComplexEquals(expected, operand1.pow(2));
+
+        expected.setImaginary(44d);
+        expected.setReal(-117d);
+        assertComplexEquals(expected, operand1.pow(3));
+
+        expected.setReal(0d);
+        expected.setImaginary(125000d);
+        assertComplexEquals(expected, operand1Imaginary.pow(3));
+
+        expected.setReal(-2500d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, operand1Imaginary.pow(2));
+
+        expected.setReal(100d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, operand1Real.pow(2));
+
+        expected.setReal(8.99);
+        expected.setImaginary(0.6);
+        assertComplexEquals(expected, operand2.pow(2));
+
+        expected.setReal(26.91);
+        expected.setImaginary(2.699);
+        assertComplexEquals(expected, operand2.pow(3));
+
+        expected.setReal(-3600d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, operand2Imaginary.pow(2));
+
+        expected.setReal(216d);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, operand2Real.pow(3));
     }
 
     @Test()
