@@ -25,7 +25,6 @@ import java.util.Set;
  */
 public class Operations {
 
-    //private final Calculator c;
     private final Map<String, Command> userOperations;
     private final StandardOperations standardOperations;
     private final Set<String> userOpNames;
@@ -40,7 +39,7 @@ public class Operations {
         //this.c = c;
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        standardOperations = new StandardOperations(c);
+        standardOperations = StandardOperations.getStandardOperations(c);
     }
 
     /**
@@ -95,12 +94,15 @@ public class Operations {
      * passed as a parameter.
      *
      * @param name The operation that must be returned.
-     * @return Command object.
+     * @return Command object or null if the name isn't a valid operation.
      */
     public Command getOperationsCommand(String name) {
-        Command c = userOperations.get(name);
-        if(c != null)
+        UserCommand c = (UserCommand) userOperations.get(name);
+        if(c != null) {
+            if(!c.isExecutable())
+                throw new ExecuteException("The implementation of function '" + name + "' has been deleted.");
             return c;
+        }
         else
             return standardOperations.getCommand(name);
     }
@@ -110,7 +112,7 @@ public class Operations {
      * operation that has the name passed as a parameter.
      *
      * @param name The user-defined operation name.
-     * @return List of String.
+     * @return List of String or null if the isn't a valid user-defined operation.
      */
     public List<String> getOperationsNames(String name) {
         UserCommand command = (UserCommand) userOperations.get(name);
@@ -127,15 +129,17 @@ public class Operations {
      * @param name The user-defined operation name.
      */
     public void executeOperation(String name) throws ExecuteException {
-        Command command = userOperations.get(name);
+        UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
+            if(!command.isExecutable())
+                throw new ExecuteException("The implementation of function '" + name + "' has been deleted.");
             command.execute();
             return;
         }
         
-        command = standardOperations.getCommand(name);
-        if(command != null)
-            command.execute();
+        Command comm = standardOperations.getCommand(name);
+        if(comm != null)
+            comm.execute();
         else
             throw new ExecuteException("Can't execute this operation, can't find operation with name " + name + ".");
     }
