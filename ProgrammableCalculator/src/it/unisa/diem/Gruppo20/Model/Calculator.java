@@ -508,10 +508,14 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the natural logarithm on the calculator and saves the result at
+     * the top of the stack.
      */
     public void log() {
-        return;
+        checkStackSize(1);
+
+        Complex resolve = data.pop();
+        data.push(resolve.log());
     }
 
     private void checkStackSize(int k) {

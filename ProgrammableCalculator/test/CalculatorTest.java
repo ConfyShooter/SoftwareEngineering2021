@@ -794,14 +794,49 @@ public class CalculatorTest {
 
     }
 
-    @Test()
+    @Test(expected = NoSuchElementException.class)
     public void testLogException() {
-
+        c.clear();
+        c.log();
     }
 
-    @Test
+    @Test(expected = ArithmeticException.class)
     public void testLog() {
+        c.insertNumber(zero);
+        c.log();
 
+        c.insertNumber("-4.0003");
+        c.log();
+
+        c.insertNumber(operand1Imaginary);
+        c.log();
+        expected.setReal(3.9120230054);
+        expected.setImaginary(1.57079632679);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand1);
+        c.log();
+        expected.setReal(1.60943791243);
+        expected.setImaginary(0.927295218);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2);
+        c.log();
+        expected.setReal(1.0991675358);
+        expected.setImaginary(0.033320995878);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Imaginary);
+        c.log();
+        expected.setReal(4.094344562222);
+        expected.setImaginary(1.57079632679);
+        assertComplexEquals(expected, c.getData().peekFirst());
+
+        c.insertNumber(operand2Real);
+        c.log();
+        expected.setReal(1.7917594692);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, c.getData().peekFirst());
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {

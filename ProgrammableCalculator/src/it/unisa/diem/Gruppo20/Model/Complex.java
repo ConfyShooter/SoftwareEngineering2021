@@ -293,8 +293,11 @@ public class Complex {
     }
 
     /**
+     * Performs the natural logarithm of a complex number.
      *
-     * @return
+     * @return A complex number.
+     * @throws ArithmeticException if the imaginary is 0 and the real part
+     * negative or if both real and imaginary part are 0.
      */
     public Complex log() {
         if (real <= 0 && imaginary == 0) {
