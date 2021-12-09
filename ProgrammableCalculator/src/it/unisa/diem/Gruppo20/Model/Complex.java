@@ -86,9 +86,9 @@ public class Complex {
     public String toString() {
         String s = "";
         DecimalFormat format = new DecimalFormat("0.########");
-        format.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.US));
+        format.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
 
-        if (real == 0.0 && imaginary == 0.0) {
+        if (real == 0 && imaginary == 0) {
             return "0";
         }
         if (real != 0) {
