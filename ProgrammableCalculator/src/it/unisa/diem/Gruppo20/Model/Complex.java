@@ -296,8 +296,14 @@ public class Complex {
      *
      * @return
      */
-    public Complex log() {
-        return null;
+    public Complex log() throws ArithmeticException {
+        if (real <= 0 && imaginary == 0) {
+            throw new ArithmeticException("Impossible to perform the log on a negative value.");
+        }
+        if (real == 0d && imaginary == 0d) {
+            throw new ArithmeticException("The argument cannot be zero.");
+        }
+        return new Complex(Math.log(mod()), arg());
     }
 
 }

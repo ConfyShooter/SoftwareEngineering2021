@@ -313,14 +313,36 @@ public class ComplexTest {
         
     }
     
-    @Test
+    @Test(expected = ArithmeticException.class)
     public void testLog() {
+        zero.log();
         
+        operand1Real.log();
+        
+        expected.setReal(3.9120230054);
+        expected.setImaginary(1.57079632679);
+        assertComplexEquals(expected, operand1Imaginary.log());
+        
+        expected.setReal(1.60943791243);
+        expected.setImaginary(0.927295218);
+        assertComplexEquals(expected, operand1.log());
+        
+        expected.setReal(1.0991675358);
+        expected.setImaginary(0.033320995878);
+        assertComplexEquals(expected, operand2.log());
+        
+        expected.setReal(4.094344562222);
+        expected.setImaginary(1.57079632679);
+        assertComplexEquals(expected, operand2Imaginary.log());
+        
+        expected.setReal(1.7917594692);
+        expected.setImaginary(0d);
+        assertComplexEquals(expected, operand2Real.log());
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {
-        Assert.assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
-        Assert.assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
+        assertEquals(expected.getReal(), actual.getReal(), 0.00000001);
+        assertEquals(expected.getImaginary(), actual.getImaginary(), 0.00000001);
     }
 
 }
