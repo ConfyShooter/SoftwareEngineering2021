@@ -25,7 +25,6 @@ import java.util.Set;
  */
 public class Operations {
 
-    //private final Calculator c;
     private final Map<String, Command> userOperations;
     private final StandardOperations standardOperations;
     private final Set<String> userOpNames;
@@ -40,7 +39,7 @@ public class Operations {
         //this.c = c;
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        standardOperations = new StandardOperations(c);
+        standardOperations = StandardOperations.getStandardOperations(c);
     }
 
     /**
@@ -98,9 +97,12 @@ public class Operations {
      * @return Command object.
      */
     public Command getOperationsCommand(String name) {
-        Command c = userOperations.get(name);
-        if(c != null)
+        UserCommand c = (UserCommand) userOperations.get(name);
+        if(c != null) {
+            if(!c.isExecutable())
+                throw new ExecuteException("The implementation of function '" + name + "' has been deleted.");
             return c;
+        }
         else
             return standardOperations.getCommand(name);
     }

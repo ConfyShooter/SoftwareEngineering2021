@@ -8,21 +8,32 @@ import java.util.Map;
  * @author Team 20
  */
 public class StandardOperations {
-    
+    private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
     private static final int mapCapacity = 175;
 
     /**
      * Create an object of this class, using c for operation execution. An
-     * HashMap is used to save basic calculator operations.
+     * HashMap is used to save basic and advanced calculator operations.
      *
      * @param c
      */
-    public StandardOperations(Calculator c) {
+    private StandardOperations(Calculator c) {
         this.c = c;
         standardOpMap = new HashMap<>(mapCapacity);
         initializeBasicMap();  
+    }
+    
+    /**
+     * Return an object of this class if it already exists, or it build a new object and return it.
+     * @param c A Calculator object
+     * @return an object of StandardOperations class.
+     */
+    public static StandardOperations getStandardOperations(Calculator c) {
+        if(obj == null)
+            obj = new StandardOperations(c);
+        return obj;
     }
     
     /**

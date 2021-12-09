@@ -50,14 +50,15 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem deleteMenu;
     @FXML
     private MenuItem saveMenu;
-
+    @FXML
+    private TabPane tabPane;
+    
     private Calculator c;
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
-    @FXML
-    private TabPane tabPane;
+    
 
     /**
      * Initializes the controller class.
@@ -186,7 +187,6 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onCPressed(ActionEvent event) {
         inputText.clear();
-        insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
     }
 
     @FXML
