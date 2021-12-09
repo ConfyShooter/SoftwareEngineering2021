@@ -178,14 +178,15 @@ public class Complex {
      * @return A complex number.
      */
     public Complex squareRoot() {
+        DecimalFormat f = new DecimalFormat("0.##############E0");
+        f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
+        
         Double module = mod();
         Double phase = arg();
 
         Double r = Math.sqrt(module);
-        Double real = r * Math.cos((phase / 2));
-        Double img = r * Math.sin((phase / 2));
 
-        return new Complex(real, img);
+        return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
     }
 
     /**
@@ -275,21 +276,39 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the arctan of this Complex number.
+     * @return A Complex number represent the atan of this Complex number.
      */
     public Complex atan() {
         //atan(z) = -j/2*ln((1+jz)/(1-jz))
-        return null;
+        Complex one = new Complex(1d, 0d);
+        Complex log = multiply(ImaginaryUnit).plus(one).division(one.minus(multiply(ImaginaryUnit))).log();
+        return log.multiply(ImaginaryUnit.division(new Complex(2d, 0d))).invert();
     }
 
     /**
+     * Calculates the power of a specific degree 'n' of the complex number.
      *
-     * @param k
-     * @return
+     * @param grade The degree of the exponent of the power.
+     * @return A complex number.
      */
-    public Complex pow(int k) {
-        return null;
+    public Complex pow(double grade) {        
+        if (real == 0 && imaginary == 0) {
+            if(grade == 0)
+                throw new ArithmeticException("Indefinite value. Unable to execute.");
+            return this;
+        }
+        
+        if (grade == 0) {
+            return new Complex(1d, 0d);
+        }
+        if (grade == 1) {
+            return this;
+        }
+        double r = Math.pow(mod(), grade);
+        double arg = grade * arg();
+        
+        return new Complex(r * cosApproximation(arg), r * sinApproximation(arg));
     }
 
     /**
@@ -312,6 +331,18 @@ public class Complex {
             throw new ArithmeticException("Impossible to perform the log on this complex number.");
         }
         return new Complex(Math.log(mod()), arg());
+    }
+    
+    private Double cosApproximation(double phase) {
+        DecimalFormat f = new DecimalFormat("0.##############E0");
+        f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
+        return (Double.valueOf(f.format((Math.cos(phase) + 1))) - 1);
+    }
+    
+    private Double sinApproximation(double phase) {
+        DecimalFormat f = new DecimalFormat("0.##############E0");
+        f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
+        return (Double.valueOf(f.format((Math.sin(phase) + 1))) - 1);
     }
 
 }
