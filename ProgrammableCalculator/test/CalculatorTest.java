@@ -66,26 +66,26 @@ public class CalculatorTest {
 
     @Test
     public void testParseNumber() throws Exception {
-        c.parseNumber("0");
-        c.parseNumber("0");
+        c.insertNumber(c.parseNumber("0"));
+        c.insertNumber(c.parseNumber("0"));
         c.multiply();
 
         assertEquals("0", c.getData().pop().toString());
 
-        c.parseNumber("-5");
-        c.parseNumber("4");
+        c.insertNumber(c.parseNumber("-5"));
+        c.insertNumber(c.parseNumber("4"));
         c.subtract();
 
         assertEquals("-9", c.getData().pop().toString());
 
-        c.parseNumber("-1j");
-        c.parseNumber("4j");
+        c.insertNumber(c.parseNumber("-1j"));
+        c.insertNumber(c.parseNumber("4j"));
         c.division();
 
         assertEquals("-0.25", c.getData().pop().toString());
 
-        c.parseNumber("0.1+2.5j");
-        c.parseNumber("1.0+2.5j");
+        c.insertNumber(c.parseNumber("0.1+2.5j"));
+        c.insertNumber(c.parseNumber("1.0+2.5j"));
         c.sum();
 
         assertEquals("1.1+5j", c.getData().pop().toString());
