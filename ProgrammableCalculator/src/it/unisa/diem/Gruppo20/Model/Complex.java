@@ -154,7 +154,7 @@ public class Complex {
      * @param c The dividend of the operation.
      * @return Complex value.
      */
-    public Complex division(Complex c) throws ArithmeticException {
+    public Complex division(Complex c) {
         Double a = real;
         Double b = imaginary;
         Double c1 = c.real;
@@ -212,7 +212,7 @@ public class Complex {
      *
      * @return A double value that representing the phase.
      */
-    public Double arg() throws ArithmeticException {
+    public Double arg() {
         if (real == 0 && imaginary > 0) {
             return Math.PI / 2;
         } else if (real == 0 && imaginary < 0) {
@@ -296,11 +296,11 @@ public class Complex {
      *
      * @return
      */
-    public Complex log() throws ArithmeticException {
+    public Complex log() {
         if (real <= 0 && imaginary == 0) {
             throw new ArithmeticException("Impossible to perform the log on a negative value.");
         }
-        if (real == 0d && imaginary == 0d) {
+        if (real == 0 && imaginary == 0) {
             throw new ArithmeticException("The argument cannot be zero.");
         }
         return new Complex(Math.log(mod()), arg());
