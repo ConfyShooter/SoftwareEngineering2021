@@ -309,10 +309,7 @@ public class Complex {
      */
     public Complex log() {
         if (real <= 0 && imaginary == 0) {
-            throw new ArithmeticException("Impossible to perform the log on a negative value.");
-        }
-        if (real == 0 && imaginary == 0) {
-            throw new ArithmeticException("The argument cannot be zero.");
+            throw new ArithmeticException("Impossible to perform the log on this complex number.");
         }
         return new Complex(Math.log(mod()), arg());
     }
