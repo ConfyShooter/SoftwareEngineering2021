@@ -116,7 +116,7 @@
                                     </Button>
                                     <Button alignment="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font size="14.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Button>
                                     <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMinorPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #E9967A;" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -150,7 +150,6 @@
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -159,84 +158,64 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="sin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="sin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="cos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="cos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font size="16.0" />
+                                          <Font size="17.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="*" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="tan" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="/" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="clear" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAsinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="asin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="drop" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onModPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="mod" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="dup" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onArgPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="arg" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="over" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onPowPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="pow" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="+-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#onExpPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="exp" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font size="20.0" />
+                                          <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="√" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAcosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="acos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Button>
+                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAtanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #B0C4DE;" text="atan" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="cancBtn1" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="cancBtn1" alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onLogPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="log" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #E9967A;" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #E9967A;" text="&gt;" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="24.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #E9967A;" text="save" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #E9967A;" text="restore" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-                                       <font>
-                                          <Font size="11.0" />
+                                          <Font size="13.0" />
                                        </font>
                                     </Button>
                                  </children>
@@ -266,7 +245,7 @@
                                     <MenuItem fx:id="editMenu" mnemonicParsing="false" onAction="#editFunction" text="Edit function" />
                                     <MenuItem fx:id="deleteMenu" mnemonicParsing="false" onAction="#deleteFunction" text="Delete function" />
                                     <MenuItem fx:id="saveMenu" mnemonicParsing="false" onAction="#saveFunctionToFile" text="Save into a file" />
-                                    <MenuItem fx:id="restoreMenu" mnemonicParsing="false" onAction="#restoreFunctionFromFile" text="Restore from a file" />
+                                    <MenuItem mnemonicParsing="false" onAction="#restoreFunctionFromFile" text="Restore from a file" />
                                 </items>
                               </ContextMenu>
                            </contextMenu>

@@ -52,13 +52,14 @@ public class GUI_FXMLController implements Initializable {
     private MenuItem saveMenu;
     @FXML
     private TabPane tabPane;
-    
+    @FXML
+    private Button cancBtn1;
+
     private Calculator c;
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
-    
 
     /**
      * Initializes the controller class.
@@ -80,6 +81,7 @@ public class GUI_FXMLController implements Initializable {
 
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
+        cancBtn1.disableProperty().bind(inputText.textProperty().isEmpty());
 
         useMenu.disableProperty().bind(functionsProperty.emptyProperty());
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
@@ -88,7 +90,6 @@ public class GUI_FXMLController implements Initializable {
         tabPane.getStyleClass().add("floating");
     }
 
-    @FXML
     private void onInsert1Pressed(ActionEvent event) {
         String input = inputText.getText().trim();
         try {
@@ -97,10 +98,11 @@ public class GUI_FXMLController implements Initializable {
                 operations.parseOperations(input);
                 functions.setAll(operations.userOperationsNames());
             } else if (uc != null) {
-                if(!uc.isExecutable())
+                if (!uc.isExecutable()) {
                     showAlert("The implementation of function '" + input.toLowerCase() + "' has been deleted.");
-                else
+                } else {
                     uc.execute();
+                }
                 uc = null;
             } else {
                 c.insertNumber(input);
@@ -118,7 +120,7 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
-    
+
     @FXML
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim().toLowerCase();
@@ -306,6 +308,61 @@ public class GUI_FXMLController implements Initializable {
         a.setTitle("Warning");
         a.setHeaderText(message);
         a.showAndWait();
+    }
+
+    @FXML
+    private void onSinPressed(ActionEvent event) {
+        onButtonPressed(event, "sin");
+    }
+
+    @FXML
+    private void onCosPressed(ActionEvent event) {
+        onButtonPressed(event, "cos");
+    }
+
+    @FXML
+    private void onTanPressed(ActionEvent event) {
+        onButtonPressed(event, "tan");
+    }
+
+    @FXML
+    private void onAsinPressed(ActionEvent event) {
+        onButtonPressed(event, "asin");
+    }
+
+    @FXML
+    private void onModPressed(ActionEvent event) {
+        onButtonPressed(event, "mod");
+    }
+
+    @FXML
+    private void onArgPressed(ActionEvent event) {
+        onButtonPressed(event, "arg");
+    }
+
+    @FXML
+    private void onAcosPressed(ActionEvent event) {
+        onButtonPressed(event, "acos");
+    }
+
+    @FXML
+    private void onAtanPressed(ActionEvent event) {
+        onButtonPressed(event, "atan");
+    }
+
+    @FXML
+    private void onLogPressed(ActionEvent event) {
+        onButtonPressed(event, "log");
+    }
+
+    @FXML
+    private void onPowPressed(ActionEvent event) {
+        onButtonPressed(event, "pow");
+    }
+
+    @FXML
+    private void onExpPressed(ActionEvent event) {
+        onButtonPressed(event, "exp");
     }
 
 }
