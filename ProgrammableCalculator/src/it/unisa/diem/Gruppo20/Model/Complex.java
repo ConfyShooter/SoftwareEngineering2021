@@ -292,6 +292,9 @@ public class Complex {
         if (grade == 1) {
             return this;
         }
+        if (imaginary == 0) {
+            return new Complex(Math.pow(real, grade), 0d);
+        }
         double r = Math.pow(mod(), grade);
         double arg = grade * arg();
 
