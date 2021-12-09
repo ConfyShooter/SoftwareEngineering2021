@@ -27,7 +27,7 @@ public class Operations {
 
     //private final Calculator c;
     private final Map<String, Command> userOperations;
-    private final BasicOperations basicOperations;
+    private final StandardOperations standardOperations;
     private final Set<String> userOpNames;
 
     /**
@@ -40,7 +40,7 @@ public class Operations {
         //this.c = c;
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        basicOperations = new BasicOperations(c);
+        standardOperations = new StandardOperations(c);
     }
 
     /**
@@ -56,7 +56,7 @@ public class Operations {
                     + " to insert a new user-operation separe name and definition with ':'.");
 
         String name = s.substring(0, index).trim().toLowerCase();
-        if (basicOperations.isABasicOperation(name)) {
+        if (standardOperations.isABasicOperation(name)) {
             throw new UserOperationNameException("You can't assign this name '" + name + "' to an user-defined operation.");
         }
 
@@ -78,12 +78,12 @@ public class Operations {
 
             Command comm = userOperations.get(input); //checking if it's an already user-defined operation
             if (comm == null)
-                comm = basicOperations.getCommand(input); //checking if it's a basic operation
+                comm = standardOperations.getCommand(input); //checking if it's a basic operation
 
             if (comm != null)
                 opCommand.add(input, comm);
             else
-                opCommand.add(input, basicOperations.insertNumberCommand(input));
+                opCommand.add(input, standardOperations.insertNumberCommand(input));
         }
         
         userOperations.put(name, opCommand);
@@ -102,7 +102,7 @@ public class Operations {
         if(c != null)
             return c;
         else
-            return basicOperations.getCommand(name);
+            return standardOperations.getCommand(name);
     }
 
     /**
@@ -133,7 +133,7 @@ public class Operations {
             return;
         }
         
-        command = basicOperations.getCommand(name);
+        command = standardOperations.getCommand(name);
         if(command != null)
             command.execute();
         else

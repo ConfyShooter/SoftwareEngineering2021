@@ -7,10 +7,10 @@ import java.util.Map;
  *
  * @author Team 20
  */
-public class BasicOperations {
+public class StandardOperations {
     
     private final Calculator c;
-    private final Map<String, Command> basicOpMap;
+    private final Map<String, Command> standardOpMap;
     private static final int mapCapacity = 175;
 
     /**
@@ -19,9 +19,9 @@ public class BasicOperations {
      *
      * @param c
      */
-    public BasicOperations(Calculator c) {
+    public StandardOperations(Calculator c) {
         this.c = c;
-        basicOpMap = new HashMap<>(mapCapacity);
+        standardOpMap = new HashMap<>(mapCapacity);
         initializeBasicMap();  
     }
     
@@ -31,7 +31,7 @@ public class BasicOperations {
      * @return true if it's a basic operation, otherwise false;
      */
     public boolean isABasicOperation(String key) {
-        return basicOpMap.containsKey(key);
+        return standardOpMap.containsKey(key);
     }
     
     /**
@@ -42,7 +42,7 @@ public class BasicOperations {
      * @return Command object.
      */
     public Command getCommand(String input) {
-        Command comm = basicOpMap.get(input);
+        Command comm = standardOpMap.get(input);
         if(comm != null)
             return comm;
         
@@ -188,37 +188,38 @@ public class BasicOperations {
     }
 
     private void initializeBasicMap() {
-        basicOpMap.put("+", sumCommand());
-        basicOpMap.put("-", subtractCommand());
-        basicOpMap.put("*", multiplyCommand());
-        basicOpMap.put("/", divisionCommand());
-        basicOpMap.put("+-", invertSignCommand());
-        basicOpMap.put("sqrt", sqrtCommand());
-        basicOpMap.put("clear", clearCommand());
-        basicOpMap.put("dup", dupCommand());
-        basicOpMap.put("drop", dropCommand());
-        basicOpMap.put("swap", swapCommand());
-        basicOpMap.put("over", overCommand());
-        basicOpMap.put("mod", modCommand());
-        basicOpMap.put("arg", argCommand());
-        basicOpMap.put("cos", cosCommand());
-        basicOpMap.put("sin", sinCommand());
-        basicOpMap.put("tan", tanCommand());
-        basicOpMap.put("acos", arcCosCommand());
-        basicOpMap.put("asin", arcSinCommand());
-        basicOpMap.put("atan", arcTanCommand());
-        basicOpMap.put("pow", powCommand());
-        basicOpMap.put("exp", expCommand());
-        basicOpMap.put("log", logCommand());
-        basicOpMap.put("save", saveVariablesCommand());
-        basicOpMap.put("restore", restoreVariablesCommand());
-        char current = 'a';
-        while(current <= 'z') {
-            basicOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
-            basicOpMap.put("<" + String.valueOf(current), pushVariableCommand(current));
-            basicOpMap.put("+" + String.valueOf(current), pushVariableCommand(current));
-            basicOpMap.put("-" + String.valueOf(current), pushVariableCommand(current));
-            current += 1;
+        standardOpMap.put("+", sumCommand());
+        standardOpMap.put("-", subtractCommand());
+        standardOpMap.put("*", multiplyCommand());
+        standardOpMap.put("/", divisionCommand());
+        standardOpMap.put("+-", invertSignCommand());
+        standardOpMap.put("sqrt", sqrtCommand());
+        standardOpMap.put("clear", clearCommand());
+        standardOpMap.put("dup", dupCommand());
+        standardOpMap.put("drop", dropCommand());
+        standardOpMap.put("swap", swapCommand());
+        standardOpMap.put("over", overCommand());
+        standardOpMap.put("mod", modCommand());
+        standardOpMap.put("arg", argCommand());
+        standardOpMap.put("cos", cosCommand());
+        standardOpMap.put("sin", sinCommand());
+        standardOpMap.put("tan", tanCommand());
+        standardOpMap.put("acos", arcCosCommand());
+        standardOpMap.put("asin", arcSinCommand());
+        standardOpMap.put("atan", arcTanCommand());
+        standardOpMap.put("pow", powCommand());
+        standardOpMap.put("exp", expCommand());
+        standardOpMap.put("log", logCommand());
+        standardOpMap.put("save", saveVariablesCommand());
+        standardOpMap.put("restore", restoreVariablesCommand());
+        //char current = 'a';
+        //while(current <= 'z') {
+        for (char current = 'a'; current <= 'z'; current++) {
+            standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
+            standardOpMap.put("<" + String.valueOf(current), pushVariableCommand(current));
+            standardOpMap.put("+" + String.valueOf(current), pushVariableCommand(current));
+            standardOpMap.put("-" + String.valueOf(current), pushVariableCommand(current));
+            //current += 1;
         }
     }
 }
