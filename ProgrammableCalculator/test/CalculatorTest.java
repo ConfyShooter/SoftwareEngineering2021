@@ -744,6 +744,31 @@ public class CalculatorTest {
 
     @Test
     public void testArcSin() {
+        c.insertNumber(zero);
+        c.arcSin();
+        assertComplexEquals(expected, c.getData().pop());
+        
+        c.insertNumber(operand1Real);
+        c.arcSin();
+        operand1Imaginary.setImaginary(Math.sqrt(15) - 4);
+        expected = operand1Imaginary.log().multiply(Complex.ImaginaryUnit);
+        assertComplexEquals(expected, c.getData().pop());
+        
+        c.insertNumber(operand2Imaginary);
+        c.arcSin();
+        operand2Real.setReal(Math.sqrt(26) - 5);
+        expected = operand2Real.log().multiply(Complex.ImaginaryUnit);
+        assertComplexEquals(expected, c.getData().pop());
+        
+        c.insertNumber(operand2);
+        c.arcSin();
+        operand1.setReal(-8978d);
+        operand1.setImaginary(-4900d);
+        operand1Real.setReal(-25d);
+        operand1Real.setImaginary(98d);
+        Complex log = operand1.squareRoot().plus(operand1Real).log();
+        expected = log.multiply(Complex.ImaginaryUnit);
+        assertComplexEquals(expected, c.getData().pop());
 
     }
 

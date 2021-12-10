@@ -456,8 +456,7 @@ public class Calculator {
      */
     public void cos() {
         checkStackSize(1);
-        data.push(data.pop().cos());  
-        return;
+        data.push(data.pop().cos());
     }
 
     /**

@@ -247,14 +247,14 @@ public class Complex {
      * @return A Complex number represent the cos of this Complex number.
      */
     public Complex cos() {
-        if(this.imaginary==0)
-            return new Complex(Math.cos(this.real),0d);
-        else{
-            Complex cos = new Complex();
-            cos.setReal(Math.cos(this.real) * cosh(this.imaginary));
-            cos.setImaginary(-Math.sin(this.real)* sinh(this.imaginary));
-            return cos;
-        }         
+        if(imaginary==0)
+            return new Complex(Math.cos(real),0d);
+        
+        Complex cos = new Complex();
+        cos.setReal(Math.cos(real) * cosh(imaginary));
+        cos.setImaginary(-Math.sin(real)* sinh(imaginary));
+        return cos;
+               
     }
 
     /**
@@ -272,14 +272,13 @@ public class Complex {
      * @return A Complex number represent the sin of this Complex number.
      */
     public Complex sin() {
-        if(this.imaginary==0)
-            return new Complex(Math.sin(this.real),0.0);    
-        else{
-            Complex sin = new Complex();
-            sin.setReal(Math.sin(this.real) * cosh(this.imaginary));
-            sin.setImaginary(Math.cos(this.real)* sinh(this.imaginary));
-            return sin;
-        }  
+        if(imaginary==0)
+            return new Complex(Math.sin(real),0.0);    
+
+        Complex sin = new Complex();
+        sin.setReal(Math.sin(real) * cosh(imaginary));
+        sin.setImaginary(Math.cos(real)* sinh(imaginary));
+        return sin; 
     }
 
     /**
@@ -299,7 +298,7 @@ public class Complex {
      * @return A Complex number represent the tan of this Complex number.
      */
     public Complex tan() {
-        return new Complex(this.real,this.imaginary).sin().division(new Complex(this.real,this.imaginary).cos());
+        return sin().division(cos());
     }
 
     /**
