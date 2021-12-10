@@ -3,7 +3,6 @@ package it.unisa.diem.Gruppo20.GUI;
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Command;
 import it.unisa.diem.Gruppo20.Model.Complex;
-import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.Operations;
 import java.io.File;
 import java.io.IOException;
@@ -13,14 +12,11 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DialogEvent;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
@@ -58,12 +54,15 @@ public class GUI_FXMLController implements Initializable {
     private TabPane tabPane;
     @FXML
     private Button cancBtn1;
+    @FXML
+    private Button cancBtn2;
 
     private Calculator c;
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
+    
 
     /**
      * Initializes the controller class.
@@ -86,6 +85,7 @@ public class GUI_FXMLController implements Initializable {
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         cancBtn1.disableProperty().bind(inputText.textProperty().isEmpty());
+        cancBtn2.disableProperty().bind(inputText.textProperty().isEmpty());
 
         useMenu.disableProperty().bind(functionsProperty.emptyProperty());
         editMenu.disableProperty().bind(functionsProperty.emptyProperty());
@@ -205,6 +205,20 @@ public class GUI_FXMLController implements Initializable {
         if(c != null)
             onButtonPressed(event, ">" + c);
     }
+    
+    @FXML
+    private void onPlusVariablePressed(ActionEvent event) {
+        Character c = askForChar("Sum Variable");
+        if(c != null)
+            onButtonPressed(event, "+" + c);
+    }
+
+    @FXML
+    private void onMinusVariablePressed(ActionEvent event) {
+        Character c = askForChar("Subtract Variable");
+        if(c != null)
+            onButtonPressed(event, "-" + c);
+    }
 
     @FXML
     private void onSavePressed(ActionEvent event) {
@@ -237,8 +251,6 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void useFunction(ActionEvent event) {
-        //functionBox.setSelected(false);
-        //onFunctionBoxPressed(event);
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
     }
 

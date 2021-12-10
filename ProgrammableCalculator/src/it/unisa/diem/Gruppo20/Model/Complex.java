@@ -17,7 +17,7 @@ public class Complex {
     private Double imaginary;
 
     /**
-     * This method returns a new Complex object with default real and imaginary
+     * This method returns a new Complex object with 0 as real and imaginary
      * values.
      */
     public Complex() {
