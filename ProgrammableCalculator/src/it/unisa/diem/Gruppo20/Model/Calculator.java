@@ -451,9 +451,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the cos of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void cos() {
+        checkStackSize(1);
+        data.push(data.pop().cos());  
         return;
     }
 
@@ -467,10 +470,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the sin of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void sin() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().sin());     
     }
 
     /**
@@ -483,10 +488,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the tan of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void tan() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().tan());  
     }
 
     /**

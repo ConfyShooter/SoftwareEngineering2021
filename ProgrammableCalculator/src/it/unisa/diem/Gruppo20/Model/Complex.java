@@ -226,13 +226,35 @@ public class Complex {
             throw new ArithmeticException("The phase of 0 is undefined.");
         }
     }
+    
+    /**
+     * Performs the sinh of this Complex number.
+     * @return A Complex number represent the sinh of this Complex number.
+     */
+    private double sinh(Double x) {
+       return (Math.exp(x) - Math.exp(-x))/2;
+    }
 
     /**
-     *
-     * @return
+     * Performs the cosh of this Complex number.
+     * @return A Complex number represent the cosh of this Complex number.
+     */
+    private double cosh(Double x) {
+       return (Math.exp(x) + Math.exp(-x))/2;
+    }
+    /**
+     * Performs the cos of this Complex number.
+     * @return A Complex number represent the cos of this Complex number.
      */
     public Complex cos() {
-        return null;
+        if(this.imaginary==0)
+            return new Complex(Math.cos(this.real),0d);
+        else{
+            Complex cos = new Complex();
+            cos.setReal(Math.cos(this.real) * cosh(this.imaginary));
+            cos.setImaginary(-Math.sin(this.real)* sinh(this.imaginary));
+            return cos;
+        }         
     }
 
     /**
@@ -246,11 +268,18 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the sin of this Complex number.
+     * @return A Complex number represent the sin of this Complex number.
      */
     public Complex sin() {
-        return null;
+        if(this.imaginary==0)
+            return new Complex(Math.sin(this.real),0.0);    
+        else{
+            Complex sin = new Complex();
+            sin.setReal(Math.sin(this.real) * cosh(this.imaginary));
+            sin.setImaginary(Math.cos(this.real)* sinh(this.imaginary));
+            return sin;
+        }  
     }
 
     /**
@@ -266,11 +295,11 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the tan of this Complex number.
+     * @return A Complex number represent the tan of this Complex number.
      */
     public Complex tan() {
-        return null;
+        return new Complex(this.real,this.imaginary).sin().division(new Complex(this.real,this.imaginary).cos());
     }
 
     /**
