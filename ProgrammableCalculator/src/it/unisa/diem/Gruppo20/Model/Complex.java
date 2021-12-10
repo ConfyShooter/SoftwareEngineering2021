@@ -110,8 +110,8 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex plus(Complex c) {
-        Double a = c.getReal();
-        Double b = c.getImaginary();
+        double a = c.getReal();
+        double b = c.getImaginary();
 
         return new Complex(a + real, b + imaginary);
     }
@@ -123,8 +123,8 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
-        Double a = c.getReal();
-        Double b = c.getImaginary();
+        double a = c.getReal();
+        double b = c.getImaginary();
 
         return new Complex(real - a, imaginary - b);
     }
@@ -136,13 +136,13 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex multiply(Complex c) {
-        Double a = real;
-        Double b = imaginary;
-        Double c1 = c.real;
-        Double d = c.imaginary;
+        double a = real;
+        double b = imaginary;
+        double c1 = c.real;
+        double d = c.imaginary;
 
-        Double real = (a * c1 - b * d);
-        Double img = (a * d + b * c1);
+        double real = (a * c1 - b * d);
+        double img = (a * d + b * c1);
 
         return new Complex(real, img);
     }
@@ -155,18 +155,18 @@ public class Complex {
      * @return Complex value.
      */
     public Complex division(Complex c) {
-        Double a = real;
-        Double b = imaginary;
-        Double c1 = c.real;
-        Double d = c.imaginary;
+        double a = real;
+        double b = imaginary;
+        double c1 = c.real;
+        double d = c.imaginary;
 
         if (c1 == 0 && d == 0) {
             throw new ArithmeticException("Divider can't be 0.");
         }
 
-        Double div = c1 * c1 + d * d;
-        Double real = (a * c1 + b * d) / div;
-        Double img = (b * c1 - a * d) / div;
+        double div = c1 * c1 + d * d;
+        double real = (a * c1 + b * d) / div;
+        double img = (b * c1 - a * d) / div;
 
         return new Complex(real, img);
     }
@@ -181,8 +181,8 @@ public class Complex {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
 
-        Double r = Math.sqrt(mod());
-        Double phase = arg();
+        double r = Math.sqrt(mod());
+        double phase = arg();
 
         return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
     }

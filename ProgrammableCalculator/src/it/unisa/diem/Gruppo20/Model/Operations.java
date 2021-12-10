@@ -38,7 +38,7 @@ public class Operations {
     public Operations(Calculator c) {
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        standardOperations = new StandardOperations(c);
+        standardOperations = StandardOperations.getStandardOperations(c);
     }
 
     /**

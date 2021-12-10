@@ -3,6 +3,7 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.Operations;
+import it.unisa.diem.Gruppo20.Model.StandardOperations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -33,8 +35,11 @@ public class OperationsTest {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         operations = new Operations(c);
+        Field instance = StandardOperations.class.getDeclaredField("obj");
+        instance.setAccessible(true);
+        instance.set(null, null);
         testFile = new File("media/testFile.txt");
         testFile.deleteOnExit();
     }
@@ -67,6 +72,9 @@ public class OperationsTest {
     public void testGetOperationsCommand() {
         operations.parseOperations("   test :  clear  4 8 + ");
         assertNotNull(operations.getOperationsCommand("test")); //check if user operation named test exist
+        
+        assertNotNull(operations.getOperationsCommand("mod"));
+        assertNotNull(operations.getOperationsCommand("<a"));
 
         assertNull(operations.getOperationsCommand("notincluded"));
     }

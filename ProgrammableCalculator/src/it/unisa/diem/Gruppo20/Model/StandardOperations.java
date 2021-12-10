@@ -11,7 +11,7 @@ public class StandardOperations {
     private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
-    private static final int mapCapacity = 175; //standard op are 28 + 104
+    private static final int mapCapacity = 64; //standard op are 28 + 104
 
     /**
      * Create an object of this class, using c for operation execution. An
@@ -19,10 +19,10 @@ public class StandardOperations {
      *
      * @param c
      */
-    public StandardOperations(Calculator c) {
+    private StandardOperations(Calculator c) {
         this.c = c;
         standardOpMap = new HashMap<>(mapCapacity);
-        initializeBasicMap();  
+        initializeBasicMap();
     }
     
     /**
@@ -226,11 +226,11 @@ public class StandardOperations {
         standardOpMap.put("save", saveVariablesCommand());
         standardOpMap.put("restore", restoreVariablesCommand());
         
-        for (char current = 'a'; current <= 'z'; current++) {
+        /*for (char current = 'a'; current <= 'z'; current++) {
             standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
             standardOpMap.put("<" + String.valueOf(current), pullVariableCommand(current));
             standardOpMap.put("+" + String.valueOf(current), sumVariableCommand(current));
             standardOpMap.put("-" + String.valueOf(current), subtractVariableCommand(current));
-        }
+        }*/
     }
 }

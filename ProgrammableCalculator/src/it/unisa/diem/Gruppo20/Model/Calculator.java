@@ -56,7 +56,7 @@ public class Calculator {
      * elements to perform a specific operation.
      * @throws ParseException if input is blank or there is a unknown error.
      */
-    private void parsing(String input) throws Exception {
+    /*private void parsing(String input) throws Exception {
         input = input.replaceAll("\\s+", "").toLowerCase();
         if (input.isBlank()) {
             throw new ParseException("Input string is empty!");
@@ -126,7 +126,7 @@ public class Calculator {
         } else {
             throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
         }
-    }
+    }*/
 
     private double findImaginary(String s) throws NumberFormatException {
         switch (s) {
@@ -162,7 +162,7 @@ public class Calculator {
      * @return Complex number parsed from the string.
      * @throws NumberFormatException if in the string.
      */
-    public Complex parseNumber(String number) throws NumberFormatException {
+    public Complex parseNumber(String number) {
         Double real = 0.0;
         Double imaginary = 0.0;
         int jIndex = number.indexOf("j");
@@ -383,7 +383,6 @@ public class Calculator {
     public void pullVariable(char c) throws RuntimeException {
         Complex value = map.getVariable(c);
         insertNumber(value);
-
     }
 
     /**

@@ -13,15 +13,19 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DialogEvent;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 
 /**
  * FXML Controller class
@@ -90,43 +94,13 @@ public class GUI_FXMLController implements Initializable {
         tabPane.getStyleClass().add("floating");
     }
 
-    private void onInsert1Pressed(ActionEvent event) {
-        String input = inputText.getText().trim();
-        try {
-            UserCommand uc = (UserCommand) operations.getOperationsCommand(input.toLowerCase());
-            if (functionBox.isSelected()) {
-                operations.parseOperations(input);
-                functions.setAll(operations.userOperationsNames());
-            } else if (uc != null) {
-                if (!uc.isExecutable()) {
-                    showAlert("The implementation of function '" + input.toLowerCase() + "' has been deleted.");
-                } else {
-                    uc.execute();
-                }
-                uc = null;
-            } else {
-                c.insertNumber(input);
-            }
-            inputText.clear();
-        } catch (RuntimeException ex) {
-            if (!functionBox.isSelected()) {
-                inputText.clear();
-            }
-            showAlert(ex.getMessage());
-        } catch (Exception ex) {
-            showAlert("General error.");
-        }
-
-        insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
-        stack.setAll(c.getData());
-    }
-
     @FXML
     private void onInsertPressed(ActionEvent event) {
-        String input = inputText.getText().trim().toLowerCase();
+        String input = inputText.getText().trim().toLowerCase(); //get input from textField
+        
         try {
-            Command comm = operations.getOperationsCommand(input);
-            if (functionBox.isSelected()) {
+            Command comm = operations.getOperationsCommand(input); //search for an user or standard operation Command
+            if (functionBox.isSelected()) { //if check box is selected
                 operations.parseOperations(input);
                 functions.setAll(operations.userOperationsNames());
             } else if (comm != null) {
@@ -134,11 +108,13 @@ public class GUI_FXMLController implements Initializable {
             } else {
                 c.insertNumber(input);
             }
+            
             inputText.clear();
+        } catch (NumberFormatException ex) {
+            showAlert("Can't parse '" + inputText.getText() + "'.");
         } catch (RuntimeException ex) {
-            if (!functionBox.isSelected()) {
+            if (!functionBox.isSelected())
                 inputText.clear();
-            }
             showAlert(ex.getMessage());
         } catch (Exception ex) {
             showAlert("General error.");
@@ -218,20 +194,16 @@ public class GUI_FXMLController implements Initializable {
 
     @FXML
     private void onMinorPressed(ActionEvent event) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " <");
-        } else {
-            inputText.setText("<");
-        }
+        Character c = askForChar("Pull Variable");
+        if(c != null)
+            onButtonPressed(event, "<" + c);
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " >");
-        } else {
-            inputText.setText(">");
-        }
+        Character c = askForChar("Push Variable");
+        if(c != null)
+            onButtonPressed(event, ">" + c);
     }
 
     @FXML
@@ -363,6 +335,23 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onExpPressed(ActionEvent event) {
         onButtonPressed(event, "exp");
+    }
+
+    private Character askForChar(String title) {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle(title);
+        dialog.setHeaderText("Insert variable here.");
+        dialog.setContentText("You can insert letter from a to z.");
+        dialog.showAndWait();
+        String s = dialog.getResult();
+        
+        while(s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
+            showAlert("You must insert only 1 letter.");
+            dialog.showAndWait();
+            s = dialog.getResult();
+        }
+        
+        return (s != null) ? s.charAt(0) : null;
     }
 
 }
