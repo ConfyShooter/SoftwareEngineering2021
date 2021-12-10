@@ -36,10 +36,9 @@ public class Operations {
      * @param c
      */
     public Operations(Calculator c) {
-        //this.c = c;
         userOperations = new LinkedHashMap<>();
         userOpNames = new LinkedHashSet<>();
-        standardOperations = StandardOperations.getStandardOperations(c);
+        standardOperations = new StandardOperations(c);
     }
 
     /**
@@ -97,12 +96,9 @@ public class Operations {
      * @return Command object or null if the name isn't a valid operation.
      */
     public Command getOperationsCommand(String name) {
-        UserCommand c = (UserCommand) userOperations.get(name);
-        if(c != null) {
-            if(!c.isExecutable())
-                throw new ExecuteException("The implementation of function '" + name + "' has been deleted.");
+        Command c = userOperations.get(name);
+        if(c != null)
             return c;
-        }
         else
             return standardOperations.getCommand(name);
     }

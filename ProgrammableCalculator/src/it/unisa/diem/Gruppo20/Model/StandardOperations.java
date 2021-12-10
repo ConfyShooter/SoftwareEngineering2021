@@ -19,7 +19,7 @@ public class StandardOperations {
      *
      * @param c
      */
-    private StandardOperations(Calculator c) {
+    public StandardOperations(Calculator c) {
         this.c = c;
         standardOpMap = new HashMap<>(mapCapacity);
         initializeBasicMap();  
@@ -228,9 +228,9 @@ public class StandardOperations {
         
         for (char current = 'a'; current <= 'z'; current++) {
             standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
-            standardOpMap.put("<" + String.valueOf(current), pushVariableCommand(current));
-            standardOpMap.put("+" + String.valueOf(current), pushVariableCommand(current));
-            standardOpMap.put("-" + String.valueOf(current), pushVariableCommand(current));
+            standardOpMap.put("<" + String.valueOf(current), pullVariableCommand(current));
+            standardOpMap.put("+" + String.valueOf(current), sumVariableCommand(current));
+            standardOpMap.put("-" + String.valueOf(current), subtractVariableCommand(current));
         }
     }
 }

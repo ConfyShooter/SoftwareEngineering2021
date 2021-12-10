@@ -491,10 +491,12 @@ public class Calculator {
     }
 
     /**
-     *
+     * Performs the arctan of the last element from the stack 
+     * and store the result as last element onto the stack.
      */
     public void arcTan() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().atan());
     }
 
     /**

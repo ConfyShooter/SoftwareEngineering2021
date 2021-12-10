@@ -180,11 +180,9 @@ public class Complex {
     public Complex squareRoot() {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
-        
-        Double module = mod();
-        Double phase = arg();
 
-        Double r = Math.sqrt(module);
+        Double r = Math.sqrt(mod());
+        Double phase = arg();
 
         return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
     }
@@ -282,8 +280,9 @@ public class Complex {
     public Complex atan() {
         //atan(z) = -j/2*ln((1+jz)/(1-jz))
         Complex one = new Complex(1d, 0d);
+        Complex halfImg = new Complex(0d, -0.5);
         Complex log = multiply(ImaginaryUnit).plus(one).division(one.minus(multiply(ImaginaryUnit))).log();
-        return log.multiply(ImaginaryUnit.division(new Complex(2d, 0d))).invert();
+        return halfImg.multiply(log);
     }
 
     /**
@@ -330,7 +329,7 @@ public class Complex {
      * negative or if real and imaginary part are 0.
      */
     public Complex log() {
-        if (real <= 0 && imaginary == 0) {
+        if (real == 0 && imaginary == 0) {
             throw new ArithmeticException("Impossible to perform the log on this complex number.");
         }
         return new Complex(Math.log(mod()), arg());
