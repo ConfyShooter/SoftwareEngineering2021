@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Concrete class that implements Command. It represent a user-defined operation
- * made by a sequence of Command.
+ * Concrete class that implements Command. Represents a user-defined operation
+ * perofomed by a sequence of Command.
  *
  * @author Team 20
  */
@@ -16,7 +16,7 @@ public class UserCommand implements Command {
     private final List<Command> commands;
 
     /**
-     * Create a new UserCommand object.
+     * Creates a new UserCommand object.
      */
     public UserCommand() {
         this.commandName = new ArrayList<>();
@@ -24,7 +24,7 @@ public class UserCommand implements Command {
     }
 
     /**
-     * Add m to the sequence of operations of this UserCommand.
+     * Adds m to the sequence of operations of this UserCommand.
      *
      * @param name The name of the operation that the Command execute.
      * @param c The command that must be added to the user-defined operation.
@@ -38,7 +38,7 @@ public class UserCommand implements Command {
     }
 
     /**
-     * Execute this UserCommand.
+     * Executes this UserCommand.
      *
      * @throws ExecuteException if the user-defined operation calls another
      * user-defined operation that was deleted from function list.
@@ -54,7 +54,7 @@ public class UserCommand implements Command {
     }
 
     /**
-     * Return the names of all operations performed by this UserCommand.
+     * Returns the names of all operations performed by this UserCommand.
      *
      * @return List of String.
      */
@@ -63,16 +63,17 @@ public class UserCommand implements Command {
     }
 
     /**
-     * Reset this UserCommand's operations and commands.
+     * Resets this UserCommand's operations and commands.
      */
     public void reset() {
         commands.clear();
         commandName.clear();
     }
-    
+
     /**
-     * Return true if this UserCommand is executable else false.
-     * @return a boolean that represent if this command is executable.
+     * Returns true if this UserCommand is executable, else false.
+     *
+     * @return A boolean that represent if this command is executable.
      */
     public boolean isExecutable() {
         return !(commands.isEmpty() || commandName.isEmpty());

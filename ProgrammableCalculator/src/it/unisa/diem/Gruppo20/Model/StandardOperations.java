@@ -16,7 +16,7 @@ public class StandardOperations {
     private static final int mapCapacity = 64;
 
     /**
-     * Create an object of this class, using c for operation execution. An
+     * Creates an object of this class, using c to perform the operation. An
      * HashMap is used to save basic and advanced calculator operations.
      *
      * @param c
@@ -28,34 +28,35 @@ public class StandardOperations {
     }
 
     /**
-     * Return an object of this class if it already exists, or it build a new
-     * object and return it.
+     * Returns an object of this class if it already exists, or it builds a new
+     * object and returns it.
      *
-     * @param c A Calculator object
-     * @return an object of StandardOperations class.
+     * @param c A Calculator object.
+     * @return An object of StandardOperations class.
      */
     public static StandardOperations getStandardOperations(Calculator c) {
-        if (obj == null)
+        if (obj == null) {
             obj = new StandardOperations(c);
+        }
         return obj;
     }
 
     /**
-     * Check if the key label a basic operation defined in the data map.
+     * Checks if the key label a basic operation defined in the data map.
      *
      * @param key The basic operation key.
-     * @return true if it's a basic operation, otherwise false;
+     * @return true if it's a basic operation, otherwise false.
      */
     public boolean isAStandardOperation(String key) {
-        return  standardOpMap.containsKey(key)
-                ||  key.matches(">[a-z]{1}")
-                ||  key.matches("<[a-z]{1}")
-                ||  key.matches("\\+[a-z]{1}")
-                ||  key.matches("\\-[a-z]{1}");
+        return standardOpMap.containsKey(key)
+                || key.matches(">[a-z]{1}")
+                || key.matches("<[a-z]{1}")
+                || key.matches("\\+[a-z]{1}")
+                || key.matches("\\-[a-z]{1}");
     }
 
     /**
-     * Return the Command object that performs the basic operation labeled with
+     * Returns the Command object that performs the basic operation labeled with
      * the input passed as a parameter.
      *
      * @param input The operation that must be returned.
@@ -84,11 +85,11 @@ public class StandardOperations {
     }
 
     /**
-     * Return a Command object that performs an insert of the Complex number
+     * Returns a Command object that performs an insert of the Complex number
      * passed as a parameter.
      *
-     * @param input a String that represent the Complex number.
-     * @return a Command object.
+     * @param input A String that represent the Complex number.
+     * @return A Command object.
      * @throws ParseException if the input string is not a valid number.
      */
     public Command insertNumberCommand(String input) {
