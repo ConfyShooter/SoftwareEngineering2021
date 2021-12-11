@@ -1,6 +1,5 @@
 package it.unisa.diem.Gruppo20.Model;
 
-import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
