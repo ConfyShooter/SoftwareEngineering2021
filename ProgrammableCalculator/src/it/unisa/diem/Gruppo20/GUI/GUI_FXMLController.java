@@ -120,26 +120,19 @@ public class GUI_FXMLController implements Initializable {
             showAlert("General error.");
         }
 
+        //DISABILITIAMO IL FUNCTION BOX???
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
 
     @FXML
     private void onPlusPressed(ActionEvent event) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " +");
-        } else {
-            inputText.setText("+");
-        }
+        onButtonPressed(event, "+");
     }
 
     @FXML
     private void onMinusPressed(ActionEvent event) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " -");
-        } else {
-            inputText.setText("-");
-        }
+        onButtonPressed(event, "-");
     }
 
     @FXML

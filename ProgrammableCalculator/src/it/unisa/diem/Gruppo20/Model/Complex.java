@@ -342,19 +342,25 @@ public class Complex {
     }
 
     /**
-     *
-     * @return
+     * Performs the exponential of a complex number z.
+     * 
+     * @return a Complex Number.
      */
     public Complex exp() {
-        return null;
+        //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
+        double r = Math.exp(real);
+        if (imaginary == 0) {
+            return new Complex(r,0d);
+        }
+        return new Complex(r * Math.cos(imaginary), r*Math.sin(imaginary));
+        //return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
     }
 
     /**
      * Performs the natural logarithm of a complex number.
      *
      * @return A complex number.
-     * @throws ArithmeticException if the imaginary is 0 and the real part
-     * negative or if real and imaginary part are 0.
+     * @throws ArithmeticException if both real and imaginary part are 0.
      */
     public Complex log() {
         if (real == 0 && imaginary == 0) {

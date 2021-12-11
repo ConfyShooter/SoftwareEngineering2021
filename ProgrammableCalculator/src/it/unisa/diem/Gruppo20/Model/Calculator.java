@@ -43,91 +43,6 @@ public class Calculator {
         return map;
     }
 
-    /**
-     * This method executes the parsing of the string passed as param. String
-     * that contains a command to be executed by Calculator.
-     *
-     * @param input String that contains a command to be executed by Calculator.
-     * @throws java.lang.NumberFormatException if it fails to insert a number on
-     * the stack.
-     * @throws java.lang.ArithmeticException if it fails to do an operation on
-     * complex numbers.
-     * @throws java.util.NoSuchElementException if the stack not contains enough
-     * elements to perform a specific operation.
-     * @throws ParseException if input is blank or there is a unknown error.
-     */
-    /*private void parsing(String input) throws Exception {
-        input = input.replaceAll("\\s+", "").toLowerCase();
-        if (input.isBlank()) {
-            throw new ParseException("Input string is empty!");
-        }
-
-        char sequence[] = input.toCharArray();
-        int length = input.length();
-
-        for (int i = 0; i < length; i++) {
-            if ((sequence[i] >= '0' && sequence[i] <= '9')) { // in anycase in which the user want to insert a number
-                insertNumber(parseNumber(input));
-                return;
-            }
-        }
-        switch (input) {
-            case "j":
-                insertNumber(new Complex(0.0, 1.0));
-                return;
-            case "+":
-                sum();
-                return;
-            case "-":
-                subtract();
-                return;
-            case "*":
-                multiply();
-                return;
-            case "/":
-                division();
-                return;
-            case "+-":
-                invertSign();
-                return;
-            case "sqrt":
-                sqrt();
-                return;
-            case "clear":
-                clear();
-                return;
-            case "drop":
-                drop();
-                return;
-            case "dup":
-                dup();
-                return;
-            case "swap":
-                swap();
-                return;
-            case "over":
-                over();
-                return;
-            case "save":
-                saveVariables();
-                return;
-            case "restore":
-                restoreVariables();
-                return;
-        }
-        if (input.matches(">[a-z]{1}")) {
-            pushVariable(input.charAt(1));
-        } else if (input.matches("<[a-z]{1}")) {
-            pullVariable(input.charAt(1));
-        } else if (input.matches("\\+[a-z]{1}")) {
-            sumVariable(input.charAt(1));
-        } else if (input.matches("\\-[a-z]{1}")) {
-            subtractVariable(input.charAt(1));
-        } else {
-            throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
-        }
-    }*/
-
     private double findImaginary(String s) throws NumberFormatException {
         switch (s) {
             case "j", "+j" -> {
@@ -423,8 +338,7 @@ public class Calculator {
     }
 
     /**
-     * This method restores the variables stored in the auxiliary deque in a
-     * map.
+     * This method restores the variables stored in the auxiliary deque in a map.
      *
      * @throws java.util.NoSuchElementException if the auxiliary deque is empty.
      */
@@ -433,8 +347,8 @@ public class Calculator {
     }
 
     /**
-     * Calculates the modulus of the last element inserted onto the stack and
-     * stores the result at the top of it.
+     * Takes the last element inserted on the stack, then performs the modulus
+     * of that number and store the result value on top of the stack.
      */
     public void mod() {
         checkStackSize(1);
@@ -442,8 +356,8 @@ public class Calculator {
     }
 
     /**
-     * Calculates the phase of the last element inserted onto the stack and
-     * stores the result at the top of it (in radians).
+     * Takes the last element inserted on the stack, then performs the phase
+     * of that number and store the result value on top of the stack.
      */
     public void arg() {
         checkStackSize(1);
@@ -451,8 +365,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the cos of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the cosine
+     * of that number and store the result value on top of the stack.
      */
     public void cos() {
         checkStackSize(1);
@@ -460,8 +374,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the arccos of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the arccosine
+     * of that number and store the result value on top of the stack.
      */
     public void arcCos() {
         checkStackSize(1);
@@ -469,8 +383,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the sin of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the cosine
+     * of that number and store the result value on top of the stack.
      */
     public void sin() {
         checkStackSize(1);
@@ -478,8 +392,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the arcsin of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the arcsine
+     * of that number and store the result value on top of the stack.
      */
     public void arcSin() {
         checkStackSize(1);
@@ -487,8 +401,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the tan of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the tangent
+     * of that number and store the result value on top of the stack.
      */
     public void tan() {
         checkStackSize(1);
@@ -496,8 +410,8 @@ public class Calculator {
     }
 
     /**
-     * Performs the arctan of the last element from the stack 
-     * and store the result as last element onto the stack.
+     * Takes the last element inserted on the stack, then performs the arctangent
+     * of that number and store the result value on top of the stack.
      */
     public void arcTan() {
         checkStackSize(1);
@@ -505,33 +419,30 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack and calculates the 2nd
-     * degree power of that number. Then puts the result value on top of the
-     * stack.
+     * Takes the last element inserted on the stack, then performs the 2nd degree
+     * power of that number and store the result value on top of the stack.
      */
     public void pow() {
         checkStackSize(1);
-
-        Complex resolve = data.pop();
-        data.push(resolve.pow(2));
+        data.push(data.pop().pow(2));
     }
 
     /**
-     *
+     * Takes the last element inserted on the stack, then performs the exponential
+     * of that number and store the result value on top of the stack.
      */
     public void exp() {
-        return;
+        checkStackSize(1);
+        data.push(data.pop().exp());
     }
 
     /**
-     * Performs the natural logarithm on the calculator and saves the result at
-     * the top of the stack.
+     * Takes the last element inserted on the stack, then performs the natural 
+     * logarithm of that number and store the result value on top of the stack.
      */
     public void log() {
         checkStackSize(1);
-
-        Complex resolve = data.pop();
-        data.push(resolve.log());
+        data.push(data.pop().log());
     }
 
     private void checkStackSize(int k) {
@@ -539,5 +450,4 @@ public class Calculator {
             throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");
         }
     }
-
 }

@@ -391,29 +391,49 @@ public class ComplexTest {
         assertComplexEquals(expected, operand2Real.pow(3));
     }
 
-    @Test()
-    public void testExpException() {
-
-    }
-
     @Test
     public void testExp() {
+        expected.setReal(1d);
+        assertComplexEquals(expected, zero.exp());
 
-    }
+        expected.setReal(0.00004539);
+        assertComplexEquals(expected, operand1Real.exp());
 
-    @Test()
-    public void testLogException() {
+        expected.setReal(403.42879349);
+        assertComplexEquals(expected, operand2Real.exp());
 
+        expected.setReal(0.96496603);
+        expected.setImaginary(0.26237485);
+        assertComplexEquals(expected, operand1Imaginary.exp());
+
+        expected.setReal(-0.95241298);
+        expected.setImaginary(-0.30481062);
+        assertComplexEquals(expected, operand2Imaginary.exp());
+
+        expected.setReal(-13.12878308);
+        expected.setImaginary(-15.20078446);
+        assertComplexEquals(expected, operand1.exp());
+
+        expected.setReal(0.04953834);
+        expected.setImaginary(-0.00497041);
+        assertComplexEquals(expected, operand2.invert().exp());
     }
 
     @Test(expected = ArithmeticException.class)
-    public void testLog() {
+    public void testLogException() {
         zero.log();
+    }
 
-        operand1Real.log();
+    @Test
+    public void testLog() {
+        
+        expected.setReal(2.30258509);
+        expected.setImaginary(3.14159265);
+        assertComplexEquals(expected, operand1Real.log());
+        
 
         expected.setReal(3.9120230054);
-        expected.setImaginary(1.57079632679);
+        expected.setImaginary(-1.57079632679);
         assertComplexEquals(expected, operand1Imaginary.log());
 
         expected.setReal(1.60943791243);
