@@ -24,7 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 
 /**
- * FXML Controller class
+ * Controller class for the management of the calculator's GUI.
  *
  * @author Team 20
  */
