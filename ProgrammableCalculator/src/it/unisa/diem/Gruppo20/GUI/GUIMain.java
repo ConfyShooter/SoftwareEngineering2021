@@ -8,6 +8,7 @@ import javafx.fxml.*;
 
 /**
  * Main class of the calculator's GUI.
+ *
  * @author Team 20
  */
 public class GUIMain extends Application {
