@@ -349,11 +349,11 @@ public class Complex {
     public Complex exp() {
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
-        if (imaginary == 0) {
+        /*if (imaginary == 0) {
             return new Complex(r, 0d);
-        }
-        return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
-        //return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
+        }*/
+        //return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
+        return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
     }
 
     /**

@@ -1,6 +1,5 @@
 package it.unisa.diem.Gruppo20.Model;
 
-import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.NoSuchElementException;
@@ -42,6 +41,94 @@ public class Calculator {
     public Variables getMap() {
         return map;
     }
+    
+    /**
+     * This method executes the parsing of the string passed as param. String
+     * that contains a command to be executed by Calculator.
+     * During the last Sprint this method has been deprecated by StandardOperations class.
+     *
+     * @param input String that contains a command to be executed by Calculator.
+     * @throws java.lang.NumberFormatException if it fails to insert a number on
+     * the stack.
+     * @throws java.lang.ArithmeticException if it fails to do an operation on
+     * complex numbers.
+     * @throws java.util.NoSuchElementException if the stack not contains enough
+     * elements to perform a specific operation.
+     * @throws RuntimeException if input is blank or there is a unknown error.
+     */
+    @Deprecated
+    public void parsing(String input) throws Exception {
+        input = input.replaceAll("\\s+", "").toLowerCase();
+        if (input.isBlank()) {
+            throw new RuntimeException("Input string is empty!");
+        }
+
+        char sequence[] = input.toCharArray();
+        int length = input.length();
+
+        for (int i = 0; i < length; i++) {
+            if ((sequence[i] >= '0' && sequence[i] <= '9')) { // in anycase in which the user want to insert a number
+                insertNumber(parseNumber(input));
+                return;
+            }
+        }
+        switch (input) {
+            case "j":
+                insertNumber(new Complex(0.0, 1.0));
+                return;
+            case "+":
+                sum();
+                return;
+            case "-":
+                subtract();
+                return;
+            case "*":
+                multiply();
+                return;
+            case "/":
+                division();
+                return;
+            case "+-":
+                invertSign();
+                return;
+            case "sqrt":
+                sqrt();
+                return;
+            case "clear":
+                clear();
+                return;
+            case "drop":
+                drop();
+                return;
+            case "dup":
+                dup();
+                return;
+            case "swap":
+                swap();
+                return;
+            case "over":
+                over();
+                return;
+            case "save":
+                saveVariables();
+                return;
+            case "restore":
+                restoreVariables();
+                return;
+        }
+        if (input.matches(">[a-z]{1}")) {
+            pushVariable(input.charAt(1));
+        } else if (input.matches("<[a-z]{1}")) {
+            pullVariable(input.charAt(1));
+        } else if (input.matches("\\+[a-z]{1}")) {
+            sumVariable(input.charAt(1));
+        } else if (input.matches("\\-[a-z]{1}")) {
+            subtractVariable(input.charAt(1));
+        } else {
+            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
+        }
+    }
+
 
     private double findImaginary(String s) throws NumberFormatException {
         switch (s) {
