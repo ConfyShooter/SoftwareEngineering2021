@@ -382,7 +382,7 @@ public class Complex {
     /**
      * Returns the approximated cos of num, normally the Math.cos(pi/2) or
      * Math.cos(-pi/2) will return a very low floating point but not zero;
-     * instead this method return 0.
+     * instead this method returns 0.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated cos of num.
@@ -396,7 +396,7 @@ public class Complex {
     /**
      * Returns the approximated sin of num, normally the Math.sin(x * pi) with
      * x=1,2,3 ecc will return a very low floating point but not zero; instead
-     * this method return 0.
+     * this method returns 0.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated sin of num.
