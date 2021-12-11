@@ -350,9 +350,9 @@ public class Complex {
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
         if (imaginary == 0) {
-            return new Complex(r,0d);
+            return new Complex(r, 0d);
         }
-        return new Complex(r * Math.cos(imaginary), r*Math.sin(imaginary));
+        return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
         //return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
     }
 
@@ -369,16 +369,30 @@ public class Complex {
         return new Complex(Math.log(mod()), arg());
     }
     
-    private Double cosApproximation(double phase) {
+    /**
+     * This method return the approximated cos of num, 
+     * normally the Math.cos(pi/2) or Math.cos(-pi/2) will return a very low floating point but not zero;
+     * instead this method return 0.
+     * @param num An angle, in radians.
+     * @return A Double represents the approximated cos of num.
+     */
+    private Double cosApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
-        return (Double.valueOf(f.format((Math.cos(phase) + 1))) - 1);
+        return (Double.valueOf(f.format((Math.cos(num) + 1))) - 1);
     }
     
-    private Double sinApproximation(double phase) {
+    /**
+     * This method return the approximated sin of num, 
+     * normally the Math.sin(x * pi) with x=1,2,3 ecc will return a very low floating point but not zero;
+     * instead this method return 0.
+     * @param num An angle, in radians.
+     * @return A Double represents the approximated sin of num.
+     */
+    private Double sinApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
-        return (Double.valueOf(f.format((Math.sin(phase) + 1))) - 1);
+        return (Double.valueOf(f.format((Math.sin(num) + 1))) - 1);
     }
 
 }

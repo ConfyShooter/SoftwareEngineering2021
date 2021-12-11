@@ -3,11 +3,13 @@ package it.unisa.diem.Gruppo20.Model;
 import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  *
  * @author Team 20
  */
 public class StandardOperations {
+
     private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
@@ -24,39 +26,47 @@ public class StandardOperations {
         standardOpMap = new HashMap<>(mapCapacity);
         initializeBasicMap();
     }
-    
+
     /**
-     * Return an object of this class if it already exists, or it build a new object and return it.
+     * Return an object of this class if it already exists, or it build a new
+     * object and return it.
+     *
      * @param c A Calculator object
      * @return an object of StandardOperations class.
      */
     public static StandardOperations getStandardOperations(Calculator c) {
-        if(obj == null)
+        if (obj == null)
             obj = new StandardOperations(c);
         return obj;
     }
-    
+
     /**
-     *  Check if the key label a basic operation defined in the data map.
+     * Check if the key label a basic operation defined in the data map.
+     *
      * @param key The basic operation key.
      * @return true if it's a basic operation, otherwise false;
      */
     public boolean isAStandardOperation(String key) {
-        return standardOpMap.containsKey(key);
+        return  standardOpMap.containsKey(key)
+                ||  key.matches(">[a-z]{1}")
+                ||  key.matches("<[a-z]{1}")
+                ||  key.matches("\\+[a-z]{1}")
+                ||  key.matches("\\-[a-z]{1}");
     }
-    
+
     /**
-     * Return the Command object that performs the basic operation labeled with the input
-     * passed as a parameter.
+     * Return the Command object that performs the basic operation labeled with
+     * the input passed as a parameter.
      *
      * @param input The operation that must be returned.
      * @return Command object.
      */
     public Command getCommand(String input) {
         Command comm = standardOpMap.get(input);
-        if(comm != null)
+        if (comm != null) {
             return comm;
-        
+        }
+
         if (input.matches(">[a-z]{1}")) {
             comm = pushVariableCommand(input.charAt(1));
         } else if (input.matches("<[a-z]{1}")) {
@@ -68,13 +78,15 @@ public class StandardOperations {
         } else {
             return null;
         }
-        
+
         standardOpMap.put(input, comm);
         return comm;
     }
-    
+
     /**
-     *  Return a Command object that performs an insert of the Complex number passed as a parameter. 
+     * Return a Command object that performs an insert of the Complex number
+     * passed as a parameter.
+     *
      * @param input a String that represent the Complex number.
      * @return a Command object.
      * @throws ParseException if the input string is not a valid number.
@@ -155,47 +167,47 @@ public class StandardOperations {
     private Command restoreVariablesCommand() {
         return c::restoreVariables;
     }
-    
+
     private Command modCommand() {
         return c::mod;
     }
-    
+
     private Command argCommand() {
         return c::arg;
     }
-    
+
     private Command cosCommand() {
         return c::cos;
     }
-    
+
     private Command arcCosCommand() {
         return c::arcCos;
     }
-            
+
     private Command sinCommand() {
         return c::sin;
     }
-    
+
     private Command arcSinCommand() {
         return c::arcSin;
     }
-    
+
     private Command tanCommand() {
         return c::tan;
     }
-    
+
     private Command arcTanCommand() {
         return c::arcTan;
     }
-    
+
     private Command powCommand() {
         return c::pow;
     }
-    
+
     private Command expCommand() {
         return c::exp;
     }
-    
+
     private Command logCommand() {
         return c::log;
     }
@@ -225,7 +237,7 @@ public class StandardOperations {
         standardOpMap.put("log", logCommand());
         standardOpMap.put("save", saveVariablesCommand());
         standardOpMap.put("restore", restoreVariablesCommand());
-        
+
         /*for (char current = 'a'; current <= 'z'; current++) {
             standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
             standardOpMap.put("<" + String.valueOf(current), pullVariableCommand(current));
