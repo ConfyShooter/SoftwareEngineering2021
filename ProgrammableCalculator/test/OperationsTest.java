@@ -80,6 +80,11 @@ public class OperationsTest {
         assertNotNull(operations.getOperationsCommand(">j"));
 
         assertNull(operations.getOperationsCommand("notincluded"));
+        char c = 'z' + 1;
+        assertNull(operations.getOperationsCommand(">" + String.valueOf(c)));
+        c = 'a' - 1;
+        assertNull(operations.getOperationsCommand("<" + String.valueOf(c)));
+        
     }
 
     @Test
