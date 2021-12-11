@@ -30,7 +30,7 @@ public class Operations {
     private final Set<String> userOpNames;
 
     /**
-     * Create an object of this class, using c for operation execution. An
+     * Creates an object of this class, using c for operation execution. An
      * HashMap is used to save user-defined operations.
      *
      * @param c
@@ -42,16 +42,18 @@ public class Operations {
     }
 
     /**
-     * Parse a sequence of operations and add a sequence of command to the map.
+     * Parses a sequence of operations and adds a sequence of command to the
+     * map.
      *
      * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3...".
      * @throws ParseException
      */
     public void parseOperations(String s) throws ParseException {
         int index = s.indexOf(":");
-        if (index == -1)
+        if (index == -1) {
             throw new ParseException("To make an operation don't check Function box,\n"
                     + " to insert a new user-operation separe name and definition with ':'.");
+        }
 
         String name = s.substring(0, index).trim().toLowerCase();
         if (standardOperations.isAStandardOperation(name)) {
@@ -64,32 +66,32 @@ public class Operations {
         }
 
         UserCommand opCommand = (UserCommand) userOperations.get(name); //check if already exists a user-defined operation with same name
-        if (opCommand == null)
+        if (opCommand == null) {
             opCommand = new UserCommand(); //if it's a new operation create the Command object
-        else
+        } else {
             opCommand.reset(); //if already exists perform a overwrite(or edit)
+        }
 
         String[] seq = s.split("\\s+");
-
-        for (String input: seq) {
+        for (String input : seq) {
             input = input.toLowerCase();
-
             Command comm = userOperations.get(input); //checking if it's an already user-defined operation
-            if (comm == null)
+            if (comm == null) {
                 comm = standardOperations.getCommand(input); //checking if it's a basic operation
-
-            if (comm != null)
+            }
+            if (comm != null) {
                 opCommand.add(input, comm);
-            else
+            } else {
                 opCommand.add(input, standardOperations.insertNumberCommand(input));
+            }
         }
-        
+
         userOperations.put(name, opCommand);
         userOpNames.add(name);
     }
 
     /**
-     * Return the Command object that performs the operation with the name
+     * Returns the Command object that performs the operation with the name
      * passed as a parameter.
      *
      * @param name The operation that must be returned.
@@ -97,10 +99,11 @@ public class Operations {
      */
     public Command getOperationsCommand(String name) {
         Command c = userOperations.get(name);
-        if(c != null)
+        if (c != null) {
             return c;
-        else
+        } else {
             return standardOperations.getCommand(name);
+        }
     }
 
     /**
@@ -108,7 +111,8 @@ public class Operations {
      * operation that has the name passed as a parameter.
      *
      * @param name The user-defined operation name.
-     * @return List of String or null if the isn't a valid user-defined operation.
+     * @return List of String or null if the isn't a valid user-defined
+     * operation.
      */
     public List<String> getOperationsNames(String name) {
         UserCommand command = (UserCommand) userOperations.get(name);
@@ -119,7 +123,7 @@ public class Operations {
     }
 
     /**
-     * Execute the user-defined operation that has the name passed as a
+     * Executes the user-defined operation that has the name passed as a
      * parameter.
      *
      * @param name The user-defined operation name.
@@ -127,21 +131,23 @@ public class Operations {
     public void executeOperation(String name) throws ExecuteException {
         UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
-            if(!command.isExecutable())
+            if (!command.isExecutable()) {
                 throw new ExecuteException("The implementation of function '" + name + "' has been deleted.");
+            }
             command.execute();
             return;
         }
-        
+
         Command comm = standardOperations.getCommand(name);
-        if(comm != null)
+        if (comm != null) {
             comm.execute();
-        else
+        } else {
             throw new ExecuteException("Can't execute this operation, can't find operation with name " + name + ".");
+        }
     }
 
     /**
-     * Return the names of all user-defined operations.
+     * Returns the names of all user-defined operations.
      *
      * @return Set of String.
      */
@@ -150,7 +156,7 @@ public class Operations {
     }
 
     /**
-     * Remove the user-defined operation that has the name passed as a
+     * Removes the user-defined operation that has the name passed as a
      * parameter.
      *
      * @param name The user-defined operation name.
@@ -165,7 +171,7 @@ public class Operations {
     }
 
     /**
-     * Return a string of definition of a user-defined operation.
+     * Returns a string of definition of a user-defined operation.
      *
      * @param name The name of the user-defined operation whose we want to
      * print.
@@ -184,7 +190,7 @@ public class Operations {
     }
 
     /**
-     * Save on a default file the user-defined operations.
+     * Saves on a default file the user-defined operations.
      *
      * @param f The file where save the user-defined operations (default =
      * "functions.txt").
@@ -199,10 +205,10 @@ public class Operations {
     }
 
     /**
-     * Reload the previuses user-defined operations from the default file.
+     * Reloads the previuses user-defined operations from the default file.
      *
      * @param f The file where re-load the user-defined operations (default =
-     * "functions.txt")
+     * "functions.txt").
      * @throws java.io.IOException
      */
     public void loadFromFile(File f) throws IOException {

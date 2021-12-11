@@ -23,7 +23,7 @@ public class Variables {
     }
 
     /**
-     * Create an object of this class. An HashMap is used to save Complex
+     * Creates an object of this class. An HashMap is used to save Complex
      * numbers corresponding to a letter in the range [a-z]. Instead, an
      * ArrayDeque is used to save and restore the map.
      */
@@ -40,8 +40,7 @@ public class Variables {
     }
 
     /**
-     * This method gets the Complex number corresponding to the key c inside the
-     * map.
+     * Gets the Complex number corresponding to the key c inside the map.
      *
      * @param c Is the key of the map.
      * @return Complex Object corresponding to the key c.
@@ -57,55 +56,48 @@ public class Variables {
     }
 
     /**
-     * This method sets the Complex number passed as param as value of the
-     * variable c.
+     * Sets the Complex number passed as param as value of the variable c.
      *
      * @param c Is the key of the map.
      * @param number Is the Complex Object that we want to insert in the
      * variable c.
-     * @throws VariableKeyException if the key is not valid.
      */
-    public void setVariable(char c, Complex number) throws VariableKeyException {
+    public void setVariable(char c, Complex number) {
         data.put(checkKey(c), number);
     }
 
     /**
-     * This method sums the Complex number passed as param to the value of the
-     * variable c and stores the result of the sum as the value of variable c.
+     * Sums the Complex number passed as param to the value of the variable c
+     * and stores the result of the sum as the value of variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to sum to the variable
      * c.
-     * @throws VariableKeyException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void sumVariable(char c, Complex number) throws VariableKeyException {
+    public void sumVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.plus(number);
         setVariable(c, result);
     }
 
     /**
-     * This method subtracts the Complex number passed as param to the value of
-     * the variable c and stores the result of subtraction as value of the
-     * variable c.
+     * Subtracts the Complex number passed as param to the value of the variable
+     * c and stores the result of subtraction as value of the variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to subtract to the
      * variable c.
-     * @throws VariableKeyException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void subVariable(char c, Complex number) throws VariableKeyException {
+    public void subVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.minus(number);
         setVariable(c, result);
     }
 
     /**
-     * This method backups the variables of current map into a backup stack.
+     * Backups the variables of current map into a backup stack.
      *
-     * @throws RuntimeException if there aren't variables to be saved.
+     * @throws NoSuchElementException if there aren't variables to be saved.
      */
     public void backup() throws NoSuchElementException {
         if (data.isEmpty()) {
@@ -117,8 +109,8 @@ public class Variables {
     }
 
     /**
-     * This method restores the variables with the latest backup contained from
-     * the stack, removing it.
+     * Restores the variables with the latest backup contained from the stack,
+     * removing it.
      *
      * @throws NoSuchElementException if there aren't elements contained in the
      * backup stack.
@@ -131,6 +123,13 @@ public class Variables {
         data.putAll(backupsStack.pop());
     }
 
+    /**
+     * Private method used to check if the param c is valid entry in the map.
+     *
+     * @param c Is the character to check if is acceptable key for the map.
+     * @return Key of the map that is a char in the range [a-z].
+     * @throws VariableKeyException if the param c not represent a valid entry.
+     */
     private char checkKey(char c) throws VariableKeyException {
         char key = Character.toLowerCase(c);
         if (key < 'a' || key > 'z') {
