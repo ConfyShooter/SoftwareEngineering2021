@@ -46,7 +46,7 @@ public class OperationsTest {
 
     @Test(expected = RuntimeException.class)
     public void testParseOperationsExceptionName() {
-        operations.parseOperations("   <a :  clear  4 8 + ");
+        operations.parseOperations("   clear :  clear  4 8 + ");//PROBLEMA CON VARIABILI
     }
     
     @Test(expected = RuntimeException.class)
