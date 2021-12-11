@@ -73,7 +73,7 @@ public class Operations {
         }
 
         String[] seq = s.split("\\s+");
-        for (String input : seq) {
+        for (String input : seq) { //analyzing list of operation
             input = input.toLowerCase();
             Command comm = userOperations.get(input); //checking if it's an already user-defined operation
             if (comm == null) {
