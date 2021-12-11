@@ -5,7 +5,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represents an abstraction 
+ * This class manages the Standard calculator's Operations using the Command
+ * pattern to execute insert numbers, arithmetic, trigonometric,
+ * trascendental and on variable ones.
+ * 
+ * 
  * @author Team 20
  */
 public class StandardOperations {
@@ -95,7 +99,7 @@ public class StandardOperations {
         try {
             Complex number = c.parseNumber(input);
             return () -> c.insertNumber(number);
-        } catch (RuntimeException ex) {
+        } catch (NumberFormatException ex) {
             throw new ParseException("Can't parse \"" + input + "\", try to reinsert it.");
         }
     }
@@ -237,12 +241,5 @@ public class StandardOperations {
         standardOpMap.put("log", logCommand());
         standardOpMap.put("save", saveVariablesCommand());
         standardOpMap.put("restore", restoreVariablesCommand());
-
-        /*for (char current = 'a'; current <= 'z'; current++) {
-            standardOpMap.put(">" + String.valueOf(current), pushVariableCommand(current));
-            standardOpMap.put("<" + String.valueOf(current), pullVariableCommand(current));
-            standardOpMap.put("+" + String.valueOf(current), sumVariableCommand(current));
-            standardOpMap.put("-" + String.valueOf(current), subtractVariableCommand(current));
-        }*/
     }
 }

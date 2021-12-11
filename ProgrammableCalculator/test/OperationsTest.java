@@ -28,7 +28,7 @@ import static org.junit.Assert.*;
 public class OperationsTest {
 
     private Operations operations;
-    private final Calculator c = new Calculator();
+    private Calculator c;
     private File testFile;
 
     public OperationsTest() {
@@ -36,6 +36,7 @@ public class OperationsTest {
 
     @Before
     public void setUp() throws Exception {
+        c = new Calculator();
         operations = new Operations(c);
         Field instance = StandardOperations.class.getDeclaredField("obj");
         instance.setAccessible(true);
