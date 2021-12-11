@@ -63,9 +63,8 @@ public class Variables {
      * @param c Is the key of the map.
      * @param number Is the Complex Object that we want to insert in the
      * variable c.
-     * @throws VariableKeyException if the key is not valid.
      */
-    public void setVariable(char c, Complex number) throws VariableKeyException {
+    public void setVariable(char c, Complex number) {
         data.put(checkKey(c), number);
     }
 
@@ -76,10 +75,8 @@ public class Variables {
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to sum to the variable
      * c.
-     * @throws VariableKeyException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void sumVariable(char c, Complex number) throws VariableKeyException {
+    public void sumVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.plus(number);
         setVariable(c, result);
@@ -93,10 +90,8 @@ public class Variables {
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to subtract to the
      * variable c.
-     * @throws VariableKeyException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void subVariable(char c, Complex number) throws VariableKeyException {
+    public void subVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.minus(number);
         setVariable(c, result);
@@ -105,7 +100,7 @@ public class Variables {
     /**
      * This method backups the variables of current map into a backup stack.
      *
-     * @throws RuntimeException if there aren't variables to be saved.
+     * @throws NoSuchElementException if there aren't variables to be saved.
      */
     public void backup() throws NoSuchElementException {
         if (data.isEmpty()) {
@@ -131,6 +126,12 @@ public class Variables {
         data.putAll(backupsStack.pop());
     }
 
+    /**
+     * Private method used to check if the param c is valid entry in the map.
+     * @param c is the character to check if is acceptable key for the map.
+     * @return key of the map that is a char in the range [a-z].
+     * @throws VariableKeyException if the param c not represent a valid entry.
+     */
     private char checkKey(char c) throws VariableKeyException {
         char key = Character.toLowerCase(c);
         if (key < 'a' || key > 'z') {

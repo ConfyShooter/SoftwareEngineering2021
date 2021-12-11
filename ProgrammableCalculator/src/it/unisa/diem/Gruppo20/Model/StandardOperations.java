@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * This class represents an abstraction 
  * @author Team 20
  */
 public class StandardOperations {
@@ -13,7 +13,7 @@ public class StandardOperations {
     private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
-    private static final int mapCapacity = 64; //standard op are 28 + 104
+    private static final int mapCapacity = 64;
 
     /**
      * Create an object of this class, using c for operation execution. An
