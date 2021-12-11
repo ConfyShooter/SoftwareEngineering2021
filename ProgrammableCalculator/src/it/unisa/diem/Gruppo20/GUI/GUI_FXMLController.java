@@ -62,7 +62,6 @@ public class GUI_FXMLController implements Initializable {
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
     private final File defaultFile = new File("media/functions.txt");
-    
 
     /**
      * Initializes the controller class.
@@ -97,7 +96,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim().toLowerCase(); //get input from textField
-        
+
         try {
             Command comm = operations.getOperationsCommand(input); //search for an user or standard operation Command
             if (functionBox.isSelected()) { //if check box is selected
@@ -108,13 +107,14 @@ public class GUI_FXMLController implements Initializable {
             } else {
                 c.insertNumber(input);
             }
-            
+
             inputText.clear();
         } catch (NumberFormatException ex) {
             showAlert("Can't parse '" + inputText.getText() + "'.");
         } catch (RuntimeException ex) {
-            if (!functionBox.isSelected())
+            if (!functionBox.isSelected()) {
                 inputText.clear();
+            }
             showAlert(ex.getMessage());
         } catch (Exception ex) {
             showAlert("General error.");
@@ -188,29 +188,33 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onMinorPressed(ActionEvent event) {
         Character c = askForChar("Pull Variable");
-        if(c != null)
+        if (c != null) {
             onButtonPressed(event, "<" + c);
+        }
     }
 
     @FXML
     private void onMajorPressed(ActionEvent event) {
         Character c = askForChar("Push Variable");
-        if(c != null)
+        if (c != null) {
             onButtonPressed(event, ">" + c);
+        }
     }
-    
+
     @FXML
     private void onPlusVariablePressed(ActionEvent event) {
         Character c = askForChar("Sum Variable");
-        if(c != null)
+        if (c != null) {
             onButtonPressed(event, "+" + c);
+        }
     }
 
     @FXML
     private void onMinusVariablePressed(ActionEvent event) {
         Character c = askForChar("Subtract Variable");
-        if(c != null)
+        if (c != null) {
             onButtonPressed(event, "-" + c);
+        }
     }
 
     @FXML
@@ -349,13 +353,13 @@ public class GUI_FXMLController implements Initializable {
         dialog.setContentText("You can insert letter from a to z.");
         dialog.showAndWait();
         String s = dialog.getResult();
-        
-        while(s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
+
+        while (s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
             showAlert("You must insert only 1 letter.");
             dialog.showAndWait();
             s = dialog.getResult();
         }
-        
+
         return (s != null) ? s.charAt(0) : null;
     }
 

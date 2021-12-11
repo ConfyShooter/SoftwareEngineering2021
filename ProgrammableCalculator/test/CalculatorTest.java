@@ -903,35 +903,35 @@ public class CalculatorTest {
 
     @Test
     public void testLog() {
-        /*c.insertNumber(operand1Imaginary);
+        c.insertNumber(operand1Imaginary);
         c.log();
-        expected.setReal(3.9120230054);
-        expected.setImaginary(1.57079632679);
+        expected.setReal(1.4469189829);
+        expected.setImaginary(-1.57079632679);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand1);
         c.log();
-        expected.setReal(1.60943791243);
-        expected.setImaginary(0.927295218);
+        expected.setReal(2.6616574053);
+        expected.setImaginary(-0.797743215);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand2);
         c.log();
-        expected.setReal(1.0991675358);
-        expected.setImaginary(0.033320995878);
+        expected.setReal(4.616491051);
+        expected.setImaginary(-2.891817864);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand2Imaginary);
         c.log();
-        expected.setReal(4.094344562222);
-        expected.setImaginary(1.57079632679);
+        expected.setReal(1.60943791);
+        expected.setImaginary(-1.570796327);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand2Real);
         c.log();
-        expected.setReal(1.7917594692);
+        expected.setReal(1.0986122886681);
         expected.setImaginary(0d);
-        assertComplexEquals(expected, c.getData().pop());*/
+        assertComplexEquals(expected, c.getData().pop());
     }
 
     private void assertComplexEquals(Complex expected, Complex actual) {

@@ -246,24 +246,23 @@ public class ComplexTest {
     @Test
     public void testAcos() {
         Complex halfPi = new Complex(Math.PI / 2, 0d);
-        
+
         expected.setReal(halfPi.getReal());
         assertComplexEquals(expected, zero.acos());
-        
+
         operand2Real.setReal(Math.sqrt(99) + 10);
         Complex asin = operand2Real.log().plus(Complex.ImaginaryUnit.log()).multiply(Complex.ImaginaryUnit);
         expected = halfPi.minus(asin);
         assertComplexEquals(expected, operand1Real.acos());
-        
+
         operand2Real.setReal(Math.sqrt(2501) - 50);
         asin = operand2Real.log().multiply(Complex.ImaginaryUnit);
         expected = halfPi.minus(asin);
         assertComplexEquals(expected, operand1Imaginary.acos());
-        
+
         operand2 = new Complex(8d, -24d).squareRoot().minus(new Complex(-4d, 3d));
         expected = halfPi.minus(Complex.ImaginaryUnit.multiply(operand2.log()));
         assertComplexEquals(expected, operand1.acos());
-        
 
     }
 
@@ -285,15 +284,15 @@ public class ComplexTest {
     @Test
     public void testAsin() {
         assertComplexEquals(expected, zero.asin());
-        
+
         operand2Real.setReal(Math.sqrt(99) + 10);
         expected = operand2Real.log().plus(Complex.ImaginaryUnit.log()).multiply(Complex.ImaginaryUnit);
         assertComplexEquals(expected, operand1Real.asin());
-        
+
         operand2Real.setReal(Math.sqrt(2501) - 50);
         expected = operand2Real.log().multiply(Complex.ImaginaryUnit);
         assertComplexEquals(expected, operand1Imaginary.asin());
-        
+
         operand2 = new Complex(8d, -24d).squareRoot().minus(new Complex(-4d, 3d));
         expected = Complex.ImaginaryUnit.multiply(operand2.log());
         assertComplexEquals(expected, operand1.asin());
@@ -319,18 +318,18 @@ public class ComplexTest {
     public void testAtan() {
         Complex halfImg = new Complex(0d, -0.5);
         assertComplexEquals(expected, zero.atan());
-        
+
         operand2Real.setReal(101d);
         operand2.setReal(-99d);
         operand2.setImaginary(-20d);
         Complex log = operand2.division(operand2Real).log();
         expected = halfImg.multiply(log);
         assertComplexEquals(expected, operand1Real.atan());
-        
-        operand1Real.setReal((double) -51/49);
+
+        operand1Real.setReal((double) -51 / 49);
         expected = halfImg.multiply(operand1Real.log());
         assertComplexEquals(expected, operand1Imaginary.atan());
-        
+
         operand2.setReal(-24d);
         operand2.setImaginary(6d);
         operand1Real.setReal(34d);
@@ -426,11 +425,9 @@ public class ComplexTest {
 
     @Test
     public void testLog() {
-        
         expected.setReal(2.30258509);
         expected.setImaginary(3.14159265);
         assertComplexEquals(expected, operand1Real.log());
-        
 
         expected.setReal(3.9120230054);
         expected.setImaginary(-1.57079632679);
