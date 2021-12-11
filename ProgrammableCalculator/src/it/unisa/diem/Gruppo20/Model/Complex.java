@@ -231,7 +231,7 @@ public class Complex {
      * Performs the sinh of this Complex number.
      * @return A Complex number represent the sinh of this Complex number.
      */
-    private double sinh(Double x) {
+    public double sinh(Double x) {
        return (Math.exp(x) - Math.exp(-x))/2;
     }
 
@@ -239,7 +239,7 @@ public class Complex {
      * Performs the cosh of this Complex number.
      * @return A Complex number represent the cosh of this Complex number.
      */
-    private double cosh(Double x) {
+    public double cosh(Double x) {
        return (Math.exp(x) + Math.exp(-x))/2;
     }
     /**
