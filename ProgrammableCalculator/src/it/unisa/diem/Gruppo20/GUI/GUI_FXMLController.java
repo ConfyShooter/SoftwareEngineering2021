@@ -120,7 +120,7 @@ public class GUI_FXMLController implements Initializable {
             showAlert("General error.");
         }
 
-        //DISABILITIAMO IL FUNCTION BOX???
+        functionBox.setSelected(false);
         insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
@@ -349,18 +349,19 @@ public class GUI_FXMLController implements Initializable {
     private Character askForChar(String title) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
+
         dialog.setHeaderText("Insert variable here.");
         dialog.setContentText("You can insert letter from a to z.");
         dialog.showAndWait();
-        String s = dialog.getResult();
 
+        String s = dialog.getResult();
         while (s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
+            dialog.getEditor().setText("");
             showAlert("You must insert only 1 letter.");
             dialog.showAndWait();
             s = dialog.getResult();
         }
-
-        return (s != null) ? s.charAt(0) : null;
+        return s != null ? s.charAt(0) : null;
     }
 
 }

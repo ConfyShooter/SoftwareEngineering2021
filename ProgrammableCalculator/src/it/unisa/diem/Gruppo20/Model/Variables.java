@@ -23,7 +23,7 @@ public class Variables {
     }
 
     /**
-     * Create an object of this class. An HashMap is used to save Complex
+     * Creates an object of this class. An HashMap is used to save Complex
      * numbers corresponding to a letter in the range [a-z]. Instead, an
      * ArrayDeque is used to save and restore the map.
      */
@@ -40,8 +40,7 @@ public class Variables {
     }
 
     /**
-     * This method gets the Complex number corresponding to the key c inside the
-     * map.
+     * Gets the Complex number corresponding to the key c inside the map.
      *
      * @param c Is the key of the map.
      * @return Complex Object corresponding to the key c.
@@ -57,8 +56,7 @@ public class Variables {
     }
 
     /**
-     * This method sets the Complex number passed as param as value of the
-     * variable c.
+     * Sets the Complex number passed as param as value of the variable c.
      *
      * @param c Is the key of the map.
      * @param number Is the Complex Object that we want to insert in the
@@ -69,8 +67,8 @@ public class Variables {
     }
 
     /**
-     * This method sums the Complex number passed as param to the value of the
-     * variable c and stores the result of the sum as the value of variable c.
+     * Sums the Complex number passed as param to the value of the variable c
+     * and stores the result of the sum as the value of variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to sum to the variable
@@ -83,9 +81,8 @@ public class Variables {
     }
 
     /**
-     * This method subtracts the Complex number passed as param to the value of
-     * the variable c and stores the result of subtraction as value of the
-     * variable c.
+     * Subtracts the Complex number passed as param to the value of the variable
+     * c and stores the result of subtraction as value of the variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to subtract to the
@@ -98,7 +95,7 @@ public class Variables {
     }
 
     /**
-     * This method backups the variables of current map into a backup stack.
+     * Backups the variables of current map into a backup stack.
      *
      * @throws NoSuchElementException if there aren't variables to be saved.
      */
@@ -112,8 +109,8 @@ public class Variables {
     }
 
     /**
-     * This method restores the variables with the latest backup contained from
-     * the stack, removing it.
+     * Restores the variables with the latest backup contained from the stack,
+     * removing it.
      *
      * @throws NoSuchElementException if there aren't elements contained in the
      * backup stack.
@@ -128,8 +125,9 @@ public class Variables {
 
     /**
      * Private method used to check if the param c is valid entry in the map.
-     * @param c is the character to check if is acceptable key for the map.
-     * @return key of the map that is a char in the range [a-z].
+     *
+     * @param c Is the character to check if is acceptable key for the map.
+     * @return Key of the map that is a char in the range [a-z].
      * @throws VariableKeyException if the param c not represent a valid entry.
      */
     private char checkKey(char c) throws VariableKeyException {

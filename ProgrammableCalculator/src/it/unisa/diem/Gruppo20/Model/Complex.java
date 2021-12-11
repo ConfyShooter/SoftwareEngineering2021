@@ -12,13 +12,13 @@ import java.util.Objects;
  * @author Team 20
  */
 public class Complex {
+
     public static Complex ImaginaryUnit = new Complex(0d, 1d);
     private Double real;
     private Double imaginary;
 
     /**
-     * This method returns a new Complex object with 0 as real and imaginary
-     * values.
+     * Returns a new Complex object with 0 as real and imaginary values.
      */
     public Complex() {
         this.real = 0.0;
@@ -26,8 +26,7 @@ public class Complex {
     }
 
     /**
-     * This method return a new Complex object using param real and imaginary as
-     * values.
+     * Returns a new Complex object using param real and imaginary as values.
      *
      * @param real The real value of this new Complex.
      * @param imaginary The imaginary of this new Complex.
@@ -104,7 +103,7 @@ public class Complex {
     }
 
     /**
-     * This method implements the sum between two complex numbers.
+     * Implements the sum between two complex numbers.
      *
      * @param c Is the operand we want to make the sum with.
      * @return The complex number resulting from the operation.
@@ -117,7 +116,7 @@ public class Complex {
     }
 
     /**
-     * This method implements the subtraction between two numbers.
+     * Implements the subtraction between two numbers.
      *
      * @param c The operand we want to subtract.
      * @return The complex number resulting from the operation.
@@ -130,7 +129,7 @@ public class Complex {
     }
 
     /**
-     * This method implements the moltiplication between two complex numbers.
+     * Implements the moltiplication between two complex numbers.
      *
      * @param c Is the operand we want to make the moltiplication with.
      * @return The complex number resulting from the operation.
@@ -148,8 +147,7 @@ public class Complex {
     }
 
     /**
-     * This method returns the ratio between this complex number and the param
-     * c.
+     * Returns the ratio between this complex number and the param c.
      *
      * @param c The dividend of the operation.
      * @return Complex value.
@@ -172,8 +170,8 @@ public class Complex {
     }
 
     /**
-     * This method implements the square root operation of a complex number. The
-     * result value is a complex number.
+     * Implements the square root operation of a complex number. The result
+     * value is a complex number.
      *
      * @return A complex number.
      */
@@ -188,7 +186,7 @@ public class Complex {
     }
 
     /**
-     * This method returns the reverse of this Complex number.
+     * Returns the reverse of this Complex number.
      *
      * @return The complex number changed in sign.
      */
@@ -197,7 +195,7 @@ public class Complex {
     }
 
     /**
-     * This method calculates the module of a complex number.
+     * Calculates the module of a complex number.
      *
      * @return A double value that representing the module.
      */
@@ -206,8 +204,8 @@ public class Complex {
     }
 
     /**
-     * This method returns the phase of a complex number in (-pi, pi]. The value
-     * is Undefined if the real and imaginary part are both equals to 0.
+     * Returns the phase of a complex number in (-pi, pi]. The value is
+     * Undefined if the real and imaginary part are both equals to 0.
      *
      * @return A double value that representing the phase.
      */
@@ -226,63 +224,72 @@ public class Complex {
             throw new ArithmeticException("The phase of 0 is undefined.");
         }
     }
-    
+
     /**
      * Performs the sinh of this Complex number.
+     *
      * @return A Complex number represent the sinh of this Complex number.
      */
-    private double sinh(Double x) {
-       return (Math.exp(x) - Math.exp(-x))/2;
+    public double sinh(Double x) {
+        return (Math.exp(x) - Math.exp(-x)) / 2;
     }
 
     /**
      * Performs the cosh of this Complex number.
+     *
      * @return A Complex number represent the cosh of this Complex number.
      */
-    private double cosh(Double x) {
-       return (Math.exp(x) + Math.exp(-x))/2;
+    public double cosh(Double x) {
+        return (Math.exp(x) + Math.exp(-x)) / 2;
     }
+
     /**
      * Performs the cos of this Complex number.
+     *
      * @return A Complex number represent the cos of this Complex number.
      */
     public Complex cos() {
-        if(imaginary==0)
-            return new Complex(Math.cos(real),0d);
-        
+        if (imaginary == 0) {
+            return new Complex(Math.cos(real), 0d);
+        }
+
         Complex cos = new Complex();
         cos.setReal(Math.cos(real) * cosh(imaginary));
-        cos.setImaginary(-Math.sin(real)* sinh(imaginary));
+        cos.setImaginary(-Math.sin(real) * sinh(imaginary));
         return cos;
-               
+
     }
 
     /**
      * Performs the arccos of this Complex number.
+     *
      * @return A Complex number represent the acos of this Complex number.
      */
     public Complex acos() {
         //acos(z) = pi/2 - asin(z)
-        Complex halfPi = new Complex(Math.PI / 2, 0d);        
+        Complex halfPi = new Complex(Math.PI / 2, 0d);
         return halfPi.minus(asin());
     }
 
     /**
      * Performs the sin of this Complex number.
+     *
      * @return A Complex number represent the sin of this Complex number.
      */
     public Complex sin() {
-        if(imaginary==0)
-            return new Complex(Math.sin(real),0.0);    
+        if (imaginary == 0) {
+            return new Complex(Math.sin(real), 0.0);
+        }
 
         Complex sin = new Complex();
         sin.setReal(Math.sin(real) * cosh(imaginary));
-        sin.setImaginary(Math.cos(real)* sinh(imaginary));
-        return sin; 
+        sin.setImaginary(Math.cos(real) * sinh(imaginary));
+        return sin;
     }
 
     /**
      * Performs the arcsin of this Complex number.
+     *
      * @return A Complex number represent the asin of this Complex number.
      */
     public Complex asin() {
@@ -295,6 +302,7 @@ public class Complex {
 
     /**
      * Performs the tan of this Complex number.
+     *
      * @return A Complex number represent the tan of this Complex number.
      */
     public Complex tan() {
@@ -303,6 +311,7 @@ public class Complex {
 
     /**
      * Performs the arctan of this Complex number.
+     *
      * @return A Complex number represent the atan of this Complex number.
      */
     public Complex atan() {
@@ -319,13 +328,14 @@ public class Complex {
      * @param grade The degree of the exponent of the power.
      * @return A complex number.
      */
-    public Complex pow(double grade) {        
+    public Complex pow(double grade) {
         if (real == 0 && imaginary == 0) {
-            if(grade == 0)
+            if (grade == 0) {
                 throw new ArithmeticException("Indefinite value. Unable to execute.");
+            }
             return this;
         }
-        
+
         if (grade == 0) {
             return new Complex(1d, 0d);
         }
@@ -337,23 +347,23 @@ public class Complex {
         }
         double r = Math.pow(mod(), grade);
         double arg = grade * arg();
-        
+
         return new Complex(r * cosApproximation(arg), r * sinApproximation(arg));
     }
 
     /**
      * Performs the exponential of a complex number z.
-     * 
+     *
      * @return a Complex Number.
      */
     public Complex exp() {
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
-        if (imaginary == 0) {
+        /*if (imaginary == 0) {
             return new Complex(r, 0d);
-        }
-        return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
-        //return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
+        }*/
+        //return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
+        return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
     }
 
     /**
@@ -368,11 +378,12 @@ public class Complex {
         }
         return new Complex(Math.log(mod()), arg());
     }
-    
+
     /**
-     * This method return the approximated cos of num, 
-     * normally the Math.cos(pi/2) or Math.cos(-pi/2) will return a very low floating point but not zero;
-     * instead this method return 0.
+     * Returns the approximated cos of num, normally the Math.cos(pi/2) or
+     * Math.cos(-pi/2) will return a very low floating point but not zero;
+     * instead this method returns 0.
+     *
      * @param num An angle, in radians.
      * @return A Double represents the approximated cos of num.
      */
@@ -381,11 +392,12 @@ public class Complex {
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
         return (Double.valueOf(f.format((Math.cos(num) + 1))) - 1);
     }
-    
+
     /**
-     * This method return the approximated sin of num, 
-     * normally the Math.sin(x * pi) with x=1,2,3 ecc will return a very low floating point but not zero;
-     * instead this method return 0.
+     * Returns the approximated sin of num, normally the Math.sin(x * pi) with
+     * x=1,2,3 ecc will return a very low floating point but not zero; instead
+     * this method returns 0.
+     *
      * @param num An angle, in radians.
      * @return A Double represents the approximated sin of num.
      */

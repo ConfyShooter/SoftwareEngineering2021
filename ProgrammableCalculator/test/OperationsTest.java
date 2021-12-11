@@ -41,13 +41,14 @@ public class OperationsTest {
         Field instance = StandardOperations.class.getDeclaredField("obj");
         instance.setAccessible(true);
         instance.set(null, null);
+        operations = new Operations(c);
         testFile = new File("media/testFile.txt");
         testFile.deleteOnExit();
     }
 
     @Test(expected = RuntimeException.class)
     public void testParseOperationsExceptionName() {
-        operations.parseOperations("   clear :  clear  4 8 + ");//PROBLEMA CON VARIABILI
+        operations.parseOperations("   clear :  clear  4 8 + ");
     }
     
     @Test(expected = RuntimeException.class)
@@ -76,8 +77,16 @@ public class OperationsTest {
         
         assertNotNull(operations.getOperationsCommand("mod"));
         assertNotNull(operations.getOperationsCommand("<a"));
+        assertNotNull(operations.getOperationsCommand("+z"));
+        assertNotNull(operations.getOperationsCommand("-j"));
+        assertNotNull(operations.getOperationsCommand(">j"));
 
         assertNull(operations.getOperationsCommand("notincluded"));
+        char c = 'z' + 1;
+        assertNull(operations.getOperationsCommand(">" + String.valueOf(c)));
+        c = 'a' - 1;
+        assertNull(operations.getOperationsCommand("<" + String.valueOf(c)));
+        
     }
 
     @Test

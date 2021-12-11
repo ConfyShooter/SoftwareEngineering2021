@@ -5,8 +5,8 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 /**
- * This class allows operations on Complex number using a stack data structure 
- * for taking the operands and storing the results. This class allows also to 
+ * This class allows operations on Complex number using a stack data structure
+ * for taking the operands and storing the results. This class allows also to
  * perform operations on variables using a reference of Variables object.
  *
  * @author Team 20
@@ -42,6 +42,94 @@ public class Calculator {
     public Variables getMap() {
         return map;
     }
+    
+    /**
+     * This method executes the parsing of the string passed as param. String
+     * that contains a command to be executed by Calculator.
+     * During the last Sprint this method has been deprecated by StandardOperations class.
+     *
+     * @param input String that contains a command to be executed by Calculator.
+     * @throws java.lang.NumberFormatException if it fails to insert a number on
+     * the stack.
+     * @throws java.lang.ArithmeticException if it fails to do an operation on
+     * complex numbers.
+     * @throws java.util.NoSuchElementException if the stack not contains enough
+     * elements to perform a specific operation.
+     * @throws RuntimeException if input is blank or there is a unknown error.
+     */
+    @Deprecated
+    public void parsing(String input) throws Exception {
+        input = input.replaceAll("\\s+", "").toLowerCase();
+        if (input.isBlank()) {
+            throw new RuntimeException("Input string is empty!");
+        }
+
+        char sequence[] = input.toCharArray();
+        int length = input.length();
+
+        for (int i = 0; i < length; i++) {
+            if ((sequence[i] >= '0' && sequence[i] <= '9')) { // in anycase in which the user want to insert a number
+                insertNumber(parseNumber(input));
+                return;
+            }
+        }
+        switch (input) {
+            case "j":
+                insertNumber(new Complex(0.0, 1.0));
+                return;
+            case "+":
+                sum();
+                return;
+            case "-":
+                subtract();
+                return;
+            case "*":
+                multiply();
+                return;
+            case "/":
+                division();
+                return;
+            case "+-":
+                invertSign();
+                return;
+            case "sqrt":
+                sqrt();
+                return;
+            case "clear":
+                clear();
+                return;
+            case "drop":
+                drop();
+                return;
+            case "dup":
+                dup();
+                return;
+            case "swap":
+                swap();
+                return;
+            case "over":
+                over();
+                return;
+            case "save":
+                saveVariables();
+                return;
+            case "restore":
+                restoreVariables();
+                return;
+        }
+        if (input.matches(">[a-z]{1}")) {
+            pushVariable(input.charAt(1));
+        } else if (input.matches("<[a-z]{1}")) {
+            pullVariable(input.charAt(1));
+        } else if (input.matches("\\+[a-z]{1}")) {
+            sumVariable(input.charAt(1));
+        } else if (input.matches("\\-[a-z]{1}")) {
+            subtractVariable(input.charAt(1));
+        } else {
+            throw new RuntimeException("Can't parse \"" + input + "\", try to reinsert it.");
+        }
+    }
+
 
     private double findImaginary(String s) {
         switch (s) {
@@ -70,12 +158,13 @@ public class Calculator {
     }
 
     /**
-     * This method extracts the real and imaginary part from a complex number
-     * passed as param analysing all combinations of them.
+     * Extracts the real and imaginary part from a complex number passed as
+     * param analysing all combinations of them.
      *
      * @param number String that contains a Complex number.
      * @return Complex number parsed from the string.
-     * @throws NumberFormatException if in the string not contains a valid number.
+     * @throws NumberFormatException if in the string not contains a valid
+     * number.
      */
     public Complex parseNumber(String number) {
         Double real = 0.0;
@@ -101,12 +190,11 @@ public class Calculator {
             }
         }
 
-        Complex c = new Complex(real, imaginary);
-        return c;
+        return new Complex(real, imaginary);
     }
 
     /**
-     * This method pushes the complex number onto the stack.
+     * Pushes the complex number onto the stack.
      *
      * @param number The complex number that must be pushed onto the stack.
      */
@@ -115,7 +203,7 @@ public class Calculator {
     }
 
     /**
-     * This method pushes the complex c onto the stack.
+     * Pushes the complex c onto the stack.
      *
      * @param input The complex number that must be pushed onto the stack.
      */
@@ -140,8 +228,8 @@ public class Calculator {
     }
 
     /**
-     * This method implements the subtract between the second last and the last
-     * elements in the stack. Finally store the result onto the stack.
+     * Implements the subtract between the second last and the last elements in
+     * the stack. Finally stores the result onto the stack.
      *
      * @throws java.util.NoSuchElementException if the stack has less than 2
      * elements.
@@ -195,7 +283,7 @@ public class Calculator {
     }
 
     /**
-     * This method takes the last elements from the stack and reverses its sign.
+     * Takes the last elements from the stack and reverses its sign.
      */
     public void invertSign() {
         checkStackSize(1);
@@ -206,14 +294,14 @@ public class Calculator {
     }
 
     /**
-     * This method removes all elements from the stack.
+     * Removes all elements from the stack.
      */
     public void clear() {
         data.clear();
     }
 
     /**
-     * This method removes the last element from the stack.
+     * Removes the last element from the stack.
      */
     public void drop() {
         checkStackSize(1);
@@ -221,7 +309,7 @@ public class Calculator {
     }
 
     /**
-     * This method pushes a copy of the last element from the stack and onto it.
+     * Pushes a copy of the last element from the stack and onto it.
      */
     public void dup() {
         checkStackSize(1);
@@ -229,7 +317,7 @@ public class Calculator {
     }
 
     /**
-     * This method swaps the last and second last elements from the stack.
+     * Swaps the last and second last elements from the stack.
      */
     public void swap() {
         checkStackSize(2);
@@ -242,7 +330,7 @@ public class Calculator {
     }
 
     /**
-     * This method store onto the stack a copy of the second last element.
+     * Stores onto the stack a copy of the second last element.
      */
     public void over() {
         checkStackSize(2);
@@ -255,8 +343,8 @@ public class Calculator {
     }
 
     /**
-     * This method removes the top element of the stack and inserts it as value
-     * of key c into variables map.
+     * Removes the top element of the stack and inserts it as value of key c
+     * into variables map.
      *
      * @param c The variable that we want store value to.
      */
@@ -266,19 +354,20 @@ public class Calculator {
     }
 
     /**
-     * This method reads the Complex number associated with the variable c and
-     * pushes it onto the stack.
+     * Reads the Complex number associated with the variable c and pushes it
+     * onto the stack.
      *
      * @param c The variable that we want read value from.
      */
     public void pullVariable(char c) {
-        Complex value = map.getVariable(c);
-        insertNumber(value);
+        //Complex value = map.getVariable(c);
+        //insertNumber(value);
+        insertNumber(map.getVariable(c));
     }
 
     /**
-     * This method removes the top element of the stack and sums it at value of
-     * key c into variables map.
+     * Removes the top element of the stack and sums it at value of key c into
+     * variables map.
      *
      * @param c The variable that we want sum top element of the stack to.
      */
@@ -288,8 +377,8 @@ public class Calculator {
     }
 
     /**
-     * This method removes the top element of the stack and subtracts it at
-     * value of key c into variables map.
+     * Removes the top element of the stack and subtracts it at value of key c
+     * into variables map.
      *
      * @param c The variable that we want subtract top element of the stack to.
      */
@@ -299,14 +388,14 @@ public class Calculator {
     }
 
     /**
-     * This method saves the map of variables in the auxiliary stack.
+     * Saves the map of variables in the auxiliary stack.
      */
     public void saveVariables() {
         map.backup();
     }
 
     /**
-     * This method restores the map of variables stored in the auxiliary stack.
+     * Restores the map of variables stored in the auxiliary stack.
      */
     public void restoreVariables() {
         map.restore();
@@ -322,8 +411,8 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the phase
-     * of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the phase of
+     * that number and store the result value on top of the stack.
      */
     public void arg() {
         checkStackSize(1);
@@ -331,8 +420,8 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the cosine
-     * of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the cosine of
+     * that number and store the result value on top of the stack.
      */
     public void cos() {
         checkStackSize(1);
@@ -349,12 +438,12 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the cosine
-     * of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the cosine of
+     * that number and store the result value on top of the stack.
      */
     public void sin() {
         checkStackSize(1);
-        data.push(data.pop().sin());     
+        data.push(data.pop().sin());
     }
 
     /**
@@ -372,12 +461,12 @@ public class Calculator {
      */
     public void tan() {
         checkStackSize(1);
-        data.push(data.pop().tan());  
+        data.push(data.pop().tan());
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the arctangent
-     * of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the
+     * arctangent of that number and store the result value on top of the stack.
      */
     public void arcTan() {
         checkStackSize(1);
@@ -385,8 +474,9 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the 2nd degree
-     * power of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the 2nd
+     * degree power of that number and store the result value on top of the
+     * stack.
      */
     public void pow() {
         checkStackSize(1);
@@ -394,8 +484,9 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the exponential
-     * of that number and store the result value on top of the stack.
+     * Takes the last element inserted on the stack, then performs the
+     * exponential of that number and store the result value on top of the
+     * stack.
      */
     public void exp() {
         checkStackSize(1);
@@ -403,7 +494,7 @@ public class Calculator {
     }
 
     /**
-     * Takes the last element inserted on the stack, then performs the natural 
+     * Takes the last element inserted on the stack, then performs the natural
      * logarithm of that number and store the result value on top of the stack.
      */
     public void log() {
@@ -413,6 +504,7 @@ public class Calculator {
 
     /**
      * Private method that check if there are at least k element in the stack.
+     *
      * @param k number of operands required.
      * @throws NoSuchElementException if there aren't enough elements.
      */
