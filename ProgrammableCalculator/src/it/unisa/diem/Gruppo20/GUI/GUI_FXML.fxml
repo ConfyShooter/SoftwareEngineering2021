@@ -58,62 +58,62 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPlusPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="+" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onPlusPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="+" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMinusPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onMinusPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMulPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="*" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onMulPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="*" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDivPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="/" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onDivPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="/" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="clear" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="clear" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="drop" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="drop" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="dup" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="dup" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="over" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="over" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onInvertPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="+-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onInvertPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="+-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSqrtPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="√" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onSqrtPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="√" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="cancBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button fx:id="cancBtn" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -137,62 +137,62 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="sin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onSinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="sin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="cos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="cos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="17.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onTanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="tan" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onTanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="tan" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAsinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="asin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onAsinPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="asin" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onModPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="mod" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onModPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="mod" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onArgPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="arg" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onArgPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="arg" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPowPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="pow" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onPowPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="pow" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onExpPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="exp" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onExpPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="exp" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAcosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="acos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onAcosPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="acos" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onAtanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="atan" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onAtanPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #4682B4;" text="atan" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="15.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="cancBtn1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button fx:id="cancBtn1" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onLogPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="log" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onLogPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="log" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
@@ -216,62 +216,62 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onPlusVariablePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="+" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onPlusVariablePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="+" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMinusVariablePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onMinusVariablePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="-" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="clear" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onClearPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="clear" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="drop" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onDropPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="drop" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="dup" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onDupPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="dup" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="over" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onOverPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="over" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="cancBtn2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button fx:id="cancBtn2" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onCPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #FF6347;" text="C" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="161.0" layoutY="229.0" mnemonicParsing="false" onAction="#onSwapPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #008080;" text="swap" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="13.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMinorPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onMinorPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="&lt;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onMajorPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="&gt;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onMajorPressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="&gt;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSavePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="save" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onSavePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="save" textAlignment="CENTER" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
                                     </Button>
-                                    <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onRestorePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="restore" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                                    <Button alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onRestorePressed" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 15px; -fx-background-color: #c68068;" text="restore" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                                        <font>
                                           <Font size="11.0" />
                                        </font>

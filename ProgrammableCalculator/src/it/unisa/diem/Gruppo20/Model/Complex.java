@@ -99,6 +99,12 @@ public class Complex {
             }
             s = s + format.format(imaginary) + "j";
         }
+        
+        s = s.replace("+", " + ");
+        s = s.replace("-", " - ");
+        if(s.charAt(0) == ' ')
+            s = s.substring(1);
+        
         return s;
     }
 
