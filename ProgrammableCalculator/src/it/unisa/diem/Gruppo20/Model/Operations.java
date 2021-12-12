@@ -67,9 +67,9 @@ public class Operations {
 
         UserCommand opCommand = (UserCommand) userOperations.get(name); //check if already exists a user-defined operation with same name
         if (opCommand == null) {
-            opCommand = new UserCommand(); //if it's a new operation create the Command object
+            opCommand = new UserCommand(); //if it's a new operation then create the UserCommand object
         } else {
-            opCommand.reset(); //if already exists perform a overwrite(or edit)
+            opCommand.reset(); //if already exists perform a overwrite(or edit) on the same object
         }
 
         String[] seq = s.split("\\s+");
@@ -107,7 +107,7 @@ public class Operations {
     }
 
     /**
-     * Returns the names of all operations performed by the user-defined
+     * Returns the list of operations performed by the user-defined
      * operation that has the name passed as a parameter.
      *
      * @param name The user-defined operation name.
@@ -128,7 +128,7 @@ public class Operations {
      *
      * @param name The user-defined operation name.
      */
-    public void executeOperation(String name) throws ExecuteException {
+    public void executeOperation(String name) {
         UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
             if (!command.isExecutable()) {
@@ -158,14 +158,15 @@ public class Operations {
     /**
      * Removes the user-defined operation that has the name passed as a
      * parameter.
-     *
+     * This method will clean the sequence of operations performed by this user-defined operation,
+     * but it will not delete the name by data map, in this way it's possible to redefine it.
+     * The user-defined operation name will be deleted from names set.
      * @param name The user-defined operation name.
      */
     public void removeOperations(String name) {
         UserCommand command = (UserCommand) userOperations.get(name);
         if (command != null) {
             command.reset();
-            command = null;
         }
         userOpNames.remove(name);
     }

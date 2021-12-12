@@ -494,14 +494,14 @@ public class CalculatorTest {
 
         expected.setReal(2d);
         expected.setImaginary(1d);
-        assertComplexEquals(expected, c.getMap().getVariable('a'));
+        assertComplexEquals(expected, c.getVariables().getVariable('a'));
 
         expected.setReal(0.0);
-        assertComplexEquals(expected, c.getMap().getVariable('j'));
+        assertComplexEquals(expected, c.getVariables().getVariable('j'));
 
         expected.setReal(1.23456789);
         expected.setImaginary(0.0);
-        assertComplexEquals(expected, c.getMap().getVariable('z'));
+        assertComplexEquals(expected, c.getVariables().getVariable('z'));
     }
 
     @Test(expected = RuntimeException.class)
@@ -515,9 +515,9 @@ public class CalculatorTest {
         Complex expectedJ = new Complex(0.0, 5.5);
         Complex expectedZ = new Complex(4.5, 0.0);
 
-        c.getMap().setVariable('a', expectedA);
-        c.getMap().setVariable('j', expectedJ);
-        c.getMap().setVariable('z', expectedZ);
+        c.getVariables().setVariable('a', expectedA);
+        c.getVariables().setVariable('j', expectedJ);
+        c.getVariables().setVariable('z', expectedZ);
         c.pullVariable('a');
         c.pullVariable('j');
         c.pullVariable('z');
@@ -588,9 +588,9 @@ public class CalculatorTest {
         c.insertNumber(operand1);
         c.pushVariable('j');
         c.saveVariables();
-        assertEquals(1, c.getMap().getBackupsStack().size());
-        assertNotNull(c.getMap().getBackupsStack().peek());
-        assertComplexEquals(expected, c.getMap().getBackupsStack().element().get('j'));
+        assertEquals(1, c.getVariables().getBackupsStack().size());
+        assertNotNull(c.getVariables().getBackupsStack().peek());
+        assertComplexEquals(expected, c.getVariables().getBackupsStack().element().get('j'));
     }
 
     @Test()
@@ -603,12 +603,12 @@ public class CalculatorTest {
         c.pushVariable('j');
         expected.setReal(operand1.getReal());
         expected.setImaginary(operand1.getImaginary());
-        assertComplexEquals(expected, c.getMap().getVariable('j'));
+        assertComplexEquals(expected, c.getVariables().getVariable('j'));
 
         c.restoreVariables();
         expected.setReal(operand2.getReal());
         expected.setImaginary(operand2.getImaginary());
-        assertComplexEquals(expected, c.getMap().getVariable('j'));
+        assertComplexEquals(expected, c.getVariables().getVariable('j'));
 
     }
 
@@ -722,21 +722,21 @@ public class CalculatorTest {
         operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
         c.cos();
-        expected.setReal(Math.cos(operand1Real.getReal())*operand1Real.cosh(operand1Real.getImaginary()));
+        expected.setReal(Math.cos(operand1Real.getReal())*Math.cosh(operand1Real.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
         
         c.insertNumber(operand1Imaginary);
         c.cos();
-        expected.setReal(Math.cos(operand1Imaginary.getReal()) * operand1Imaginary.cosh(operand1Imaginary.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * operand1Imaginary.sinh(operand1Imaginary.getImaginary()));
+        expected.setReal(Math.cos(operand1Imaginary.getReal()) * Math.cosh(operand1Imaginary.getImaginary()));
+        expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
         
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         c.insertNumber(operand1);
         c.cos();
-        expected.setReal(Math.cos(operand1.getReal())*operand1.cosh(operand1.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1.getReal()) * operand1.sinh(operand1.getImaginary()));
+        expected.setReal(Math.cos(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
+        expected.setImaginary(-Math.sin(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
     }
 
@@ -793,21 +793,21 @@ public class CalculatorTest {
         operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
         c.sin();
-        expected.setReal(Math.sin(operand1Real.getReal())*operand1Real.cosh(operand1Real.getImaginary()));
+        expected.setReal(Math.sin(operand1Real.getReal())*Math.cosh(operand1Real.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
         
         c.insertNumber(operand1Imaginary);
         c.sin();
         expected.setReal(0d);
-        expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * operand1Imaginary.sinh(operand1Imaginary.getImaginary()));
+        expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
         
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         c.insertNumber(operand1);
         c.sin();
-        expected.setReal(Math.sin(operand1.getReal())*operand1.cosh(operand1.getImaginary()));
-        expected.setImaginary(Math.cos(operand1.getReal()) * operand1.sinh(operand1.getImaginary()));
+        expected.setReal(Math.sin(operand1.getReal())*Math.cosh(operand1.getImaginary()));
+        expected.setImaginary(Math.cos(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
     }
 

@@ -57,7 +57,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private Button cancBtn2;
 
-    private Calculator c;
+    private final Calculator c = new Calculator();
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
@@ -71,12 +71,10 @@ public class GUI_FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        c = new Calculator();
         operations = new Operations(c);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
 
-        stack.setAll(c.getData());
         historyList.setItems(stack);
         functionsList.setItems(functions);
         SimpleListProperty functionsProperty = new SimpleListProperty(functions);
@@ -121,7 +119,6 @@ public class GUI_FXMLController implements Initializable {
         }
 
         functionBox.setSelected(false);
-        insertBtn.disableProperty().bind(inputText.textProperty().isEmpty());
         stack.setAll(c.getData());
     }
 
@@ -232,7 +229,7 @@ public class GUI_FXMLController implements Initializable {
         if (functionBox.isSelected()) {
             inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
         } else {
-            inputText.setPromptText("a+bj");
+            inputText.setPromptText("a+bj, +, -, clear, drop, <a, +z, sin, log...");
             inputText.clear();
         }
     }
@@ -346,6 +343,11 @@ public class GUI_FXMLController implements Initializable {
         onButtonPressed(event, "exp");
     }
 
+    /**
+     * Show a TextInputDialog asking user to insert a char.
+     * @param title Represent the operation to perform on the char, used to set the title of TextInputDialog.
+     * @return A Character inserted by user.
+     */
     private Character askForChar(String title) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle(title);
@@ -356,7 +358,7 @@ public class GUI_FXMLController implements Initializable {
 
         String s = dialog.getResult();
         while (s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
-            dialog.getEditor().setText("");
+            dialog.getEditor().clear();
             showAlert("You must insert only 1 letter.");
             dialog.showAndWait();
             s = dialog.getResult();

@@ -239,17 +239,17 @@ public class ComplexTest {
         assertComplexEquals(expected,zero.cos());
         
         operand1Real.setReal(Math.PI);
-        expected.setReal(Math.cos(operand1Real.getReal())*operand1Real.cosh(operand1Real.getImaginary()));
+        expected.setReal(-1d);
         assertComplexEquals(expected, operand1Real.cos());
         
-        expected.setReal(Math.cos(operand1Imaginary.getReal())*operand1Imaginary.cosh(operand1Imaginary.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * operand1Imaginary.sinh(operand1Imaginary.getImaginary()));
+        expected.setReal(Math.cos(operand1Imaginary.getReal()) * Math.cosh(operand1Imaginary.getImaginary()));
+        expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, operand1Imaginary.cos());
         
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
-        expected.setReal(Math.cos(operand1.getReal())*operand1.cosh(operand1.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1.getReal()) * operand1.sinh(operand1.getImaginary()));
+        expected.setReal(Math.cos(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
+        expected.setImaginary(-Math.sin(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, operand1.cos());
     }
 
@@ -290,19 +290,18 @@ public class ComplexTest {
     public void testSin() {
         assertComplexEquals(expected, zero.sin());
         
-        operand1Real.setReal(Math.PI);
-        expected.setReal(Math.sin(operand1Real.getReal())*operand1Real.cosh(operand1Real.getImaginary()));
+        operand1Real.setReal(Math.PI * 2);
         assertComplexEquals(expected, operand1Real.sin());
         
 
         expected.setReal(0d);
-        expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * operand1Imaginary.sinh(operand1Imaginary.getImaginary()));
+        expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, operand1Imaginary.sin());
         
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
-        expected.setReal(Math.sin(operand1.getReal())*operand1.cosh(operand1.getImaginary()));
-        expected.setImaginary(Math.cos(operand1.getReal()) * operand1.sinh(operand1.getImaginary()));
+        expected.setReal(Math.sin(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
+        expected.setImaginary(Math.cos(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, operand1.sin());
     }
 

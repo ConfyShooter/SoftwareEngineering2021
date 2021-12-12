@@ -176,13 +176,11 @@ public class Complex {
      * @return A complex number.
      */
     public Complex squareRoot() {
-        DecimalFormat f = new DecimalFormat("0.##############E0");
-        f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
-
         double r = Math.sqrt(mod());
-        double phase = arg();
+        Complex phase = new Complex(arg() / 2, 0d);
 
-        return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
+        //return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
+        return new Complex(r * phase.cos().getReal(), r * phase.sin().getReal());
     }
 
     /**
@@ -224,25 +222,7 @@ public class Complex {
             throw new ArithmeticException("The phase of 0 is undefined.");
         }
     }
-
-    /**
-     * Performs the sinh of this Complex number.
-     *
-     * @return A Complex number represent the sinh of this Complex number.
-     */
-    public double sinh(Double x) {
-        return (Math.exp(x) - Math.exp(-x)) / 2;
-    }
-
-    /**
-     * Performs the cosh of this Complex number.
-     *
-     * @return A Complex number represent the cosh of this Complex number.
-     */
-    public double cosh(Double x) {
-        return (Math.exp(x) + Math.exp(-x)) / 2;
-    }
-
+    
     /**
      * Performs the cos of this Complex number.
      *
@@ -254,10 +234,9 @@ public class Complex {
         }
 
         Complex cos = new Complex();
-        cos.setReal(Math.cos(real) * cosh(imaginary));
-        cos.setImaginary(-Math.sin(real) * sinh(imaginary));
+        cos.setReal(Math.cos(real) * Math.cosh(imaginary));
+        cos.setImaginary(-Math.sin(real) * Math.sinh(imaginary));
         return cos;
-
     }
 
     /**
@@ -282,8 +261,8 @@ public class Complex {
         }
 
         Complex sin = new Complex();
-        sin.setReal(Math.sin(real) * cosh(imaginary));
-        sin.setImaginary(Math.cos(real) * sinh(imaginary));
+        sin.setReal(Math.sin(real) * Math.cosh(imaginary));
+        sin.setImaginary(Math.cos(real) * Math.sinh(imaginary));
         return sin;
     }
 
@@ -296,7 +275,7 @@ public class Complex {
         //asin(z) = j*ln(sqrt(1-z^2) - j*z)
         Complex one = new Complex(1d, 0d);
         Complex square = (one.minus(pow(2))).squareRoot();
-        Complex log = (square.minus(ImaginaryUnit.multiply(this))).log();
+        Complex log = (square.minus(multiply(ImaginaryUnit))).log();
         return ImaginaryUnit.multiply(log);
     }
 
@@ -346,9 +325,10 @@ public class Complex {
             return new Complex(Math.pow(real, grade), 0d);
         }
         double r = Math.pow(mod(), grade);
-        double arg = grade * arg();
+        //double arg = grade * arg();
+        Complex arg = new Complex(grade * arg(), 0d);
 
-        return new Complex(r * cosApproximation(arg), r * sinApproximation(arg));
+        return new Complex(r * arg.cos().getReal(), r * arg.sin().getReal());
     }
 
     /**
@@ -363,7 +343,8 @@ public class Complex {
             return new Complex(r, 0d);
         }*/
         //return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
-        return new Complex(r * cosApproximation(imaginary), r * sinApproximation(imaginary));
+        Complex img = new Complex(imaginary, 0d);
+        return new Complex(r * img.cos().getReal(), r * img.sin().getReal());
     }
 
     /**
@@ -383,10 +364,12 @@ public class Complex {
      * Returns the approximated cos of num, normally the Math.cos(pi/2) or
      * Math.cos(-pi/2) will return a very low floating point but not zero;
      * instead this method returns 0.
+     * This method has been deprecated by this class cos method.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated cos of num.
      */
+    @Deprecated
     private Double cosApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
@@ -397,10 +380,12 @@ public class Complex {
      * Returns the approximated sin of num, normally the Math.sin(x * pi) with
      * x=1,2,3 ecc will return a very low floating point but not zero; instead
      * this method returns 0.
+     * This method has been deprecated by this class sin method.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated sin of num.
      */
+    @Deprecated
     private Double sinApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));

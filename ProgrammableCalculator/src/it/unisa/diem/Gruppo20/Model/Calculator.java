@@ -14,38 +14,38 @@ import java.util.NoSuchElementException;
 public class Calculator {
 
     private final Deque<Complex> data;
-    private final Variables map;
+    private final Variables var;
 
     /**
      * Initialize the Calculator with an empty stack and new Variables object.
      */
     public Calculator() {
         data = new ArrayDeque<>();
-        map = new Variables();
+        var = new Variables();
     }
 
     /**
      * Initialize the Calculator using params as new attributes.
      *
      * @param data
-     * @param map
+     * @param var
      */
-    public Calculator(Deque<Complex> data, Variables map) {
+    private Calculator(Deque<Complex> data, Variables var) {
         this.data = data;
-        this.map = map;
+        this.var = var;
     }
 
     public Deque<Complex> getData() {
         return data;
     }
 
-    public Variables getMap() {
-        return map;
+    public Variables getVariables() {
+        return var;
     }
     
     /**
-     * This method executes the parsing of the string passed as param. String
-     * that contains a command to be executed by Calculator.
+     * This method executes the parsing of the string passed as param. 
+     * String that contains a command to be executed by Calculator.
      * During the last Sprint this method has been deprecated by StandardOperations class.
      *
      * @param input String that contains a command to be executed by Calculator.
@@ -203,12 +203,12 @@ public class Calculator {
     }
 
     /**
-     * Pushes the complex c onto the stack.
+     * Pushes the complex number, that will be parsed from input string, onto the stack.
      *
      * @param input The complex number that must be pushed onto the stack.
      */
     public void insertNumber(String input) {
-        data.push(parseNumber(input.replaceAll("\\s", "").toLowerCase()));
+        data.push(parseNumber(input.replaceAll("\\s+", "").toLowerCase()));
     }
 
     /**
@@ -229,7 +229,7 @@ public class Calculator {
 
     /**
      * Implements the subtract between the second last and the last elements in
-     * the stack. Finally stores the result onto the stack.
+     * the stack storing the result onto the stack.
      *
      * @throws java.util.NoSuchElementException if the stack has less than 2
      * elements.
@@ -258,8 +258,8 @@ public class Calculator {
     }
 
     /**
-     * Implements the division a/b of last element from the stack with the
-     * second last element from the stack b storing the result onto it.
+     * Implements the division a/b between the two top elements from the stack,
+     * a is the second last element, while b is the last element, the result will be storend onto the stack.
      */
     public void division() {
         checkStackSize(2);
@@ -277,9 +277,7 @@ public class Calculator {
     public void sqrt() {
         checkStackSize(1);
 
-        Complex last = data.pop();
-
-        data.push(last.squareRoot());
+        data.push(data.pop().squareRoot());
     }
 
     /**
@@ -288,9 +286,7 @@ public class Calculator {
     public void invertSign() {
         checkStackSize(1);
 
-        Complex last = data.pop();
-
-        data.push(last.invert());
+        data.push(data.pop().invert());
     }
 
     /**
@@ -350,7 +346,7 @@ public class Calculator {
      */
     public void pushVariable(char c) {
         checkStackSize(1);
-        map.setVariable(c, data.pop());
+        var.setVariable(c, data.pop());
     }
 
     /**
@@ -360,9 +356,7 @@ public class Calculator {
      * @param c The variable that we want read value from.
      */
     public void pullVariable(char c) {
-        //Complex value = map.getVariable(c);
-        //insertNumber(value);
-        insertNumber(map.getVariable(c));
+        insertNumber(var.getVariable(c));
     }
 
     /**
@@ -373,7 +367,7 @@ public class Calculator {
      */
     public void sumVariable(char c) {
         checkStackSize(1);
-        map.sumVariable(c, data.pop());
+        var.sumVariable(c, data.pop());
     }
 
     /**
@@ -384,21 +378,21 @@ public class Calculator {
      */
     public void subtractVariable(char c) {
         checkStackSize(1);
-        map.subVariable(c, data.pop());
+        var.subVariable(c, data.pop());
     }
 
     /**
      * Saves the map of variables in the auxiliary stack.
      */
     public void saveVariables() {
-        map.backup();
+        var.backup();
     }
 
     /**
      * Restores the map of variables stored in the auxiliary stack.
      */
     public void restoreVariables() {
-        map.restore();
+        var.restore();
     }
 
     /**
@@ -421,7 +415,7 @@ public class Calculator {
 
     /**
      * Takes the last element inserted on the stack, then performs the cosine of
-     * that number and store the result value on top of the stack.
+     * that number and store the result on top of the stack.
      */
     public void cos() {
         checkStackSize(1);
@@ -430,7 +424,7 @@ public class Calculator {
 
     /**
      * Takes the last element inserted on the stack, then performs the arccosine
-     * of that number and store the result value on top of the stack.
+     * of that number and store the result on top of the stack.
      */
     public void arcCos() {
         checkStackSize(1);
