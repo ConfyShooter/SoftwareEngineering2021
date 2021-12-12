@@ -236,9 +236,9 @@ public class Complex {
      * @return A Complex number represent the cos of this Complex number.
      */
     public Complex cos() {
-        if (imaginary == 0) {
+        /*if (imaginary == 0) {
             return new Complex(Math.cos(real), 0d);
-        }
+        }*/
 
         Complex cos = new Complex();
         cos.setReal(Math.cos(real) * Math.cosh(imaginary));

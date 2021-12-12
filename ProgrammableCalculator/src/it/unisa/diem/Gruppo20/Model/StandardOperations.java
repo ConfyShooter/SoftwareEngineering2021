@@ -27,7 +27,7 @@ public class StandardOperations {
     public StandardOperations(Calculator c) {
         this.c = c;
         standardOpMap = new HashMap<>(mapCapacity);
-        initializeBasicMap();
+        initializeMap();
     }
 
     /**
@@ -202,7 +202,7 @@ public class StandardOperations {
         return c::log;
     }
 
-    private void initializeBasicMap() {
+    private void initializeMap() {
         standardOpMap.put("+", sumCommand());
         standardOpMap.put("-", subtractCommand());
         standardOpMap.put("*", multiplyCommand());
