@@ -169,10 +169,10 @@ public class Complex {
         }
 
         double div = c1 * c1 + d * d;
-        double real = (a * c1 + b * d) / div;
+        double re = (a * c1 + b * d) / div;
         double img = (b * c1 - a * d) / div;
 
-        return new Complex(real, img);
+        return new Complex(re, img);
     }
 
     /**

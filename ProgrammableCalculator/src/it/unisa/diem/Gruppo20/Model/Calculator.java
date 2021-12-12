@@ -24,17 +24,6 @@ public class Calculator {
         var = new Variables();
     }
 
-    /**
-     * Initialize the Calculator using params as new attributes.
-     *
-     * @param data
-     * @param var
-     */
-    private Calculator(Deque<Complex> data, Variables var) {
-        this.data = data;
-        this.var = var;
-    }
-
     public Deque<Complex> getData() {
         return data;
     }

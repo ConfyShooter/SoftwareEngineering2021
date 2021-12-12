@@ -17,11 +17,6 @@ public class Variables {
     private final Map<Character, Complex> data;
     private final Deque<Map<Character, Complex>> backupsStack;
 
-    private Variables(Map<Character, Complex> data, Deque<Map<Character, Complex>> backupsStack) {
-        this.data = data;
-        this.backupsStack = backupsStack;
-    }
-
     /**
      * Creates an object of this class. An HashMap is used to save Complex
      * numbers corresponding to a letter in the range [a-z]. Instead, an

@@ -57,7 +57,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private Button cancBtn2;
 
-    private final Calculator c = new Calculator();
+    private final Calculator calculator = new Calculator();
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
@@ -71,7 +71,7 @@ public class GUI_FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        operations = new Operations(c);
+        operations = new Operations(calculator);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
 
@@ -103,23 +103,28 @@ public class GUI_FXMLController implements Initializable {
             } else if (comm != null) {
                 comm.execute();
             } else {
-                c.insertNumber(input);
+                calculator.insertNumber(input);
             }
 
             inputText.clear();
-        } catch (NumberFormatException ex) {
-            showAlert("Can't parse '" + inputText.getText() + "'.");
+            
         } catch (RuntimeException ex) {
+            
+            if(ex instanceof NumberFormatException)
+                showAlert("Can't parse '" + inputText.getText() + "'.");
+            else
+                showAlert(ex.getMessage());
+            
             if (!functionBox.isSelected()) {
                 inputText.clear();
             }
-            showAlert(ex.getMessage());
+            
         } catch (Exception ex) {
             showAlert("General error.");
         }
-
+        
         functionBox.setSelected(false);
-        stack.setAll(c.getData());
+        stack.setAll(calculator.getData());
     }
 
     @FXML
@@ -227,25 +232,17 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onFunctionBoxPressed(ActionEvent event) {
         if (functionBox.isSelected()) {
-            inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
+            inputText.setPromptText("nameOp: op1 op2 a+bj op3...");
         } else {
             inputText.setPromptText("a+bj, +, -, clear, drop, <a, +z, sin, log...");
             inputText.clear();
         }
     }
 
-    private void onButtonPressed(ActionEvent event, String text) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " " + text);
-        } else {
-            inputText.setText(text);
-            onInsertPressed(event);
-        }
-    }
-
     @FXML
     private void useFunction(ActionEvent event) {
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -260,6 +257,7 @@ public class GUI_FXMLController implements Initializable {
         String name = functionsList.getSelectionModel().getSelectedItem();
         operations.removeOperations(name);
         functions.setAll(operations.userOperationsNames());
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -269,6 +267,7 @@ public class GUI_FXMLController implements Initializable {
         } catch (IOException ex) {
             showAlert("General I/O error (while saving). Retry!");
         }
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -279,13 +278,7 @@ public class GUI_FXMLController implements Initializable {
             showAlert("General I/O error (while loading). Retry!");
         }
         functions.setAll(operations.userOperationsNames());
-    }
-
-    private void showAlert(String message) {
-        Alert a = new Alert(Alert.AlertType.WARNING);
-        a.setTitle("Warning");
-        a.setHeaderText(message);
-        a.showAndWait();
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -342,6 +335,13 @@ public class GUI_FXMLController implements Initializable {
     private void onExpPressed(ActionEvent event) {
         onButtonPressed(event, "exp");
     }
+    
+    private void showAlert(String message) {
+        Alert a = new Alert(Alert.AlertType.WARNING);
+        a.setTitle("Warning");
+        a.setHeaderText(message);
+        a.showAndWait();
+    }
 
     /**
      * Show a TextInputDialog asking user to insert a char.
@@ -364,6 +364,15 @@ public class GUI_FXMLController implements Initializable {
             s = dialog.getResult();
         }
         return s != null ? s.charAt(0) : null;
+    }
+    
+    private void onButtonPressed(ActionEvent event, String text) {
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " " + text);
+        } else {
+            inputText.setText(text);
+            onInsertPressed(event);
+        }
     }
 
 }

@@ -228,11 +228,6 @@ public class ComplexTest {
         expected.arg();
     }
 
-    @Test()
-    public void testCosException() {
-
-    }
-
     @Test
     public void testCos() {
         expected.setReal(1d);
@@ -251,11 +246,6 @@ public class ComplexTest {
         expected.setReal(Math.cos(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
         expected.setImaginary(-Math.sin(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, operand1.cos());
-    }
-
-    @Test()
-    public void testAcosException() {
-
     }
 
     @Test
@@ -281,11 +271,6 @@ public class ComplexTest {
 
     }
 
-    @Test()
-    public void testSinException() {
-
-    }
-
     @Test
     public void testSin() {
         assertComplexEquals(expected, zero.sin());
@@ -303,11 +288,6 @@ public class ComplexTest {
         expected.setReal(Math.sin(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
         expected.setImaginary(Math.cos(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, operand1.sin());
-    }
-
-    @Test()
-    public void testAsinException() {
-
     }
 
     @Test
@@ -346,13 +326,8 @@ public class ComplexTest {
         
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
-        expected = operand1.sin().division(operand1.cos());;
+        expected = operand1.sin().division(operand1.cos());
         assertComplexEquals(expected, operand1.tan());
-    }
-
-    @Test()
-    public void testAtanException() {
-
     }
 
     @Test
