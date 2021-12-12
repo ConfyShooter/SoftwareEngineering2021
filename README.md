@@ -56,4 +56,4 @@ _Repository of team 20 of the Software Engineering course A.Y. 21/22_
   
   [Sprint retrospective report](https://drive.google.com/file/d/1An_f7tqy2oHVx-uuew0N1eyhCcjxPPUF/view?usp=sharing)
   
- ### ✦ [Final presentation](https://docs.google.com/presentation/d/19XT9Fbl2tDdFpe5OZusDbMa3GsTi4Yyx/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true) 
+ ### ✦ [Final presentation](https://drive.google.com/file/d/1Anu-0-Mw5O8w-O1di6p_WFl17sWbpfNf/view?usp=sharing) 
