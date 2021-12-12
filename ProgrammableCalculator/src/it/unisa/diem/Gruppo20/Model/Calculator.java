@@ -34,8 +34,8 @@ public class Calculator {
 
     /**
      * Executes the parsing of the string passed as param. String
-     * that contains a command to be executed by Calculator. During the last
-     * Sprint this method has been deprecated by StandardOperations class.
+     * that contains a command to be executed by Calculator. 
+     * During the last Sprint this method has been deprecated by StandardOperations class.
      *
      * @param input String that contains a command to be executed by Calculator.
      * @throws java.lang.NumberFormatException if it fails to insert a number on
