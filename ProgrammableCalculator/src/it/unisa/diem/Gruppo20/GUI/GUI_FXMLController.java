@@ -57,10 +57,11 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private Button cancBtn2;
 
-    private final Calculator c = new Calculator();
     private Operations operations;
     private ObservableList<Complex> stack;
     private ObservableList<String> functions;
+
+    private final Calculator calculator = new Calculator();
     private final File defaultFile = new File("media/functions.txt");
 
     /**
@@ -71,7 +72,7 @@ public class GUI_FXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        operations = new Operations(c);
+        operations = new Operations(calculator);
         stack = FXCollections.observableArrayList();
         functions = FXCollections.observableArrayList();
 
@@ -94,7 +95,6 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onInsertPressed(ActionEvent event) {
         String input = inputText.getText().trim().toLowerCase(); //get input from textField
-
         try {
             Command comm = operations.getOperationsCommand(input); //search for an user or standard operation Command
             if (functionBox.isSelected()) { //if check box is selected
@@ -103,7 +103,7 @@ public class GUI_FXMLController implements Initializable {
             } else if (comm != null) {
                 comm.execute();
             } else {
-                c.insertNumber(input);
+                calculator.insertNumber(input);
             }
 
             inputText.clear();
@@ -119,7 +119,7 @@ public class GUI_FXMLController implements Initializable {
         }
 
         functionBox.setSelected(false);
-        stack.setAll(c.getData());
+        stack.setAll(calculator.getData());
     }
 
     @FXML
@@ -234,15 +234,6 @@ public class GUI_FXMLController implements Initializable {
         }
     }
 
-    private void onButtonPressed(ActionEvent event, String text) {
-        if (functionBox.isSelected()) {
-            inputText.setText(inputText.getText() + " " + text);
-        } else {
-            inputText.setText(text);
-            onInsertPressed(event);
-        }
-    }
-
     @FXML
     private void useFunction(ActionEvent event) {
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
@@ -279,13 +270,6 @@ public class GUI_FXMLController implements Initializable {
             showAlert("General I/O error (while loading). Retry!");
         }
         functions.setAll(operations.userOperationsNames());
-    }
-
-    private void showAlert(String message) {
-        Alert a = new Alert(Alert.AlertType.WARNING);
-        a.setTitle("Warning");
-        a.setHeaderText(message);
-        a.showAndWait();
     }
 
     @FXML
@@ -343,9 +327,27 @@ public class GUI_FXMLController implements Initializable {
         onButtonPressed(event, "exp");
     }
 
+    private void onButtonPressed(ActionEvent event, String text) {
+        if (functionBox.isSelected()) {
+            inputText.setText(inputText.getText() + " " + text);
+        } else {
+            inputText.setText(text);
+            onInsertPressed(event);
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert a = new Alert(Alert.AlertType.WARNING);
+        a.setTitle("Warning");
+        a.setHeaderText(message);
+        a.showAndWait();
+    }
+
     /**
-     * Show a TextInputDialog asking user to insert a char.
-     * @param title Represent the operation to perform on the char, used to set the title of TextInputDialog.
+     * Shows a TextInputDialog asking user to insert a char.
+     *
+     * @param title Represent the operation to perform on the char, used to set
+     * the title of TextInputDialog.
      * @return A Character inserted by user.
      */
     private Character askForChar(String title) {

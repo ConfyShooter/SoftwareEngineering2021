@@ -6,10 +6,10 @@ import java.util.Map;
 
 /**
  * This class manages the Standard calculator's Operations using the Command
- * pattern to execute insert numbers, arithmetic, trigonometric,
- * trascendental and on variable ones.
- * 
- * 
+ * pattern to execute insert numbers, arithmetic, trigonometric, trascendental
+ * and on variable ones.
+ *
+ *
  * @author Team 20
  */
 public class StandardOperations {

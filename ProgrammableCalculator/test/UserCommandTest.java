@@ -34,7 +34,6 @@ public class UserCommandTest {
         invert = c::invertSign;
         num1 = new Complex(10.0, 10.0);
         num2 = new Complex(25.0, 45.0);
-
     }
 
     @Test
@@ -50,7 +49,6 @@ public class UserCommandTest {
         for (int i = 0; i < expectedOp.size(); i++) {
             assertEquals(expectedOp.get(i), opNames.get(i));
         }
-
     }
 
     @Test(expected = NullPointerException.class)

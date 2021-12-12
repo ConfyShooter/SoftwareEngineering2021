@@ -107,8 +107,8 @@ public class Operations {
     }
 
     /**
-     * Returns the list of operations performed by the user-defined
-     * operation that has the name passed as a parameter.
+     * Returns the list of operations performed by the user-defined operation
+     * that has the name passed as a parameter.
      *
      * @param name The user-defined operation name.
      * @return List of String or null if the isn't a valid user-defined
@@ -157,10 +157,11 @@ public class Operations {
 
     /**
      * Removes the user-defined operation that has the name passed as a
-     * parameter.
-     * This method will clean the sequence of operations performed by this user-defined operation,
-     * but it will not delete the name by data map, in this way it's possible to redefine it.
-     * The user-defined operation name will be deleted from names set.
+     * parameter. It will clean the sequence of operations performed by this
+     * user-defined operation, but it will not delete the name by data map, in
+     * this way it's possible to redefine it. The user-defined operation name
+     * will be deleted from names set.
+     *
      * @param name The user-defined operation name.
      */
     public void removeOperations(String name) {

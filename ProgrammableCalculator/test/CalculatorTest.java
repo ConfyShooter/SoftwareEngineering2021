@@ -70,11 +70,11 @@ public class CalculatorTest {
 
         expected.setReal(-100d);
         assertComplexEquals(expected, c.parseNumber("-100"));
-        
+
         expected.setReal(0d);
         expected.setImaginary(-1d);
         assertComplexEquals(expected, c.parseNumber("-1j"));
-        
+
         expected.setReal(0d);
         expected.setImaginary(54d);
         assertComplexEquals(expected, c.parseNumber("54j"));
@@ -609,7 +609,6 @@ public class CalculatorTest {
         expected.setReal(operand2.getReal());
         expected.setImaginary(operand2.getImaginary());
         assertComplexEquals(expected, c.getVariables().getVariable('j'));
-
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -718,19 +717,19 @@ public class CalculatorTest {
         c.cos();
         expected.setReal(1d);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
         c.cos();
-        expected.setReal(Math.cos(operand1Real.getReal())*Math.cosh(operand1Real.getImaginary()));
+        expected.setReal(Math.cos(operand1Real.getReal()) * Math.cosh(operand1Real.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Imaginary);
         c.cos();
         expected.setReal(Math.cos(operand1Imaginary.getReal()) * Math.cosh(operand1Imaginary.getImaginary()));
         expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         c.insertNumber(operand1);
@@ -748,24 +747,24 @@ public class CalculatorTest {
     @Test
     public void testArcCos() {
         Complex halfPi = new Complex(Math.PI / 2, 0d);
-        
+
         c.insertNumber(zero);
         c.arcCos();
         expected.setReal(halfPi.getReal());
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Real);
         c.arcCos();
         operand1Imaginary.setImaginary(Math.sqrt(15) - 4);
         expected = halfPi.minus(operand1Imaginary.log().multiply(Complex.ImaginaryUnit));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2Imaginary);
         c.arcCos();
         operand2Real.setReal(Math.sqrt(26) - 5);
         expected = halfPi.minus(operand2Real.log().multiply(Complex.ImaginaryUnit));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2);
         c.arcCos();
         operand1.setReal(-8978d);
@@ -775,7 +774,6 @@ public class CalculatorTest {
         Complex log = operand1.squareRoot().plus(operand1Real).log();
         expected = halfPi.minus(log.multiply(Complex.ImaginaryUnit));
         assertComplexEquals(expected, c.getData().pop());
-
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -789,24 +787,24 @@ public class CalculatorTest {
         c.insertNumber(zero);
         c.sin();
         assertComplexEquals(expected, c.getData().pop());
-        
+
         operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
         c.sin();
-        expected.setReal(Math.sin(operand1Real.getReal())*Math.cosh(operand1Real.getImaginary()));
+        expected.setReal(Math.sin(operand1Real.getReal()) * Math.cosh(operand1Real.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Imaginary);
         c.sin();
         expected.setReal(0d);
         expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
-        
+
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         c.insertNumber(operand1);
         c.sin();
-        expected.setReal(Math.sin(operand1.getReal())*Math.cosh(operand1.getImaginary()));
+        expected.setReal(Math.sin(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
         expected.setImaginary(Math.cos(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
         assertComplexEquals(expected, c.getData().pop());
     }
@@ -821,19 +819,19 @@ public class CalculatorTest {
         c.insertNumber(zero);
         c.arcSin();
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Real);
         c.arcSin();
         operand1Imaginary.setImaginary(Math.sqrt(15) - 4);
         expected = operand1Imaginary.log().multiply(Complex.ImaginaryUnit);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2Imaginary);
         c.arcSin();
         operand2Real.setReal(Math.sqrt(26) - 5);
         expected = operand2Real.log().multiply(Complex.ImaginaryUnit);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2);
         c.arcSin();
         operand1.setReal(-8978d);
@@ -858,20 +856,19 @@ public class CalculatorTest {
 
         operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
-        c.tan();        
+        c.tan();
         expected = operand1Real.sin().division(operand1Real.cos());
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Imaginary);
-        c.tan();  
+        c.tan();
         expected = operand1Imaginary.sin().division(operand1Imaginary.cos());
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1);
-        c.tan();  
+        c.tan();
         expected = operand1.sin().division(operand1.cos());;
         assertComplexEquals(expected, c.getData().pop());
-
     }
 
     @Test(expected = NoSuchElementException.class)
@@ -882,24 +879,24 @@ public class CalculatorTest {
     @Test
     public void testArcTan() {
         Complex halfImg = new Complex(0d, -0.5);
-        
+
         c.insertNumber(zero);
         c.arcTan();
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1Real);
         c.arcTan();
         operand1.setImaginary((double) 8 / 17);
         operand1.setReal((double) -15 / 17);
         expected = operand1.log().multiply(halfImg);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2Imaginary);
         c.arcTan();
         operand2Real.setReal(-1.5);
         expected = operand2Real.log().multiply(halfImg);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand2);
         c.arcTan();
         operand1.setReal(26d);
@@ -958,7 +955,7 @@ public class CalculatorTest {
         expected.setImaginary(0d);
         assertComplexEquals(expected, c.getData().pop());
     }
-    
+
     @Test(expected = NoSuchElementException.class)
     public void testExpException() {
         c.exp();
@@ -992,15 +989,15 @@ public class CalculatorTest {
         expected.setReal(0.28366218);
         expected.setImaginary(-0.95892427);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         c.insertNumber(operand1);
         c.exp();
         expected.setReal(-14942.61894286);
         expected.setImaginary(16182.80984680);
         assertComplexEquals(expected, c.getData().pop());
-        
+
         operand2 = operand2.division(operand1);
-        
+
         c.insertNumber(operand2);
         c.exp();
         expected.setReal(0.02892131);
@@ -1012,7 +1009,7 @@ public class CalculatorTest {
     public void testLogExceptionStack() {
         c.log();
     }
-    
+
     @Test(expected = ArithmeticException.class)
     public void testLogException() {
         c.insertNumber(zero);

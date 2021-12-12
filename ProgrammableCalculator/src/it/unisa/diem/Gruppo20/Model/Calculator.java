@@ -42,11 +42,11 @@ public class Calculator {
     public Variables getVariables() {
         return var;
     }
-    
+
     /**
-     * This method executes the parsing of the string passed as param. 
-     * String that contains a command to be executed by Calculator.
-     * During the last Sprint this method has been deprecated by StandardOperations class.
+     * Executes the parsing of the string passed as param. String
+     * that contains a command to be executed by Calculator. During the last
+     * Sprint this method has been deprecated by StandardOperations class.
      *
      * @param input String that contains a command to be executed by Calculator.
      * @throws java.lang.NumberFormatException if it fails to insert a number on
@@ -130,7 +130,6 @@ public class Calculator {
         }
     }
 
-
     private double findImaginary(String s) {
         switch (s) {
             case "j", "+j" -> {
@@ -203,7 +202,8 @@ public class Calculator {
     }
 
     /**
-     * Pushes the complex number, that will be parsed from input string, onto the stack.
+     * Pushes the complex number, that will be parsed from input string, onto
+     * the stack.
      *
      * @param input The complex number that must be pushed onto the stack.
      */
@@ -259,7 +259,8 @@ public class Calculator {
 
     /**
      * Implements the division a/b between the two top elements from the stack,
-     * a is the second last element, while b is the last element, the result will be storend onto the stack.
+     * a is the second last element, while b is the last element, the result
+     * will be storend onto the stack.
      */
     public void division() {
         checkStackSize(2);
@@ -497,9 +498,9 @@ public class Calculator {
     }
 
     /**
-     * Private method that check if there are at least k element in the stack.
+     * Private method that checks if there are at least k element in the stack.
      *
-     * @param k number of operands required.
+     * @param k Number of operands required.
      * @throws NoSuchElementException if there aren't enough elements.
      */
     private void checkStackSize(int k) throws NoSuchElementException {

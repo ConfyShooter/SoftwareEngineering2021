@@ -236,16 +236,16 @@ public class ComplexTest {
     @Test
     public void testCos() {
         expected.setReal(1d);
-        assertComplexEquals(expected,zero.cos());
-        
+        assertComplexEquals(expected, zero.cos());
+
         operand1Real.setReal(Math.PI);
         expected.setReal(-1d);
         assertComplexEquals(expected, operand1Real.cos());
-        
+
         expected.setReal(Math.cos(operand1Imaginary.getReal()) * Math.cosh(operand1Imaginary.getImaginary()));
         expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, operand1Imaginary.cos());
-        
+
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         expected.setReal(Math.cos(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
@@ -289,15 +289,14 @@ public class ComplexTest {
     @Test
     public void testSin() {
         assertComplexEquals(expected, zero.sin());
-        
+
         operand1Real.setReal(Math.PI * 2);
         assertComplexEquals(expected, operand1Real.sin());
-        
 
         expected.setReal(0d);
         expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
         assertComplexEquals(expected, operand1Imaginary.sin());
-        
+
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         expected.setReal(Math.sin(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
@@ -336,14 +335,14 @@ public class ComplexTest {
     @Test
     public void testTan() {
         assertComplexEquals(expected, zero.tan());
-        
+
         operand1Real.setReal(Math.PI);
         expected = operand1Real.sin().division(operand1Real.cos());
         assertComplexEquals(expected, operand1Real.tan());
-        
+
         expected = operand1Imaginary.sin().division(operand1Imaginary.cos());
         assertComplexEquals(expected, operand1Imaginary.tan());
-        
+
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
         expected = operand1.sin().division(operand1.cos());;

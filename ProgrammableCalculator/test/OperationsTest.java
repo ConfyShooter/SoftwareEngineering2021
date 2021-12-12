@@ -3,7 +3,6 @@ import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.UserCommand;
 import it.unisa.diem.Gruppo20.Model.Operations;
-import it.unisa.diem.Gruppo20.Model.StandardOperations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -12,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -46,7 +44,7 @@ public class OperationsTest {
     public void testParseOperationsExceptionName() {
         operations.parseOperations("   clear :  clear  4 8 + ");
     }
-    
+
     @Test(expected = RuntimeException.class)
     public void testParseOperationsExceptionEmptyDef() {
         operations.parseOperations("   test :    ");
@@ -70,7 +68,7 @@ public class OperationsTest {
     public void testGetOperationsCommand() {
         operations.parseOperations("   test :  clear  4 8 + ");
         assertNotNull(operations.getOperationsCommand("test")); //check if user operation named test exist
-        
+
         assertNotNull(operations.getOperationsCommand("mod"));
         assertNotNull(operations.getOperationsCommand("<a"));
         assertNotNull(operations.getOperationsCommand("+z"));
@@ -82,7 +80,6 @@ public class OperationsTest {
         assertNull(operations.getOperationsCommand(">" + String.valueOf(c)));
         c = 'a' - 1;
         assertNull(operations.getOperationsCommand("<" + String.valueOf(c)));
-        
     }
 
     @Test
