@@ -99,12 +99,13 @@ public class Complex {
             }
             s = s + format.format(imaginary) + "j";
         }
-        
+
         s = s.replace("+", " + ");
         s = s.replace("-", " - ");
-        if(s.charAt(0) == ' ')
+        if (s.charAt(0) == ' ') {
             s = s.substring(1);
-        
+        }
+
         return s;
     }
 
@@ -228,7 +229,7 @@ public class Complex {
             throw new ArithmeticException("The phase of 0 is undefined.");
         }
     }
-    
+
     /**
      * Performs the cos of this Complex number.
      *
@@ -344,11 +345,11 @@ public class Complex {
     public Complex exp() {
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
-        
+
         if (imaginary == 0) {
             return new Complex(r, 0d);
         }
-        
+
         Complex img = new Complex(imaginary, 0d);
         return new Complex(r * img.cos().getReal(), r * img.sin().getReal());
     }
@@ -369,8 +370,8 @@ public class Complex {
     /**
      * Returns the approximated cos of num, normally the Math.cos(pi/2) or
      * Math.cos(-pi/2) will return a very low floating point but not zero;
-     * instead this method returns 0.
-     * This method has been deprecated by this class cos method.
+     * instead this method returns 0. This method has been deprecated by this
+     * class cos method.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated cos of num.
@@ -385,8 +386,8 @@ public class Complex {
     /**
      * Returns the approximated sin of num, normally the Math.sin(x * pi) with
      * x=1,2,3 ecc will return a very low floating point but not zero; instead
-     * this method returns 0.
-     * This method has been deprecated by this class sin method.
+     * this method returns 0. This method has been deprecated by this class sin
+     * method.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated sin of num.
