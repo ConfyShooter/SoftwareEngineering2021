@@ -325,7 +325,6 @@ public class Complex {
             return new Complex(Math.pow(real, grade), 0d);
         }
         double r = Math.pow(mod(), grade);
-        //double arg = grade * arg();
         Complex arg = new Complex(grade * arg(), 0d);
 
         return new Complex(r * arg.cos().getReal(), r * arg.sin().getReal());
@@ -339,10 +338,11 @@ public class Complex {
     public Complex exp() {
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
-        /*if (imaginary == 0) {
+        
+        if (imaginary == 0) {
             return new Complex(r, 0d);
-        }*/
-        //return new Complex(r * Math.cos(imaginary), r * Math.sin(imaginary));
+        }
+        
         Complex img = new Complex(imaginary, 0d);
         return new Complex(r * img.cos().getReal(), r * img.sin().getReal());
     }
