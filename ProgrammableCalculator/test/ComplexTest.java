@@ -230,6 +230,8 @@ public class ComplexTest {
 
     @Test
     public void testCos() {
+        assertComplexEquals(expected, new Complex(Math.PI / 2, 0d));
+        
         expected.setReal(1d);
         assertComplexEquals(expected,zero.cos());
         
@@ -310,7 +312,7 @@ public class ComplexTest {
 
     @Test()
     public void testTanException() {
-
+        new Complex(Math.PI / 2, 0d).tan();
     }
 
     @Test
