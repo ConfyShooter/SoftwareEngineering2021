@@ -107,13 +107,19 @@ public class GUI_FXMLController implements Initializable {
             }
 
             inputText.clear();
-        } catch (NumberFormatException ex) {
-            showAlert("Can't parse '" + inputText.getText() + "'.");
+
         } catch (RuntimeException ex) {
+
+            if (ex instanceof NumberFormatException) {
+                showAlert("Can't parse '" + inputText.getText() + "'.");
+            } else {
+                showAlert(ex.getMessage());
+            }
+
             if (!functionBox.isSelected()) {
                 inputText.clear();
             }
-            showAlert(ex.getMessage());
+
         } catch (Exception ex) {
             showAlert("General error.");
         }
@@ -227,7 +233,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void onFunctionBoxPressed(ActionEvent event) {
         if (functionBox.isSelected()) {
-            inputText.setPromptText("name: fun1 fun2 a+bj fun3...");
+            inputText.setPromptText("nameOp: op1 op2 a+bj op3...");
         } else {
             inputText.setPromptText("a+bj, +, -, clear, drop, <a, +z, sin, log...");
             inputText.clear();
@@ -237,6 +243,7 @@ public class GUI_FXMLController implements Initializable {
     @FXML
     private void useFunction(ActionEvent event) {
         onButtonPressed(event, functionsList.getSelectionModel().getSelectedItem());
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -251,6 +258,7 @@ public class GUI_FXMLController implements Initializable {
         String name = functionsList.getSelectionModel().getSelectedItem();
         operations.removeOperations(name);
         functions.setAll(operations.userOperationsNames());
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -260,6 +268,7 @@ public class GUI_FXMLController implements Initializable {
         } catch (IOException ex) {
             showAlert("General I/O error (while saving). Retry!");
         }
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -270,6 +279,7 @@ public class GUI_FXMLController implements Initializable {
             showAlert("General I/O error (while loading). Retry!");
         }
         functions.setAll(operations.userOperationsNames());
+        functionsList.getSelectionModel().clearSelection();
     }
 
     @FXML
@@ -367,5 +377,4 @@ public class GUI_FXMLController implements Initializable {
         }
         return s != null ? s.charAt(0) : null;
     }
-
 }

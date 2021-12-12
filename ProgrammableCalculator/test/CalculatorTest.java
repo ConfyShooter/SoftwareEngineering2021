@@ -713,29 +713,31 @@ public class CalculatorTest {
 
     @Test
     public void testCos() {
+        operand1Real.setReal(Math.PI / 2);
+        c.insertNumber(operand1Real);
+        c.cos();
+        assertComplexEquals(expected, c.getData().pop());
+
         c.insertNumber(zero);
         c.cos();
         expected.setReal(1d);
         assertComplexEquals(expected, c.getData().pop());
 
-        operand1Real.setReal(Math.PI);
-        c.insertNumber(operand1Real);
+        c.insertNumber(operand2Real);
         c.cos();
-        expected.setReal(Math.cos(operand1Real.getReal()) * Math.cosh(operand1Real.getImaginary()));
+        expected.setReal(-0.98999249);
         assertComplexEquals(expected, c.getData().pop());
 
-        c.insertNumber(operand1Imaginary);
+        c.insertNumber(operand2Imaginary);
         c.cos();
-        expected.setReal(Math.cos(operand1Imaginary.getReal()) * Math.cosh(operand1Imaginary.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
+        expected.setReal(74.20994852);
+        expected.setImaginary(0d);
         assertComplexEquals(expected, c.getData().pop());
 
-        operand1.setReal(-3d);
-        operand1.setImaginary(-45d);
         c.insertNumber(operand1);
         c.cos();
-        expected.setReal(Math.cos(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
-        expected.setImaginary(-Math.sin(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
+        expected.setReal(-11865.53786246);
+        expected.setImaginary(-7693.14992752);
         assertComplexEquals(expected, c.getData().pop());
     }
 
@@ -788,24 +790,26 @@ public class CalculatorTest {
         c.sin();
         assertComplexEquals(expected, c.getData().pop());
 
-        operand1Real.setReal(Math.PI);
+        operand2Real.setReal(Math.PI);
+        c.insertNumber(operand2Real);
+        c.sin();
+        assertComplexEquals(expected, c.getData().pop());
+
         c.insertNumber(operand1Real);
         c.sin();
-        expected.setReal(Math.sin(operand1Real.getReal()) * Math.cosh(operand1Real.getImaginary()));
+        expected.setReal(-0.75680249);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand1Imaginary);
         c.sin();
         expected.setReal(0d);
-        expected.setImaginary(Math.cos(operand1Imaginary.getReal()) * Math.sinh(operand1Imaginary.getImaginary()));
+        expected.setImaginary(-35.04557405);
         assertComplexEquals(expected, c.getData().pop());
 
-        operand1.setReal(-3d);
-        operand1.setImaginary(-45d);
         c.insertNumber(operand1);
         c.sin();
-        expected.setReal(Math.sin(operand1.getReal()) * Math.cosh(operand1.getImaginary()));
-        expected.setImaginary(Math.cos(operand1.getReal()) * Math.sinh(operand1.getImaginary()));
+        expected.setReal(-7693.14994675);
+        expected.setImaginary(11865.53783279);
         assertComplexEquals(expected, c.getData().pop());
     }
 
@@ -848,26 +852,34 @@ public class CalculatorTest {
         c.tan();
     }
 
+    @Test(expected = ArithmeticException.class)
+    public void testTanExceptionCos() {
+        operand1Real.setReal(Math.PI / 2);
+        c.insertNumber(operand1Real);
+        c.tan();
+    }
+
     @Test
     public void testTan() {
         c.insertNumber(zero);
         c.tan();
         assertComplexEquals(expected, c.getData().pop());
 
-        operand1Real.setReal(Math.PI);
         c.insertNumber(operand1Real);
         c.tan();
-        expected = operand1Real.sin().division(operand1Real.cos());
+        expected.setReal(1.15782128);
         assertComplexEquals(expected, c.getData().pop());
 
         c.insertNumber(operand1Imaginary);
         c.tan();
-        expected = operand1Imaginary.sin().division(operand1Imaginary.cos());
+        expected.setReal(0d);
+        expected.setImaginary(-0.99959314);
         assertComplexEquals(expected, c.getData().pop());
 
-        c.insertNumber(operand1);
+        c.insertNumber(new Complex(operand1Real.getReal(), operand1Imaginary.getImaginary()));
         c.tan();
-        expected = operand1.sin().division(operand1.cos());;
+        expected.setReal(0.00040263);
+        expected.setImaginary(-1.00005913);
         assertComplexEquals(expected, c.getData().pop());
     }
 

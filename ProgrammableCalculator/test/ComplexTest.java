@@ -230,7 +230,10 @@ public class ComplexTest {
 
     @Test
     public void testCos() {
-        assertComplexEquals(expected, new Complex(Math.PI / 2, 0d).cos());
+        assertComplexEquals(expected, new Complex(Math.PI / 2, 0d));
+        
+        expected.setReal(1d);
+        assertComplexEquals(expected,zero.cos());
         
         expected.setReal(1d);
         assertComplexEquals(expected, zero.cos());
@@ -268,6 +271,7 @@ public class ComplexTest {
         operand2 = new Complex(8d, -24d).squareRoot().minus(new Complex(-4d, 3d));
         expected = halfPi.minus(Complex.ImaginaryUnit.multiply(operand2.log()));
         assertComplexEquals(expected, operand1.acos());
+
     }
 
     @Test
@@ -322,7 +326,7 @@ public class ComplexTest {
 
         operand1.setReal(-3d);
         operand1.setImaginary(-45d);
-        expected = operand1.sin().division(operand1.cos());;
+        expected = operand1.sin().division(operand1.cos());
         assertComplexEquals(expected, operand1.tan());
     }
 

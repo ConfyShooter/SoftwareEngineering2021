@@ -170,10 +170,10 @@ public class Complex {
         }
 
         double div = c1 * c1 + d * d;
-        double real = (a * c1 + b * d) / div;
+        double re = (a * c1 + b * d) / div;
         double img = (b * c1 - a * d) / div;
 
-        return new Complex(real, img);
+        return new Complex(re, img);
     }
 
     /**
@@ -241,8 +241,8 @@ public class Complex {
         }*/
 
         Complex cos = new Complex();
-        cos.setReal(Math.cos(real) * Math.cosh(imaginary));
-        cos.setImaginary(-Math.sin(real) * Math.sinh(imaginary));
+        cos.setReal(cosApproximation(real) * Math.cosh(imaginary));
+        cos.setImaginary(-1 * sinApproximation(real) * Math.sinh(imaginary));
         return cos;
     }
 
@@ -268,8 +268,8 @@ public class Complex {
         }
 
         Complex sin = new Complex();
-        sin.setReal(Math.sin(real) * Math.cosh(imaginary));
-        sin.setImaginary(Math.cos(real) * Math.sinh(imaginary));
+        sin.setReal(sinApproximation(real) * Math.cosh(imaginary));
+        sin.setImaginary(cosApproximation(real) * Math.sinh(imaginary));
         return sin;
     }
 
@@ -370,13 +370,11 @@ public class Complex {
     /**
      * Returns the approximated cos of num, normally the Math.cos(pi/2) or
      * Math.cos(-pi/2) will return a very low floating point but not zero;
-     * instead this method returns 0. This method has been deprecated by this
-     * class cos method.
+     * instead this method returns 0.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated cos of num.
      */
-    @Deprecated
     private Double cosApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
@@ -386,13 +384,11 @@ public class Complex {
     /**
      * Returns the approximated sin of num, normally the Math.sin(x * pi) with
      * x=1,2,3 ecc will return a very low floating point but not zero; instead
-     * this method returns 0. This method has been deprecated by this class sin
-     * method.
+     * this method returns 0.
      *
      * @param num An angle, in radians.
      * @return A Double represents the approximated sin of num.
      */
-    @Deprecated
     private Double sinApproximation(double num) {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));

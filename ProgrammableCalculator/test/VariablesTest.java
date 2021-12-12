@@ -17,6 +17,8 @@ public class VariablesTest {
     private Complex expected;
     private Variables v;
     private Complex number;
+    private final char beforeA = 'a' - 1;
+    private final char afterZ = 'z' + 1;
 
     public VariablesTest() {
     }
@@ -26,6 +28,7 @@ public class VariablesTest {
         v = new Variables();
         expected = new Complex();
         number = new Complex((double) 1, (double) 2);
+        
         v.setVariable('j', number);
         v.setVariable('m', number.multiply(number));
         v.setVariable('p', number.plus(number));
@@ -33,12 +36,12 @@ public class VariablesTest {
 
     @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionSx() {
-        v.getVariable('_');
+        v.getVariable(beforeA);
     }
 
     @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionDx() {
-        v.getVariable('{');
+        v.getVariable(afterZ);
     }
 
     @Test(expected = VariableKeyException.class)
@@ -55,12 +58,12 @@ public class VariablesTest {
 
     @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionSx() {
-        v.setVariable('_', number);
+        v.setVariable(beforeA, number);
     }
 
     @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionDx() {
-        v.setVariable('{', number);
+        v.setVariable(afterZ, number);
     }
 
     @Test
@@ -71,12 +74,12 @@ public class VariablesTest {
 
     @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionSx() {
-        v.sumVariable('_', number);
+        v.sumVariable(beforeA, number);
     }
 
     @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionDx() {
-        v.sumVariable('{', number);
+        v.sumVariable(afterZ, number);
     }
 
     @Test
@@ -87,12 +90,12 @@ public class VariablesTest {
 
     @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionSx() {
-        v.subVariable('_', number);
+        v.subVariable(beforeA, number);
     }
 
     @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionDx() {
-        v.subVariable('{', number);
+        v.subVariable(afterZ, number);
     }
 
     @Test

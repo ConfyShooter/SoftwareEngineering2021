@@ -45,10 +45,10 @@ public class Operations {
      * Parses a sequence of operations and adds a sequence of command to the
      * map.
      *
-     * @param s A string formatted like this "nameFun: fun1 fun2 a+bj fun3...".
+     * @param s A string formatted like this "nameOp: op1 op2 a+bj op3...".
      * @throws ParseException
      */
-    public void parseOperations(String s) throws ParseException {
+    public void parseOperations(String s) {
         int index = s.indexOf(":");
         if (index == -1) {
             throw new ParseException("To make an operation don't check Function box,\n"

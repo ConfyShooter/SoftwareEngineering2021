@@ -28,7 +28,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <TextField fx:id="inputText" prefHeight="26.0" prefWidth="394.0" promptText="a + ib" />
+                  <TextField fx:id="inputText" prefHeight="26.0" prefWidth="394.0" promptText="a+bj, +, -, clear, drop, &lt;a, +z, sin, log..." />
                   <CheckBox fx:id="functionBox" focusTraversable="false" mnemonicParsing="false" onAction="#onFunctionBoxPressed" prefHeight="18.0" prefWidth="90.0" text="Function" />
                   <Button fx:id="insertBtn" defaultButton="true" mnemonicParsing="false" onAction="#onInsertPressed" prefHeight="30.0" prefWidth="77.0" style="-fx-background-color: #1E90FF; -fx-background-radius: 12px;" text="Insert" textFill="WHITE">
                      <font>
@@ -292,7 +292,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="historyList" maxHeight="280.0" maxWidth="200.0" prefHeight="280.0" prefWidth="200.0" />
+                        <ListView fx:id="historyList" focusTraversable="false" maxHeight="280.0" maxWidth="200.0" prefHeight="280.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" layoutX="363.0" layoutY="10.0" prefHeight="430.0" prefWidth="130.0" spacing="10.0">
