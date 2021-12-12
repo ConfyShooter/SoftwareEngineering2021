@@ -2,6 +2,7 @@
 import it.unisa.diem.Gruppo20.Model.Variables;
 
 import it.unisa.diem.Gruppo20.Model.Complex;
+import it.unisa.diem.Gruppo20.Model.Exception.VariableKeyException;
 import java.util.NoSuchElementException;
 
 import org.junit.*;
@@ -16,6 +17,8 @@ public class VariablesTest {
     private Complex expected;
     private Variables v;
     private Complex number;
+    private final char beforeA = 'a' - 1;
+    private final char afterZ = 'z' + 1;
 
     public VariablesTest() {
     }
@@ -25,22 +28,23 @@ public class VariablesTest {
         v = new Variables();
         expected = new Complex();
         number = new Complex((double) 1, (double) 2);
+        
         v.setVariable('j', number);
         v.setVariable('m', number.multiply(number));
         v.setVariable('p', number.plus(number));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionSx() {
-        v.getVariable('_');
+        v.getVariable(beforeA);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionDx() {
-        v.getVariable('{');
+        v.getVariable(afterZ);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testGetVariableExceptionValue() {
         v.getVariable('a');
     }
@@ -52,14 +56,14 @@ public class VariablesTest {
         assertComplexEquals(number.plus(number), v.getVariable('p'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionSx() {
-        v.setVariable('_', number);
+        v.setVariable(beforeA, number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSetVariableExceptionDx() {
-        v.setVariable('{', number);
+        v.setVariable(afterZ, number);
     }
 
     @Test
@@ -68,14 +72,14 @@ public class VariablesTest {
         assertComplexEquals(new Complex(0.0, 0.0), v.getVariable('m'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionSx() {
-        v.sumVariable('_', number);
+        v.sumVariable(beforeA, number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSumVariableExceptionDx() {
-        v.sumVariable('{', number);
+        v.sumVariable(afterZ, number);
     }
 
     @Test
@@ -84,14 +88,14 @@ public class VariablesTest {
         assertComplexEquals(v.getVariable('p'), v.getVariable('j'));
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionSx() {
-        v.subVariable('_', number);
+        v.subVariable(beforeA, number);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = VariableKeyException.class)
     public void testSubVariableExceptionDx() {
-        v.subVariable('{', number);
+        v.subVariable(afterZ, number);
     }
 
     @Test
@@ -104,7 +108,7 @@ public class VariablesTest {
     public void testBackup() {
         v.backup();
 
-        Complex result = v.getBackupsStack().peekFirst().get('j');
+        Complex result = v.getBackupsStack().element().get('j');
         expected.setReal(1.0);
         expected.setImaginary(2.0);
 
@@ -131,8 +135,6 @@ public class VariablesTest {
         result = v.getVariable('j');
         expected.setReal(1.0);
         expected.setImaginary(2.0);
-        assertComplexEquals(expected, result);
-
         assertComplexEquals(expected, result);
     }
 

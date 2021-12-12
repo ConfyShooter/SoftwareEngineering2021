@@ -5,46 +5,37 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 /**
- * This class allows arithmetic operations on Complex number using a LIFO data
- * structure for storing.
+ * This class allows operations on Complex number using a stack data structure
+ * for taking the operands and storing the results. This class allows also to
+ * perform operations on variables using a reference of Variables object.
  *
  * @author Team 20
  */
 public class Calculator {
 
     private final Deque<Complex> data;
-    private final Variables map;
+    private final Variables var;
 
     /**
-     * Initialize the Calculator with an empty stack.
+     * Initialize the Calculator with an empty stack and new Variables object.
      */
     public Calculator() {
         data = new ArrayDeque<>();
-        map = new Variables();
-    }
-
-    /**
-     * Initialize the Calculator using params as new attributes.
-     *
-     * @param data
-     * @param map
-     */
-    public Calculator(Deque<Complex> data, Variables map) {
-        this.data = data;
-        this.map = map;
+        var = new Variables();
     }
 
     public Deque<Complex> getData() {
         return data;
     }
 
-    public Variables getMap() {
-        return map;
+    public Variables getVariables() {
+        return var;
     }
 
     /**
-     * This method executes the parsing of the string passed as param. String
-     * that contains a command to be executed by Calculator.
+     * Executes the parsing of the string passed as param. String
+     * that contains a command to be executed by Calculator. During the last
+     * Sprint this method has been deprecated by StandardOperations class.
      *
      * @param input String that contains a command to be executed by Calculator.
      * @throws java.lang.NumberFormatException if it fails to insert a number on
@@ -55,6 +46,7 @@ public class Calculator {
      * elements to perform a specific operation.
      * @throws RuntimeException if input is blank or there is a unknown error.
      */
+    @Deprecated
     public void parsing(String input) throws Exception {
         input = input.replaceAll("\\s+", "").toLowerCase();
         if (input.isBlank()) {
@@ -127,8 +119,8 @@ public class Calculator {
         }
     }
 
-    private double findImaginary(String s) throws NumberFormatException {
-        switch (s) {
+    private double findImaginary(String input) {
+        switch (input) {
             case "j", "+j" -> {
                 return 1.0;
             }
@@ -136,17 +128,17 @@ public class Calculator {
                 return -1.0;
             }
             default -> {
-                int jIndex = s.indexOf("j");
-                String number = new String();
+                int jIndex = input.indexOf("j");
+                String number;
 
                 if (jIndex == 0) { // imaginary part inserted in form jb
-                    number = s.substring(1, s.length());
-                } else if (jIndex == 1 && (0 == s.indexOf("+") || 0 == s.indexOf("-"))) { // imaginary part inserted in form +jb or -jb
-                    number = s.substring(0, jIndex).concat(s.substring(jIndex + 1, s.length()));
-                } else if (jIndex == s.length() - 1) { // imaginary part inserted in form bj
-                    number = s.substring(0, jIndex);
+                    number = input.substring(1, input.length());
+                } else if (jIndex == 1 && (0 == input.indexOf("+") || 0 == input.indexOf("-"))) { // imaginary part inserted in form +jb or -jb
+                    number = input.substring(0, jIndex).concat(input.substring(jIndex + 1, input.length()));
+                } else if (jIndex == input.length() - 1) { // imaginary part inserted in form bj
+                    number = input.substring(0, jIndex);
                 } else {
-                    number = s;
+                    number = input;
                 }
                 return Double.parseDouble(number);
             }
@@ -154,14 +146,15 @@ public class Calculator {
     }
 
     /**
-     * This method extracts the real and imaginary part from a complex number
-     * passed as param analysing all combinations of them.
+     * Extracts the real and imaginary part from a complex number passed as
+     * param analysing all combinations of them.
      *
      * @param number String that contains a Complex number.
      * @return Complex number parsed from the string.
-     * @throws NumberFormatException if in the string.
+     * @throws NumberFormatException if in the string not contains a valid
+     * number.
      */
-    public Complex parseNumber(String number) throws NumberFormatException {
+    public Complex parseNumber(String number) {
         Double real = 0.0;
         Double imaginary = 0.0;
         int jIndex = number.indexOf("j");
@@ -185,17 +178,26 @@ public class Calculator {
             }
         }
 
-        Complex c = new Complex(real, imaginary);
-        return c;
+        return new Complex(real, imaginary);
     }
 
     /**
-     * This method pushes the complex c onto the stack.
+     * Pushes the complex number onto the stack.
      *
-     * @param c The complex number that must be pushed onto the stack.
+     * @param number The complex number that must be pushed onto the stack.
      */
-    public void insertNumber(Complex c) {
-        data.push(c);
+    public void insertNumber(Complex number) {
+        data.push(number);
+    }
+
+    /**
+     * Pushes the complex number, that will be parsed from input string, onto
+     * the stack.
+     *
+     * @param input The complex number that must be pushed onto the stack.
+     */
+    public void insertNumber(String input) {
+        data.push(parseNumber(input.replaceAll("\\s+", "").toLowerCase()));
     }
 
     /**
@@ -205,7 +207,7 @@ public class Calculator {
      * @throws java.util.NoSuchElementException if the stack has less than 2
      * elements.
      */
-    public void sum() throws NoSuchElementException {
+    public void sum() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -215,13 +217,13 @@ public class Calculator {
     }
 
     /**
-     * This method implements the subtract between the second last and the last
-     * elements in the stack. Finally store the result onto the stack.
+     * Implements the subtract between the second last and the last elements in
+     * the stack storing the result onto the stack.
      *
      * @throws java.util.NoSuchElementException if the stack has less than 2
      * elements.
      */
-    public void subtract() throws NoSuchElementException {
+    public void subtract() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -234,11 +236,8 @@ public class Calculator {
      * Implements the multiplication a*b of two elements from the top of the
      * stack, a is the second last element, while b is is the last element,
      * removing them from the stack and storing the result onto it.
-     *
-     * @throws java.util.NoSuchElementException if the stack has less than 2
-     * elements.
      */
-    public void multiply() throws NoSuchElementException {
+    public void multiply() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -248,12 +247,11 @@ public class Calculator {
     }
 
     /**
-     * Implements the division a/b of last element from the stack with the
-     * second last element from the stack b storing the result onto it.
-     *
-     * @throws java.lang.RuntimeException
+     * Implements the division a/b between the two top elements from the stack,
+     * a is the second last element, while b is the last element, the result
+     * will be storend onto the stack.
      */
-    public void division() throws RuntimeException {
+    public void division() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -265,65 +263,49 @@ public class Calculator {
     /**
      * Implements the square root of last element from the stack storing the
      * result onto it.
-     *
-     * @throws java.lang.RuntimeException if the stack is empty.
      */
-    public void sqrt() throws RuntimeException {
+    public void sqrt() {
         checkStackSize(1);
 
-        Complex last = data.pop();
-
-        data.push(last.squareRoot());
+        data.push(data.pop().squareRoot());
     }
 
     /**
-     * This method takes the last elements from the stack and reverses its sign.
-     *
-     * @throws java.util.NoSuchElementException if the stack is empty.
+     * Takes the last elements from the stack and reverses its sign.
      */
-    public void invertSign() throws NoSuchElementException {
+    public void invertSign() {
         checkStackSize(1);
 
-        Complex last = data.pop();
-
-        data.push(last.invert());
+        data.push(data.pop().invert());
     }
 
     /**
-     * This method removes all elements from the stack.
+     * Removes all elements from the stack.
      */
     public void clear() {
         data.clear();
     }
 
     /**
-     * This method removes the last element from the stack.
-     *
-     * @throws java.util.NoSuchElementException if the stack is empty.
+     * Removes the last element from the stack.
      */
-    public void drop() throws NoSuchElementException {
+    public void drop() {
         checkStackSize(1);
         data.pop();
     }
 
     /**
-     * This method duplicates the last element from the stack and add the copy
-     * onto it.
-     *
-     * @throws java.util.NoSuchElementException if the stack is empty.
+     * Pushes a copy of the last element from the stack and onto it.
      */
-    public void dup() throws NoSuchElementException {
+    public void dup() {
         checkStackSize(1);
         data.push(data.element());
     }
 
     /**
-     * This method swaps the last and last but one element from the stack.
-     *
-     * @throws java.util.NoSuchElementException if the stack has less than two
-     * elements.
+     * Swaps the last and second last elements from the stack.
      */
-    public void swap() throws NoSuchElementException {
+    public void swap() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -334,13 +316,9 @@ public class Calculator {
     }
 
     /**
-     * This method duplicates the last but one element from the stack and add
-     * the copy onto it.
-     *
-     * @throws java.util.NoSuchElementException if the stack has less than two
-     * elements.
+     * Stores onto the stack a copy of the second last element.
      */
-    public void over() throws NoSuchElementException {
+    public void over() {
         checkStackSize(2);
 
         Complex last = data.pop();
@@ -351,82 +329,172 @@ public class Calculator {
     }
 
     /**
-     * This method removes the top element of the stack and inserts it as value
-     * of key c into variables map.
+     * Removes the top element of the stack and inserts it as value of key c
+     * into variables map.
      *
      * @param c The variable that we want store value to.
-     * @throws java.util.NoSuchElementException if the stack is empty.
      */
-    public void pushVariable(char c) throws NoSuchElementException {
+    public void pushVariable(char c) {
         checkStackSize(1);
-        map.setVariable(c, data.pop());
+        var.setVariable(c, data.pop());
     }
 
     /**
-     * This method reads the Complex number associated with the variable c and
-     * pushes it onto the stack.
+     * Reads the Complex number associated with the variable c and pushes it
+     * onto the stack.
      *
      * @param c The variable that we want read value from.
-     * @throws java.lang.RuntimeException if the variable has null corresponding
-     * value.
      */
-    public void pullVariable(char c) throws RuntimeException {
-        Complex value = map.getVariable(c);
-        insertNumber(value);
-
+    public void pullVariable(char c) {
+        insertNumber(var.getVariable(c));
     }
 
     /**
-     * This method removes the top element of the stack and sums it at value of
-     * key c into variables map.
+     * Removes the top element of the stack and sums it at value of key c into
+     * variables map.
      *
      * @param c The variable that we want sum top element of the stack to.
-     * @throws java.util.NoSuchElementException if the stack is empty.
-     * @throws java.lang.RuntimeException if the variable has null corresponding
-     * value.
      */
-    public void sumVariable(char c) throws RuntimeException {
+    public void sumVariable(char c) {
         checkStackSize(1);
-        map.sumVariable(c, data.pop());
+        var.sumVariable(c, data.pop());
     }
 
     /**
-     * This method removes the top element of the stack and subtracts it at
-     * value of key c into variables map.
+     * Removes the top element of the stack and subtracts it at value of key c
+     * into variables map.
      *
      * @param c The variable that we want subtract top element of the stack to.
-     * @throws java.util.NoSuchElementException if the stack is empty.
-     * @throws java.lang.RuntimeException if the variable has null corresponding
-     * value.
      */
-    public void subtractVariable(char c) throws RuntimeException {
+    public void subtractVariable(char c) {
         checkStackSize(1);
-        map.subVariable(c, data.pop());
+        var.subVariable(c, data.pop());
     }
 
     /**
-     * This method saves the variables stored in the map in a auxiliary deque.
-     *
-     * @throws java.util.NoSuchElementException if the map is empty.
+     * Saves the map of variables in the auxiliary stack.
      */
-    public void saveVariables() throws NoSuchElementException {
-        map.backup();
+    public void saveVariables() {
+        var.backup();
     }
 
     /**
-     * This method restores the variables stored in the auxiliary deque in a
-     * map.
-     *
-     * @throws java.util.NoSuchElementException if the auxiliary deque is empty.
+     * Restores the map of variables stored in the auxiliary stack.
      */
-    public void restoreVariables() throws NoSuchElementException {
-        map.restore();
+    public void restoreVariables() {
+        var.restore();
     }
 
-    private void checkStackSize(int k) {
+    /**
+     * Takes the last element inserted on the stack, then performs the modulus
+     * of that number and store the result value on top of the stack.
+     */
+    public void mod() {
+        checkStackSize(1);
+        data.push(new Complex(data.pop().mod(), 0.0));
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the phase of
+     * that number and store the result value on top of the stack.
+     */
+    public void arg() {
+        checkStackSize(1);
+        data.push(new Complex(data.pop().arg(), 0.0));
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the cosine of
+     * that number and store the result on top of the stack.
+     */
+    public void cos() {
+        checkStackSize(1);
+        data.push(data.pop().cos());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the arccosine
+     * of that number and store the result on top of the stack.
+     */
+    public void arcCos() {
+        checkStackSize(1);
+        data.push(data.pop().acos());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the cosine of
+     * that number and store the result value on top of the stack.
+     */
+    public void sin() {
+        checkStackSize(1);
+        data.push(data.pop().sin());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the arcsine
+     * of that number and store the result value on top of the stack.
+     */
+    public void arcSin() {
+        checkStackSize(1);
+        data.push(data.pop().asin());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the tangent
+     * of that number and store the result value on top of the stack.
+     */
+    public void tan() {
+        checkStackSize(1);
+        data.push(data.pop().tan());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the
+     * arctangent of that number and store the result value on top of the stack.
+     */
+    public void arcTan() {
+        checkStackSize(1);
+        data.push(data.pop().atan());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the 2nd
+     * degree power of that number and store the result value on top of the
+     * stack.
+     */
+    public void pow() {
+        checkStackSize(1);
+        data.push(data.pop().pow(2));
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the
+     * exponential of that number and store the result value on top of the
+     * stack.
+     */
+    public void exp() {
+        checkStackSize(1);
+        data.push(data.pop().exp());
+    }
+
+    /**
+     * Takes the last element inserted on the stack, then performs the natural
+     * logarithm of that number and store the result value on top of the stack.
+     */
+    public void log() {
+        checkStackSize(1);
+        data.push(data.pop().log());
+    }
+
+    /**
+     * Private method that checks if there are at least k element in the stack.
+     *
+     * @param k Number of operands required.
+     * @throws NoSuchElementException if there aren't enough elements.
+     */
+    private void checkStackSize(int k) throws NoSuchElementException {
         if (data.size() < k) {
             throw new NoSuchElementException("To perform this operation you must have at least " + k + " numbers.");
         }
     }
-
 }

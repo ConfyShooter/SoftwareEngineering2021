@@ -1,5 +1,6 @@
 package it.unisa.diem.Gruppo20.Model;
 
+import it.unisa.diem.Gruppo20.Model.Exception.VariableKeyException;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
@@ -12,21 +13,18 @@ import java.util.NoSuchElementException;
  * @author Team 20
  */
 public class Variables {
-    private Map<Character, Complex> data;
+
+    private final Map<Character, Complex> data;
     private final Deque<Map<Character, Complex>> backupsStack;
 
-     Variables(Map<Character, Complex> data, Deque<Map<Character, Complex>> backupsStack) {
-        this.data = data;
-        this.backupsStack = backupsStack;
-    }
-
     /**
-     * Create an object of this class. An HashMap is used to save Complex
+     * Creates an object of this class. An HashMap is used to save Complex
      * numbers corresponding to a letter in the range [a-z]. Instead, an
      * ArrayDeque is used to save and restore the map.
      */
     public Variables() {
-        this(new HashMap<>(), new ArrayDeque<>());
+        data = new HashMap<>();
+        backupsStack = new ArrayDeque<>();
     }
 
     public Map<Character, Complex> getCurrentValues() {
@@ -38,73 +36,64 @@ public class Variables {
     }
 
     /**
-     * This method get the Complex number corresponding to the key c inside the
-     * map.
+     * Gets the Complex number corresponding to the key c inside the map.
      *
      * @param c Is the key of the map.
      * @return Complex Object corresponding to the key c.
-     * @throws RuntimeException if the key is not valid or is not contained
+     * @throws VariableKeyException if the key is not valid or is not contained
      * inside the map.
      */
-    public Complex getVariable(char c) throws RuntimeException {
+    public Complex getVariable(char c) throws VariableKeyException {
         Complex value = data.get(checkKey(c));
         if (value == null) {
-            throw new RuntimeException("There isn't a Complex number associated to the the key " + c);
+            throw new VariableKeyException("There isn't a Complex number associated to the the key " + c);
         }
         return value;
     }
 
     /**
-     * This method set the Complex number passed as param as value of the
-     * variable c.
+     * Sets the Complex number passed as param as value of the variable c.
      *
      * @param c Is the key of the map.
      * @param number Is the Complex Object that we want to insert in the
      * variable c.
-     * @throws RuntimeException if the key is not valid.
      */
-    public void setVariable(char c, Complex number) throws RuntimeException {
+    public void setVariable(char c, Complex number) {
         data.put(checkKey(c), number);
     }
 
     /**
-     * This method sums the Complex number passed as param to the value of the
-     * variable c and stores the result of the sum as the value of variable c.
+     * Sums the Complex number passed as param to the value of the variable c
+     * and stores the result of the sum as the value of variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to sum to the variable
      * c.
-     * @throws RuntimeException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void sumVariable(char c, Complex number) throws RuntimeException {
+    public void sumVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.plus(number);
         setVariable(c, result);
     }
 
     /**
-     * This method subtracts the Complex number passed as param to the value of
-     * the variable c and stores the result of subtraction as value of the
-     * variable c.
+     * Subtracts the Complex number passed as param to the value of the variable
+     * c and stores the result of subtraction as value of the variable c.
      *
      * @param c Is the key of the variable.
      * @param number Is the Complex Object that we want to subtract to the
      * variable c.
-     * @throws RuntimeException if the key is not valid or is not contained
-     * inside the map.
      */
-    public void subVariable(char c, Complex number) throws RuntimeException {
+    public void subVariable(char c, Complex number) {
         Complex actual = getVariable(c);
         Complex result = actual.minus(number);
         setVariable(c, result);
     }
 
     /**
-     * This method backups the variables of current map into
-     * a backup stack.
+     * Backups the variables of current map into a backup stack.
      *
-     * @throws RuntimeException if there aren't variables to be saved.
+     * @throws NoSuchElementException if there aren't variables to be saved.
      */
     public void backup() throws NoSuchElementException {
         if (data.isEmpty()) {
@@ -116,9 +105,11 @@ public class Variables {
     }
 
     /**
-     * This method restore the variables with the latest backup contained from the stack, removing it.
+     * Restores the variables with the latest backup contained from the stack,
+     * removing it.
      *
-     * @throws RuntimeException if there aren't elements contained in the backup stack.
+     * @throws NoSuchElementException if there aren't elements contained in the
+     * backup stack.
      */
     public void restore() throws NoSuchElementException {
         if (backupsStack.isEmpty()) {
@@ -128,10 +119,17 @@ public class Variables {
         data.putAll(backupsStack.pop());
     }
 
-    private char checkKey(char c) throws RuntimeException {
+    /**
+     * Private method used to check if the param c is valid entry in the map.
+     *
+     * @param c Is the character to check if is acceptable key for the map.
+     * @return Key of the map that is a char in the range [a-z].
+     * @throws VariableKeyException if the param c not represent a valid entry.
+     */
+    private char checkKey(char c) throws VariableKeyException {
         char key = Character.toLowerCase(c);
         if (key < 'a' || key > 'z') {
-            throw new RuntimeException("Error generated by an operation on variable with key" + key);
+            throw new VariableKeyException("Error generated by an operation on variable with key '" + key + "'.");
         }
         return key;
     }

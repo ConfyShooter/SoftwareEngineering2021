@@ -1,7 +1,8 @@
 
 import it.unisa.diem.Gruppo20.Model.Calculator;
 import it.unisa.diem.Gruppo20.Model.Complex;
-import it.unisa.diem.Gruppo20.Model.UserDefinedOperations;
+import it.unisa.diem.Gruppo20.Model.UserCommand;
+import it.unisa.diem.Gruppo20.Model.Operations;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -23,39 +23,39 @@ import static org.junit.Assert.*;
  *
  * @author Team 20
  */
-public class UserDefinedOperationsTest {
+public class OperationsTest {
 
-    private UserDefinedOperations userOp;
+    private Operations operations;
     private Calculator c;
     private File testFile;
 
-    public UserDefinedOperationsTest() {
+    public OperationsTest() {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         c = new Calculator();
-        userOp = new UserDefinedOperations(c);
+        operations = new Operations(c);
         testFile = new File("media/testFile.txt");
         testFile.deleteOnExit();
     }
 
     @Test(expected = RuntimeException.class)
     public void testParseOperationsExceptionName() {
-        userOp.parseOperations("   <a :  clear  4 8 + ");
+        operations.parseOperations("   clear :  clear  4 8 + ");
     }
-    
+
     @Test(expected = RuntimeException.class)
     public void testParseOperationsExceptionEmptyDef() {
-        userOp.parseOperations("   test :    ");
+        operations.parseOperations("   test :    ");
     }
 
     @Test
     public void testParseOperations() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        assertNotNull(userOp.getOperationsCommand("test")); //check if user operation named test exist
+        operations.parseOperations("   test :  clear  4 8 + ");
+        assertNotNull(operations.getOperationsCommand("test")); //check if user operation named test exist
 
-        List<String> result = userOp.getOperationsNames("test"); //get the operations' sequence defined by user
+        List<String> result = operations.getOperationsNames("test"); //get the operations' sequence defined by user
         List<String> expected = List.of("clear", "4", "8", "+"); //expected sequence
 
         assertEquals(expected.size(), result.size()); //checking if they have same size
@@ -66,40 +66,50 @@ public class UserDefinedOperationsTest {
 
     @Test
     public void testGetOperationsCommand() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        assertNotNull(userOp.getOperationsCommand("test")); //check if user operation named test exist
+        operations.parseOperations("   test :  clear  4 8 + ");
+        assertNotNull(operations.getOperationsCommand("test")); //check if user operation named test exist
 
-        assertNull(userOp.getOperationsCommand("notincluded"));
+        assertNotNull(operations.getOperationsCommand("mod"));
+        assertNotNull(operations.getOperationsCommand("<a"));
+        assertNotNull(operations.getOperationsCommand("+z"));
+        assertNotNull(operations.getOperationsCommand("-j"));
+        assertNotNull(operations.getOperationsCommand(">j"));
+
+        assertNull(operations.getOperationsCommand("notincluded"));
+        char c = 'z' + 1;
+        assertNull(operations.getOperationsCommand(">" + String.valueOf(c)));
+        c = 'a' - 1;
+        assertNull(operations.getOperationsCommand("<" + String.valueOf(c)));
     }
 
     @Test
     public void testGetOperationsNames() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        assertNotNull(userOp.getOperationsNames("test")); //check if user operation named test exist
+        operations.parseOperations("   test :  clear  4 8 + ");
+        assertNotNull(operations.getOperationsNames("test")); //check if user operation named test exist
     }
 
     @Test
     public void testExecuteOperation() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        userOp.executeOperation("test");
-        assertComplexEquals(new Complex(12.0, 0.0), c.getData().element());
+        operations.parseOperations("   test :  clear  4 8 + ");
+        operations.executeOperation("test");
+        assertComplexEquals(new Complex(12.0, 0.0), c.getData().pop());
     }
 
     @Test
     public void testExecuteOperationWithAnotherOperation() {
-        userOp.parseOperations("   test :  clear  4+10j 5-4j + ");
-        userOp.parseOperations("   test1 :  test  -4 + ");
+        operations.parseOperations("   test :  clear  4+10j 5-4j + ");
+        operations.parseOperations("   test1 :  test  -4 + ");
 
-        userOp.executeOperation("test1");
+        operations.executeOperation("test1");
 
-        assertComplexEquals(new Complex(5.0, 6.0), c.getData().element());
+        assertComplexEquals(new Complex(5.0, 6.0), c.getData().pop());
     }
 
     @Test
     public void testUserOperationsNames() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        userOp.parseOperations(" test1 :  clear  4 8 + ");
-        Set<String> result = userOp.userOperationsNames();
+        operations.parseOperations("   test :  clear  4 8 + ");
+        operations.parseOperations(" test1 :  clear  4 8 + ");
+        Set<String> result = operations.userOperationsNames();
         Set<String> expected = Set.of("test", "test1");
 
         assertNotNull(result);
@@ -112,20 +122,23 @@ public class UserDefinedOperationsTest {
 
     @Test
     public void testRemoveOperation() {
-        userOp.parseOperations("   test :  clear  4 8 + ");
-        userOp.removeOperations("test");
-        assertNull(userOp.getOperationsCommand("test"));
+        operations.parseOperations("   test :  clear  4 8 + ");
+        operations.removeOperations("test");
+        assertFalse(operations.userOperationsNames().contains("test"));
+        UserCommand uc = (UserCommand) operations.getOperationsCommand("test");
+        assertNotNull(uc);
+        assertFalse(uc.isExecutable());
     }
 
     @Test
     public void testSaveOnFile() throws IOException {
         String expected_1 = "test_1: + - * / +- sqrt";
         String expected_2 = "test: clear drop dup swap over + - * / +- sqrt";
-        userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
-        userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
+        operations.parseOperations("    test_1 :       + -  * / +- sqrt   ");
+        operations.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
 
         testFile.setWritable(true);
-        userOp.saveOnFile(testFile);
+        operations.saveOnFile(testFile);
 
         String actual = read(testFile);
         String expected = expected_1 + "\n" + expected_2 + "\n";
@@ -136,7 +149,7 @@ public class UserDefinedOperationsTest {
     public void testSaveOnFileException() throws IOException {
         testFile.createNewFile();
         testFile.setReadOnly();
-        userOp.saveOnFile(testFile);
+        operations.saveOnFile(testFile);
     }
 
     @Test
@@ -146,16 +159,16 @@ public class UserDefinedOperationsTest {
         String expected_3 = "test_3: 1+1j sqrt +- >a test_1 <a";
         String expected = expected_1 + "\n" + expected_2 + "\n" + expected_3 + "\n";
 
-        userOp.parseOperations("    test_1 :       + -  * / +- sqrt   ");
-        userOp.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
-        userOp.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");
+        operations.parseOperations("    test_1 :       + -  * / +- sqrt   ");
+        operations.parseOperations("    test :   clear   drop  dup swap over     + -  * / +- sqrt   ");
+        operations.parseOperations("test_3:  1+1j   sqrt +-  >a   test_1  <a   ");
 
         write(testFile);
-        userOp.loadFromFile(testFile);
+        operations.loadFromFile(testFile);
 
         String actual = "";
-        for (String i : userOp.userOperationsNames()) {
-            actual += userOp.operationToString(i) + "\n";
+        for (String i : operations.userOperationsNames()) {
+            actual += operations.operationToString(i) + "\n";
         }
         assertEquals(expected, actual);
     }
@@ -163,7 +176,7 @@ public class UserDefinedOperationsTest {
     @Test(expected = IOException.class)
     public void testLoadFromFileException() throws IOException {
         testFile.delete();
-        userOp.loadFromFile(testFile);
+        operations.loadFromFile(testFile);
     }
 
     private String read(File file) {
@@ -182,8 +195,8 @@ public class UserDefinedOperationsTest {
 
     private void write(File file) {
         try (PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(file)))) {
-            for (String i : userOp.userOperationsNames()) {
-                out.write(userOp.operationToString(i) + "\n");
+            for (String i : operations.userOperationsNames()) {
+                out.write(operations.operationToString(i) + "\n");
             }
         } catch (IOException ex) {
             ex.printStackTrace();
