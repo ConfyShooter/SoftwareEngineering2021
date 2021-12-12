@@ -4,7 +4,6 @@ import it.unisa.diem.Gruppo20.Model.Command;
 import it.unisa.diem.Gruppo20.Model.Complex;
 import it.unisa.diem.Gruppo20.Model.Exception.ParseException;
 import it.unisa.diem.Gruppo20.Model.StandardOperations;
-import java.lang.reflect.Field;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -25,10 +24,7 @@ public class StandardOperationsTest {
     public void setUp() throws Exception {
         c = new Calculator();
         number = new Complex();
-        Field instance = StandardOperations.class.getDeclaredField("obj");
-        instance.setAccessible(true);
-        instance.set(null, null);
-        standardOp = StandardOperations.getStandardOperations(c);
+        standardOp = new StandardOperations(c);
     }
     
     @Test

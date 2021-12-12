@@ -14,7 +14,6 @@ import java.util.Map;
  */
 public class StandardOperations {
 
-    private static StandardOperations obj = null;
     private final Calculator c;
     private final Map<String, Command> standardOpMap;
     private static final int mapCapacity = 64;
@@ -25,24 +24,10 @@ public class StandardOperations {
      *
      * @param c
      */
-    private StandardOperations(Calculator c) {
+    public StandardOperations(Calculator c) {
         this.c = c;
         standardOpMap = new HashMap<>(mapCapacity);
         initializeBasicMap();
-    }
-
-    /**
-     * Returns an object of this class if it already exists, or it builds a new
-     * object and returns it.
-     *
-     * @param c A Calculator object.
-     * @return An object of StandardOperations class.
-     */
-    public static StandardOperations getStandardOperations(Calculator c) {
-        if (obj == null) {
-            obj = new StandardOperations(c);
-        }
-        return obj;
     }
 
     /**

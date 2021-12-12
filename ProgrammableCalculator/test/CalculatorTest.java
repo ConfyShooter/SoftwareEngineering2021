@@ -92,22 +92,22 @@ public class CalculatorTest {
     @Test
     public void testInsertNumber() {
         c.insertNumber("-j4.0");
-        assertEquals("-4j", c.getData().pop().toString());
+        assertEquals("- 4j", c.getData().pop().toString());
 
         c.insertNumber("3.05");
         assertEquals("3.05", c.getData().pop().toString());
 
         c.insertNumber("0.1+2.5j");
-        assertEquals("0.1+2.5j", c.getData().pop().toString());
+        assertEquals("0.1 + 2.5j", c.getData().pop().toString());
 
         c.insertNumber("0.1-j2.50");
-        assertEquals("0.1-2.5j", c.getData().pop().toString());
+        assertEquals("0.1 - 2.5j", c.getData().pop().toString());
 
         c.insertNumber("2.5j+0.1");
-        assertEquals("0.1+2.5j", c.getData().pop().toString());
+        assertEquals("0.1 + 2.5j", c.getData().pop().toString());
 
         c.insertNumber("-j2.5+0.1");
-        assertEquals("0.1-2.5j", c.getData().pop().toString());
+        assertEquals("0.1 - 2.5j", c.getData().pop().toString());
     }
 
     @Test

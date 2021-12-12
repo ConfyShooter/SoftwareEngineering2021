@@ -38,10 +38,6 @@ public class OperationsTest {
     public void setUp() throws Exception {
         c = new Calculator();
         operations = new Operations(c);
-        Field instance = StandardOperations.class.getDeclaredField("obj");
-        instance.setAccessible(true);
-        instance.set(null, null);
-        operations = new Operations(c);
         testFile = new File("media/testFile.txt");
         testFile.deleteOnExit();
     }
