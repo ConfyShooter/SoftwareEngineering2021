@@ -52,8 +52,8 @@ _Repository of team 20 of the Software Engineering course A.Y. 21/22_
   
   [Project Burndown chart](https://drive.google.com/file/d/1ARn_AoPyF3RofgtHHV9ftOwhAw7yq9n4/view?usp=sharing)
   
-  [Sprint review report]()
+  [Sprint review report](https://drive.google.com/file/d/1AnQ48Ghva3tbIkc7TP1Ww8nofQxuZnqs/view?usp=sharing)
   
-  [Sprint retrospective report]()
+  [Sprint retrospective report](https://drive.google.com/file/d/1An_f7tqy2oHVx-uuew0N1eyhCcjxPPUF/view?usp=sharing)
   
  ### ✦ [Final presentation](https://docs.google.com/presentation/d/19XT9Fbl2tDdFpe5OZusDbMa3GsTi4Yyx/edit?usp=sharing&ouid=116525819115775980151&rtpof=true&sd=true) 
