@@ -90,10 +90,15 @@ public class Complex {
         if (real == 0 && imaginary == 0) {
             return "0";
         }
-        if (real != 0) {
+        
+        if(real.isNaN() && imaginary.isNaN())
+            return "Not A Number";
+        
+        if (real != 0 && !real.isNaN()) {
             s = format.format(real);
         }
-        if (imaginary != 0) {
+        
+        if (imaginary != 0 && !imaginary.isNaN()) {
             if (imaginary > 0) {
                 s += "+";
             }
@@ -116,6 +121,7 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex plus(Complex c) {
+        notNaN(c);
         double a = c.getReal();
         double b = c.getImaginary();
 
@@ -129,6 +135,7 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex minus(Complex c) {
+        notNaN(c);
         double a = c.getReal();
         double b = c.getImaginary();
 
@@ -142,6 +149,7 @@ public class Complex {
      * @return The complex number resulting from the operation.
      */
     public Complex multiply(Complex c) {
+        notNaN(c);
         double a = real;
         double b = imaginary;
         double c1 = c.real;
@@ -160,6 +168,7 @@ public class Complex {
      * @return Complex value.
      */
     public Complex division(Complex c) {
+        notNaN(c);
         double a = real;
         double b = imaginary;
         double c1 = c.real;
@@ -183,6 +192,7 @@ public class Complex {
      * @return A complex number.
      */
     public Complex squareRoot() {
+        notNaN(null);
         double r = Math.sqrt(mod());
         Complex phase = new Complex(arg() / 2, 0d);
 
@@ -196,6 +206,7 @@ public class Complex {
      * @return The complex number changed in sign.
      */
     public Complex invert() {
+        notNaN(null);
         return new Complex(-1 * real, -1 * imaginary);
     }
 
@@ -205,6 +216,7 @@ public class Complex {
      * @return A double value that representing the module.
      */
     public Double mod() {
+        notNaN(null);
         return Math.sqrt(Math.pow(real, 2) + Math.pow(imaginary, 2));
     }
 
@@ -215,6 +227,7 @@ public class Complex {
      * @return A double value that representing the phase.
      */
     public Double arg() {
+        notNaN(null);
         if (real == 0 && imaginary > 0) {
             return Math.PI / 2;
         } else if (real == 0 && imaginary < 0) {
@@ -226,7 +239,7 @@ public class Complex {
         } else if (real < 0 && imaginary < 0) {
             return Math.atan(imaginary / real) - Math.PI;
         } else {
-            throw new ArithmeticException("The phase of 0 is undefined.");
+            throw new ArithmeticException("The phase is undefined.");
         }
     }
 
@@ -236,9 +249,7 @@ public class Complex {
      * @return A Complex number represent the cos of this Complex number.
      */
     public Complex cos() {
-        /*if (imaginary == 0) {
-            return new Complex(Math.cos(real), 0d);
-        }*/
+        notNaN(null);
 
         Complex cos = new Complex();
         cos.setReal(cosApproximation(real) * Math.cosh(imaginary));
@@ -252,6 +263,7 @@ public class Complex {
      * @return A Complex number represent the acos of this Complex number.
      */
     public Complex acos() {
+        notNaN(null);
         //acos(z) = pi/2 - asin(z)
         Complex halfPi = new Complex(Math.PI / 2, 0d);
         return halfPi.minus(asin());
@@ -263,9 +275,7 @@ public class Complex {
      * @return A Complex number represent the sin of this Complex number.
      */
     public Complex sin() {
-        if (imaginary == 0) {
-            return new Complex(Math.sin(real), 0.0);
-        }
+        notNaN(null);
 
         Complex sin = new Complex();
         sin.setReal(sinApproximation(real) * Math.cosh(imaginary));
@@ -279,6 +289,7 @@ public class Complex {
      * @return A Complex number represent the asin of this Complex number.
      */
     public Complex asin() {
+        notNaN(null);
         //asin(z) = j*ln(sqrt(1-z^2) - j*z)
         Complex one = new Complex(1d, 0d);
         Complex square = (one.minus(pow(2))).squareRoot();
@@ -292,6 +303,7 @@ public class Complex {
      * @return A Complex number represent the tan of this Complex number.
      */
     public Complex tan() {
+        notNaN(null);
         return sin().division(cos());
     }
 
@@ -301,6 +313,7 @@ public class Complex {
      * @return A Complex number represent the atan of this Complex number.
      */
     public Complex atan() {
+        notNaN(null);
         //atan(z) = -j/2*ln((1+jz)/(1-jz))
         Complex one = new Complex(1d, 0d);
         Complex halfImg = new Complex(0d, -0.5);
@@ -315,6 +328,7 @@ public class Complex {
      * @return A complex number.
      */
     public Complex pow(double grade) {
+        notNaN(null);
         if (real == 0 && imaginary == 0) {
             if (grade == 0) {
                 throw new ArithmeticException("Indefinite value. Unable to execute.");
@@ -343,6 +357,7 @@ public class Complex {
      * @return a Complex Number.
      */
     public Complex exp() {
+        notNaN(null);
         //exp(z)=e^x(cos(y)+jsen(y)) where z = x + jy
         double r = Math.exp(real);
 
@@ -361,6 +376,7 @@ public class Complex {
      * @throws ArithmeticException if both real and imaginary part are 0.
      */
     public Complex log() {
+        notNaN(null);
         if (real == 0 && imaginary == 0) {
             throw new ArithmeticException("Impossible to perform the log on this complex number.");
         }
@@ -393,6 +409,13 @@ public class Complex {
         DecimalFormat f = new DecimalFormat("0.##############E0");
         f.setDecimalFormatSymbols(DecimalFormatSymbols.getInstance(Locale.US));
         return (Double.valueOf(f.format((Math.sin(num) + 1))) - 1);
+    }
+    
+    private void notNaN(Complex c) {
+        if(real.isNaN() || imaginary.isNaN())
+            throw new ArithmeticException("This operand isn't a complex number.");
+        if(c != null && (c.getReal().isNaN() || c.getImaginary().isNaN()))
+            throw new ArithmeticException("Second operand isn't a complex number.");
     }
 
 }
