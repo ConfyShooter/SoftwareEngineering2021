@@ -55,8 +55,8 @@ public class Complex {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.real);
-        hash = 59 * hash + Objects.hashCode(this.imaginary);
+        hash = 59 * hash + Objects.hashCode(real);
+        hash = 59 * hash + Objects.hashCode(imaginary);
         return hash;
     }
 
@@ -122,8 +122,8 @@ public class Complex {
      */
     public Complex plus(Complex c) {
         notNaN(c);
-        double a = c.getReal();
-        double b = c.getImaginary();
+        double a = c.real;
+        double b = c.imaginary;
 
         return new Complex(a + real, b + imaginary);
     }
@@ -136,8 +136,8 @@ public class Complex {
      */
     public Complex minus(Complex c) {
         notNaN(c);
-        double a = c.getReal();
-        double b = c.getImaginary();
+        double a = c.real;
+        double b = c.imaginary;
 
         return new Complex(real - a, imaginary - b);
     }
@@ -200,7 +200,7 @@ public class Complex {
         Complex phase = new Complex(arg() / 2, 0d);
 
         //return new Complex(r * cosApproximation(phase / 2), r * sinApproximation(phase / 2));
-        return new Complex(r * phase.cos().getReal(), r * phase.sin().getReal());
+        return new Complex(r * phase.cos().real, r * phase.sin().real);
     }
 
     /**
@@ -351,7 +351,7 @@ public class Complex {
         double r = Math.pow(mod(), grade);
         Complex arg = new Complex(grade * arg(), 0d);
 
-        return new Complex(r * arg.cos().getReal(), r * arg.sin().getReal());
+        return new Complex(r * arg.cos().real, r * arg.sin().real);
     }
 
     /**
@@ -369,7 +369,7 @@ public class Complex {
         }
 
         Complex img = new Complex(imaginary, 0d);
-        return new Complex(r * img.cos().getReal(), r * img.sin().getReal());
+        return new Complex(r * img.cos().real, r * img.sin().real);
     }
 
     /**
@@ -417,7 +417,7 @@ public class Complex {
     private void notNaN(Complex c) {
         if(real.isNaN() || imaginary.isNaN())
             throw new ArithmeticException("This operand isn't a complex number.");
-        if(c != null && (c.getReal().isNaN() || c.getImaginary().isNaN()))
+        if(c != null && (c.real.isNaN() || c.imaginary.isNaN()))
             throw new ArithmeticException("Second operand isn't a complex number.");
     }
 
