@@ -46,7 +46,7 @@ public class Variables {
     public Complex getVariable(char c) throws VariableKeyException {
         Complex value = data.get(checkKey(c));
         if (value == null) {
-            throw new VariableKeyException("There isn't a Complex number associated to the the key " + c);
+            throw new VariableKeyException("There isn't a Complex number associated to the the key '" + c + "'.");
         }
         return value;
     }
@@ -97,7 +97,7 @@ public class Variables {
      */
     public void backup() throws NoSuchElementException {
         if (data.isEmpty()) {
-            throw new NoSuchElementException("There aren't elements to save");
+            throw new NoSuchElementException("There aren't elements to save.");
         }
         Map<Character, Complex> map = new HashMap<>();
         map.putAll(data);
@@ -113,7 +113,7 @@ public class Variables {
      */
     public void restore() throws NoSuchElementException {
         if (backupsStack.isEmpty()) {
-            throw new NoSuchElementException("There aren't elements to restore");
+            throw new NoSuchElementException("There aren't elements to restore.");
         }
         data.clear();
         data.putAll(backupsStack.pop());
