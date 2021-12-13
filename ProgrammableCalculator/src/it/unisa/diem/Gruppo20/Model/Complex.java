@@ -155,10 +155,10 @@ public class Complex {
         double c1 = c.real;
         double d = c.imaginary;
 
-        double real = (a * c1 - b * d);
+        double re = (a * c1 - b * d);
         double img = (a * d + b * c1);
 
-        return new Complex(real, img);
+        return new Complex(re, img);
     }
 
     /**
