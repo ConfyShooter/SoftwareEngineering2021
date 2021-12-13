@@ -193,6 +193,9 @@ public class Complex {
      */
     public Complex squareRoot() {
         notNaN(null);
+        if(real == 0 && imaginary == 0)
+            return new Complex();
+        
         double r = Math.sqrt(mod());
         Complex phase = new Complex(arg() / 2, 0d);
 
