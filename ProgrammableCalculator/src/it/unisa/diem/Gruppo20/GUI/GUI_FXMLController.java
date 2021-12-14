@@ -111,9 +111,9 @@ public class GUI_FXMLController implements Initializable {
         } catch (RuntimeException ex) {
 
             if (ex instanceof NumberFormatException) {
-                showAlert("Can't parse '" + inputText.getText() + "'.");
+                showAlertWarning("Can't parse '" + inputText.getText() + "'.");
             } else {
-                showAlert(ex.getMessage());
+                showAlertWarning(ex.getMessage());
             }
 
             if (!functionBox.isSelected()) {
@@ -121,7 +121,7 @@ public class GUI_FXMLController implements Initializable {
             }
 
         } catch (Exception ex) {
-            showAlert("General error.");
+            showAlertWarning("General error.");
         }
 
         functionBox.setSelected(false);
@@ -266,7 +266,7 @@ public class GUI_FXMLController implements Initializable {
         try {
             operations.saveOnFile(defaultFile);
         } catch (IOException ex) {
-            showAlert("General I/O error (while saving). Retry!");
+            showAlertWarning("General I/O error (while saving). Retry!");
         }
         functionsList.getSelectionModel().clearSelection();
     }
@@ -276,7 +276,7 @@ public class GUI_FXMLController implements Initializable {
         try {
             operations.loadFromFile(defaultFile);
         } catch (IOException ex) {
-            showAlert("General I/O error (while loading). Retry!");
+            showAlertWarning("General I/O error (while loading). Retry!");
         }
         functions.setAll(operations.userOperationsNames());
         functionsList.getSelectionModel().clearSelection();
@@ -346,9 +346,16 @@ public class GUI_FXMLController implements Initializable {
         }
     }
 
-    private void showAlert(String message) {
+    private void showAlertWarning(String message) {
         Alert a = new Alert(Alert.AlertType.WARNING);
         a.setTitle("Warning");
+        a.setHeaderText(message);
+        a.showAndWait();
+    }
+    
+    private void showAlertInfo(String message) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("Operation performed successfully");
         a.setHeaderText(message);
         a.showAndWait();
     }
@@ -371,7 +378,7 @@ public class GUI_FXMLController implements Initializable {
         String s = dialog.getResult();
         while (s != null && !s.matches("[a-z]{1}|[A-Z]{1}")) {
             dialog.getEditor().clear();
-            showAlert("You must insert only 1 letter.");
+            showAlertWarning("You must insert only 1 letter.");
             dialog.showAndWait();
             s = dialog.getResult();
         }
