@@ -1,5 +1,6 @@
 # ProjectSE2021
 _Repository of team 20 of the Software Engineering course A.Y. 21/22_
+This repository contains an educational project made for the course Software Engineering which task was the realization od scientific programmable calculator.
 
 ### ✦ First delivery - Sun. November 21:
 
