@@ -59,3 +59,9 @@ This repository contains an educational project made for the course Software Eng
   [Sprint retrospective report](https://drive.google.com/file/d/1An_f7tqy2oHVx-uuew0N1eyhCcjxPPUF/view?usp=sharing)
   
  ### ✦ [Final presentation](https://drive.google.com/file/d/1Anu-0-Mw5O8w-O1di6p_WFl17sWbpfNf/view?usp=sharing) 
+
+## Contributors
+- [Ceglia Salvatore](https://github.com/Sceglia2)
+- [Celentano Fausto](https://github.com/Fausto-99)
+- [Conforti Alessandro](https://github.com/ConfyShooter)
+- [Faiella Ciro](https://github.com/remind-wq)
