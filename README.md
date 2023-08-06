@@ -62,6 +62,6 @@ This repository contains an educational project made for the course Software Eng
 
 ## Contributors
 - [Ceglia Salvatore](https://github.com/Sceglia2)
-- [Celentano Fausto](https://github.com/Fausto-99)
+- [Celentano Fausto](https://github.com/faucelez)
 - [Conforti Alessandro](https://github.com/ConfyShooter)
 - [Faiella Ciro](https://github.com/remind-wq)
