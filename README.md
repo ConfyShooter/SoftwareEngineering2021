@@ -65,3 +65,6 @@ This repository contains an educational project made for the course Software Eng
 - [Celentano Fausto](https://github.com/faucelez)
 - [Conforti Alessandro](https://github.com/ConfyShooter)
 - [Faiella Ciro](https://github.com/remind-wq)
+
+## License
+This system uses the GNU General Public License v3.0 (GPL-3.0) to ensure that the software remains open-source and free for everyone to use, modify and distribute. The license allows users to use the system for personal or commercial use, modify the code, and distribute the modified code as long as they maintain the same license. The GPL-3.0 ensures that the system's source code remains open and accessible, fostering a collaborative development environment.
